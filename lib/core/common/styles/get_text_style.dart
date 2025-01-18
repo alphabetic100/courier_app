@@ -1,33 +1,23 @@
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-//
-// import '../../utils/constants/app_sizes.dart';
-//
-//
-// TextStyle getTextStyle({
-//   double fontSize = getWidth(14),
-//   FontWeight fontWeight = FontWeight.w400,
-//   TextAlign textAlign = TextAlign.center,
-//   Color color = Colors.black,
-// }) {
-//   return GoogleFonts.poppins(
-//     fontSize: getWidth(fontSize),
-//
-//     fontWeight: fontWeight,
-//     color: color,
-//   );
-// }
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../utils/constants/app_sizes.dart';
 
-// TextStyle getTextStyleBt({
-//   double fontSize = 14.0,
-//   FontWeight fontWeight = FontWeight.w400,
-//   Color color = Colors.black,
-// }) {
-//   return TextStyle(
-//     fontFamily: 'FuturaHv',
-//     fontSize: fontSize.sp,
-//     fontWeight: fontWeight,
-//     color: color,
-//   );
-// }
+TextStyle getTextStyleMsrt({
+  double fontSize = 18,
+  FontWeight fontWeight = FontWeight.w400,
+  TextAlign textAlign = TextAlign.center,
+  Color color = Colors.black,
+  TextDecoration decoration = TextDecoration.none,
+  Color? decorationColor,
+  double? decorationThickness,
+}) {
+  return GoogleFonts.montserrat(
+    fontSize: getWidth(fontSize),
+    fontWeight: fontWeight,
+    color: color,
+    decoration: decoration,
+    decorationColor: decorationColor,
+    decorationThickness: decorationThickness,
+  );
+}

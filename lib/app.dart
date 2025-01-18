@@ -20,8 +20,9 @@ class MyApp extends StatelessWidget {
       getPages: AppRoute.routes,
       initialBinding: ControllerBinder(),
       themeMode: ThemeMode.light,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      theme: AppTheme.appTheme,
+      // theme: AppTheme.lightTheme,
+      // darkTheme: AppTheme.darkTheme,
     );
   }
 }

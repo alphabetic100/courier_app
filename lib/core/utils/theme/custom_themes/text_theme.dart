@@ -160,4 +160,5 @@ class AppTextTheme {
       color: Colors.white54,
     ),
   );
+
 }
