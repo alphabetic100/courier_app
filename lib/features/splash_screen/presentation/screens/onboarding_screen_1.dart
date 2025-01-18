@@ -20,15 +20,16 @@ class OnboardingScreen1 extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            VerticalSpace(height: getHeight(30)),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
                 width: getWidth(250),
                 child: Image.asset(ImagePath.appLogo)),
-            VerticalSpace(height: getHeight(30)),
+            VerticalSpace(height: getHeight(10)),
             SizedBox(
               child: Image.asset(ImagePath.onboarding1),
             ),
-             VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(20)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
               child: Text(
@@ -49,7 +50,7 @@ class OnboardingScreen1 extends StatelessWidget {
                 ),
               ),
             ),
-            VerticalSpace(height: getHeight(150)),
+            Spacer(),
             Container(
               width: AppSizes.width,
               alignment: Alignment.centerRight,
@@ -65,7 +66,8 @@ class OnboardingScreen1 extends StatelessWidget {
                     Icons.arrow_forward_ios,
                     color: AppColors.white,
                   )),
-            )
+            ),
+            VerticalSpace(height: getHeight(40))
           ],
         ),
       ),

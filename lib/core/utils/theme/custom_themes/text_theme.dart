@@ -161,11 +161,4 @@ class AppTextTheme {
     ),
   );
 
-  static TextTheme buttonTextThemeWhite = TextTheme(
-    bodyLarge: TextStyle(
-      fontSize: getWidth(16),
-      fontWeight: FontWeight.w500,
-      color: Colors.white,
-    ),
-  );
 }

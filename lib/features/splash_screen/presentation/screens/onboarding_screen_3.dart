@@ -14,54 +14,73 @@ class OnboardingScreen3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              width: 250,
-              child: Image.asset(ImagePath.appLogo)),
-          SizedBox(
-            child: Image.asset(ImagePath.onboarding3),
-          ),
-          VerticalSpace(height: getHeight(20)),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                "Earn While You Travel",
-                style: getTextStyleMsrt(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                "Browse available parcels, accept deliveries, and earn money effortlessly.",
-                style: getTextStyleMsrt(
-                  color: Colors.grey,
-                  fontSize: 16,
-                ),
-              )),
-          VerticalSpace(height: getHeight(150)),
-          Container(
-            width: AppSizes.width,
-            alignment: Alignment.centerRight,
-            padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-            child: CustomButton(
-                width: getWidth(44),
-                onPressed: () {
-                  Get.toNamed(
-                    AppRoute.onboarding2,
-                  );
-                },
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  color: AppColors.white,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            VerticalSpace(height: getHeight(30)),
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                width: 250,
+                child: Image.asset(ImagePath.appLogo)),
+            VerticalSpace(height: getHeight(10)),
+            SizedBox(
+              child: Image.asset(ImagePath.onboarding3),
+            ),
+            VerticalSpace(height: getHeight(20)),
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Text(
+                  "Earn While You Travel",
+                  style: getTextStyleMsrt(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                 )),
-          )
-        ],
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Text(
+                  "Browse available parcels, accept deliveries, and earn money effortlessly.",
+                  style: getTextStyleMsrt(
+                    color: Colors.grey,
+                    fontSize: 16,
+                  ),
+                )),
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: CustomButton(
+                  onPressed: () {
+                    Get.toNamed(AppRoute.loginScreen);
+                  },
+                  child: Text(
+                    "Log In",
+                    style: getTextStyleMsrt(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
+            ),
+            VerticalSpace(height: getHeight(20)),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: CustomButton(
+                  isPrimary: false,
+                  onPressed: () {
+                    Get.toNamed(AppRoute.selectRuleScreen);
+                  },
+                  child: Text(
+                    "Sign Up",
+                    style: getTextStyleMsrt(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
+            ),
+            VerticalSpace(height: getHeight(40)),
+          ],
+        ),
       ),
     );
   }
