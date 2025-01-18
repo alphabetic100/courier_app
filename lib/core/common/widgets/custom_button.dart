@@ -20,12 +20,15 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
+        height: height,
+        width: width,
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: isPrimary ? Theme.of(context).primaryColor : AppColors.white,
           borderRadius: BorderRadius.circular(3),
           border: Border.all(
-            color: isPrimary ? Theme.of(context).primaryColor : AppColors.primary,
+            color:
+                isPrimary ? Theme.of(context).primaryColor : AppColors.primary,
             width: 2,
           ),
         ),

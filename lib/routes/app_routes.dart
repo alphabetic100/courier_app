@@ -1,31 +1,57 @@
-
+import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_1.dart';
+import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_2.dart';
+import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_3.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../features/splash_screen/presentation/screens/splash_screen.dart';
-
-
 
 class AppRoute {
   static String init = "/";
   static String onboarding1 = "/onboarding1";
   static String onboarding2 = "/onboarding2";
   static String onboarding3 = "/onboarding3";
-  static String navBarScreen = "/navBarScreen";
-  static String changeBackgroundScreen = "/changeBackgroundScreen";
-  static String createNewAlarmScreen = "/createNewAlarmScreen";
+  static String landingScreen = "/landingScreen";
 
   static String loginScreen = "/loginScreen";
 
-
   static List<GetPage> routes = [
+    //Splash Screen: initial screen
     GetPage(name: init, page: () => const SplashScreen()),
-    // GetPage(name: onboarding1, page: () => const OnBoarding1Screen()),
-    // GetPage(name: onboarding2, page: () => const OnBoarding2Screen()),
-    // GetPage(name: onboarding3, page: () => const OnBoarding3Screen()),
-    // GetPage(name: navBarScreen, page: () => const CreatorNavBar()),
-    //
+
+    //Onboarding Screens
+    GetPage(
+      name: onboarding1,
+      page: () => const OnboardingScreen1(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    ),
+    GetPage(
+      name: onboarding2,
+      page: () => const OnboardingScreen2(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    ),
+    GetPage(
+      name: onboarding3,
+      page: () => const OnboardingScreen3(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    ),
+
+// ------------------------------------------------------------------------------------------------
+    //SENDER ROUTES
+
+    //Landing screen
+    // GetPage(name: landingScreen, page: () => const LandingScreen()),
+
+    //Auth Screens
     // GetPage(name: loginScreen, page: () => const LoginScreen()),
-    // GetPage(name: changeBackgroundScreen, page: () => const ChangeBackGroundAlarm()),
-    // GetPage(name: createNewAlarmScreen, page: () => const CreateNewAlarmScreen ()),
+
+    //Home Screen
+    // GetPage(name: homeScreen, page: () => const HomeScreen()),
   ];
 }
