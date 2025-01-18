@@ -160,4 +160,12 @@ class AppTextTheme {
       color: Colors.white54,
     ),
   );
+
+  static TextTheme buttonTextThemeWhite = TextTheme(
+    bodyLarge: TextStyle(
+      fontSize: getWidth(16),
+      fontWeight: FontWeight.w500,
+      color: Colors.white,
+    ),
+  );
 }

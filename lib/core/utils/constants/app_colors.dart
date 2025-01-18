@@ -4,22 +4,12 @@ class AppColors {
   AppColors._();
 
   // Brand Colors
-  static const Color primary = Color(0xFF1E3A5F);
-  static const Color secondary = Color(0xFFFEC601);
+  static const Color primary = Color(0xFF5F6AE3);
+  static const Color secondary = Color(0xFFF5F5F5);
   static const Color yellow = Color(0xFFFFA845);
   static const Color accent = Color(0xFF89A7FF);
   static const Color black = Colors.black;
-
-  // Gradient Colors
-  static const Gradient linearGradient = LinearGradient(
-    begin: Alignment(0.0, 0.0),
-    end: Alignment(0.707, -0.707),
-    colors: [
-      Color(0xfffff9a9e),
-      Color(0xFFFAD0C4),
-      Color(0xFFFAD0C4),
-    ],
-  );
+  static const Color grey = Color(0xFFE2E2E6);
 
 
 
@@ -30,7 +20,6 @@ class AppColors {
   static const Color textYellow = Color(0xffFFAB4C);
   static const Color textWhite = Color(0xffF7F7F7);
   static const Color white = Colors.white;
-
 
   // Background Colors
   static const Color backgroundLight = Color(0xFFF9FAFB);

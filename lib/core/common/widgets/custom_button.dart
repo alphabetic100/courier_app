@@ -1,0 +1,38 @@
+import 'package:courierapp/core/utils/constants/app_colors.dart';
+import 'package:flutter/material.dart';
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({
+    super.key,
+    this.isPrimary = true,
+    this.height,
+    this.width,
+    required this.onPressed,
+    required this.child,
+  });
+  final bool isPrimary;
+  final VoidCallback onPressed;
+  final double? height;
+  final double? width;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: isPrimary ? Theme.of(context).primaryColor : AppColors.white,
+          borderRadius: BorderRadius.circular(3),
+          border: Border.all(
+            color: isPrimary ? Theme.of(context).primaryColor : AppColors.primary,
+            width: 2,
+          ),
+        ),
+        child: Center(
+          child: child,
+        ),
+      ),
+    );
+  }
+}
