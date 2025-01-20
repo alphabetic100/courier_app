@@ -85,7 +85,7 @@ class SelectRuleScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.only(left: 20),
                     child: Text("Already have an account?")),
                 CustomTextButton(
                     onPressed: () {
