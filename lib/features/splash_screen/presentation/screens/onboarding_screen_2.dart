@@ -1,5 +1,6 @@
 import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
+import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
@@ -21,10 +22,7 @@ class OnboardingScreen2 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             VerticalSpace(height: getHeight(30)),
-            Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                width: 250,
-                child: Image.asset(ImagePath.appLogo)),
+            Padding(padding: EdgeInsets.all(12), child: ShowAppLogo()),
             VerticalSpace(height: getHeight(10)),
             SizedBox(
               child: Image.asset(ImagePath.onboarding2),
