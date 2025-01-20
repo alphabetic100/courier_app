@@ -1,5 +1,5 @@
-import 'package:courierapp/features/sender/authentication/presentation/screens/login_screen.dart';
-import 'package:courierapp/features/sender/authentication/presentation/screens/sing_up_screen.dart';
+import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/login_screen.dart';
+import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/sing_up_screen.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_1.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_2.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_3.dart';
@@ -54,9 +54,9 @@ class AppRoute {
     // GetPage(name: landingScreen, page: () => const LandingScreen()),
 
     //Auth Screens
-    GetPage(name: loginScreen, page: () => const LoginScreen()),
-    GetPage(name: selectRuleScreen, page: () =>  SelectRuleScreen()),
-    GetPage(name: signUpScreen, page: () => const SingUpScreen()),
+    GetPage(name: loginScreen, page: () => LoginScreen()),
+    GetPage(name: selectRuleScreen, page: () => SelectRuleScreen()),
+    GetPage(name: signUpScreen, page: () => SingUpScreen()),
 
     //Home Screen
     // GetPage(name: homeScreen, page: () => const HomeScreen()),

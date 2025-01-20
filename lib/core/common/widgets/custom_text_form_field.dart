@@ -1,3 +1,4 @@
+import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -45,9 +46,9 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
         contentPadding:
             const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
         hintText: widget.hintText,
-        hintStyle: const TextStyle(
-          color: Color(0xff9CA3AF),
-          fontSize: 14,
+        hintStyle: getTextStyleMsrt(
+          color: Color(0xFF84828E),
+          fontSize: 16,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 4)),

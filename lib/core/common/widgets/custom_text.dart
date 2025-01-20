@@ -1,11 +1,9 @@
-
+import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/constants/app_colors.dart';
 import '../../utils/constants/app_sizes.dart';
-
-
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -23,21 +21,21 @@ class CustomText extends StatelessWidget {
       this.textOverflow,
       this.fontSize,
       this.color,
-        this.fontWeight, this.decoration, this.decorationColor });
+      this.fontWeight,
+      this.decoration,
+      this.decorationColor});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.poppins(
-        decoration:decoration,
-          decorationColor: decorationColor??const Color(0xffA59F92),
+      style: getTextStyleMsrt(
+          decorationColor: decorationColor ?? const Color(0xffA59F92),
           fontSize: fontSize ?? getWidth(16),
-          color: color ?? AppColors.textPrimary,
+          color: color ?? Color(0xff9CA3AF),
           fontWeight: fontWeight ?? FontWeight.w600),
       overflow: textOverflow,
       maxLines: maxLines,
-
     );
   }
 }
