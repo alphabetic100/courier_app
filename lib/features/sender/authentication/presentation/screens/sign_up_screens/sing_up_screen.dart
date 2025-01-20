@@ -7,7 +7,7 @@ import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/features/sender/authentication/controllers/sing_up_controller.dart';
+import 'package:courierapp/features/sender/authentication/controllers/signup_controllers/sing_up_controller.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -129,7 +129,9 @@ class SingUpScreen extends StatelessWidget {
                 ),
                 Spacer(),
                 CustomButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(AppRoute.paymentSetupScreen);
+                    },
                     child: Text(
                       "Next",
                       style: getTextStyleMsrt(
@@ -149,7 +151,7 @@ class SingUpScreen extends StatelessWidget {
                         Get.toNamed(AppRoute.loginScreen);
                       },
                       text: "Log in",
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ],
                 ),

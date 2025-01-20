@@ -7,7 +7,7 @@ import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/features/sender/authentication/controllers/login_controller.dart';
+import 'package:courierapp/features/sender/authentication/controllers/login_controllers/login_controller.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/forget_password_screen.dart';
 import 'package:courierapp/routes/app_routes.dart';
 
@@ -123,7 +123,7 @@ class LoginScreen extends StatelessWidget {
                         Get.toNamed(AppRoute.signUpScreen);
                       },
                       text: "Sign up",
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ],
                 ),

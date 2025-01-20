@@ -1,5 +1,5 @@
-import 'package:courierapp/features/sender/authentication/controllers/login_controller.dart';
-import 'package:courierapp/features/sender/authentication/controllers/sing_up_controller.dart';
+import 'package:courierapp/features/sender/authentication/controllers/login_controllers/login_controller.dart';
+import 'package:courierapp/features/sender/authentication/controllers/signup_controllers/sing_up_controller.dart';
 import 'package:get/get.dart';
 
 class ControllerBinder extends Bindings {
