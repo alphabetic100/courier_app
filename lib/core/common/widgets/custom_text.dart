@@ -1,8 +1,6 @@
 import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../../utils/constants/app_colors.dart';
 import '../../utils/constants/app_sizes.dart';
 
 class CustomText extends StatelessWidget {

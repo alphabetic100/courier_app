@@ -1,3 +1,4 @@
+import 'package:courierapp/routes/app_routes.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
@@ -8,6 +9,7 @@ class LoginController extends GetxController {
   }
 
   login() {
+    Get.toNamed(AppRoute.landingScreen);
     // login logic here
   }
 }

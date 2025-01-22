@@ -1,3 +1,4 @@
+import 'package:courierapp/features/landing/presentation/screens/landing_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/login_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/payment_setup_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/sing_up_screen.dart';
@@ -22,6 +23,7 @@ class AppRoute {
   static String signUpScreen = "/signUpScreen";
 
   static String paymentSetupScreen = "/paymentSetupScreen";
+
   static List<GetPage> routes = [
     //Splash Screen: initial screen
     GetPage(name: init, page: () => const SplashScreen()),
@@ -65,5 +67,9 @@ class AppRoute {
 
     //Home Screen
     // GetPage(name: homeScreen, page: () => const HomeScreen()),
+
+    //-------------------------------------------------------------------------------------------------
+    //    Landing Screen
+    GetPage(name: landingScreen, page: () => LandingScreen()),
   ];
 }
