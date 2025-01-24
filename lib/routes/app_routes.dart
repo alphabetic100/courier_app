@@ -26,7 +26,7 @@ class AppRoute {
 
   static List<GetPage> routes = [
     //Splash Screen: initial screen
-    GetPage(name: init, page: () => const SplashScreen()),
+    GetPage(name: init, page: () =>  SplashScreen()),
 
     //Onboarding Screens
     GetPage(

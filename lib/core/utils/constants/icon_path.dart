@@ -16,4 +16,7 @@ class IconPath {
   static const String addIcon = "$_basePath/add_icon.png";
   static const String messageIcon = "$_basePath/message_icon.png";
   static const String profileIcon = "$_basePath/profile_icon.png";
+
+  // Google Logo
+  static const String googleLogo = "assets/logos/google.png";
 }
