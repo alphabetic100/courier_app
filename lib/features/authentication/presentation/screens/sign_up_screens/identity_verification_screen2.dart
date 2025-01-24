@@ -6,13 +6,13 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
-import 'package:courierapp/features/sender/authentication/controllers/signup_controllers/identity_verification_controller.dart';
+import 'package:courierapp/features/authentication/controllers/signup_controllers/identity_verification_controller.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class IdentityVerificationScreen3 extends StatelessWidget {
-  IdentityVerificationScreen3({super.key});
+class IdentityVerificationScreen2 extends StatelessWidget {
+  IdentityVerificationScreen2({super.key});
   final IdentityVerificationController verificationController =
       Get.find<IdentityVerificationController>();
   @override
@@ -44,14 +44,14 @@ class IdentityVerificationScreen3 extends StatelessWidget {
             ),
             VerticalSpace(height: getHeight(25)),
             CustomText(
-              text: "Upload Selfie Holding ID",
+              text: "Upload Front Photo of ID",
               fontWeight: FontWeight.bold,
               color: AppColors.titleTextColor,
             ),
             VerticalSpace(height: getHeight(10)),
             Obx(() {
               return GestureDetector(
-                onTap: verificationController.takeSelfie,
+                onTap: verificationController.pickImage,
                 child: Container(
                     height: AppSizes.height * 0.3,
                     width: double.infinity,
@@ -60,11 +60,11 @@ class IdentityVerificationScreen3 extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                       color: AppColors.white,
                     ),
-                    child: verificationController.selfieImage.value != null
+                    child: verificationController.selectedImage.value != null
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.file(
-                              verificationController.selfieImage.value!,
+                              verificationController.selectedImage.value!,
                               fit: BoxFit.cover,
                             ),
                           )
@@ -98,7 +98,7 @@ class IdentityVerificationScreen3 extends StatelessWidget {
                   Expanded(
                     child: CustomButton(
                         onPressed: () {
-                          Get.toNamed(AppRoute.paymentSetupScreen);
+                          Get.toNamed(AppRoute.identityVerificationScreen3);
                         },
                         child: CustomText(
                           text: "Next",

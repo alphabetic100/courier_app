@@ -1,9 +1,9 @@
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
-import 'package:courierapp/features/sender/authentication/controllers/login_controllers/login_controller.dart';
-import 'package:courierapp/features/sender/authentication/controllers/login_controllers/otp_controller.dart';
-import 'package:courierapp/features/sender/authentication/controllers/signup_controllers/identity_verification_controller.dart';
-import 'package:courierapp/features/sender/authentication/controllers/signup_controllers/sing_up_controller.dart';
+import 'package:courierapp/features/authentication/controllers/login_controllers/login_controller.dart';
+import 'package:courierapp/features/authentication/controllers/login_controllers/otp_controller.dart';
+import 'package:courierapp/features/authentication/controllers/signup_controllers/identity_verification_controller.dart';
+import 'package:courierapp/features/authentication/controllers/signup_controllers/sing_up_controller.dart';
 import 'package:get/get.dart';
 
 class ControllerBinder extends Bindings {

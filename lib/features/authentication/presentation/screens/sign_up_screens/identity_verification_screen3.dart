@@ -5,23 +5,16 @@ import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/core/utils/constants/icon_path.dart';
-import 'package:courierapp/features/sender/authentication/controllers/signup_controllers/identity_verification_controller.dart';
-import 'package:courierapp/features/sender/authentication/presentation/components/select_identity_card.dart';
+import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/features/authentication/controllers/signup_controllers/identity_verification_controller.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class IdentityVerificationScreen1 extends StatelessWidget {
-  IdentityVerificationScreen1({super.key});
+class IdentityVerificationScreen3 extends StatelessWidget {
+  IdentityVerificationScreen3({super.key});
   final IdentityVerificationController verificationController =
       Get.find<IdentityVerificationController>();
-  final List<String> titles = ["National ID", "Passport", "Driver’s License"];
-  final List<String> iconPaths = [
-    IconPath.nationalID,
-    IconPath.passportIcon,
-    IconPath.drivingLicence
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,36 +44,40 @@ class IdentityVerificationScreen1 extends StatelessWidget {
             ),
             VerticalSpace(height: getHeight(25)),
             CustomText(
-              text: "Select ID Type",
+              text: "Upload Selfie Holding ID",
               fontWeight: FontWeight.bold,
               color: AppColors.titleTextColor,
             ),
             VerticalSpace(height: getHeight(10)),
-            Expanded(
-                child: ListView.builder(
-                    itemCount: titles.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: getHeight(20)),
-                        child: Obx(() {
-                          return GestureDetector(
-                            onTap: () {
-                              verificationController.selectedIndex.value =
-                                  index;
-                            },
-                            child: SelectIdentityCard(
-                                isSelected: verificationController
-                                            .selectedIndex.value ==
-                                        index
-                                    ? true
-                                    : false,
-                                iconPath: iconPaths[index],
-                                title: titles[index]),
-                          );
-                        }),
-                      );
-                    })),
+            Obx(() {
+              return GestureDetector(
+                onTap: verificationController.takeSelfie,
+                child: Container(
+                    height: AppSizes.height * 0.3,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.white,
+                    ),
+                    child: verificationController.selfieImage.value != null
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.file(
+                              verificationController.selfieImage.value!,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : Padding(
+                            padding:
+                                EdgeInsets.symmetric(vertical: getHeight(100)),
+                            child: Image.asset(
+                              ImagePath.uploadPhoto,
+                              height: getHeight(20),
+                            ),
+                          )),
+              );
+            }),
             Spacer(),
             SizedBox(
               width: AppSizes.width,
@@ -101,7 +98,7 @@ class IdentityVerificationScreen1 extends StatelessWidget {
                   Expanded(
                     child: CustomButton(
                         onPressed: () {
-                          Get.toNamed(AppRoute.identityVerificationScreen2);
+                          Get.toNamed(AppRoute.paymentSetupScreen);
                         },
                         child: CustomText(
                           text: "Next",

@@ -9,7 +9,10 @@ class IconPath {
   static const String appleLogo = "$_basePath/apple.png";
   static const String creditCardLogo = "$_basePath/credit-card.png";
   static const String payPalLogo = "$_basePath/paypal.png";
-
+  static const String filterIcon = "$_basePath/filter_icon.png";
+  static const String arrow = "$_basePath/arrow.png";
+  static const String destn = "$_basePath/desin.png";
+  static const String directionsBus = "$_basePath/directions_bus.png";
   //nav bar Icons
   static const String searchIcon = "$_basePath/Search.png";
   static const String sendIcon = "$_basePath/list_alt.png";
