@@ -12,6 +12,9 @@ class CustomTexFormField extends StatefulWidget {
     this.maxLines = 1,
     this.radius,
     this.prefixIcon,
+    this.onChange,
+    this.onTap,
+    this.readOnly = false,
   });
 
   final String hintText;
@@ -21,7 +24,9 @@ class CustomTexFormField extends StatefulWidget {
   final int maxLines;
   final double? radius;
   final Widget? prefixIcon;
-
+  final Function(String)? onChange;
+  final VoidCallback? onTap;
+  final bool readOnly;
   @override
   State<CustomTexFormField> createState() => _CustomTexFormFieldState();
 }
@@ -32,6 +37,9 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: widget.readOnly,
+      onChanged: widget.onChange,
+      onTap: widget.onTap,
       maxLines: widget.maxLines,
       controller: widget.controller,
       validator: widget.validator,

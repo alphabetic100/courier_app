@@ -1,4 +1,6 @@
 import 'package:courierapp/features/landing/presentation/screens/landing_screen.dart';
+import 'package:courierapp/features/search_screen/presentation/screens/search_result_screen.dart';
+import 'package:courierapp/features/search_screen/presentation/screens/search_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/forget_password_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/login_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/reset_password_screen.dart';
@@ -34,6 +36,9 @@ class AppRoute {
 
   static String paymentSetupScreen = "/paymentSetupScreen";
   static String paymentSetupScreen2 = "/paymentSetupScreen";
+
+  static String searchScreen = "/SearchScreen";
+  static String searchResultScreen = "/searchresultScreen";
 
   static List<GetPage> routes = [
     //Splash Screen: initial screen
@@ -109,11 +114,13 @@ class AppRoute {
       curve: Curves.easeOut,
     ),
 
-    //Home Screen
-    // GetPage(name: homeScreen, page: () => const HomeScreen()),
-
     //-------------------------------------------------------------------------------------------------
     //           Landing Screen
     GetPage(name: landingScreen, page: () => LandingScreen()),
+
+    //-------------------------------------------------------------------------------------------------
+    //          Search Screeens
+    GetPage(name: searchScreen, page: () => SearchScreen()),
+    GetPage(name: searchResultScreen, page: () => SearchResultScreen()),
   ];
 }
