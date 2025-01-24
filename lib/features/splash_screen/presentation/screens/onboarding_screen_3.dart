@@ -66,7 +66,7 @@ class OnboardingScreen3 extends StatelessWidget {
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
-                    Get.toNamed(AppRoute.selectRuleScreen);
+                    Get.toNamed(AppRoute.signUpScreen);
                   },
                   child: Text(
                     "Sign Up",

@@ -1,7 +1,9 @@
 import 'package:courierapp/features/landing/presentation/screens/landing_screen.dart';
+import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/forget_password_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/login_screen.dart';
+import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/reset_password_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/payment_setup_screen.dart';
-import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/sing_up_screen.dart';
+import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/sign_up_screen.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_1.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_2.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_3.dart';
@@ -21,12 +23,14 @@ class AppRoute {
   static String loginScreen = "/loginScreen";
   static String selectRuleScreen = "/selectRuleScreen";
   static String signUpScreen = "/signUpScreen";
+  static String forgetPassword = "/forgetPassword";
+  static String createNewPassword = "/createNewPassword";
 
   static String paymentSetupScreen = "/paymentSetupScreen";
 
   static List<GetPage> routes = [
     //Splash Screen: initial screen
-    GetPage(name: init, page: () =>  SplashScreen()),
+    GetPage(name: init, page: () => SplashScreen()),
 
     //Onboarding Screens
     GetPage(
@@ -60,7 +64,9 @@ class AppRoute {
     //Auth Screens
     GetPage(name: loginScreen, page: () => LoginScreen()),
     GetPage(name: selectRuleScreen, page: () => SelectRuleScreen()),
-    GetPage(name: signUpScreen, page: () => SingUpScreen()),
+    GetPage(name: signUpScreen, page: () => SignUpScreen()),
+    GetPage(name: forgetPassword, page: () => ForgetPasswordScreen()),
+    GetPage(name: createNewPassword, page: () => ResetPasswordScreen()),
 
     //Payment Setup Screen
     GetPage(name: paymentSetupScreen, page: () => const PaymentSetupScreen()),

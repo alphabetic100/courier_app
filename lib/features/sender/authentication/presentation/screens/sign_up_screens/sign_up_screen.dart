@@ -8,16 +8,21 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
-import 'package:courierapp/features/sender/authentication/controllers/login_controllers/login_controller.dart';
-import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/forget_password_screen.dart';
+import 'package:courierapp/features/sender/authentication/controllers/signup_controllers/sing_up_controller.dart';
 import 'package:courierapp/routes/app_routes.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
-  final LoginController loginController = Get.find<LoginController>();
+class SignUpScreen extends StatelessWidget {
+  SignUpScreen({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+  final TextEditingController fullNameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  final SingUpController singUpController = Get.find<SingUpController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,16 +40,30 @@ class LoginScreen extends StatelessWidget {
                   ShowAppLogo(),
                   VerticalSpace(height: getHeight(20)),
                   Text(
-                    "Log in",
+                    "Create Your Account",
                     style: getTextStyleMsrt(
                         color: Colors.black,
                         fontSize: getWidth(35),
                         fontWeight: FontWeight.bold),
                   ),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(10)),
                   Text(
                     "Deliver smarter, faster, and hassle-free",
                     style: getTextStyleMsrt(color: Color(0xFF84828E)),
+                  ),
+                  VerticalSpace(height: getHeight(10)),
+                  //Full Name
+                  Text(
+                    "Full Name",
+                    style: getTextStyleMsrt(
+                        color: AppColors.black,
+                        fontSize: getWidth(18),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  VerticalSpace(height: getHeight(10)),
+                  CustomTexFormField(
+                    controller: fullNameController,
+                    hintText: "Enter your full name",
                   ),
                   VerticalSpace(height: getHeight(20)),
                   Text(
@@ -55,10 +74,15 @@ class LoginScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   VerticalSpace(height: getHeight(10)),
+
+                  //Email Address
                   CustomTexFormField(
+                    controller: emailController,
                     hintText: "Enter your email address",
                   ),
                   VerticalSpace(height: getHeight(20)),
+
+                  //Password
                   Text(
                     "Password",
                     style: getTextStyleMsrt(
@@ -68,45 +92,65 @@ class LoginScreen extends StatelessWidget {
                   ),
                   VerticalSpace(height: getHeight(10)),
                   CustomTexFormField(
+                    controller: passwordController,
                     hintText: "Enter your password",
                     isPassword: true,
                   ),
                   VerticalSpace(height: getHeight(20)),
+
+                  //Confirm Password
+                  Text(
+                    "Confirm Password",
+                    style: getTextStyleMsrt(
+                        color: AppColors.black,
+                        fontSize: getWidth(18),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  VerticalSpace(height: getHeight(10)),
+                  CustomTexFormField(
+                    controller: confirmPasswordController,
+                    hintText: "Enter your password again",
+                    isPassword: true,
+                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Obx(() => Checkbox(
-                                value: loginController.rememberMe.value,
-                                onChanged: (value) {
-                                  loginController.toggleRememberMe();
-                                },
-                                activeColor: AppColors.black,
-                              )),
-                          CustomText(
-                            text: "Remember me",
-                            fontSize: getWidth(16),
-                          )
-                        ],
-                      ),
-                      CustomTextButton(
-                        isUnderline: true,
-                        onPressed: () {
-                          Get.to(() => ForgetPasswordScreen());
-                        },
-                        text: "Forgot Password?",
-                        fontWeight: FontWeight.bold,
-                      ),
+                      Obx(() => Checkbox(
+                          activeColor: AppColors.black,
+                          value: singUpController.termsAndConditions.value,
+                          onChanged: (value) {
+                            singUpController.toggleTermsAndConditions();
+                          })),
+                      Row(children: [
+                        CustomText(
+                          text: "I agree to the",
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: AppColors.bodyTextColor,
+                        ),
+                        HorizontalSpace(width: getWidth(5)),
+                        CustomTextButton(
+                          isUnderline: false,
+                          onPressed: () {
+                            //TODO: Go to the trams and condition screen
+                          },
+                          text: "Terms & Conditions.",
+                          fontWeight: FontWeight.bold,
+                        )
+                      ])
+                      // CustomText(
+                      //   text: "I agree to the Terms & Conditions.",
+                      //   fontSize: getWidth(16),
+                      //   fontWeight: FontWeight.normal,
+                      // )
                     ],
                   ),
-                  VerticalSpace(height: AppSizes.height * 0.25),
+                  VerticalSpace(height: AppSizes.height * 0.073),
                   CustomButton(
                       onPressed: () {
-                        loginController.login();
+                        Get.toNamed(AppRoute.paymentSetupScreen);
                       },
                       child: Text(
-                        "Log in",
+                        "Next",
                         style: getTextStyleMsrt(
                             color: Colors.white,
                             fontSize: getWidth(18),
@@ -142,25 +186,24 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ],
                       )),
-                  VerticalSpace(height: getHeight(10)),
                   Row(
                     children: [
                       CustomText(
-                        text: "Don't have an account?",
+                        text: "Already have an account?",
                         fontSize: getWidth(16),
                       ),
                       CustomTextButton(
                         isUnderline: true,
                         fontSize: 18,
                         onPressed: () {
-                          Get.toNamed(AppRoute.signUpScreen);
+                          Get.toNamed(AppRoute.loginScreen);
                         },
-                        text: "Sign up",
+                        text: "Log in",
                         fontWeight: FontWeight.bold,
                       ),
                     ],
                   ),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(10)),
                 ],
               ),
             ),

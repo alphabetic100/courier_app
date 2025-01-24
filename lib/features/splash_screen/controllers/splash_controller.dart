@@ -9,8 +9,8 @@ class SplashController extends GetxController {
       () {
         Get.offAll(
           () => const OnboardingScreen1(),
-          transition: Transition.fade,
-          duration: const Duration(milliseconds: 300),
+          transition: Transition.rightToLeftWithFade,
+          duration: Duration(milliseconds: 400),
           curve: Curves.easeOut,
         );
       },
