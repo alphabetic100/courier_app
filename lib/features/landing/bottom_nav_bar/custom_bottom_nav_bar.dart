@@ -1,5 +1,4 @@
 import 'package:courierapp/core/common/styles/get_text_style.dart';
-import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -71,7 +71,7 @@ class OnboardingScreen3 extends StatelessWidget {
                   child: Text(
                     "Sign Up",
                     style: getTextStyleMsrt(
-                      color: AppColors.primary,
+                      color: AppColors.bodyTextColor,
                       fontWeight: FontWeight.bold,
                     ),
                   )),

@@ -34,7 +34,7 @@ class TextWithArrow extends StatelessWidget {
             fontSize: fontSize ?? getWidth(14),
             maxLines: 1,
             textOverflow: TextOverflow.ellipsis,
-            color: AppColors.primary,
+            color: AppColors.primaryColor,
             fontWeight: fontWeight ?? FontWeight.w400
           ),
           SizedBox(width: getWidth(8)),

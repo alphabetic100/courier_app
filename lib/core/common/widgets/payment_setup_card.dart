@@ -24,11 +24,11 @@ class PaymentSetupCard extends StatelessWidget {
         width: AppSizes.width,
         decoration: BoxDecoration(
           color: isCardSelected
-              ? AppColors.primary.withOpacity(0.1)
+              ? AppColors.primaryColor.withOpacity(0.1)
               : Colors.white,
           borderRadius: BorderRadius.circular(8),
           border: isCardSelected
-              ? Border.all(color: AppColors.primary)
+              ? Border.all(color: AppColors.primaryColor)
               : Border.all(color: Color(0xFFE2E2E6)),
         ),
         child: Row(
