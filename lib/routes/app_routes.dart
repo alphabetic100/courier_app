@@ -2,12 +2,14 @@ import 'package:courierapp/features/landing/presentation/screens/landing_screen.
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/forget_password_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/login_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/reset_password_screen.dart';
+import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/identity_verification_screen1.dart';
+import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/identity_verification_screen2.dart';
+import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/identity_verification_screen3.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/payment_setup_screen.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/sign_up_screen.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_1.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_2.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_3.dart';
-import 'package:courierapp/features/splash_screen/presentation/screens/select_rule_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,11 +23,12 @@ class AppRoute {
   static String landingScreen = "/landingScreen";
 
   static String loginScreen = "/loginScreen";
-  static String selectRuleScreen = "/selectRuleScreen";
   static String signUpScreen = "/signUpScreen";
   static String forgetPassword = "/forgetPassword";
   static String createNewPassword = "/createNewPassword";
-
+  static String identityVerificationScreen1 = "/IdentityVerificationScreen1";
+  static String identityVerificationScreen2 = "/IdentityVerificationScreen2";
+  static String identityVerificationScreen3 = "/IdentityVerificationScreen3";
   static String paymentSetupScreen = "/paymentSetupScreen";
 
   static List<GetPage> routes = [
@@ -61,12 +64,34 @@ class AppRoute {
     //Landing screen
     // GetPage(name: landingScreen, page: () => const LandingScreen()),
 
-    //Auth Screens
+    //              Auth Screens
+    //Login Screens
     GetPage(name: loginScreen, page: () => LoginScreen()),
-    GetPage(name: selectRuleScreen, page: () => SelectRuleScreen()),
-    GetPage(name: signUpScreen, page: () => SignUpScreen()),
     GetPage(name: forgetPassword, page: () => ForgetPasswordScreen()),
     GetPage(name: createNewPassword, page: () => ResetPasswordScreen()),
+    //Signup Screens
+    GetPage(name: signUpScreen, page: () => SignUpScreen()),
+    GetPage(
+      name: identityVerificationScreen1,
+      page: () => IdentityVerificationScreen1(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    ),
+    GetPage(
+      name: identityVerificationScreen2,
+      page: () => IdentityVerificationScreen2(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    ),
+    GetPage(
+      name: identityVerificationScreen3,
+      page: () => IdentityVerificationScreen3(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    ),
 
     //Payment Setup Screen
     GetPage(name: paymentSetupScreen, page: () => const PaymentSetupScreen()),

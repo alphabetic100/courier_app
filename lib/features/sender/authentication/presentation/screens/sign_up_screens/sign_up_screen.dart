@@ -137,17 +137,12 @@ class SignUpScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         )
                       ])
-                      // CustomText(
-                      //   text: "I agree to the Terms & Conditions.",
-                      //   fontSize: getWidth(16),
-                      //   fontWeight: FontWeight.normal,
-                      // )
                     ],
                   ),
                   VerticalSpace(height: AppSizes.height * 0.073),
                   CustomButton(
                       onPressed: () {
-                        Get.toNamed(AppRoute.paymentSetupScreen);
+                        Get.toNamed(AppRoute.identityVerificationScreen1);
                       },
                       child: Text(
                         "Next",

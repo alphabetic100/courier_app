@@ -5,7 +5,7 @@ import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/features/sender/authentication/controllers/reset_password_controllers/otp_controller.dart';
+import 'package:courierapp/features/sender/authentication/controllers/login_controllers/otp_controller.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/log_in_screens/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

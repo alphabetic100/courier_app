@@ -6,4 +6,6 @@ class ImagePath {
   static const String onboarding1 = '$_basePath/onboarding1.png';
   static const String onboarding2 = '$_basePath/onboarding2.png';
   static const String onboarding3 = '$_basePath/onboarding3.png';
+
+  static const String uploadPhoto = "$_basePath/upload_photo.png";
 }
