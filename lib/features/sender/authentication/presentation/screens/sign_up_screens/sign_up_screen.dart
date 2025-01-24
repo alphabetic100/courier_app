@@ -176,7 +176,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           HorizontalSpace(width: getWidth(10)),
                           CustomText(
-                            text: "Login with Google",
+                            text: "Sign Up with Google",
                             fontWeight: FontWeight.bold,
                           ),
                         ],

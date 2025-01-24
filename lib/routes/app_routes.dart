@@ -6,6 +6,7 @@ import 'package:courierapp/features/sender/authentication/presentation/screens/s
 import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/identity_verification_screen2.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/identity_verification_screen3.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/payment_setup_screen.dart';
+import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/payment_setup_screen2.dart';
 import 'package:courierapp/features/sender/authentication/presentation/screens/sign_up_screens/sign_up_screen.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_1.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_2.dart';
@@ -26,10 +27,13 @@ class AppRoute {
   static String signUpScreen = "/signUpScreen";
   static String forgetPassword = "/forgetPassword";
   static String createNewPassword = "/createNewPassword";
+
   static String identityVerificationScreen1 = "/IdentityVerificationScreen1";
   static String identityVerificationScreen2 = "/IdentityVerificationScreen2";
   static String identityVerificationScreen3 = "/IdentityVerificationScreen3";
+
   static String paymentSetupScreen = "/paymentSetupScreen";
+  static String paymentSetupScreen2 = "/paymentSetupScreen";
 
   static List<GetPage> routes = [
     //Splash Screen: initial screen
@@ -59,10 +63,6 @@ class AppRoute {
     ),
 
 // ------------------------------------------------------------------------------------------------
-    //                      SENDER ROUTES
-
-    //Landing screen
-    // GetPage(name: landingScreen, page: () => const LandingScreen()),
 
     //              Auth Screens
     //Login Screens
@@ -94,13 +94,26 @@ class AppRoute {
     ),
 
     //Payment Setup Screen
-    GetPage(name: paymentSetupScreen, page: () => const PaymentSetupScreen()),
+    GetPage(
+      name: paymentSetupScreen,
+      page: () => PaymentSetupScreen(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    ),
+    GetPage(
+      name: paymentSetupScreen2,
+      page: () => PaymentSetupScreen2(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    ),
 
     //Home Screen
     // GetPage(name: homeScreen, page: () => const HomeScreen()),
 
     //-------------------------------------------------------------------------------------------------
-    //    Landing Screen
+    //           Landing Screen
     GetPage(name: landingScreen, page: () => LandingScreen()),
   ];
 }
