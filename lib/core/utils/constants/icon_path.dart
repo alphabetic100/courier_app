@@ -12,10 +12,10 @@ class IconPath {
 
   //nav bar Icons
   static const String searchIcon = "$_basePath/Search.png";
-  static const String sendIcon = "$_basePath/send_icon.png";
-  static const String addIcon = "$_basePath/add_icon.png";
+  static const String sendIcon = "$_basePath/list_alt.png";
+  static const String addIcon = "$_basePath/add_circle.png";
   static const String messageIcon = "$_basePath/message_icon.png";
-  static const String profileIcon = "$_basePath/profile_icon.png";
+  static const String profileIcon = "$_basePath/account_circle.png";
 
   //Identity icons
   static const String nationalID = "$_basePath/national_id.png";

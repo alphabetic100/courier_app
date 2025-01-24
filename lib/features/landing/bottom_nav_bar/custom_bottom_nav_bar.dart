@@ -11,48 +11,24 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return BottomNavigationBar(
-        backgroundColor: Color(0xFF000000),
+        selectedLabelStyle:
+            getTextStyleMsrt(fontSize: 16, fontWeight: FontWeight.bold),
+        unselectedLabelStyle:
+            getTextStyleMsrt(fontSize: 14, color: AppColors.bodyTextColor),
+        backgroundColor: AppColors.white,
         currentIndex: landingController.currentPage.value,
-        selectedItemColor: AppColors.white,
-        unselectedItemColor: Color(0xFF777C7C),
+        selectedItemColor: AppColors.primaryColor,
+        unselectedItemColor: AppColors.grey,
         showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
+        type: BottomNavigationBarType.shifting,
         onTap: (value) => landingController.changePage(value),
         items: List.generate(landingController.activeIcons.length, (index) {
           final isSelected = landingController.currentPage.value == index;
-
           return BottomNavigationBarItem(
-            backgroundColor: Color(0xFF000000),
-            icon: index == 3
-                ? Stack(
-                    children: [
-                      isSelected
-                          ? landingController.activeIcons[3]
-                          : landingController.inActiveIcons[3],
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.red,
-                          ),
-                          child: Center(
-                            child: Text(
-                              landingController.notifications.value.toString(),
-                              style:
-                                  getTextStyleMsrt(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                : isSelected
-                    ? landingController.activeIcons[index]
-                    : landingController.inActiveIcons[index],
+            backgroundColor: AppColors.white,
+            icon: isSelected
+                ? landingController.activeIcons[index]
+                : landingController.inActiveIcons[index],
             label: landingController.labels[index],
           );
         }),
