@@ -1,4 +1,5 @@
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
+import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
 import 'package:courierapp/features/authentication/controllers/login_controllers/login_controller.dart';
 import 'package:courierapp/features/authentication/controllers/login_controllers/otp_controller.dart';
@@ -49,6 +50,12 @@ class ControllerBinder extends Bindings {
     //Trip overview Details controller
     Get.lazyPut<TripOverviewController>(
       () => TripOverviewController(),
+      fenix: true,
+    );
+
+    //Request Shipping controller
+    Get.lazyPut<RequestShippingController>(
+      () => RequestShippingController(),
       fenix: true,
     );
   }
