@@ -15,6 +15,7 @@ class CustomTexFormField extends StatefulWidget {
     this.onChange,
     this.onTap,
     this.readOnly = false,
+    this.suffixIcon,
   });
 
   final String hintText;
@@ -24,6 +25,7 @@ class CustomTexFormField extends StatefulWidget {
   final int maxLines;
   final double? radius;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final Function(String)? onChange;
   final VoidCallback? onTap;
   final bool readOnly;
@@ -48,6 +50,7 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
           : false, // Obscure for password fields
       style: getTextStyleMsrt(),
       decoration: InputDecoration(
+        suffix: widget.suffixIcon,
         prefixIcon: widget.prefixIcon,
         filled: true,
         fillColor: AppColors.white,

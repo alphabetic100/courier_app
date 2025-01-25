@@ -30,7 +30,7 @@ class CustomBottomAppBar extends StatelessWidget {
           secondaryWidget ?? SizedBox.shrink(),
           isPrimaryButton
               ? CustomButton(
-                  onPressed:onTap,
+                  onPressed: onTap,
                   child: CustomText(
                     text: primaryText ?? "Next",
                     color: AppColors.white,
