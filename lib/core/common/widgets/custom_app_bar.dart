@@ -1,8 +1,10 @@
-import 'package:courierapp/core/common/widgets/custom_back_button.dart';
+import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -35,8 +37,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       leading: backButton
           ? Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomBackButton(),
+              padding: EdgeInsets.only(
+                  left: getWidth(12), top: getWidth(6), bottom: getWidth(6)),
+              child: CustomButton(
+                  isPrimary: false,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Center(
+                    child: Icon(
+                      CupertinoIcons.back,
+                      color: AppColors.grey,
+                    ),
+                  )),
             )
           : null,
     );

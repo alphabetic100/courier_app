@@ -13,6 +13,7 @@ class IconPath {
   static const String arrow = "$_basePath/arrow.png";
   static const String destn = "$_basePath/desin.png";
   static const String directionsBus = "$_basePath/directions_bus.png";
+  static const String weightIcon = "$_basePath/weight.png";
   //nav bar Icons
   static const String searchIcon = "$_basePath/Search.png";
   static const String sendIcon = "$_basePath/list_alt.png";

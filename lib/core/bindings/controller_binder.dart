@@ -4,6 +4,7 @@ import 'package:courierapp/features/authentication/controllers/login_controllers
 import 'package:courierapp/features/authentication/controllers/login_controllers/otp_controller.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/identity_verification_controller.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/sing_up_controller.dart';
+import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
 import 'package:get/get.dart';
 
 class ControllerBinder extends Bindings {
@@ -42,6 +43,12 @@ class ControllerBinder extends Bindings {
     //Search screen controller
     Get.lazyPut<SearchScreenController>(
       () => SearchScreenController(),
+      fenix: true,
+    );
+
+    //Trip overview Details controller
+    Get.lazyPut<TripOverviewController>(
+      () => TripOverviewController(),
       fenix: true,
     );
   }

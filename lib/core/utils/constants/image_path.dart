@@ -8,4 +8,6 @@ class ImagePath {
   static const String onboarding3 = '$_basePath/onboarding3.png';
 
   static const String uploadPhoto = "$_basePath/upload_photo.png";
+
+  static const String location = "assets/icons/pin_drop.png";
 }

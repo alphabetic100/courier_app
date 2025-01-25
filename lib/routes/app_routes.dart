@@ -10,6 +10,7 @@ import 'package:courierapp/features/authentication/presentation/screens/sign_up_
 import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/payment_setup_screen.dart';
 import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/payment_setup_screen2.dart';
 import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/sign_up_screen.dart';
+import 'package:courierapp/features/search_screen/presentation/screens/trip_overview_screen.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_1.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_2.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_3.dart';
@@ -39,6 +40,8 @@ class AppRoute {
 
   static String searchScreen = "/SearchScreen";
   static String searchResultScreen = "/searchresultScreen";
+
+  static String tripOverviewScreen = "/tripOverviewScreen";
 
   static List<GetPage> routes = [
     //Splash Screen: initial screen
@@ -122,5 +125,6 @@ class AppRoute {
     //          Search Screeens
     GetPage(name: searchScreen, page: () => SearchScreen()),
     GetPage(name: searchResultScreen, page: () => SearchResultScreen()),
+     GetPage(name: tripOverviewScreen, page: () => TripOverviewScreen()),
   ];
 }
