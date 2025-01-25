@@ -1,3 +1,4 @@
+import 'package:courierapp/features/authentication/controllers/signup_controllers/payment_setup_controller.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
@@ -38,6 +39,12 @@ class ControllerBinder extends Bindings {
     //Identity Verification Controller
     Get.lazyPut<IdentityVerificationController>(
       () => IdentityVerificationController(),
+      fenix: true,
+    );
+
+    //Payment setup controller
+    Get.lazyPut<PaymentSetupController>(
+      () => PaymentSetupController(),
       fenix: true,
     );
 

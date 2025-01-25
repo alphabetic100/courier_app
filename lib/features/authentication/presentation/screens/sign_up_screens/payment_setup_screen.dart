@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 class PaymentSetupScreen extends StatelessWidget {
   PaymentSetupScreen({super.key});
   final PaymentSetupController paymentSetupController =
-      Get.put(PaymentSetupController());
+      Get.find<PaymentSetupController>();
   final List<String> titles = ["PayPal", "Apple Pay", "Credit Card"];
   final List<String> iconPaths = [
     IconPath.payPalLogo,
