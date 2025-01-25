@@ -2,6 +2,7 @@ import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
+import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -53,45 +54,7 @@ class SearchScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(child: ShowAppLogo()),
-                          Stack(
-                            children: [
-                              CustomButton(
-                                  width: getWidth(50),
-                                  isPrimary: false,
-                                  onPressed: () {},
-                                  child: SizedBox(
-                                    width: getWidth(50),
-                                    child: Icon(
-                                      CupertinoIcons.bubble_left,
-                                      color: AppColors.grey,
-                                    ),
-                                  )),
-                              Obx(
-                                () =>
-                                    searchScreenController.hasNotification.value
-                                        ? Positioned(
-                                            top: getHeight(5),
-                                            right: getWidth(5),
-                                            child: Container(
-                                              height: getWidth(20),
-                                              width: getWidth(20),
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: AppColors.error,
-                                              ),
-                                              child: Center(
-                                                child: CustomText(
-                                                  text: "1",
-                                                  fontSize: 10,
-                                                  color: AppColors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : SizedBox.shrink(),
-                              ),
-                            ],
-                          )
+                          MessageNotificationBox(),
                         ],
                       )
                     ],
