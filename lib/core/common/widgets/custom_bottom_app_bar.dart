@@ -1,9 +1,7 @@
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
-import 'package:courierapp/features/request_shipping/presentation/payment_select_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
 import 'custom_text.dart';
 

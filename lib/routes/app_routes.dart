@@ -125,6 +125,6 @@ class AppRoute {
     //          Search Screeens
     GetPage(name: searchScreen, page: () => SearchScreen()),
     GetPage(name: searchResultScreen, page: () => SearchResultScreen()),
-     GetPage(name: tripOverviewScreen, page: () => TripOverviewScreen()),
+    GetPage(name: tripOverviewScreen, page: () => TripOverviewScreen()),
   ];
 }

@@ -1,6 +1,5 @@
 import 'package:courierapp/features/landing/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
-import 'package:courierapp/features/messege/presentation/screens/message_screen.dart';
 import 'package:courierapp/features/profile/presentation/screens/profile_screen.dart';
 import 'package:courierapp/features/publish_screen/presentation/screens/publish_screen.dart';
 import 'package:courierapp/features/search_screen/presentation/screens/search_screen.dart';
@@ -24,7 +23,6 @@ class LandingScreen extends StatelessWidget {
           SearchScreen(),
           PublishScreen(),
           SendScreen(),
-          MessageScreen(),
           ProfileScreen(),
         ],
       ),

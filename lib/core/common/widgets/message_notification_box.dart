@@ -2,6 +2,7 @@ import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
+import 'package:courierapp/features/messege/presentation/screens/message_screen.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,9 @@ class MessageNotificationBox extends StatelessWidget {
         CustomButton(
             width: getWidth(50),
             isPrimary: false,
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => MessageScreen());
+            },
             child: SizedBox(
               width: getWidth(50),
               child: Icon(
