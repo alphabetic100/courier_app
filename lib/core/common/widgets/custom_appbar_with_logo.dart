@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -79,11 +78,10 @@ class CustomAppbarWithLogo extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           color: AppColors.textPrimary,
                         ),
-                      if (subText != null)
-                        SizedBox(height: getHeight(4)),
+                      if (subText != null) SizedBox(height: getHeight(4)),
                       if (subText != null)
                         CustomText(
-                         text: subText!,
+                          text: subText!,
                           fontSize: getWidth(14),
                           fontWeight: FontWeight.w400,
                         ),
@@ -108,5 +106,4 @@ class CustomAppbarWithLogo extends StatelessWidget {
       ],
     );
   }
-
 }

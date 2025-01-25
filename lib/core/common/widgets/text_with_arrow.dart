@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../../utils/constants/app_colors.dart';
 import '../../utils/constants/app_sizes.dart';
@@ -30,13 +29,12 @@ class TextWithArrow extends StatelessWidget {
         children: [
           // CustomText Widget
           CustomText(
-            text: text ?? '',
-            fontSize: fontSize ?? getWidth(14),
-            maxLines: 1,
-            textOverflow: TextOverflow.ellipsis,
-            color: AppColors.primary,
-            fontWeight: fontWeight ?? FontWeight.w400
-          ),
+              text: text ?? '',
+              fontSize: fontSize ?? getWidth(14),
+              maxLines: 1,
+              textOverflow: textOverflow,
+              color: AppColors.primaryColor,
+              fontWeight: fontWeight ?? FontWeight.w400),
           SizedBox(width: getWidth(8)),
           // Arrow Icon
           Icon(

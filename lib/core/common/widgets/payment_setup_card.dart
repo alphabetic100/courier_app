@@ -1,6 +1,7 @@
-import 'package:courierapp/core/common/styles/get_text_style.dart';
+import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
+import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:flutter/material.dart';
 
 class PaymentSetupCard extends StatelessWidget {
@@ -19,34 +20,34 @@ class PaymentSetupCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(8),
-        height: getHeight(55),
-        width: AppSizes.width,
-        decoration: BoxDecoration(
-          color: isCardSelected
-              ? AppColors.primary.withOpacity(0.1)
-              : Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          border: isCardSelected
-              ? Border.all(color: AppColors.primary)
-              : Border.all(color: Color(0xFFE2E2E6)),
-        ),
-        child: Row(
-          children: [
-            Image.asset(
-              iconPath,
-              height: getHeight(25),
-              width: getWidth(25),
-            ),
-            SizedBox(width: getWidth(10)),
-            Text(title,
-                style: getTextStyleMsrt(
-                    color: Colors.black,
-                    fontSize: getWidth(18),
-                    fontWeight: FontWeight.bold)),
-          ],
-        ),
-      ),
+          padding: EdgeInsets.all(getWidth(8)),
+          decoration: BoxDecoration(
+            color: isCardSelected
+                ? AppColors.primaryColor.withOpacity(0.3)
+                : AppColors.white,
+            borderRadius: BorderRadius.circular(getWidth(8)),
+            border: Border.all(
+                color:
+                    isCardSelected ? AppColors.primaryColor : AppColors.grey),
+          ),
+          child: Row(
+            children: [
+              HorizontalSpace(width: getWidth(10)),
+              Image.asset(
+                iconPath,
+                height: 30,
+              ),
+              HorizontalSpace(width: getWidth(25)),
+              CustomText(
+                text: title,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: isCardSelected
+                    ? AppColors.primaryColor
+                    : AppColors.bodyTextColor,
+              ),
+            ],
+          )),
     );
   }
 }

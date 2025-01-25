@@ -1,4 +1,5 @@
 import 'package:courierapp/core/common/styles/get_text_style.dart';
+import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,9 +9,13 @@ class CustomTextButton extends StatelessWidget {
       required this.onPressed,
       required this.text,
       this.decorationThickness,
-      this.fontWeight});
+      this.fontWeight,
+      this.fontSize,
+      this.isUnderline});
   final double? decorationThickness;
+  final double? fontSize;
   final FontWeight? fontWeight;
+  final bool? isUnderline;
   final Function() onPressed;
   final String text;
   @override
@@ -21,8 +26,11 @@ class CustomTextButton extends StatelessWidget {
           text,
           style: getTextStyleMsrt(
               fontWeight: fontWeight ?? FontWeight.w400,
+              fontSize: fontSize ?? getWidth(16),
               color: Get.theme.primaryColor,
-              decoration: TextDecoration.underline,
+              decoration: isUnderline == true
+                  ? TextDecoration.underline
+                  : TextDecoration.none,
               decorationColor: Get.theme.primaryColor,
               decorationThickness: decorationThickness ?? 1.5),
         ));

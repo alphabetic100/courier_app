@@ -9,12 +9,14 @@ class CustomButton extends StatelessWidget {
     this.width,
     required this.onPressed,
     required this.child,
+    this.padding,
   });
   final bool isPrimary;
   final VoidCallback onPressed;
   final double? height;
   final double? width;
   final Widget child;
+  final EdgeInsetsGeometry? padding;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,13 +24,13 @@ class CustomButton extends StatelessWidget {
       child: Container(
         height: height,
         width: width,
-        padding: const EdgeInsets.all(8.0),
+        padding: padding ?? const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: isPrimary ? Theme.of(context).primaryColor : AppColors.white,
           borderRadius: BorderRadius.circular(3),
           border: Border.all(
             color:
-                isPrimary ? Theme.of(context).primaryColor : AppColors.primary,
+                isPrimary ? Theme.of(context).primaryColor : Color(0xFFCCD9D6),
             width: 2,
           ),
         ),

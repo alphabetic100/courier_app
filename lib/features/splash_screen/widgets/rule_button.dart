@@ -13,10 +13,10 @@ Widget ruleButton(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: isSelected ? AppColors.primary : AppColors.grey,
+          color: isSelected ? AppColors.primaryColor : AppColors.grey,
         ),
         color:
-            isSelected ? AppColors.primary.withOpacity(0.1) : AppColors.white,
+            isSelected ? AppColors.primaryColor.withOpacity(0.1) : AppColors.white,
       ),
       padding: EdgeInsets.symmetric(
           horizontal: getWidth(20), vertical: getWidth(10)),
@@ -25,12 +25,12 @@ Widget ruleButton(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CircleAvatar(
-            backgroundColor: isSelected ? AppColors.white : AppColors.primary,
+            backgroundColor: isSelected ? AppColors.white : AppColors.primaryColor,
             child: Padding(
               padding: EdgeInsets.all(5),
               child: Image.asset(
                 iconPath,
-                color: isSelected ? AppColors.primary : AppColors.white,
+                color: isSelected ? AppColors.primaryColor : AppColors.white,
               ),
             ),
           ),
@@ -38,7 +38,7 @@ Widget ruleButton(
             title,
             style: getTextStyleMsrt(
               fontSize: 18,
-              color: AppColors.primary,
+              color: AppColors.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),
