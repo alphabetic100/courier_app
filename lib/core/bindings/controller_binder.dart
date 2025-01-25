@@ -1,5 +1,6 @@
 import 'package:courierapp/features/authentication/controllers/signup_controllers/payment_setup_controller.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
+import 'package:courierapp/features/messege/controller/chat_screen_controller.dart';
 import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
 import 'package:courierapp/features/authentication/controllers/login_controllers/login_controller.dart';
@@ -63,6 +64,12 @@ class ControllerBinder extends Bindings {
     //Request Shipping controller
     Get.lazyPut<RequestShippingController>(
       () => RequestShippingController(),
+      fenix: true,
+    );
+
+    //Chat inbox controller
+    Get.lazyPut<ChatController>(
+      () => ChatController(),
       fenix: true,
     );
   }

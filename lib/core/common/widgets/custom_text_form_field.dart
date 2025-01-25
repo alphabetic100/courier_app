@@ -46,11 +46,12 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
       obscureText: widget.isPassword
           ? _obscureText
           : false, // Obscure for password fields
-
+      style: getTextStyleMsrt(),
       decoration: InputDecoration(
         prefixIcon: widget.prefixIcon,
         filled: true,
         fillColor: AppColors.white,
+        labelStyle: getTextStyleMsrt(),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
         hintText: widget.hintText,
