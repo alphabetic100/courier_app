@@ -16,57 +16,65 @@ class OnboardingScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            VerticalSpace(height: getHeight(30)),
-            Padding(padding: EdgeInsets.all(12), child: ShowAppLogo()),
-            VerticalSpace(height: getHeight(10)),
-            SizedBox(
-              child: Image.asset(ImagePath.onboarding2),
-            ),
-            VerticalSpace(height: getHeight(20)),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-              child: Text(
-                "Post Parcels Easily",
-                style: getTextStyleMsrt(
-                  fontSize: getWidth(30),
-                  fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: AppSizes.height,
+          width: AppSizes.width,
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              //  mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                VerticalSpace(height: getHeight(40)),
+                Padding(
+                    padding: EdgeInsets.only(left: getWidth(16)),
+                    child: ShowAppLogo()),
+                VerticalSpace(height: getHeight(16)),
+                SizedBox(
+                  child: Image.asset(ImagePath.onboarding2),
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-              child: Text(
-                "Share parcel details, choose a traveler, and track your delivery step-by-step.",
-                style: getTextStyleMsrt(
-                  color: Colors.grey,
-                  fontSize: getWidth(16),
+                VerticalSpace(height: getHeight(26)),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                  child: Text(
+                    "Post Parcels Easily",
+                    style: getTextStyleMsrt(
+                      fontSize: getWidth(32),
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                  child: Text(
+                    "Share parcel details, choose a traveler, and track your delivery step-by-step.",
+                    style: getTextStyleMsrt(
+                      color: Colors.grey,
+                      fontSize: getWidth(16),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Container(
+                  width: AppSizes.width,
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                  child: CustomButton(
+                      width: getWidth(44),
+                      onPressed: () {
+                        Get.toNamed(
+                          AppRoute.onboarding3,
+                        );
+                      },
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: AppColors.white,
+                      )),
+                ),
+                VerticalSpace(height: getHeight(16)),
+              ],
             ),
-            Spacer(),
-            Container(
-              width: AppSizes.width,
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-              child: CustomButton(
-                  width: getWidth(44),
-                  onPressed: () {
-                    Get.toNamed(
-                      AppRoute.onboarding3,
-                    );
-                  },
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    color: AppColors.white,
-                  )),
-            ),
-            VerticalSpace(height: getHeight(40)),
-          ],
+          ),
         ),
       ),
     );
