@@ -7,6 +7,7 @@ import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/features/create_trip/presentation/screens/create_trip_screen7.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,7 +48,7 @@ class CreateTripScreen6 extends StatelessWidget {
           isPrimaryButton: true,
           onTap: () {
             Get.to(
-              () => CreateTripScreen6(),
+              () => CreateTripScreen7(),
               transition: Transition.rightToLeftWithFade,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOut,

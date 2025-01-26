@@ -1,4 +1,5 @@
 import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/common/widgets/trip_details_view.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
@@ -64,58 +65,25 @@ class TripOverviewDetails extends StatelessWidget {
                   ),
                 ],
               ),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  CupertinoIcons.forward,
-                  size: getHeight(30),
-                  color: AppColors.black,
-                  weight: 2,
-                ),
+              trailing: Icon(
+                CupertinoIcons.forward,
+                size: getHeight(30),
+                color: AppColors.black,
+                weight: 2,
               ),
             ),
           ),
           VerticalSpace(height: getHeight(10)),
-          builtDetail(
-              isSub: true,
-              title: "Transport:",
-              icon: Image.asset(
-                IconPath.directionsBus,
-                height: getHeight(25),
-                fit: BoxFit.cover,
-                color: AppColors.secondaryColor,
-              ),
-              subtitle: "Bus"),
-          VerticalSpace(height: getHeight(10)),
-          builtDetail(
-              isSub: true,
-              title: "Available:",
-              icon: Image.asset(
-                IconPath.weightIcon,
-                height: getHeight(25),
-                fit: BoxFit.cover,
-                color: AppColors.secondaryColor,
-              ),
-              subtitle: "5kg"),
-          VerticalSpace(height: getHeight(10)),
-          builtDetail(
-            isSub: false,
-            title: "No perishable food items without proper packaging.",
-            icon: Icon(
-              Icons.error_outline,
-              color: Colors.red,
-            ),
-          ),
-          VerticalSpace(height: getHeight(10)),
-          builtDetail(
-            isSub: false,
-            title: "No fragile items unless securely packaged.",
-            icon: Icon(
-              Icons.error_outline,
-              color: Colors.red,
-            ),
-          ),
-          VerticalSpace(height: getHeight(10)),
+          TripDetailsView(
+              tripTransport: "Buss",
+              availabileSpace: "12kg",
+              tripRules: [
+                "No perishable food items without proper packaging.",
+                "No fragile items unless securely packaged.",
+              ],
+              transportIcon: IconPath.directionsBus,
+              color: Colors.green),
+          VerticalSpace(height: getHeight(10))
         ],
       ),
     );
