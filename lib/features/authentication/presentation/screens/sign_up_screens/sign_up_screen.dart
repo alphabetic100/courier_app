@@ -15,98 +15,115 @@ import 'package:get/get.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
+  final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  final TextEditingController fullNameController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   final SingUpController singUpController = Get.find<SingUpController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: SizedBox(
+        height: AppSizes.height,
+        width: AppSizes.width,
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-            child: SizedBox(
-              width: AppSizes.width,
+            padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+            child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(40)),
                   ShowAppLogo(),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(40)),
                   Text(
                     "Create Your Account",
                     style: getTextStyleMsrt(
                         color: Colors.black,
-                        fontSize: getWidth(35),
+                        fontSize: getWidth(32),
                         fontWeight: FontWeight.bold),
                   ),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(16)),
                   Text(
                     "Deliver smarter, faster, and hassle-free",
-                    style: getTextStyleMsrt(color: Color(0xFF84828E)),
+                    style: getTextStyleMsrt(
+                        color: Color(0xFF84828E), fontSize: getWidth(16)),
                   ),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(30)),
                   //Full Name
                   Text(
                     "Full Name",
                     style: getTextStyleMsrt(
                         color: AppColors.black,
-                        fontSize: getWidth(18),
-                        fontWeight: FontWeight.bold),
+                        fontSize: getWidth(14),
+                        fontWeight: FontWeight.w600),
                   ),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(8)),
                   CustomTexFormField(
                     controller: fullNameController,
                     hintText: "Enter your full name",
                   ),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(16)),
+                  Text(
+                    "Phone Number",
+                    style: getTextStyleMsrt(
+                        color: AppColors.black,
+                        fontSize: getWidth(14),
+                        fontWeight: FontWeight.w600),
+                  ),
+                  VerticalSpace(height: getHeight(8)),
+                  CustomTexFormField(
+                    controller: phoneNumberController,
+                    hintText: "Enter your phone number",
+                  ),
+                  VerticalSpace(height: getHeight(16)),
                   Text(
                     "Email Address",
                     style: getTextStyleMsrt(
                         color: AppColors.black,
-                        fontSize: getWidth(18),
-                        fontWeight: FontWeight.bold),
+                        fontSize: getWidth(14),
+                        fontWeight: FontWeight.w600),
                   ),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(8)),
 
                   //Email Address
                   CustomTexFormField(
                     controller: emailController,
                     hintText: "Enter your email address",
                   ),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(16)),
 
                   //Password
                   Text(
                     "Password",
                     style: getTextStyleMsrt(
                         color: AppColors.black,
-                        fontSize: getWidth(18),
-                        fontWeight: FontWeight.bold),
+                        fontSize: getWidth(14),
+                        fontWeight: FontWeight.w600),
                   ),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(8)),
                   CustomTexFormField(
                     controller: passwordController,
                     hintText: "Enter your password",
                     isPassword: true,
                   ),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(16)),
 
                   //Confirm Password
                   Text(
                     "Confirm Password",
                     style: getTextStyleMsrt(
                         color: AppColors.black,
-                        fontSize: getWidth(18),
+                        fontSize: getWidth(14),
                         fontWeight: FontWeight.bold),
                   ),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(8)),
                   CustomTexFormField(
                     controller: confirmPasswordController,
                     hintText: "Enter your password again",
@@ -123,7 +140,7 @@ class SignUpScreen extends StatelessWidget {
                       Row(children: [
                         CustomText(
                           text: "I agree to the",
-                          fontSize: 14,
+                          fontSize: getWidth(14),
                           fontWeight: FontWeight.normal,
                           color: AppColors.bodyTextColor,
                         ),
@@ -139,19 +156,19 @@ class SignUpScreen extends StatelessWidget {
                       ])
                     ],
                   ),
-                  VerticalSpace(height: AppSizes.height * 0.073),
+                  VerticalSpace(height: getHeight(40)),
                   CustomButton(
                       onPressed: () {
                         Get.toNamed(AppRoute.identityVerificationScreen1);
                       },
                       child: Text(
-                        "Next",
+                        "Sign Up",
                         style: getTextStyleMsrt(
                             color: Colors.white,
                             fontSize: getWidth(18),
                             fontWeight: FontWeight.bold),
                       )),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(16)),
                   SizedBox(
                       width: AppSizes.width,
                       child: Text(
@@ -161,7 +178,7 @@ class SignUpScreen extends StatelessWidget {
                             fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
                       )),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(16)),
                   CustomButton(
                       isPrimary: false,
                       onPressed: () {
@@ -181,12 +198,14 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ],
                       )),
+                  VerticalSpace(height: getHeight(16)),
                   Row(
                     children: [
                       CustomText(
                         text: "Already have an account?",
                         fontSize: getWidth(16),
                       ),
+                      HorizontalSpace(width: getWidth(5)),
                       CustomTextButton(
                         isUnderline: true,
                         fontSize: 18,
@@ -198,7 +217,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(16)),
                 ],
               ),
             ),

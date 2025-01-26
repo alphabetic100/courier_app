@@ -33,13 +33,14 @@ class SelectIdentityCard extends StatelessWidget {
           Image.asset(
             iconPath,
             color: isSelected ? AppColors.primaryColor : AppColors.grey,
-            height: 30,
+            height: getHeight(30),
+            width: getWidth(30),
           ),
           HorizontalSpace(width: getWidth(25)),
           CustomText(
             text: title,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            fontSize: getWidth(16),
             color:
                 isSelected ? AppColors.primaryColor : AppColors.bodyTextColor,
           ),

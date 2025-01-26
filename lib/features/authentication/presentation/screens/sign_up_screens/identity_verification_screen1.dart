@@ -28,31 +28,32 @@ class IdentityVerificationScreen1 extends StatelessWidget {
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: getWidth(12),
+          horizontal: getWidth(16),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(40)),
             ShowAppLogo(),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(40)),
             Text(
               "Verify Your Identity",
               style: getTextStyleMsrt(
                   color: AppColors.black,
-                  fontSize: getWidth(35),
+                  fontSize: getWidth(32),
                   fontWeight: FontWeight.bold),
             ),
-            VerticalSpace(height: getHeight(10)),
+            VerticalSpace(height: getHeight(16)),
             Text(
               "Upload a valid ID to keep our platform secure.",
               style: getTextStyleMsrt(color: AppColors.bodyTextColor),
             ),
-            VerticalSpace(height: getHeight(25)),
+            VerticalSpace(height: getHeight(40)),
             CustomText(
               text: "Select ID Type",
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
+              fontSize: getWidth(14),
               color: AppColors.titleTextColor,
             ),
             VerticalSpace(height: getHeight(10)),
@@ -97,7 +98,7 @@ class IdentityVerificationScreen1 extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         )),
                   ),
-                  HorizontalSpace(width: getHeight(20)),
+                  HorizontalSpace(width: getHeight(16)),
                   Expanded(
                     child: CustomButton(
                         onPressed: () {
@@ -112,7 +113,7 @@ class IdentityVerificationScreen1 extends StatelessWidget {
                 ],
               ),
             ),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(16)),
           ],
         ),
       )),

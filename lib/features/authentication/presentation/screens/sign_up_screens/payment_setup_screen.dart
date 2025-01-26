@@ -28,32 +28,33 @@ class PaymentSetupScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+          padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
           child: SizedBox(
             height: AppSizes.height,
             width: AppSizes.width,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                VerticalSpace(height: getHeight(20)),
+                VerticalSpace(height: getHeight(40)),
                 ShowAppLogo(),
-                VerticalSpace(height: getHeight(20)),
+                VerticalSpace(height: getHeight(40)),
                 Text(
                   "Payment Setup",
                   style: getTextStyleMsrt(
                       color: Colors.black,
-                      fontSize: getWidth(35),
+                      fontSize: getWidth(32),
                       fontWeight: FontWeight.bold),
                 ),
                 VerticalSpace(height: getHeight(20)),
                 Text(
                   "Add payment details for easy transactions",
-                  style: getTextStyleMsrt(color: Color(0xFF84828E)),
+                  style: getTextStyleMsrt(
+                      color: Color(0xFF84828E), fontSize: getWidth(16)),
                 ),
-                VerticalSpace(height: getHeight(10)),
+                VerticalSpace(height: getHeight(64)),
                 ...List.generate(titles.length, (index) {
                   return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.only(bottom: getHeight(16)),
                       child: Obx(() {
                         return PaymentSetupCard(
                           onTap: () {
@@ -99,7 +100,7 @@ class PaymentSetupScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                VerticalSpace(height: getHeight(20)),
+                VerticalSpace(height: getHeight(16)),
               ],
             ),
           ),
