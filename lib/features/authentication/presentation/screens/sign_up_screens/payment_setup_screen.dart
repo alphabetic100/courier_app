@@ -7,9 +7,11 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
+import 'package:courierapp/features/authentication/controllers/signup_controllers/identity_verification_controller.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/payment_setup_controller.dart';
+import 'package:courierapp/features/authentication/controllers/signup_controllers/sing_up_controller.dart';
 import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/payment_setup_screen2.dart';
-import 'package:courierapp/routes/app_routes.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +19,9 @@ class PaymentSetupScreen extends StatelessWidget {
   PaymentSetupScreen({super.key});
   final PaymentSetupController paymentSetupController =
       Get.find<PaymentSetupController>();
+  final SingUpController singUpController = Get.find<SingUpController>();
+  final IdentityVerificationController verificationController =
+      Get.find<IdentityVerificationController>();
   final List<String> titles = ["PayPal", "Apple Pay", "Credit Card"];
   final List<String> iconPaths = [
     IconPath.payPalLogo,
@@ -78,7 +83,13 @@ class PaymentSetupScreen extends StatelessWidget {
                         child: CustomButton(
                             isPrimary: false,
                             onPressed: () {
-                              Get.toNamed(AppRoute.landingScreen);
+                              singUpController.signUp(
+                                imagePath1: verificationController
+                                    .selectedImage.value!.path,
+                                imagePath2: verificationController
+                                    .selfieImage.value!.path,
+                                bodyData: singUpController.getRequestBody(),
+                              );
                             },
                             child: CustomText(
                               text: "Skip for Now",

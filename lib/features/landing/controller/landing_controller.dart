@@ -53,8 +53,13 @@ class LandingController extends GetxController {
   ];
 
   final List<Image> inActiveIcons = [
-    Image.asset(IconPath.searchIcon,
-        height: getHeight(30), width: getWidth(30), fit: BoxFit.cover),
+    Image.asset(
+      IconPath.searchIcon,
+      height: getHeight(30),
+      width: getWidth(30),
+      fit: BoxFit.cover,
+      color: AppColors.grey,
+    ),
     Image.asset(IconPath.sendIcon,
         height: getHeight(30), width: getWidth(30), fit: BoxFit.cover),
     Image.asset(IconPath.addIcon,

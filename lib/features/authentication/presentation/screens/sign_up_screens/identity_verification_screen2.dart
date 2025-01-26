@@ -100,7 +100,12 @@ class IdentityVerificationScreen2 extends StatelessWidget {
                   Expanded(
                     child: CustomButton(
                         onPressed: () {
-                          Get.toNamed(AppRoute.identityVerificationScreen3);
+                          if (verificationController.selectedImage.value ==
+                              null) {
+                            Get.snackbar("title", "message");
+                          } else {
+                            Get.toNamed(AppRoute.identityVerificationScreen3);
+                          }
                         },
                         child: CustomText(
                           text: "Next",
