@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:courierapp/core/common/widgets/error_snakbar.dart';
+import 'package:courierapp/core/common/widgets/success_snakbar.dart';
+import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:dio/dio.dart' as dio;
@@ -39,6 +42,12 @@ class SingUpController extends GetxController {
     required Map<String, dynamic> bodyData,
   }) async {
     final Dio dioClient = Dio();
+    dioClient.options = BaseOptions(
+      connectTimeout: Duration(seconds: 12),
+      validateStatus: (status) {
+        return status! < 500;
+      },
+    );
     try {
       final bodyDataString = jsonEncode(bodyData);
 
@@ -71,14 +80,23 @@ class SingUpController extends GetxController {
       log('Response Status Code: ${response.statusCode}');
       log('Response Data: ${response.data}');
       if (response.statusCode == 201) {
-        Get.snackbar("Success", "Successfully created account");
+        successSnakbr(successMessage: "Successfully created account");
         Get.toNamed(AppRoute.landingScreen);
+        AuthService.saveToken(response.data["data"]["accessToken"],
+            response.data["data"]["role"]);
       } else if (response.statusCode == 409) {
-        Get.snackbar(
-            "error", "A user is allreadey exist with this email address");
+        errorSnakbar(
+            errorMessage: "A user is allreadey exist with this email address");
+      } else {
+        final errorMessage = response.data["data"]["message"];
+        errorSnakbar(
+            errorMessage:
+                errorMessage ?? "Something went wrong, please try again");
       }
     } catch (e) {
       log('Error: $e');
+      errorSnakbar(
+          errorMessage: "Please check your internet connection and try again");
     }
   }
 }
