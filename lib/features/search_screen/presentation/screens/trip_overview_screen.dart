@@ -10,6 +10,7 @@ import 'package:courierapp/features/chat_with_traveller/presentation/chat_with_t
 import 'package:courierapp/features/request_shipping/presentation/request_shipping_screen.dart';
 import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
 import 'package:courierapp/features/search_screen/presentation/components/trip_overview_details.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,7 +55,7 @@ class TripOverviewScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.message_outlined,
+                      CupertinoIcons.bubble_left,
                       color: AppColors.grey,
                     ),
                     HorizontalSpace(width: getWidth(5)),

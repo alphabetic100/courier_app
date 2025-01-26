@@ -57,7 +57,7 @@ class MessageScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -100,6 +100,8 @@ class MessageScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage(ImagePath.profile),
                                       radius: getWidth(15),
                                     ),
                                     HorizontalSpace(width: getWidth(10)),

@@ -5,8 +5,9 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
-import 'package:courierapp/features/profile/components/profile_details_card.dart';
-import 'package:courierapp/features/profile/components/profile_trip_travel_box.dart';
+import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/features/profile/presentation/components/profile_details_card.dart';
+import 'package:courierapp/features/profile/presentation/components/profile_trip_travel_box.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -19,14 +20,15 @@ class ProfileScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: EdgeInsets.only(
-                right: getWidth(12), top: getHeight(6), bottom: getHeight(6)),
+              right: getWidth(16),
+            ),
             child: MessageNotificationBox(),
           )
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+          padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -43,6 +45,7 @@ class ProfileScreen extends StatelessWidget {
               Stack(
                 children: [
                   CircleAvatar(
+                    backgroundImage: AssetImage(ImagePath.profile),
                     radius: getWidth(60),
                   ),
                   Positioned(
