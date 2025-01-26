@@ -24,17 +24,17 @@ class SearchResultScreen extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: Column(
                 children: [
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(16)),
                   Row(
                     children: [
                       Expanded(
                         child: CustomButton(
                             padding: EdgeInsets.all(0),
                             height: getWidth(50),
-                            width: getWidth(50),
+                            // width: getWidth(50),
                             isPrimary: false,
                             onPressed: () {},
                             child: Row(children: [
@@ -98,8 +98,11 @@ class SearchResultScreen extends StatelessWidget {
                               )),
                             ])),
                       ),
-                      HorizontalSpace(width: getWidth(10)),
-                      MessageNotificationBox(),
+                      HorizontalSpace(width: getWidth(16)),
+                      Padding(
+                        padding: EdgeInsets.only(),
+                        child: MessageNotificationBox(),
+                      ),
                     ],
                   )
                 ],

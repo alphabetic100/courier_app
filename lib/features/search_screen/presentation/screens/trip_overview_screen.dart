@@ -23,14 +23,13 @@ class TripOverviewScreen extends StatelessWidget {
       appBar: CustomAppBar(
         actions: [
           Padding(
-            padding: EdgeInsets.only(
-                right: getWidth(12), top: getWidth(6), bottom: getWidth(6)),
+            padding: EdgeInsets.only(right: getWidth(16)),
             child: MessageNotificationBox(),
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,8 +40,8 @@ class TripOverviewScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         height: AppSizes.height * 0.135,
-        padding: EdgeInsets.symmetric(
-            horizontal: getHeight(12), vertical: getHeight(10)),
+        padding: EdgeInsets.only(
+            left: getHeight(16), right: getHeight(16), bottom: getHeight(16)),
         color: AppColors.white,
         child: Column(
           children: [
@@ -65,7 +64,7 @@ class TripOverviewScreen extends StatelessWidget {
                     )
                   ],
                 )),
-            VerticalSpace(height: getHeight(10)),
+            VerticalSpace(height: getHeight(16)),
             CustomButton(
                 isPrimary: true,
                 onPressed: () {
@@ -75,7 +74,7 @@ class TripOverviewScreen extends StatelessWidget {
                   text: "Request Shipping",
                   fontWeight: FontWeight.bold,
                   color: AppColors.white,
-                ))
+                )),
           ],
         ),
       ),

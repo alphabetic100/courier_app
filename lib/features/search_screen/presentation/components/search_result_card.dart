@@ -57,7 +57,8 @@ class SearchResultCard extends StatelessWidget {
                       CustomText(
                         text: "\$8/kg",
                         color: AppColors.black,
-                        fontSize: getWidth(20),
+                        fontWeight: FontWeight.w700,
+                        fontSize: getWidth(24),
                       ),
                       VerticalSpace(height: getHeight(5)),
                       CustomText(
@@ -107,7 +108,8 @@ class SearchResultCard extends StatelessWidget {
               ),
               trailing: Image.asset(
                 IconPath.directionsBus,
-                height: getHeight(35),
+                height: getHeight(25),
+                color: AppColors.grey,
               ),
             )
           ],

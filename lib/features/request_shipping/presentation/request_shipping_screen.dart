@@ -22,7 +22,8 @@ class RequestShippingScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: EdgeInsets.only(
-                right: getWidth(12), top: getHeight(6), bottom: getHeight(6)),
+              right: getWidth(16),
+            ),
             child: MessageNotificationBox(),
           )
         ],

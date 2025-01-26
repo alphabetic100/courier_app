@@ -16,7 +16,7 @@ class TripOverviewDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: AppSizes.width,
-      padding: EdgeInsets.only(top: getHeight(10)),
+      padding: EdgeInsets.only(top: getHeight(16)),
       child: Column(
         children: [
           ListTile(
@@ -67,7 +67,8 @@ class TripOverviewDetails extends StatelessWidget {
               title: "Transport:",
               icon: Image.asset(
                 IconPath.directionsBus,
-                height: getHeight(30),
+                height: getHeight(25),
+                fit: BoxFit.cover,
                 color: AppColors.secondaryColor,
               ),
               subtitle: "Bus"),
@@ -77,7 +78,8 @@ class TripOverviewDetails extends StatelessWidget {
               title: "Available:",
               icon: Image.asset(
                 IconPath.weightIcon,
-                height: getHeight(30),
+                height: getHeight(25),
+                fit: BoxFit.cover,
                 color: AppColors.secondaryColor,
               ),
               subtitle: "5kg"),
@@ -115,7 +117,7 @@ Widget _builtDetail({
   return Row(
     children: [
       icon,
-      HorizontalSpace(width: getWidth(5)),
+      HorizontalSpace(width: getWidth(10)),
       isSub
           ? CustomText(
               text: title,
