@@ -19,30 +19,33 @@ class ResetPasswordScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(40)),
             ShowAppLogo(),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(40)),
             Text(
               "Password reset",
               style: getTextStyleMsrt(
                   color: Colors.black,
-                  fontSize: getWidth(35),
+                  fontSize: getWidth(32),
                   fontWeight: FontWeight.bold),
             ),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(16)),
             Text(
               "Create a new password to access your account.",
-              style: getTextStyleMsrt(color: Color(0xFF84828E)),
+              style: getTextStyleMsrt(
+                  color: Color(0xFF84828E),
+                  fontSize: getWidth(16),
+                  fontWeight: FontWeight.w400),
             ),
-            VerticalSpace(height: getHeight(30)),
+            VerticalSpace(height: getHeight(20)),
             CustomText(
               text: "New Password",
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+              fontSize: getWidth(14),
+              fontWeight: FontWeight.w600,
               color: AppColors.black,
             ),
             VerticalSpace(height: getHeight(10)),
@@ -53,8 +56,8 @@ class ResetPasswordScreen extends StatelessWidget {
             VerticalSpace(height: getHeight(20)),
             CustomText(
               text: "Confirm Password",
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+              fontSize: getWidth(14),
+              fontWeight: FontWeight.w600,
               color: AppColors.black,
             ),
             VerticalSpace(height: getHeight(10)),
@@ -67,10 +70,10 @@ class ResetPasswordScreen extends StatelessWidget {
                 onPressed: () {},
                 child: CustomText(
                     text: "Next",
-                    fontSize: 18,
+                    fontSize: getWidth(18),
                     color: AppColors.white,
                     fontWeight: FontWeight.bold)),
-            VerticalSpace(height: getHeight(20))
+            VerticalSpace(height: getHeight(16))
           ],
         ),
       )),

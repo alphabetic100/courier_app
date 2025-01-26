@@ -21,37 +21,37 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-            child: SizedBox(
-              width: AppSizes.width,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: AppSizes.height,
+          width: AppSizes.width,
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(40)),
                   ShowAppLogo(),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(40)),
                   Text(
                     "Log in",
                     style: getTextStyleMsrt(
                         color: Colors.black,
-                        fontSize: getWidth(35),
-                        fontWeight: FontWeight.bold),
+                        fontSize: getWidth(36),
+                        fontWeight: FontWeight.w700),
                   ),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(16)),
                   Text(
                     "Deliver smarter, faster, and hassle-free",
                     style: getTextStyleMsrt(color: Color(0xFF84828E)),
                   ),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(40)),
                   Text(
                     "Email Address",
                     style: getTextStyleMsrt(
                         color: AppColors.black,
-                        fontSize: getWidth(18),
+                        fontSize: getWidth(14),
                         fontWeight: FontWeight.bold),
                   ),
                   VerticalSpace(height: getHeight(10)),
@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                     "Password",
                     style: getTextStyleMsrt(
                         color: AppColors.black,
-                        fontSize: getWidth(18),
+                        fontSize: getWidth(14),
                         fontWeight: FontWeight.bold),
                   ),
                   VerticalSpace(height: getHeight(10)),
@@ -87,6 +87,7 @@ class LoginScreen extends StatelessWidget {
                           CustomText(
                             text: "Remember me",
                             fontSize: getWidth(16),
+                            fontWeight: FontWeight.w400,
                           )
                         ],
                       ),
@@ -100,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  VerticalSpace(height: AppSizes.height * 0.25),
+                  Spacer(),
                   CustomButton(
                       onPressed: () {
                         loginController.login();
@@ -112,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                             fontSize: getWidth(18),
                             fontWeight: FontWeight.bold),
                       )),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(16)),
                   SizedBox(
                       width: AppSizes.width,
                       child: Text(
@@ -122,7 +123,7 @@ class LoginScreen extends StatelessWidget {
                             fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
                       )),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(16)),
                   CustomButton(
                       isPrimary: false,
                       onPressed: () {
@@ -142,13 +143,14 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ],
                       )),
-                  VerticalSpace(height: getHeight(10)),
+                  VerticalSpace(height: getHeight(16)),
                   Row(
                     children: [
                       CustomText(
                         text: "Don't have an account?",
                         fontSize: getWidth(16),
                       ),
+                      HorizontalSpace(width: getWidth(5)),
                       CustomTextButton(
                         isUnderline: true,
                         fontSize: 18,
@@ -160,7 +162,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  VerticalSpace(height: getHeight(20)),
+                  VerticalSpace(height: getHeight(16)),
                 ],
               ),
             ),

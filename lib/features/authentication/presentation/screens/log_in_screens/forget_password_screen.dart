@@ -19,33 +19,34 @@ class ForgetPasswordScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(40)),
             ShowAppLogo(),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(40)),
             Text(
               "Password reset",
               style: getTextStyleMsrt(
                   color: Colors.black,
-                  fontSize: getWidth(35),
+                  fontSize: getWidth(32),
                   fontWeight: FontWeight.bold),
             ),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(16)),
             Text(
               "Please enter the OTP that has been sent to your registered email address.",
-              style: getTextStyleMsrt(color: Color(0xFF84828E)),
-            ),
-            VerticalSpace(height: getHeight(30)),
-            CustomText(
-              text: "Enter the OTP",
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: AppColors.black,
+              style: getTextStyleMsrt(
+                  color: Color(0xFF84828E), fontSize: getWidth(16)),
             ),
             VerticalSpace(height: getHeight(20)),
+            CustomText(
+              text: "Enter the OTP",
+              fontSize: getWidth(14),
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+            VerticalSpace(height: getHeight(10)),
             PinCodeTextField(
               backgroundColor: AppColors.white,
               appContext: context,
@@ -60,7 +61,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 fieldHeight: 50,
                 fieldWidth: 50,
-                inactiveFillColor: Color(0xFFF2F2F2),
+                inactiveFillColor: Colors.white,
                 activeColor: AppColors.primaryColor,
                 selectedColor: AppColors.primaryColor, //
                 inactiveColor: Color(0xFFE0E0E0),
@@ -84,7 +85,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     fontSize: 18,
                     color: AppColors.white,
                     fontWeight: FontWeight.bold)),
-            VerticalSpace(height: getHeight(20))
+            VerticalSpace(height: getHeight(16))
           ],
         ),
       )),
