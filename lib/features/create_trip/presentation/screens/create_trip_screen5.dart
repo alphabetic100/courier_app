@@ -21,13 +21,14 @@ class CreateTripScreen5 extends StatelessWidget {
         actions: [
           Padding(
             padding: EdgeInsets.only(
-                right: getWidth(12), top: getWidth(6), bottom: getWidth(6)),
+              right: getWidth(16),
+            ),
             child: MessageNotificationBox(),
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -38,7 +39,7 @@ class CreateTripScreen5 extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: getWidth(16),
             ),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(16)),
             CustomTexFormField(hintText: "Specify weight (KG)")
           ],
         ),
