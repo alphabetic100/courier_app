@@ -18,10 +18,15 @@ class ShowAppLogo extends StatelessWidget {
     return SizedBox(
       width: AppSizes.width,
       child: Container(
-        height: height ?? getHeight(50),
-        width: width ?? getWidth(50),
+        // height: height ?? getHeight(40),
+        // width: width ?? getWidth(245),
         alignment: alignment ?? Alignment.centerLeft,
-        child: Image.asset(ImagePath.appLogo),
+        child: Image.asset(
+          ImagePath.appLogo,
+          height: getHeight(40),
+          width: getWidth(245),
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }

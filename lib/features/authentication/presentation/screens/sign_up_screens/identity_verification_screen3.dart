@@ -8,6 +8,7 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/identity_verification_controller.dart';
 import 'package:courierapp/routes/app_routes.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,9 +28,9 @@ class IdentityVerificationScreen3 extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(40)),
             ShowAppLogo(),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(40)),
             Text(
               "Verify Your Identity",
               style: getTextStyleMsrt(
@@ -37,45 +38,46 @@ class IdentityVerificationScreen3 extends StatelessWidget {
                   fontSize: getWidth(35),
                   fontWeight: FontWeight.bold),
             ),
-            VerticalSpace(height: getHeight(10)),
+            VerticalSpace(height: getHeight(16)),
             Text(
               "Upload a valid ID to keep our platform secure.",
-              style: getTextStyleMsrt(color: AppColors.bodyTextColor),
+              style: getTextStyleMsrt(
+                  color: AppColors.bodyTextColor, fontSize: getWidth(16)),
             ),
-            VerticalSpace(height: getHeight(25)),
+            VerticalSpace(height: getHeight(40)),
             CustomText(
               text: "Upload Selfie Holding ID",
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
               color: AppColors.titleTextColor,
             ),
             VerticalSpace(height: getHeight(10)),
             Obx(() {
               return GestureDetector(
                 onTap: verificationController.takeSelfie,
-                child: Container(
-                    height: AppSizes.height * 0.3,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColors.white,
-                    ),
-                    child: verificationController.selfieImage.value != null
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.file(
-                              verificationController.selfieImage.value!,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        : Padding(
-                            padding:
-                                EdgeInsets.symmetric(vertical: getHeight(100)),
-                            child: Image.asset(
-                              ImagePath.uploadPhoto,
-                              height: getHeight(20),
-                            ),
-                          )),
+                child: DottedBorder(
+                  borderType: BorderType.RRect,
+                  color: AppColors.grey.withOpacity(0.5),
+                  radius: Radius.circular(8),
+                  child: SizedBox(
+                      height: getHeight(220),
+                      width: double.infinity,
+                      child: verificationController.selfieImage.value != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.file(
+                                verificationController.selfieImage.value!,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Padding(
+                              padding: EdgeInsets.all(getHeight(50)),
+                              child: Image.asset(
+                                ImagePath.uploadPhoto,
+                                height: getHeight(84),
+                                width: getWidth(106),
+                              ),
+                            )),
+                ),
               );
             }),
             Spacer(),
@@ -98,7 +100,12 @@ class IdentityVerificationScreen3 extends StatelessWidget {
                   Expanded(
                     child: CustomButton(
                         onPressed: () {
-                          Get.toNamed(AppRoute.paymentSetupScreen);
+                          if (verificationController.selfieImage.value ==
+                              null) {
+                            Get.snackbar("title", " message");
+                          } else {
+                            Get.toNamed(AppRoute.paymentSetupScreen);
+                          }
                         },
                         child: CustomText(
                           text: "Next",
@@ -109,7 +116,7 @@ class IdentityVerificationScreen3 extends StatelessWidget {
                 ],
               ),
             ),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(16)),
           ],
         ),
       )),

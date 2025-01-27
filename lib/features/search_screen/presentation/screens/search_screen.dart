@@ -46,10 +46,10 @@ class SearchScreen extends StatelessWidget {
                 height: AppSizes.height * 0.1,
                 color: AppColors.white,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: [
-                      VerticalSpace(height: getHeight(20)),
+                      VerticalSpace(height: getHeight(16)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -64,11 +64,11 @@ class SearchScreen extends StatelessWidget {
 
               // Intro Text of Search Screen
               Positioned(
-                  top: AppSizes.height * 0.12,
+                  top: AppSizes.height * 0.13,
                   child: SizedBox(
                     width: AppSizes.width,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+                      padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
                       child: Column(
                         children: [
                           Text.rich(
@@ -107,7 +107,7 @@ class SearchScreen extends StatelessWidget {
                           ),
                           VerticalSpace(height: getHeight(40)),
                           Container(
-                            padding: EdgeInsets.all(getWidth(12)),
+                            padding: EdgeInsets.all(getWidth(16)),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: AppColors.white,
@@ -160,7 +160,7 @@ class SearchScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          VerticalSpace(height: getHeight(25)),
+                          VerticalSpace(height: getHeight(16)),
                           CustomButton(
                               height: getHeight(50),
                               onPressed: () {

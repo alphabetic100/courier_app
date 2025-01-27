@@ -18,7 +18,7 @@ class SelectIdentityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(getWidth(8)),
+      padding: EdgeInsets.all(getWidth(12)),
       decoration: BoxDecoration(
         color: isSelected
             ? AppColors.primaryColor.withOpacity(0.3)
@@ -33,13 +33,14 @@ class SelectIdentityCard extends StatelessWidget {
           Image.asset(
             iconPath,
             color: isSelected ? AppColors.primaryColor : AppColors.grey,
-            height: 30,
+            height: getHeight(25),
+            width: getWidth(20),
           ),
           HorizontalSpace(width: getWidth(25)),
           CustomText(
             text: title,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            fontSize: getWidth(16),
             color:
                 isSelected ? AppColors.primaryColor : AppColors.bodyTextColor,
           ),

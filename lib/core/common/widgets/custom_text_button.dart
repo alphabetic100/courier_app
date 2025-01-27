@@ -11,13 +11,15 @@ class CustomTextButton extends StatelessWidget {
       this.decorationThickness,
       this.fontWeight,
       this.fontSize,
-      this.isUnderline});
+      this.isUnderline,
+      this.color});
   final double? decorationThickness;
   final double? fontSize;
   final FontWeight? fontWeight;
   final bool? isUnderline;
   final Function() onPressed;
   final String text;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -27,11 +29,11 @@ class CustomTextButton extends StatelessWidget {
           style: getTextStyleMsrt(
               fontWeight: fontWeight ?? FontWeight.w400,
               fontSize: fontSize ?? getWidth(16),
-              color: Get.theme.primaryColor,
+              color: color ?? Get.theme.primaryColor,
               decoration: isUnderline == true
                   ? TextDecoration.underline
                   : TextDecoration.none,
-              decorationColor: Get.theme.primaryColor,
+              decorationColor: color ?? Get.theme.primaryColor,
               decorationThickness: decorationThickness ?? 1.5),
         ));
   }

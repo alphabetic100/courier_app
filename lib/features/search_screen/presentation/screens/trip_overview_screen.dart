@@ -10,6 +10,7 @@ import 'package:courierapp/features/chat_with_traveller/presentation/chat_with_t
 import 'package:courierapp/features/request_shipping/presentation/request_shipping_screen.dart';
 import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
 import 'package:courierapp/features/search_screen/presentation/components/trip_overview_details.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,14 +24,13 @@ class TripOverviewScreen extends StatelessWidget {
       appBar: CustomAppBar(
         actions: [
           Padding(
-            padding: EdgeInsets.only(
-                right: getWidth(12), top: getWidth(6), bottom: getWidth(6)),
+            padding: EdgeInsets.only(right: getWidth(16)),
             child: MessageNotificationBox(),
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,8 +41,8 @@ class TripOverviewScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         height: AppSizes.height * 0.135,
-        padding: EdgeInsets.symmetric(
-            horizontal: getHeight(12), vertical: getHeight(10)),
+        padding: EdgeInsets.only(
+            left: getHeight(16), right: getHeight(16), bottom: getHeight(16)),
         color: AppColors.white,
         child: Column(
           children: [
@@ -55,7 +55,7 @@ class TripOverviewScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.message_outlined,
+                      CupertinoIcons.bubble_left,
                       color: AppColors.grey,
                     ),
                     HorizontalSpace(width: getWidth(5)),
@@ -65,7 +65,7 @@ class TripOverviewScreen extends StatelessWidget {
                     )
                   ],
                 )),
-            VerticalSpace(height: getHeight(10)),
+            VerticalSpace(height: getHeight(16)),
             CustomButton(
                 isPrimary: true,
                 onPressed: () {
@@ -75,7 +75,7 @@ class TripOverviewScreen extends StatelessWidget {
                   text: "Request Shipping",
                   fontWeight: FontWeight.bold,
                   color: AppColors.white,
-                ))
+                )),
           ],
         ),
       ),

@@ -9,7 +9,7 @@ class SearchResultBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
         child: ListView.builder(
             shrinkWrap: true,
             itemCount: 10,

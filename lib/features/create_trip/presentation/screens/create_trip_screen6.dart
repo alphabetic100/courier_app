@@ -7,6 +7,7 @@ import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/features/create_trip/presentation/screens/create_trip_screen7.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,13 +21,14 @@ class CreateTripScreen6 extends StatelessWidget {
         actions: [
           Padding(
             padding: EdgeInsets.only(
-                right: getWidth(12), top: getWidth(6), bottom: getWidth(6)),
+              right: getWidth(16),
+            ),
             child: MessageNotificationBox(),
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,7 +39,7 @@ class CreateTripScreen6 extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: getWidth(16),
             ),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(16)),
             CustomTexFormField(maxLines: 3, hintText: "e.g., No fragile items")
           ],
         ),
@@ -46,7 +48,7 @@ class CreateTripScreen6 extends StatelessWidget {
           isPrimaryButton: true,
           onTap: () {
             Get.to(
-              () => CreateTripScreen6(),
+              () => CreateTripScreen7(),
               transition: Transition.rightToLeftWithFade,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOut,

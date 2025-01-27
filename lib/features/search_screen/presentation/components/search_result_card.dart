@@ -3,6 +3,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
+import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
 import 'package:courierapp/features/search_screen/presentation/screens/trip_overview_screen.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,8 @@ class SearchResultCard extends StatelessWidget {
                       CustomText(
                         text: "\$8/kg",
                         color: AppColors.black,
-                        fontSize: getWidth(20),
+                        fontWeight: FontWeight.w700,
+                        fontSize: getWidth(24),
                       ),
                       VerticalSpace(height: getHeight(5)),
                       CustomText(
@@ -77,7 +79,9 @@ class SearchResultCard extends StatelessWidget {
               contentPadding: EdgeInsets.all(0),
               leading: Stack(
                 children: [
-                  CircleAvatar(),
+                  CircleAvatar(
+                    backgroundImage: AssetImage(ImagePath.profile),
+                  ),
                   tripOverviewController.isVerified.value
                       ? Positioned(
                           bottom: 0,
@@ -107,7 +111,8 @@ class SearchResultCard extends StatelessWidget {
               ),
               trailing: Image.asset(
                 IconPath.directionsBus,
-                height: getHeight(35),
+                height: getHeight(25),
+                color: AppColors.grey,
               ),
             )
           ],

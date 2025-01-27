@@ -22,7 +22,7 @@ class CustomBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: AppSizes.height * 0.13,
-      padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+      padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
       color: AppColors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

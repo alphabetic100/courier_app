@@ -23,7 +23,8 @@ class CustomText extends StatelessWidget {
       this.color,
       this.fontWeight,
       this.decoration,
-      this.decorationColor, this.textAlign});
+      this.decorationColor,
+      this.textAlign});
 
   @override
   Widget build(BuildContext context) {

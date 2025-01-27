@@ -23,26 +23,27 @@ class OnboardingScreen1 extends StatelessWidget {
           children: [
             VerticalSpace(height: getHeight(30)),
             Padding(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.only(left: getWidth(16)),
               child: ShowAppLogo(),
             ),
-            VerticalSpace(height: getHeight(10)),
+            VerticalSpace(height: getHeight(16)),
             SizedBox(
               child: Image.asset(ImagePath.onboarding1),
             ),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(26)),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: Text(
                 "Welcome to Courier App",
                 style: getTextStyleMsrt(
-                  fontSize: getWidth(30),
+                  fontSize: getWidth(32),
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
+            VerticalSpace(height: getHeight(16)),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: Text(
                 "Send parcels or earn money by delivering—fast, secure, and collaborative.",
                 style: getTextStyleMsrt(
@@ -55,7 +56,8 @@ class OnboardingScreen1 extends StatelessWidget {
             Container(
               width: AppSizes.width,
               alignment: Alignment.centerRight,
-              padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+              padding: EdgeInsets.symmetric(
+                  horizontal: getWidth(16), vertical: getHeight(16)),
               child: CustomButton(
                   width: getWidth(44),
                   onPressed: () {
@@ -68,7 +70,6 @@ class OnboardingScreen1 extends StatelessWidget {
                     color: AppColors.white,
                   )),
             ),
-            VerticalSpace(height: getHeight(40))
           ],
         ),
       ),

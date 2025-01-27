@@ -3,6 +3,7 @@ import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/messege/controller/chat_screen_controller.dart';
 import 'package:courierapp/features/messege/presentation/components/message_input_box.dart';
 import 'package:courierapp/features/messege/presentation/components/message_sent_by_me.dart';
@@ -26,12 +27,14 @@ class ChatInboxScreen extends StatelessWidget {
           children: [
             VerticalSpace(height: getHeight(10)),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: getHeight(12)),
+              padding: EdgeInsets.symmetric(horizontal: getHeight(16)),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(),
+                      CircleAvatar(
+                        backgroundImage: AssetImage(ImagePath.profile),
+                      ),
                       HorizontalSpace(width: getWidth(5)),
                       CustomText(
                         text: "Albert Flores",

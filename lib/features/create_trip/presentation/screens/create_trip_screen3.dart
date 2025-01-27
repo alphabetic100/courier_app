@@ -22,14 +22,13 @@ class CreateTripScreen3 extends StatelessWidget {
       appBar: CustomAppBar(
         actions: [
           Padding(
-            padding: EdgeInsets.only(
-                top: getHeight(6), bottom: getHeight(6), right: getWidth(12)),
+            padding: EdgeInsets.only(right: getWidth(16)),
             child: MessageNotificationBox(),
           )
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,15 +38,16 @@ class CreateTripScreen3 extends StatelessWidget {
               color: AppColors.black,
               fontSize: getWidth(18),
             ),
-            VerticalSpace(height: getHeight(20)),
+            VerticalSpace(height: getHeight(16)),
             TextField(
               style: getTextStyleMsrt(),
               decoration: InputDecoration(
                 suffixIcon: Padding(
-                  padding: EdgeInsets.all(getWidth(12)),
+                  padding: EdgeInsets.all(getWidth(16)),
                   child: Image.asset(
                     ImagePath.location,
                     height: getWidth(15),
+                    color: AppColors.grey,
                   ),
                 ),
                 hintText: "Paris, Spain",
