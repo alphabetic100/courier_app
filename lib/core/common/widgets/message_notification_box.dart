@@ -29,6 +29,7 @@ class MessageNotificationBox extends StatelessWidget {
                 child: Icon(
                   CupertinoIcons.bubble_left,
                   color: AppColors.grey,
+                  size: getHeight(32),
                 ),
               )),
           Obx(

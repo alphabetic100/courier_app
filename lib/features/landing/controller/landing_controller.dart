@@ -11,6 +11,7 @@ class LandingController extends GetxController {
   RxInt notifications = 1.obs;
 
   changePage(int page) {
+    currentPage.value = page;
     pageController.jumpToPage(page);
   }
 

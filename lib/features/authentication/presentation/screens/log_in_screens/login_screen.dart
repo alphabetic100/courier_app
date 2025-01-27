@@ -170,9 +170,11 @@ class LoginScreen extends StatelessWidget {
                         )),
                     VerticalSpace(height: getHeight(16)),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomText(
                           text: "Don't have an account?",
+                          fontWeight: FontWeight.normal,
                           fontSize: getWidth(16),
                         ),
                         HorizontalSpace(width: getWidth(5)),

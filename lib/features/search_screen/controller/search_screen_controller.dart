@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class SearchScreenController extends GetxController {
-  RxBool hasNotification = false.obs;
+  RxBool hasNotification = true.obs;
   final TextEditingController senderController = TextEditingController();
   final TextEditingController receiverController = TextEditingController();
   final TextEditingController calenderController = TextEditingController();

@@ -42,6 +42,7 @@ class OnboardingScreen3 extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     )),
+                VerticalSpace(height: getHeight(16)),
                 Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Text(

@@ -26,13 +26,16 @@ class TripDetailsView extends StatelessWidget {
         children: [
           Row(
             children: [
-              SizedBox(
-                height: getHeight(25),
-                width: getWidth(20),
-                child: Image.asset(
-                  transportIcon,
-                  fit: BoxFit.fill,
-                  color: AppColors.secondaryColor,
+              Padding(
+                padding: EdgeInsets.only(left: getWidth(5)),
+                child: SizedBox(
+                  height: getHeight(25),
+                  width: getWidth(20),
+                  child: Image.asset(
+                    transportIcon,
+                    fit: BoxFit.fill,
+                    color: AppColors.secondaryColor,
+                  ),
                 ),
               ),
               HorizontalSpace(width: getHeight(16)),
@@ -50,13 +53,16 @@ class TripDetailsView extends StatelessWidget {
           VerticalSpace(height: getHeight(10)),
           Row(
             children: [
-              SizedBox(
-                height: getHeight(25),
-                width: getWidth(20),
-                child: Image.asset(
-                  IconPath.weightIcon,
-                  fit: BoxFit.fill,
-                  color: AppColors.secondaryColor,
+              Padding(
+                padding: EdgeInsets.only(left: getWidth(5)),
+                child: SizedBox(
+                  height: getHeight(25),
+                  width: getWidth(20),
+                  child: Image.asset(
+                    IconPath.weightIcon,
+                    fit: BoxFit.fill,
+                    color: AppColors.secondaryColor,
+                  ),
                 ),
               ),
               HorizontalSpace(width: getHeight(16)),

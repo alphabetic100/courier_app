@@ -23,7 +23,7 @@ class ShowAppLogo extends StatelessWidget {
         alignment: alignment ?? Alignment.centerLeft,
         child: Image.asset(
           ImagePath.appLogo,
-          height: getHeight(40),
+          height: getHeight(55),
           width: getWidth(245),
           fit: BoxFit.fill,
         ),

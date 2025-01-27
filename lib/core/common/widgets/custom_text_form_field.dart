@@ -50,7 +50,6 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
           : false, // Obscure for password fields
       style: getTextStyleMsrt(),
       decoration: InputDecoration(
-        suffix: widget.suffixIcon,
         prefixIcon: widget.prefixIcon,
         filled: true,
         fillColor: AppColors.white,
@@ -85,8 +84,10 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: Icon(
-                  _obscureText ? Icons.visibility_off : Icons.visibility,
-                  color: Colors.grey,
+                  _obscureText
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  color: Color(0xFF262B2B),
                 ),
                 onPressed: () {
                   setState(() {
@@ -94,7 +95,7 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
                   });
                 },
               )
-            : null, // No suffix icon for non-password fields
+            : widget.suffixIcon, // No suffix icon for non-password fields
       ),
     );
   }

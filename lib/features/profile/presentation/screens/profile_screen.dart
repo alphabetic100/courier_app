@@ -6,17 +6,22 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:courierapp/features/profile/presentation/components/profile_details_card.dart';
 import 'package:courierapp/features/profile/presentation/components/profile_trip_travel_box.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
+  ProfileScreen({super.key});
+  final LandingController landingController = Get.find<LandingController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        ontapBackButton: () {
+          landingController.changePage(0);
+        },
         actions: [
           Padding(
             padding: EdgeInsets.only(
