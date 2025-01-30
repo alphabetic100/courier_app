@@ -4,8 +4,8 @@ class AppColors {
   AppColors._();
 
   // Brand Colors
-  static const primaryColor = Color(0xFF4192C4); // Blue
-  static const secondaryColor = Color(0xFF5BC6AB); // Turquoise
+  static const primaryColor = Color(0xFF003087); // Blue
+  static const secondaryColor = Color(0xFF4192C4); // Turquoise
   static const titleTextColor = Colors.black;
   static const bodyTextColor = Color(0xFF677674);
   static const Color accent = Color(0xFF89A7FF);
