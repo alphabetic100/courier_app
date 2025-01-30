@@ -1,3 +1,4 @@
+import 'package:courierapp/core/common/widgets/body_profile_card.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -75,41 +76,12 @@ class SearchResultCard extends StatelessWidget {
             Divider(
               color: AppColors.grey.withOpacity(0.8),
             ),
-            ListTile(
-              contentPadding: EdgeInsets.all(0),
-              leading: Stack(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(ImagePath.profile),
-                  ),
-                  tripOverviewController.isVerified.value
-                      ? Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: CircleAvatar(
-                            backgroundColor: AppColors.secondaryColor,
-                            radius: getWidth(10),
-                            child: Icon(
-                              Icons.check,
-                              size: getHeight(15),
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : SizedBox.shrink(),
-                ],
-              ),
-              title: CustomText(
-                text: "Albert Flores",
-                color: AppColors.black,
-              ),
-              subtitle: Row(
-                children: [
-                  Icon(Icons.star_rounded, color: Color(0xFFFFC934)),
-                  Text("4.8/5"),
-                ],
-              ),
-              trailing: Image.asset(
+            BodyProfileCard(
+              isVerified: true,
+              profileImage: ImagePath.profile,
+              profileName: "Albert Flores",
+              rattings: "4.8/5",
+              suffixIcon: Image.asset(
                 IconPath.directionsBus,
                 height: getHeight(25),
                 color: AppColors.grey,

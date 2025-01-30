@@ -47,7 +47,7 @@ class TravellerInformation extends StatelessWidget {
                       right: getWidth(10),
                       child: CircleAvatar(
                         radius: getWidth(15),
-                        backgroundColor: AppColors.secondaryColor,
+                        backgroundColor: Color(0xFF2BCD31),
                         child: Icon(
                           Icons.check,
                           color: Colors.white,

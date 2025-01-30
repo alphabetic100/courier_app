@@ -12,12 +12,16 @@ class TripDetailsView extends StatelessWidget {
       required this.availabileSpace,
       required this.tripRules,
       required this.transportIcon,
-      required this.color});
+      required this.color,
+      required this.date,
+      required this.tripAdvantate});
   final String transportIcon;
   final String tripTransport;
   final String availabileSpace;
+  final String date;
   final Color color;
   final List<String> tripRules;
+  final List<String> tripAdvantate;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -41,7 +45,8 @@ class TripDetailsView extends StatelessWidget {
               HorizontalSpace(width: getHeight(16)),
               CustomText(
                 text: "Transport: ",
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.w600,
+                color: AppColors.titleTextColor,
               ),
               CustomText(
                 text: tripTransport,
@@ -68,7 +73,8 @@ class TripDetailsView extends StatelessWidget {
               HorizontalSpace(width: getHeight(16)),
               CustomText(
                 text: "Available: ",
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.w600,
+                color: AppColors.titleTextColor,
               ),
               CustomText(
                 text: availabileSpace,
@@ -78,9 +84,58 @@ class TripDetailsView extends StatelessWidget {
             ],
           ),
           VerticalSpace(height: getHeight(10)),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: getWidth(5)),
+                child: SizedBox(
+                    height: getHeight(25),
+                    width: getWidth(20),
+                    child: Icon(
+                      Icons.calendar_month,
+                      color: AppColors.secondaryColor,
+                    )),
+              ),
+              HorizontalSpace(width: getHeight(16)),
+              CustomText(
+                text: "Date: ",
+                fontWeight: FontWeight.w600,
+                color: AppColors.titleTextColor,
+              ),
+              CustomText(
+                text: date,
+                fontWeight: FontWeight.normal,
+              ),
+              Expanded(child: SizedBox())
+            ],
+          ),
+          VerticalSpace(height: getHeight(10)),
+          if (tripAdvantate.isNotEmpty)
+            ...List.generate(tripAdvantate.length, (index) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                      height: getHeight(35),
+                      width: getWidth(30),
+                      child: Icon(
+                        Icons.check,
+                        color: AppColors.success.withOpacity(0.7),
+                      )),
+                  HorizontalSpace(width: getHeight(8)),
+                  Expanded(
+                      child: CustomText(
+                    text: tripRules[index],
+                    fontWeight: FontWeight.normal,
+                  ))
+                ],
+              );
+            }),
+          VerticalSpace(height: getHeight(10)),
           if (tripRules.isNotEmpty)
             ...List.generate(tripRules.length, (index) {
               return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                       height: getHeight(35),

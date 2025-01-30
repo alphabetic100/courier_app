@@ -8,6 +8,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
+import 'package:courierapp/features/search_screen/presentation/screens/add_item.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class SearchScreen extends StatelessWidget {
               Column(
                 children: [
                   Container(
-                    height: AppSizes.height * 0.5,
+                    height: AppSizes.height * 0.4,
                     color: AppColors.secondaryColor,
                   ),
                   Expanded(
@@ -64,7 +65,7 @@ class SearchScreen extends StatelessWidget {
 
               // Intro Text of Search Screen
               Positioned(
-                  top: AppSizes.height * 0.13,
+                  top: AppSizes.height * 0.12,
                   child: SizedBox(
                     width: AppSizes.width,
                     child: Padding(
@@ -79,28 +80,28 @@ class SearchScreen extends StatelessWidget {
                                     style: getTextStyleMsrt(
                                       color: AppColors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: getWidth(35),
+                                      fontSize: getWidth(25),
                                     )),
                                 TextSpan(
                                     text: " wherever you want",
                                     style: getTextStyleMsrt(
                                       color: Color(0xFFFEFEFE).withOpacity(0.5),
                                       fontWeight: FontWeight.bold,
-                                      fontSize: getWidth(35),
+                                      fontSize: getWidth(25),
                                     )),
                                 TextSpan(
                                     text: " - To ",
                                     style: getTextStyleMsrt(
                                       color: AppColors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: getWidth(35),
+                                      fontSize: getWidth(25),
                                     )),
                                 TextSpan(
                                     text: "wherever you want",
                                     style: getTextStyleMsrt(
                                       color: Color(0xFFFEFEFE).withOpacity(0.5),
                                       fontWeight: FontWeight.bold,
-                                      fontSize: getWidth(35),
+                                      fontSize: getWidth(25),
                                     )),
                               ],
                             ),
@@ -164,10 +165,11 @@ class SearchScreen extends StatelessWidget {
                           CustomButton(
                               height: getHeight(50),
                               onPressed: () {
-                                Get.toNamed(AppRoute.searchResultScreen);
+                                Get.to(() => AddItem());
+                                // Get.toNamed(AppRoute.searchResultScreen);
                               },
                               child: CustomText(
-                                text: "Search Travelers",
+                                text: "Add a Item",
                                 fontSize: getWidth(16),
                                 color: AppColors.white,
                               ))

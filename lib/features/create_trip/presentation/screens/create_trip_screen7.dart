@@ -34,6 +34,11 @@ class CreateTripScreen7 extends StatelessWidget {
             TripDetailsView(
                 tripTransport: "Buss",
                 availabileSpace: "12kg",
+                date: "14 Jan 2025",
+                tripAdvantate: [
+                  "Will pickup the items from the sender's location.",
+                  "Will deliver directly to recipient’s door."
+                ],
                 tripRules: [
                   "No perishable food items without proper packaging.",
                   "No fragile items unless securely packaged.",

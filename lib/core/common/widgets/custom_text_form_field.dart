@@ -1,5 +1,6 @@
 import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
+
 import 'package:flutter/material.dart';
 
 class CustomTexFormField extends StatefulWidget {
@@ -16,6 +17,7 @@ class CustomTexFormField extends StatefulWidget {
     this.onTap,
     this.readOnly = false,
     this.suffixIcon,
+    this.isPhoneField = false, // New flag to handle phone input
   });
 
   final String hintText;
@@ -29,12 +31,14 @@ class CustomTexFormField extends StatefulWidget {
   final Function(String)? onChange;
   final VoidCallback? onTap;
   final bool readOnly;
+  final bool isPhoneField;
+
   @override
   State<CustomTexFormField> createState() => _CustomTexFormFieldState();
 }
 
 class _CustomTexFormFieldState extends State<CustomTexFormField> {
-  bool _obscureText = true; // Default to obscure the text
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +49,9 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
       maxLines: widget.maxLines,
       controller: widget.controller,
       validator: widget.validator,
-      obscureText: widget.isPassword
-          ? _obscureText
-          : false, // Obscure for password fields
+      obscureText: widget.isPassword ? _obscureText : false,
+      keyboardType:
+          widget.isPhoneField ? TextInputType.phone : TextInputType.text,
       style: getTextStyleMsrt(),
       decoration: InputDecoration(
         prefixIcon: widget.prefixIcon,
@@ -57,10 +61,7 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
         contentPadding:
             const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
         hintText: widget.hintText,
-        hintStyle: getTextStyleMsrt(
-          color: Color(0xFF84828E),
-          fontSize: 16,
-        ),
+        hintStyle: getTextStyleMsrt(color: Color(0xFF84828E), fontSize: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 4)),
           borderSide: BorderSide(color: Color(0xFFE2E2E6)),
@@ -91,11 +92,11 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
                 ),
                 onPressed: () {
                   setState(() {
-                    _obscureText = !_obscureText; // Toggle visibility
+                    _obscureText = !_obscureText;
                   });
                 },
               )
-            : widget.suffixIcon, // No suffix icon for non-password fields
+            : widget.suffixIcon,
       ),
     );
   }

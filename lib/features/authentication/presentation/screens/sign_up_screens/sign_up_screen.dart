@@ -3,6 +3,7 @@ import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
+import 'package:courierapp/core/common/widgets/phone_number_text_field.dart';
 import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -79,17 +80,14 @@ class SignUpScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600),
                     ),
                     VerticalSpace(height: getHeight(8)),
-                    CustomTexFormField(
-                      controller: singUpController.phoneNumberController,
+                    PhoneNumberTextField(
                       hintText: "Enter your phone number",
+                      controller: singUpController.phoneNumberController,
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Phone Number is required";
-                        }
-                        if (!RegExp(r'^\d{10,}$').hasMatch(value)) {
-                          return "Enter a valid phone number";
-                        }
                         return null;
+
+                        // return AppHelperFunctions.phoneNumberValidator(
+                        //     value, singUpController.phoneNumberController.text);
                       },
                     ),
                     VerticalSpace(height: getHeight(16)),
