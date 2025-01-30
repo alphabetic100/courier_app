@@ -1,7 +1,6 @@
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
-import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:courierapp/core/common/styles/get_text_style.dart'; // Replace with your actual import
+import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 
 class PhoneNumberTextField extends StatefulWidget {

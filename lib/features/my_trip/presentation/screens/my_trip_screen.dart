@@ -1,3 +1,4 @@
+import 'package:courierapp/core/common/widgets/as_traveller_card.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
@@ -5,8 +6,9 @@ import 'package:courierapp/core/common/widgets/my_trip_card.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:courierapp/features/my_trip/controller/my_trip_controller.dart';
-import 'package:courierapp/features/search_screen/presentation/components/search_result_card.dart';
+import 'package:courierapp/features/my_trip/presentation/screens/delivery_details_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +19,7 @@ class MyTripScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MyTripController controller = Get.put(MyTripController());
+    final LandingController landingController = Get.find<LandingController>();
 
     return Scaffold(
       body: NestedScrollView(
@@ -33,7 +36,7 @@ class MyTripScreen extends StatelessWidget {
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
-                    Get.back();
+                    landingController.changePage(0);
                   },
                   child: Center(
                     child: Icon(
@@ -67,50 +70,79 @@ class MyTripScreen extends StatelessWidget {
               ),
             ],
           ),
+          SliverPersistentHeader(
+            delegate: _TabBarDelegate(
+              TabBar(
+                controller: controller.tabController,
+                overlayColor: WidgetStatePropertyAll(Colors.transparent),
+                dividerColor: Colors.transparent,
+                tabs: [
+                  GestureDetector(
+                      onTap: () {
+                        controller.selectedIndex.value = 0;
+                        controller.tabController.animateTo(0);
+                      },
+                      child: Obx(
+                        () => Container(
+                          padding: EdgeInsets.all(getWidth(10)),
+                          width: AppSizes.width * 0.5,
+                          decoration: BoxDecoration(
+                              color: controller.selectedIndex.value == 0
+                                  ? AppColors.primaryColor.withOpacity(0.3)
+                                  : null,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                  color: controller.selectedIndex.value == 0
+                                      ? AppColors.primaryColor
+                                      : AppColors.grey)),
+                          child: Center(
+                            child: CustomText(
+                              text: "As Sender",
+                              fontSize: getWidth(16),
+                              color: controller.selectedIndex.value == 0
+                                  ? AppColors.primaryColor
+                                  : null,
+                            ),
+                          ),
+                        ),
+                      )),
+                  GestureDetector(
+                      onTap: () {
+                        controller.selectedIndex.value = 1;
+                        controller.tabController.animateTo(1);
+                      },
+                      child: Obx(
+                        () => Container(
+                          padding: EdgeInsets.all(getWidth(10)),
+                          width: AppSizes.width * 0.5,
+                          decoration: BoxDecoration(
+                              color: controller.selectedIndex.value == 1
+                                  ? AppColors.primaryColor.withOpacity(0.3)
+                                  : null,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                  color: controller.selectedIndex.value == 1
+                                      ? AppColors.primaryColor
+                                      : AppColors.grey)),
+                          child: Center(
+                            child: CustomText(
+                              text: "As Traveller",
+                              fontSize: getWidth(16),
+                              color: controller.selectedIndex.value == 1
+                                  ? AppColors.primaryColor
+                                  : null,
+                            ),
+                          ),
+                        ),
+                      )),
+                ],
+              ),
+            ),
+            pinned: true,
+          ),
         ],
         body: Column(
           children: [
-            TabBar(
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelColor: Color(0xFF0057B7),
-              unselectedLabelColor: AppColors.black,
-              dividerColor: Colors.transparent,
-              indicator: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Color(0xFF0057B7),
-                width: 2,
-              ))),
-              controller: controller.tabController,
-              tabs: [
-                Container(
-                  padding: EdgeInsets.all(getWidth(10)),
-                  width: AppSizes.width * 0.5,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.primaryColor)),
-                  child: Center(
-                    child: CustomText(
-                      text: "As Sender",
-                      fontSize: getWidth(16),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(getWidth(10)),
-                  width: AppSizes.width * 0.5,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.primaryColor)),
-                  child: Center(
-                    child: CustomText(
-                      text: "As Traveller",
-                      fontSize: getWidth(16),
-                    ),
-                  ),
-                ),
-              ],
-            ),
             Expanded(
               child: TabBarView(
                 controller: controller.tabController,
@@ -121,17 +153,22 @@ class MyTripScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.all(getWidth(16)),
-                        child: SearchResultCard(),
+                        child: GestureDetector(
+                            onTap: () {
+                              Get.to(() => DeliveryDetailsScreen());
+                            },
+                            child: MyTripCard()),
                       );
                     },
                   ),
-                  //TAb: 2
+                  // Tab 2
                   ListView.builder(
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.all(getWidth(16)),
-                        child: MyTripCard(),
+                        child: GestureDetector(
+                            onTap: () {}, child: AsTravellerCard()),
                       );
                     },
                   ),
@@ -142,5 +179,30 @@ class MyTripScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _TabBarDelegate extends SliverPersistentHeaderDelegate {
+  final TabBar tabBar;
+
+  _TabBarDelegate(this.tabBar);
+
+  @override
+  double get minExtent => tabBar.preferredSize.height;
+  @override
+  double get maxExtent => tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Material(
+      color: AppColors.white,
+      child: tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }

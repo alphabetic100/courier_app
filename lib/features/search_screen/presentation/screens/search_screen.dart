@@ -9,7 +9,6 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
 import 'package:courierapp/features/search_screen/presentation/screens/add_item.dart';
-import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
