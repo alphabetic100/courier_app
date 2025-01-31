@@ -51,6 +51,7 @@ class TravellerRiviewCard extends StatelessWidget {
         text: review,
         fontSize: getWidth(14),
         fontWeight: FontWeight.normal,
+        color: Color(0xff677674),
       ),
     );
   }

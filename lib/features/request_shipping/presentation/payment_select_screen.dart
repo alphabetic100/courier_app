@@ -1,6 +1,7 @@
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/common/widgets/payment_setup_card.dart';
 import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
@@ -9,6 +10,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/payment_setup_controller.dart';
+import 'package:courierapp/features/request_shipping/presentation/payment_method_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +29,7 @@ class PaymentSelectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        backgroundColor: Color(0xffFAFAFC),
         actions: [
           Padding(
             padding: EdgeInsets.only(
@@ -35,38 +38,88 @@ class PaymentSelectScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-        child: Column(
-          children: [
-            TripDetailsTopBody(title: "Payment Method"),
-            ListView.builder(
-                itemCount: 3,
-                shrinkWrap: true,
-                padding: EdgeInsets.all(8),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: getHeight(10)),
-                    child: Obx(
-                      () {
-                        return PaymentSetupCard(
-                            onTap: () {
-                              paymentSetupController.selectedCard.value = index;
-                            },
-                            iconPath: iconPaths[index],
-                            title: titles[index],
-                            isCardSelected:
-                                paymentSetupController.selectedCard.value ==
-                                    index);
-                      },
+      body: Column(
+
+        children: [
+          Container(
+            color: Color(0xffFAFAFC),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                VerticalSpace(height: getHeight(10)),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                  child: CustomText(
+                    text: "Payment Method",
+                    fontSize: getWidth(25),
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
+                  ),
+                ),
+                VerticalSpace(height: getHeight(20)),
+                Container(height: getHeight(1),width: double.infinity,color: Color(0xffCCD9D6),),
+              ],
+            ),
+          ),
+
+          SizedBox(height: getHeight(8),),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                CustomTextAndTextFormField(text: "Card Name",hintText: "Enter your card name",),
+                SizedBox(height: getHeight(16),),
+                CustomTextAndTextFormField(text: "Card Number",hintText: "Enter your card number",),
+                SizedBox(height: getHeight(16),),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextAndTextFormField(text: "Expiry Date",hintText: "MM/YY",),
                     ),
-                  );
-                }),
-          ],
-        ),
+                    HorizontalSpace(width: getWidth(16)),
+                    Expanded(
+                      child: CustomTextAndTextFormField(text: "CVV",hintText: "CVV",),
+                    ),
+                  ],
+                ),
+                SizedBox(height: getHeight(16),),
+                Obx(() => Row(
+                  children: [
+                    Checkbox(
+                      fillColor: MaterialStateProperty.all(Color(0xff677674)),
+                      checkColor: Colors.white,
+                      value: paymentSetupController.isChecked.value,
+                      onChanged: (newValue) {
+                        paymentSetupController.toggleCheckbox();
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(2), // Optional: if you want rounded corners
+                        side: BorderSide(color: Colors.white, width: 2), // Sets the border color and width
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: () => paymentSetupController.toggleCheckbox(),
+                      child: Text("Save this card for future use",
+                          style: TextStyle(fontSize: 16)),
+                    )
+                  ],
+                )),
+              ],
+            ),
+          ),
+
+
+
+        ],
       ),
       bottomNavigationBar: CustomBottomAppBar(
-          onTap: () {},
+        primaryText: "Pay",
+          onTap: () {
+            Get.to(()=>PaymentMethodScreen());
+
+          },
+
           secondaryWidget: Row(
             children: [
               Text("\$",
@@ -85,6 +138,26 @@ class PaymentSelectScreen extends StatelessWidget {
             ],
           ),
           isPrimaryButton: true),
+    );
+  }
+}
+
+class CustomTextAndTextFormField extends StatelessWidget {
+  const CustomTextAndTextFormField({
+    super.key, required this.text, required this.hintText, this.controller,
+  });
+  final String text,hintText;
+  final TextEditingController? controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(text: text,color: Color(0xff262B2B),fontWeight: FontWeight.bold,fontSize: getWidth(16),),
+        SizedBox(height: getHeight(8),),
+        CustomTexFormField(hintText: hintText,controller: controller,),
+      ],
     );
   }
 }

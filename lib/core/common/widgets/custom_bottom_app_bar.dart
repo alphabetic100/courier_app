@@ -22,7 +22,7 @@ class CustomBottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSizes.height * 0.14,
+      height: AppSizes.height * 0.18,
       padding: EdgeInsets.symmetric(
           horizontal: getWidth(16), vertical: getHeight(16)),
       color: AppColors.white,
@@ -42,6 +42,7 @@ class CustomBottomAppBar extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ))
               : primaryWidget ?? SizedBox.shrink(),
+          SizedBox(height: getHeight(10)),
         ],
       ),
     );

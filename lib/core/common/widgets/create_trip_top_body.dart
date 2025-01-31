@@ -10,22 +10,29 @@ class CreateTripTopBody extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        VerticalSpace(height: getHeight(10)),
-        CustomText(
-          text: title,
-          fontSize: getWidth(25),
-          fontWeight: FontWeight.bold,
-          color: AppColors.black,
-        ),
-        VerticalSpace(height: getHeight(20)),
-        Divider(
-          color: AppColors.grey,
-        ),
-        VerticalSpace(height: getHeight(20)),
-      ],
+    return Container(
+      color: Color(0xffFAFAFC),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          VerticalSpace(height: getHeight(10)),
+          Padding(
+            padding:  EdgeInsets.only(left: getWidth(16)),
+            child: CustomText(
+              text: title,
+              fontSize: getWidth(25),
+              fontWeight: FontWeight.bold,
+              color: AppColors.black,
+            ),
+          ),
+          VerticalSpace(height: getHeight(20)),
+          Divider(
+            color: Color(0xffCCD9D6),
+            height: getHeight(1),
+          ),
+
+        ],
+      ),
     );
   }
 }

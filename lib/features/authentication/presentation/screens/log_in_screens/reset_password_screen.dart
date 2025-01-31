@@ -7,6 +7,9 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'login_screen.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   ResetPasswordScreen({super.key});
@@ -67,7 +70,9 @@ class ResetPasswordScreen extends StatelessWidget {
                 hintText: "Confirm your new password"),
             Spacer(),
             CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.offAll(() => LoginScreen());
+                },
                 child: CustomText(
                     text: "Next",
                     fontSize: getWidth(18),

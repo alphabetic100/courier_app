@@ -56,7 +56,7 @@ class SignUpScreen extends StatelessWidget {
                     Text(
                       "Full Name",
                       style: getTextStyleMsrt(
-                          color: AppColors.black,
+                          color: Color(0xff262B2B),
                           fontSize: getWidth(14),
                           fontWeight: FontWeight.w600),
                     ),
@@ -158,6 +158,7 @@ class SignUpScreen extends StatelessWidget {
                         return null;
                       },
                     ),
+                    VerticalSpace(height: getHeight(8)),
                     Row(
                       children: [
                         Obx(() => Checkbox(
@@ -190,7 +191,7 @@ class SignUpScreen extends StatelessWidget {
                         onPressed: () {
                           if (!singUpController.termsAndConditions.value) {
                             Get.snackbar(
-                                "Error", "Please reat the terms & conditions");
+                                "Error", "Please read the terms & conditions");
                             return;
                           }
                           if (_formKey.currentState!.validate()) {
@@ -229,7 +230,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             HorizontalSpace(width: getWidth(10)),
                             CustomText(
-                              text: "Login with Google",
+                              text: "Sign Up with Google",
                               fontWeight: FontWeight.bold,
                             ),
                           ],

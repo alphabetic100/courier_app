@@ -21,6 +21,7 @@ class TravellerInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        backgroundColor: Color(0xffFAFAFC),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: getWidth(16)),
@@ -29,162 +30,180 @@ class TravellerInformation extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CreateTripTopBody(title: "Traveller Information"),
-              VerticalSpace(height: getHeight(20)),
-              Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CreateTripTopBody(title: "Traveller Information"),
+            VerticalSpace(height: getHeight(20)),
+            Padding(
+              padding:  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(ImagePath.profile),
-                    radius: getWidth(60),
+                  Stack(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage(ImagePath.profile),
+                        radius: getWidth(42),
+                      ),
+                      Positioned(
+                          bottom: 0,
+                          right: getWidth(0),
+                          child: CircleAvatar(
+                            radius: getWidth(13),
+                            backgroundColor: Color(0xFF2BCD31),
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: getWidth(15),
+                            ),
+                          )),
+                    ],
                   ),
-                  Positioned(
-                      bottom: 0,
-                      right: getWidth(10),
-                      child: CircleAvatar(
-                        radius: getWidth(15),
-                        backgroundColor: Color(0xFF2BCD31),
-                        child: Icon(
-                          Icons.check,
-                          color: Colors.white,
-                          size: getWidth(15),
-                        ),
-                      )),
-                ],
-              ),
-              VerticalSpace(height: getHeight(8)),
-              CustomText(
-                text: "Albert Flores",
-                fontSize: getWidth(18),
-                color: AppColors.black,
-                fontWeight: FontWeight.w800,
-              ),
-              Row(
-                children: [
-                  Icon(Icons.star_rounded, color: Color(0xFFFFC934)),
+                  VerticalSpace(height: getHeight(8)),
                   CustomText(
-                    text: "4.8/5",
-                    fontWeight: FontWeight.w400,
-                    fontSize: getWidth(14),
+                    text: "Albert Flores",
+                    fontSize: getWidth(18),
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.star_rounded, color: Color(0xFFFFC934)),
+                      CustomText(
+                        text: "4.8/5",
+                        fontWeight: FontWeight.w400,
+                        fontSize: getWidth(14),
+                      ),
+                    ],
+                  ),
+                  VerticalSpace(height: getHeight(16)),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                              height: getHeight(25),
+                              width: getWidth(20),
+                              child: Icon(
+                                Icons.history,
+                                color: AppColors.secondaryColor,
+                              )),
+                          HorizontalSpace(width: getHeight(16)),
+                          CustomText(
+                            text: "Member since March 2022",
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xff677674),
+                          ),
+                        ],
+                      ),
+                      VerticalSpace(height: getHeight(10)),
+                      Row(
+                        children: [
+                          SizedBox(
+                            height: getHeight(20),
+                            width: getWidth(20),
+                            child: Image.asset(
+                              "assets/icons/check_circle.png",
+                              fit: BoxFit.fill,
+                              color: AppColors.secondaryColor,
+                            ),
+                          ),
+                          HorizontalSpace(width: getHeight(16)),
+                          CustomText(
+                            text: "Verified Profile",
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xff677674),
+                          ),
+                        ],
+                      ),
+                      VerticalSpace(height: getHeight(10)),
+                      Row(
+                        children: [
+                          SizedBox(
+                              height: getHeight(20),
+                              width: getWidth(20),
+                              child: Icon(
+                                Icons.message_outlined,
+                                color: AppColors.secondaryColor,
+                                size: getHeight(25),
+                              )),
+                          HorizontalSpace(width: getHeight(16)),
+                          CustomText(
+                            text: "10 trips - 7 comments",
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xff677674),
+                          ),
+                        ],
+                      ),
+                      VerticalSpace(height: getHeight(10)),
+                    ],
                   ),
                 ],
               ),
-              VerticalSpace(height: getHeight(16)),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                          height: getHeight(25),
-                          width: getWidth(20),
-                          child: Icon(
-                            Icons.history,
-                            color: AppColors.secondaryColor,
-                          )),
-                      HorizontalSpace(width: getHeight(16)),
-                      CustomText(
-                        text: "Member since March 2022",
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ],
-                  ),
-                  VerticalSpace(height: getHeight(10)),
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: getHeight(20),
-                        width: getWidth(20),
-                        child: Image.asset(
-                          "assets/icons/check_circle.png",
-                          fit: BoxFit.fill,
-                          color: AppColors.secondaryColor,
-                        ),
-                      ),
-                      HorizontalSpace(width: getHeight(16)),
-                      CustomText(
-                        text: "Verified Profile",
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ],
-                  ),
-                  VerticalSpace(height: getHeight(10)),
-                  Row(
-                    children: [
-                      SizedBox(
-                          height: getHeight(20),
-                          width: getWidth(20),
-                          child: Icon(
-                            Icons.message_outlined,
-                            color: AppColors.secondaryColor,
-                            size: getHeight(25),
-                          )),
-                      HorizontalSpace(width: getHeight(16)),
-                      CustomText(
-                        text: "10 trips - 7 comments",
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ],
-                  ),
-                  VerticalSpace(height: getHeight(10)),
-                ],
-              ),
-              // builtDetail(
-              //     isSub: false,
-              //     title: 'Member since March 2022',
-              //     icon: Icon(
-              //       Icons.history,
-              //       size: 25,
-              //       color: AppColors.secondaryColor,
-              //     )),
-              // builtDetail(
-              //     isSub: false,
-              //     title: 'Verified Profile',
-              //     icon: Image.asset(
-              //       "assets/icons/check_circle.png",
-              //       fit: BoxFit.fill,
-              //     )),
-              // builtDetail(
-              //   isSub: false,
-              //   title: "10 trips - 7 comments",
-              //   icon: Icon(
-              //     Icons.message,
-              //     color: AppColors.secondaryColor,
-              //   ),
-              // ),
-              VerticalSpace(height: getHeight(16)),
-              Divider(
-                color: AppColors.grey,
-              ),
-              VerticalSpace(height: getHeight(16)),
-              TravellerRiviewCard(
-                  profileUrl: ImagePath.profile,
-                  userName: "Darrell Steward",
-                  ratting: "4/5",
-                  review:
-                      "kept me updated throughout the delivery process. Everything went smoothly"),
-              TravellerRiviewCard(
-                  profileUrl: ImagePath.profile,
-                  userName: "Mark Wilson",
-                  ratting: "5/5",
-                  review:
-                      "Delivery was a little late, but he communicated well and ensured the package arrived safely."),
-              CustomTextButton(
+            ),
+            // builtDetail(
+            //     isSub: false,
+            //     title: 'Member since March 2022',
+            //     icon: Icon(
+            //       Icons.history,
+            //       size: 25,
+            //       color: AppColors.secondaryColor,
+            //     )),
+            // builtDetail(
+            //     isSub: false,
+            //     title: 'Verified Profile',
+            //     icon: Image.asset(
+            //       "assets/icons/check_circle.png",
+            //       fit: BoxFit.fill,
+            //     )),
+            // builtDetail(
+            //   isSub: false,
+            //   title: "10 trips - 7 comments",
+            //   icon: Icon(
+            //     Icons.message,
+            //     color: AppColors.secondaryColor,
+            //   ),
+            // ),
+            VerticalSpace(height: getHeight(16)),
+            Divider(
+              color: Color(0xffCCD9D6),
+              height: getHeight(1),
+            ),
+            VerticalSpace(height: getHeight(16)),
+            TravellerRiviewCard(
+                profileUrl: ImagePath.profile,
+                userName: "Darrell Steward",
+                ratting: "4/5",
+                review:
+                    "kept me updated throughout the delivery process. Everything went smoothly"),
+            TravellerRiviewCard(
+                profileUrl: ImagePath.profile,
+                userName: "Mark Wilson",
+                ratting: "5/5",
+                review:
+                    "Delivery was a little late, but he communicated well and ensured the package arrived safely."),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: CustomTextButton(
                 onPressed: () {},
                 text: "Show more",
                 isUnderline: true,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
+                fontSize: getWidth(16),
+                color: Color(0xff003087),
               ),
-              VerticalSpace(height: getHeight(16)),
-              Divider(
-                color: AppColors.grey,
-              ),
-              VerticalSpace(height: getHeight(16)),
-              CustomButton(
+            ),
+            Divider(
+              color: Color(0xffCCD9D6),
+              height: getHeight(1),
+            ),
+            
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: CustomButton(
                   isPrimary: false,
+                color: Color(0xffFAFAFC),
                   onPressed: () {
                     Get.to(() => ChatWithTravellerScreen());
                   },
@@ -202,16 +221,19 @@ class TravellerInformation extends StatelessWidget {
                       )
                     ],
                   )),
-              VerticalSpace(height: getHeight(16)),
-              CustomTextButton(
+            ),
+
+            Padding(
+              padding: EdgeInsets.only(left: getWidth(16)),
+              child: CustomTextButton(
                 onPressed: () {},
                 text: "Report This Account",
                 isUnderline: true,
                 fontWeight: FontWeight.w600,
                 color: AppColors.error,
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

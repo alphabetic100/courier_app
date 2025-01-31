@@ -8,17 +8,20 @@ class SearchResultBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-        child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: SearchResultCard(),
-              );
-            }),
+      child: Container(
+        color: Color(0xffFFFFFF),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+          child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: SearchResultCard(),
+                );
+              }),
+        ),
       ),
     );
   }

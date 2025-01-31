@@ -14,6 +14,8 @@ import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'forgot_email_screen.dart';
+
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   final LoginController loginController = Get.find<LoginController>();
@@ -42,22 +44,22 @@ class LoginScreen extends StatelessWidget {
                     Text(
                       "Log in",
                       style: getTextStyleMsrt(
-                          color: Colors.black,
+                          color: Color(0xff262B2B),
                           fontSize: getWidth(36),
                           fontWeight: FontWeight.w700),
                     ),
                     VerticalSpace(height: getHeight(16)),
                     Text(
                       "Deliver smarter, faster, and hassle-free",
-                      style: getTextStyleMsrt(color: Color(0xFF84828E)),
+                      style: getTextStyleMsrt(color: Color(0xFF677674),fontSize: getWidth(16)),
                     ),
                     VerticalSpace(height: getHeight(40)),
                     Text(
                       "Email Address",
                       style: getTextStyleMsrt(
-                          color: AppColors.black,
+                          color: Color(0xff262B2B),
                           fontSize: getWidth(14),
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.w700),
                     ),
                     VerticalSpace(height: getHeight(10)),
                     CustomTexFormField(
@@ -75,9 +77,9 @@ class LoginScreen extends StatelessWidget {
                     Text(
                       "Password",
                       style: getTextStyleMsrt(
-                          color: AppColors.black,
+                          color: Color(0xff262B2B),
                           fontSize: getWidth(14),
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.w700),
                     ),
                     VerticalSpace(height: getHeight(10)),
                     CustomTexFormField(
@@ -111,16 +113,18 @@ class LoginScreen extends StatelessWidget {
                               text: "Remember me",
                               fontSize: getWidth(16),
                               fontWeight: FontWeight.w400,
+                              color: Color(0xff677674),
                             )
                           ],
                         ),
                         CustomTextButton(
                           isUnderline: true,
                           onPressed: () {
-                            Get.to(() => ForgetPasswordScreen());
+                            Get.to(() => ForgetEmailScreen());
                           },
                           text: "Forgot Password?",
                           fontWeight: FontWeight.bold,
+                          color: Color(0xff4192C4),
                         ),
                       ],
                     ),
@@ -128,7 +132,8 @@ class LoginScreen extends StatelessWidget {
                     CustomButton(
                         onPressed: () {
                           if (_formKey.currentState?.validate() ?? false) {
-                            loginController.login();
+                            //loginController.login();
+                            Get.toNamed(AppRoute.landingScreen);
                           }
                         },
                         child: Text(
@@ -136,7 +141,7 @@ class LoginScreen extends StatelessWidget {
                           style: getTextStyleMsrt(
                               color: Colors.white,
                               fontSize: getWidth(18),
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.w700),
                         )),
                     VerticalSpace(height: getHeight(16)),
                     SizedBox(
@@ -144,7 +149,7 @@ class LoginScreen extends StatelessWidget {
                         child: Text(
                           "Or,",
                           style: getTextStyleMsrt(
-                              color: AppColors.bodyTextColor,
+                              color: Color(0xff677674),
                               fontWeight: FontWeight.w500),
                           textAlign: TextAlign.center,
                         )),
@@ -159,12 +164,15 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             Image.asset(
                               IconPath.googleLogo,
-                              height: 25,
+                              height: getHeight(20),
+                              width: getWidth(20),
                             ),
                             HorizontalSpace(width: getWidth(10)),
                             CustomText(
                               text: "Login with Google",
-                              fontWeight: FontWeight.bold,
+                              fontSize: getWidth(16),
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xff677674),
                             ),
                           ],
                         )),
@@ -176,16 +184,18 @@ class LoginScreen extends StatelessWidget {
                           text: "Don't have an account?",
                           fontWeight: FontWeight.normal,
                           fontSize: getWidth(16),
+                          color: Color(0xff677674),
                         ),
                         HorizontalSpace(width: getWidth(5)),
                         CustomTextButton(
                           isUnderline: true,
-                          fontSize: 18,
+                          fontSize: getWidth(18),
                           onPressed: () {
                             Get.toNamed(AppRoute.signUpScreen);
                           },
-                          text: "Sign up",
-                          fontWeight: FontWeight.bold,
+                          text: "Sign Up",
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff003087),
                         ),
                       ],
                     ),

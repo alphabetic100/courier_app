@@ -28,16 +28,17 @@ class OnboardingScreen1 extends StatelessWidget {
             ),
             VerticalSpace(height: getHeight(16)),
             SizedBox(
-              child: Image.asset(ImagePath.onboarding1),
+              child: Image.asset(ImagePath.onboarding1,height: getHeight(390),width: getWidth(522),fit: BoxFit.cover,),
             ),
-            VerticalSpace(height: getHeight(26)),
+            VerticalSpace(height: getHeight(24)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: Text(
                 "Welcome to Courier App",
                 style: getTextStyleMsrt(
                   fontSize: getWidth(32),
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
+                    color: Color(0xff262B2B)
                 ),
               ),
             ),
@@ -47,8 +48,9 @@ class OnboardingScreen1 extends StatelessWidget {
               child: Text(
                 "Send parcels or earn money by delivering—fast, secure, and collaborative.",
                 style: getTextStyleMsrt(
-                  color: Colors.grey,
+                  color: Color(0xFF677674),
                   fontSize: getWidth(16),
+                  fontWeight: FontWeight.w400
                 ),
               ),
             ),
@@ -70,6 +72,7 @@ class OnboardingScreen1 extends StatelessWidget {
                     color: AppColors.white,
                   )),
             ),
+            SizedBox(height: getHeight(16)),
           ],
         ),
       ),

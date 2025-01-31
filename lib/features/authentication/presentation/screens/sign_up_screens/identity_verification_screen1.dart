@@ -101,6 +101,7 @@ class IdentityVerificationScreen1 extends StatelessWidget {
                   HorizontalSpace(width: getHeight(16)),
                   Expanded(
                     child: CustomButton(
+                      color: Color(0xff003087),
                         onPressed: () {
                           if (verificationController.selectedIndex.value < 4) {
                             Get.toNamed(AppRoute.identityVerificationScreen2);

@@ -20,7 +20,7 @@ class TripOverviewDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: AppSizes.width,
-      padding: EdgeInsets.only(top: getHeight(16)),
+      padding: EdgeInsets.only(top: getHeight(12)),
       child: Column(
         children: [
           GestureDetector(
@@ -36,7 +36,7 @@ class TripOverviewDetails extends StatelessWidget {
               suffixIcon: Icon(
                 CupertinoIcons.forward,
                 size: getHeight(30),
-                color: AppColors.black,
+                color: Color(0xff82918F),
                 weight: 2,
               ),
             ),
