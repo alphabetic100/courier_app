@@ -52,9 +52,9 @@ class PaymentSetupScreen extends StatelessWidget {
                 ),
                 VerticalSpace(height: getHeight(20)),
                 Text(
-                  "Add payment details for easy transactions",
+                  "Get paid securely after each delivery.",
                   style: getTextStyleMsrt(
-                      color: Color(0xFF84828E), fontSize: getWidth(16)),
+                      color: Color(0xFF677674), fontSize: getWidth(16)),
                 ),
                 VerticalSpace(height: getHeight(64)),
                 ...List.generate(titles.length, (index) {
@@ -99,6 +99,7 @@ class PaymentSetupScreen extends StatelessWidget {
                       HorizontalSpace(width: getHeight(20)),
                       Expanded(
                         child: CustomButton(
+                          color: Color(0xff003087),
                             onPressed: () {
                               Get.to(PaymentSetupScreen2());
                             },

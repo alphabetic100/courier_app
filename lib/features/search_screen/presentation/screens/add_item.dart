@@ -123,8 +123,8 @@ class AddItem extends StatelessWidget {
                                   CustomButton(
                                       height: getHeight(50),
                                       onPressed: () {
-                                        Get.toNamed(
-                                            AppRoute.searchResultScreen);
+                                        Get.toNamed(AppRoute.searchScreen);
+
                                       },
                                       child: CustomText(
                                         text: "Add a Item",

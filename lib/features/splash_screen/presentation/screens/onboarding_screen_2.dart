@@ -31,9 +31,9 @@ class OnboardingScreen2 extends StatelessWidget {
                     child: ShowAppLogo()),
                 VerticalSpace(height: getHeight(16)),
                 SizedBox(
-                  child: Image.asset(ImagePath.onboarding2),
+                  child: Image.asset(ImagePath.onboarding2,height: getHeight(390),width: getWidth(522),fit: BoxFit.cover,),
                 ),
-                VerticalSpace(height: getHeight(26)),
+                VerticalSpace(height: getHeight(24)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
                   child: Text(
@@ -41,6 +41,7 @@ class OnboardingScreen2 extends StatelessWidget {
                     style: getTextStyleMsrt(
                       fontSize: getWidth(32),
                       fontWeight: FontWeight.w700,
+                      color: Color(0xff262B2B)
                     ),
                   ),
                 ),
@@ -50,7 +51,7 @@ class OnboardingScreen2 extends StatelessWidget {
                   child: Text(
                     "Share parcel details, choose a traveler, and track your delivery step-by-step.",
                     style: getTextStyleMsrt(
-                      color: Colors.grey,
+                      color: Color(0xFF677674),
                       fontSize: getWidth(16),
                     ),
                   ),

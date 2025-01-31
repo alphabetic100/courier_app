@@ -30,7 +30,7 @@ class OnboardingScreen3 extends StatelessWidget {
                     child: ShowAppLogo()),
                 VerticalSpace(height: getHeight(16)),
                 SizedBox(
-                  child: Image.asset(ImagePath.onboarding3),
+                  child: Image.asset(ImagePath.onboarding3,height: getHeight(390),width: getWidth(522),fit: BoxFit.cover,),
                 ),
                 VerticalSpace(height: getHeight(26)),
                 Padding(
@@ -39,7 +39,8 @@ class OnboardingScreen3 extends StatelessWidget {
                       "Earn While You Travel",
                       style: getTextStyleMsrt(
                         fontSize: getWidth(32),
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff262B2B)
                       ),
                     )),
                 VerticalSpace(height: getHeight(16)),
@@ -48,8 +49,8 @@ class OnboardingScreen3 extends StatelessWidget {
                     child: Text(
                       "Browse available parcels, accept deliveries, and earn money effortlessly.",
                       style: getTextStyleMsrt(
-                        color: Colors.grey,
-                        fontSize: 16,
+                        color: Color(0xff677674),
+                        fontSize: getWidth(16),
                       ),
                     )),
                 Spacer(),

@@ -99,6 +99,7 @@ class IdentityVerificationScreen2 extends StatelessWidget {
                   HorizontalSpace(width: getHeight(20)),
                   Expanded(
                     child: CustomButton(
+                      color: Color(0xff003087),
                         onPressed: () {
                           if (verificationController.selectedImage.value ==
                               null) {

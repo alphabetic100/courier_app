@@ -13,19 +13,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.actions,
     this.ontapBackButton,
-    this.backButton = true,
+    this.backButton = true, this.backgroundColor,
   });
   final String title;
   final bool? centerTitle;
   final List<Widget>? actions;
   final VoidCallback? ontapBackButton;
   final bool backButton;
+  final Color? backgroundColor;
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.white,
+      backgroundColor: backgroundColor??AppColors.white,
       title: title.isNotEmpty
           ? CustomText(
               text: title,

@@ -2,6 +2,7 @@ import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
 import 'package:courierapp/core/common/widgets/item_card.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
@@ -23,6 +24,8 @@ class RequestShippingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        backgroundColor: Color(0xffFAFAFC),
+
         actions: [
           Padding(
             padding: EdgeInsets.only(
@@ -33,32 +36,44 @@ class RequestShippingScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TripDetailsTopBody(title: "Request shipping"),
-              VerticalSpace(height: getHeight(20)),
-              Obx(() => ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: requestShippingController.items.length,
-                    itemBuilder: (context, index) {
-                      final item = requestShippingController.items[index];
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: getHeight(20)),
-                        child: GestureDetector(
-                          onTap: () {
-                            requestShippingController.toggleSelection(index);
-                          },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TripDetailsTopBody(title: "Request shipping"),
+            VerticalSpace(height: getHeight(20)),
+            Obx(() => ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: requestShippingController.items.length,
+                  itemBuilder: (context, index) {
+                    final item = requestShippingController.items[index];
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: getHeight(20)),
+                      child: GestureDetector(
+                        onTap: () {
+                          requestShippingController.toggleSelection(index);
+                        },
+                        child: Padding(
+                          padding:  EdgeInsets.only(left: getWidth(16),right: getWidth(16)),
                           child: ItemCard(item: item),
                         ),
-                      );
-                    },
-                  )),
-            ],
-          ),
+                      ),
+                    );
+                  },
+                )),
+
+            Padding(
+              padding: EdgeInsets.only(left: getWidth(16),right: getWidth(16)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(text: "Message",fontSize: getWidth(16),fontWeight: FontWeight.w600,color: Color(0xff262B2B),),
+                  SizedBox(height: getHeight(8),),
+                  CustomTexFormField(hintText: "Message for your traveller ",maxLines: 4,)
+                ],
+              ),
+            )
+          ],
         ),
       ),
       bottomNavigationBar: CustomBottomAppBar(
@@ -105,7 +120,8 @@ class RequestShippingScreen extends StatelessWidget {
                     color: AppColors.white,
                     fontWeight: FontWeight.w600,
                   )),
-            )
+            ),
+
           ],
         ),
       ),

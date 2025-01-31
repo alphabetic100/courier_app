@@ -22,6 +22,7 @@ class TripOverviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        backgroundColor: Color(0xffFAFAFC),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: getWidth(16)),
@@ -29,23 +30,23 @@ class TripOverviewScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TripDetailsTopBody(title: "Trip Overview"),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TripDetailsTopBody(title: "Trip Overview"),
 
-            //Trip Overview Details
-            TripOverviewDetails(),
-          ],
-        ),
+          //Trip Overview Details
+          Padding(
+            padding:  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+            child: TripOverviewDetails(),
+          ),
+        ],
       ),
       bottomNavigationBar: Container(
-        height: AppSizes.height * 0.135,
+        height: AppSizes.height * 0.165,
         padding: EdgeInsets.only(
             left: getHeight(16), right: getHeight(16), bottom: getHeight(16)),
-        color: AppColors.white,
+        color: Color(0xffFFFFFF),
         child: Column(
           children: [
             CustomButton(
@@ -78,6 +79,7 @@ class TripOverviewScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: AppColors.white,
                 )),
+            VerticalSpace(height: getHeight(16)),
           ],
         ),
       ),

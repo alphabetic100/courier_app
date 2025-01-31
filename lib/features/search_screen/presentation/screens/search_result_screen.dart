@@ -23,94 +23,106 @@ class SearchResultScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+            Container(
+              color: Color(0xffFAFAFC),
               child: Column(
                 children: [
-                  VerticalSpace(height: getHeight(16)),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                            padding: EdgeInsets.all(0),
-                            height: getWidth(50),
-                            // width: getWidth(50),
-                            isPrimary: false,
-                            onPressed: () {},
-                            child: Row(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: Icon(
-                                  CupertinoIcons.back,
-                                  color: AppColors.grey,
-                                  size: getHeight(35),
-                                  weight: getWidth(2),
-                                ),
-                              ),
-                              HorizontalSpace(width: getWidth(5)),
-                              Expanded(
-                                  child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  FittedBox(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                  Padding(
+                    padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16),top: getHeight(16)),
+                    child: Column(
+                      children: [
+                        VerticalSpace(height: getHeight(16)),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomButton(
+                                  padding: EdgeInsets.all(0),
+                                  height: getWidth(50),
+                                  // width: getWidth(50),
+                                  isPrimary: false,
+                                  onPressed: () {},
+                                  child: Row(children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.back();
+                                      },
+                                      child: Icon(
+                                        CupertinoIcons.back,
+                                        color: AppColors.grey,
+                                        size: getHeight(35),
+                                        weight: getWidth(2),
+                                      ),
+                                    ),
+                                    HorizontalSpace(width: getWidth(5)),
+                                    Expanded(
+                                        child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Row(
-                                          children: [
-                                            CustomText(
-                                              text: "Madrid",
-                                              color: AppColors.black,
-                                              fontSize: getWidth(14),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              child: Image.asset(
-                                                IconPath.arrow,
-                                                width: getWidth(30),
-                                                fit: BoxFit.fitWidth,
+                                        FittedBox(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  CustomText(
+                                                    text: "Madrid",
+                                                    color: AppColors.black,
+                                                    fontSize: getWidth(14),
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 5, right: 5),
+                                                    child: Image.asset(
+                                                      IconPath.arrow,
+                                                      width: getWidth(30),
+                                                      fit: BoxFit.fitWidth,
+                                                    ),
+                                                  ),
+                                                  CustomText(
+                                                    text: "Madrid",
+                                                    color: AppColors.black,
+                                                    fontSize: getWidth(14),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                            CustomText(
-                                              text: "Madrid",
-                                              color: AppColors.black,
-                                              fontSize: getWidth(14),
-                                            ),
-                                          ],
+                                              CustomText(
+                                                text: "Saturday, 15 October, 2kg",
+                                                fontSize: getWidth(12),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                        CustomText(
-                                          text: "Saturday, 15 October, 2kg",
-                                          fontSize: getWidth(12),
+                                        Image.asset(
+                                          IconPath.filterIcon,
+                                          height: getWidth(40),
                                         )
                                       ],
-                                    ),
-                                  ),
-                                  Image.asset(
-                                    IconPath.filterIcon,
-                                    height: getWidth(40),
-                                  )
-                                ],
-                              )),
-                            ])),
-                      ),
-                      HorizontalSpace(width: getWidth(16)),
-                      Padding(
-                        padding: EdgeInsets.only(),
-                        child: MessageNotificationBox(),
-                      ),
-                    ],
+                                    )),
+                                  ])),
+                            ),
+                            HorizontalSpace(width: getWidth(16)),
+                            Padding(
+                              padding: EdgeInsets.only(),
+                              child: MessageNotificationBox(),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  VerticalSpace(height: getHeight(10)),
+                  Container(
+                    height: getHeight(1),
+                    width: double.infinity,
+                    color: Color(0xffCCD9D6),
                   )
                 ],
               ),
             ),
-            VerticalSpace(height: getHeight(10)),
-            Divider(
-              color: AppColors.grey.withOpacity(0.6),
+            SizedBox(
+              height: getHeight(8),
             ),
             SearchResultBody()
           ],

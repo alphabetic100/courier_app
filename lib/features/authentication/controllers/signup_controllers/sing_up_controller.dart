@@ -18,8 +18,8 @@ class SingUpController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController forgotEmailController = TextEditingController();
   void toggleTermsAndConditions() {
     termsAndConditions.value = !termsAndConditions.value;
   }
