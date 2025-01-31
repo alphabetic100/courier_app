@@ -1,3 +1,4 @@
+import 'package:courierapp/core/common/widgets/body_profile_card.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/trip_details_view.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
@@ -27,45 +28,12 @@ class TripOverviewDetails extends StatelessWidget {
               //TODO: Navigate to the Traveller Information page
               Get.to(() => TravellerInformation());
             },
-            child: ListTile(
-              contentPadding: EdgeInsets.all(0),
-              leading: Stack(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(ImagePath.profile),
-                  ),
-                  tripOverviewController.isVerified.value
-                      ? Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: CircleAvatar(
-                            backgroundColor: AppColors.secondaryColor,
-                            radius: getWidth(10),
-                            child: Icon(
-                              Icons.check,
-                              size: getHeight(15),
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : SizedBox.shrink(),
-                ],
-              ),
-              title: CustomText(
-                text: "Albert Flores",
-                color: AppColors.black,
-              ),
-              subtitle: Row(
-                children: [
-                  Icon(Icons.star_rounded, color: Color(0xFFFFC934)),
-                  CustomText(
-                    text: "4.8/5",
-                    fontWeight: FontWeight.w400,
-                    fontSize: getWidth(14),
-                  ),
-                ],
-              ),
-              trailing: Icon(
+            child: BodyProfileCard(
+              isVerified: true,
+              profileImage: ImagePath.profile,
+              profileName: "Albert Flores",
+              rattings: "4.8/5",
+              suffixIcon: Icon(
                 CupertinoIcons.forward,
                 size: getHeight(30),
                 color: AppColors.black,
@@ -77,6 +45,11 @@ class TripOverviewDetails extends StatelessWidget {
           TripDetailsView(
               tripTransport: "Buss",
               availabileSpace: "12kg",
+              date: "14 Jan 2025",
+              tripAdvantate: [
+                "Will pickup the items from the sender's location.",
+                "Will deliver directly to recipient’s door."
+              ],
               tripRules: [
                 "No perishable food items without proper packaging.",
                 "No fragile items unless securely packaged.",

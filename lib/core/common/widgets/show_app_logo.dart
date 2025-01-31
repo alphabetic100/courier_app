@@ -24,7 +24,7 @@ class ShowAppLogo extends StatelessWidget {
         child: Image.asset(
           ImagePath.appLogo,
           height: getHeight(40),
-          width: getWidth(245),
+          width: getWidth(150),
           fit: BoxFit.fill,
         ),
       ),

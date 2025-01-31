@@ -26,12 +26,15 @@ class MessageInputBox extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: CustomTexFormField(
-                controller: chatController.textController,
-                onChange: (p0) {
-                  chatController.showSendbox();
-                },
-                hintText: 'Message here..',
+              child: SizedBox(
+                height: getHeight(55),
+                child: CustomTexFormField(
+                  controller: chatController.textController,
+                  onChange: (p0) {
+                    chatController.showSendbox();
+                  },
+                  hintText: 'Message here..',
+                ),
               ),
             ),
             const SizedBox(width: 8),

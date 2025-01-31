@@ -40,7 +40,10 @@ class CreateTripScreen6 extends StatelessWidget {
               fontSize: getWidth(16),
             ),
             VerticalSpace(height: getHeight(16)),
-            CustomTexFormField(maxLines: 3, hintText: "e.g., No fragile items")
+            CustomTexFormField(
+              maxLines: 4,
+              hintText: "e.g., No fragile items",
+            )
           ],
         ),
       ),

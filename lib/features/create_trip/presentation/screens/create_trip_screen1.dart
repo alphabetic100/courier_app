@@ -10,12 +10,14 @@ import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/presentation/components/select_identity_card.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
 import 'package:courierapp/features/create_trip/presentation/screens/create_trip_screen2.dart';
+import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateTripScreen1 extends StatelessWidget {
   CreateTripScreen1({super.key});
   final CreateTripController tripController = Get.find<CreateTripController>();
+  final LandingController landingController = Get.find<LandingController>();
   final List<String> titles = ["Car", "Train", "Buss", "Airplane"];
   final List<String> iconPaths = [
     IconPath.car,
@@ -27,6 +29,9 @@ class CreateTripScreen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        ontapBackButton: () {
+          landingController.changePage(0);
+        },
         actions: [
           Padding(
             padding: EdgeInsets.only(

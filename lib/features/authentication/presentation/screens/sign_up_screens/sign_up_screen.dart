@@ -3,10 +3,12 @@ import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
+import 'package:courierapp/core/common/widgets/phone_number_text_field.dart';
 import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/sing_up_controller.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -78,17 +80,14 @@ class SignUpScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600),
                     ),
                     VerticalSpace(height: getHeight(8)),
-                    CustomTexFormField(
-                      controller: singUpController.phoneNumberController,
+                    PhoneNumberTextField(
                       hintText: "Enter your phone number",
+                      controller: singUpController.phoneNumberController,
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Phone Number is required";
-                        }
-                        if (!RegExp(r'^\d{10,}$').hasMatch(value)) {
-                          return "Enter a valid phone number";
-                        }
                         return null;
+
+                        // return AppHelperFunctions.phoneNumberValidator(
+                        //     value, singUpController.phoneNumberController.text);
                       },
                     ),
                     VerticalSpace(height: getHeight(16)),
@@ -205,7 +204,58 @@ class SignUpScreen extends StatelessWidget {
                               fontSize: getWidth(18),
                               fontWeight: FontWeight.bold),
                         )),
-                    // Remaining content
+                    VerticalSpace(height: getHeight(16)),
+                    SizedBox(
+                        width: AppSizes.width,
+                        child: Text(
+                          "Or,",
+                          style: getTextStyleMsrt(
+                              color: AppColors.bodyTextColor,
+                              fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.center,
+                        )),
+                    VerticalSpace(height: getHeight(16)),
+                    CustomButton(
+                        isPrimary: false,
+                        onPressed: () {
+                          //TODO: Google sign up
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              IconPath.googleLogo,
+                              height: 25,
+                            ),
+                            HorizontalSpace(width: getWidth(10)),
+                            CustomText(
+                              text: "Login with Google",
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ],
+                        )),
+                    VerticalSpace(height: getHeight(16)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomText(
+                          text: "Already have an account?",
+                          fontWeight: FontWeight.normal,
+                          fontSize: getWidth(16),
+                        ),
+                        HorizontalSpace(width: getWidth(5)),
+                        CustomTextButton(
+                          isUnderline: true,
+                          fontSize: 18,
+                          onPressed: () {
+                            Get.toNamed(AppRoute.loginScreen);
+                          },
+                          text: "Log in",
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ],
+                    ),
+                    VerticalSpace(height: getHeight(16)),
                   ],
                 ),
               ),

@@ -76,7 +76,7 @@ class TripDetailsTopBody extends StatelessWidget {
                         child: Image.asset(
                           ImagePath.location,
                           height: getHeight(20),
-                          color: AppColors.secondaryColor,
+                          color: AppColors.primaryColor,
                         ),
                       ),
                       GestureDetector(
@@ -86,7 +86,7 @@ class TripDetailsTopBody extends StatelessWidget {
                         child: Image.asset(
                           ImagePath.location,
                           height: getHeight(20),
-                          color: AppColors.secondaryColor,
+                          color: AppColors.primaryColor,
                         ),
                       ),
                     ],

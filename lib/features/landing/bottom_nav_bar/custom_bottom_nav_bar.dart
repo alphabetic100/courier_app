@@ -1,4 +1,5 @@
 import 'package:courierapp/core/common/styles/get_text_style.dart';
+import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,10 +12,10 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return BottomNavigationBar(
-        selectedLabelStyle:
-            getTextStyleMsrt(fontSize: 16, fontWeight: FontWeight.bold),
-        unselectedLabelStyle:
-            getTextStyleMsrt(fontSize: 14, color: AppColors.bodyTextColor),
+        selectedLabelStyle: getTextStyleMsrt(
+            fontSize: getWidth(14), fontWeight: FontWeight.w600),
+        unselectedLabelStyle: getTextStyleMsrt(
+            fontSize: getWidth(14), color: AppColors.bodyTextColor),
         backgroundColor: AppColors.white,
         currentIndex: landingController.currentPage.value,
         selectedItemColor: AppColors.primaryColor,

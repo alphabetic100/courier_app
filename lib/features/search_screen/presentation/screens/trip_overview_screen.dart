@@ -35,6 +35,8 @@ class TripOverviewScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TripDetailsTopBody(title: "Trip Overview"),
+
+            //Trip Overview Details
             TripOverviewDetails(),
           ],
         ),

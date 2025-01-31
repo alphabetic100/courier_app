@@ -1,10 +1,10 @@
+import 'package:courierapp/core/utils/constants/app_sizes.dart';
+import 'package:flutter/material.dart';
 import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 
-import 'package:flutter/material.dart';
-
-class CustomTexFormField extends StatefulWidget {
-  const CustomTexFormField({
+class PhoneNumberTextField extends StatefulWidget {
+  const PhoneNumberTextField({
     super.key,
     required this.hintText,
     this.controller,
@@ -17,7 +17,6 @@ class CustomTexFormField extends StatefulWidget {
     this.onTap,
     this.readOnly = false,
     this.suffixIcon,
-    this.isPhoneField = false, // New flag to handle phone input
   });
 
   final String hintText;
@@ -31,14 +30,42 @@ class CustomTexFormField extends StatefulWidget {
   final Function(String)? onChange;
   final VoidCallback? onTap;
   final bool readOnly;
-  final bool isPhoneField;
 
   @override
-  State<CustomTexFormField> createState() => _CustomTexFormFieldState();
+  State<PhoneNumberTextField> createState() => _PhoneNumberTextFieldState();
 }
 
-class _CustomTexFormFieldState extends State<CustomTexFormField> {
+class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
   bool _obscureText = true;
+  String _selectedCountryCode = '+880';
+  final List<String> countryCodes = [
+    '+880',
+    '+1',
+    '+44',
+    '+91',
+    '+61',
+    '+49',
+    '+33',
+    '+81',
+    '+55',
+    '+34'
+  ];
+
+  int getValidPhoneLength(String countryCode) {
+    Map<String, int> countryPhoneLengths = {
+      '+880': 8,
+      '+1': 10,
+      '+44': 10,
+      '+91': 10,
+      '+61': 9,
+      '+49': 11,
+      '+33': 9,
+      '+81': 10,
+      '+55': 11,
+      '+34': 9,
+    };
+    return countryPhoneLengths[countryCode] ?? -1;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +75,58 @@ class _CustomTexFormFieldState extends State<CustomTexFormField> {
       onTap: widget.onTap,
       maxLines: widget.maxLines,
       controller: widget.controller,
-      validator: widget.validator,
+      // validator: (value) {
+      //   return AppHelperFunctions.phoneNumberValidator(
+      //       value, _selectedCountryCode);
+      // },
       obscureText: widget.isPassword ? _obscureText : false,
-      keyboardType:
-          widget.isPhoneField ? TextInputType.phone : TextInputType.text,
+      keyboardType: TextInputType.phone,
       style: getTextStyleMsrt(),
       decoration: InputDecoration(
-        prefixIcon: widget.prefixIcon,
+        prefixIcon: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              isDense: true,
+              isExpanded: false,
+              padding: EdgeInsets.all(0),
+              dropdownColor: AppColors.white,
+              value: _selectedCountryCode,
+              onChanged: (newValue) {
+                setState(() {
+                  _selectedCountryCode = newValue!;
+                });
+              },
+              items: countryCodes.map((code) {
+                return DropdownMenuItem(
+                  value: code,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      countryCodes.indexOf(code) == 0
+                          ? Transform.flip(
+                              flipX: true,
+                              child: Icon(Icons.arrow_drop_down,
+                                  color: Colors.black),
+                            )
+                          : SizedBox.shrink(),
+                      const SizedBox(width: 4),
+                      Text(
+                        code,
+                        style: getTextStyleMsrt(
+                          fontWeight: FontWeight.w500,
+                          fontSize: getWidth(16),
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+              icon: SizedBox.shrink(),
+            ),
+          ),
+        ),
         filled: true,
         fillColor: AppColors.white,
         labelStyle: getTextStyleMsrt(),
