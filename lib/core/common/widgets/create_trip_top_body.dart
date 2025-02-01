@@ -29,6 +29,7 @@ class CreateTripTopBody extends StatelessWidget {
             color: Color(0xffCCD9D6),
             height: getHeight(1),
           ),
+          VerticalSpace(height: getHeight(25))
         ],
       ),
     );

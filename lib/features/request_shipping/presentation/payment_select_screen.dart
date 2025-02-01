@@ -8,7 +8,6 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/payment_setup_controller.dart';
-import 'package:courierapp/features/request_shipping/presentation/payment_method_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -135,7 +134,7 @@ class PaymentSelectScreen extends StatelessWidget {
       bottomNavigationBar: CustomBottomAppBar(
           primaryText: "Pay",
           onTap: () {
-            Get.to(() => PaymentMethodScreen());
+            // Get.to(() => PaymentMethodScreen());
           },
           secondaryWidget: Row(
             children: [

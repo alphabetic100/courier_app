@@ -10,6 +10,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
+import 'package:courierapp/features/request_shipping/presentation/payment_method_screen.dart';
 import 'package:courierapp/features/request_shipping/presentation/payment_select_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,6 @@ class RequestShippingScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         backgroundColor: Color(0xffFAFAFC),
-
         actions: [
           Padding(
             padding: EdgeInsets.only(
@@ -54,22 +54,32 @@ class RequestShippingScreen extends StatelessWidget {
                           requestShippingController.toggleSelection(index);
                         },
                         child: Padding(
-                          padding:  EdgeInsets.only(left: getWidth(16),right: getWidth(16)),
+                          padding: EdgeInsets.only(
+                              left: getWidth(16), right: getWidth(16)),
                           child: ItemCard(item: item),
                         ),
                       ),
                     );
                   },
                 )),
-
             Padding(
-              padding: EdgeInsets.only(left: getWidth(16),right: getWidth(16)),
+              padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(text: "Message",fontSize: getWidth(16),fontWeight: FontWeight.w600,color: Color(0xff262B2B),),
-                  SizedBox(height: getHeight(8),),
-                  CustomTexFormField(hintText: "Message for your traveller ",maxLines: 4,)
+                  CustomText(
+                    text: "Message",
+                    fontSize: getWidth(16),
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff262B2B),
+                  ),
+                  SizedBox(
+                    height: getHeight(8),
+                  ),
+                  CustomTexFormField(
+                    hintText: "Message for your traveller ",
+                    maxLines: 4,
+                  )
                 ],
               ),
             )
@@ -113,7 +123,7 @@ class RequestShippingScreen extends StatelessWidget {
               child: CustomButton(
                   isPrimary: true,
                   onPressed: () {
-                    Get.to(() => PaymentSelectScreen());
+                    Get.to(() => PaymentMethodScreen());
                   },
                   child: CustomText(
                     text: "Next",
@@ -121,7 +131,6 @@ class RequestShippingScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   )),
             ),
-
           ],
         ),
       ),
