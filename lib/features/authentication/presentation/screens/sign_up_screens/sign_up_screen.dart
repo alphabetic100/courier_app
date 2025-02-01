@@ -3,6 +3,7 @@ import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
+import 'package:courierapp/core/common/widgets/error_snakbar.dart';
 import 'package:courierapp/core/common/widgets/phone_number_text_field.dart';
 import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
@@ -192,9 +193,9 @@ class SignUpScreen extends StatelessWidget {
                     CustomButton(
                         onPressed: () {
                           if (!singUpController.termsAndConditions.value) {
-                            Get.snackbar(
-                                "Error", "Please read the terms & conditions");
-                            return;
+                            errorSnakbar(
+                                errorMessage:
+                                    "Please read the terms & conditions");
                           }
                           if (_formKey.currentState!.validate()) {
                             Get.toNamed(AppRoute.identityVerificationScreen1);
