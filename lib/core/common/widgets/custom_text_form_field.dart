@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class CustomTexFormField extends StatefulWidget {
   const CustomTexFormField({
     super.key,
-    required this.hintText,
+    this.hintText,
     this.controller,
     this.validator,
     this.isPassword = false,
@@ -20,7 +20,7 @@ class CustomTexFormField extends StatefulWidget {
     this.isPhoneField = false, // New flag to handle phone input
   });
 
-  final String hintText;
+  final String? hintText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final bool isPassword;

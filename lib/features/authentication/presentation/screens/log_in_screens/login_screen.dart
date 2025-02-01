@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     VerticalSpace(height: getHeight(10)),
                     CustomTexFormField(
-                      controller: loginController.passworadController,
+                      controller: loginController.passwordController,
                       hintText: "Enter your password",
                       isPassword: true,
                       validator: (value) {
@@ -132,8 +132,8 @@ class LoginScreen extends StatelessWidget {
                     CustomButton(
                         onPressed: () {
                           if (_formKey.currentState?.validate() ?? false) {
-                            //loginController.login();
-                            Get.toNamed(AppRoute.landingScreen);
+                            loginController.login();
+                            //Get.toNamed(AppRoute.landingScreen);
                           }
                         },
                         child: Text(

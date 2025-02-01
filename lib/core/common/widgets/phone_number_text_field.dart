@@ -6,7 +6,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 class PhoneNumberTextField extends StatefulWidget {
   const PhoneNumberTextField({
     super.key,
-    required this.hintText,
+   this.hintText,
     this.controller,
     this.validator,
     this.isPassword = false,
@@ -19,7 +19,7 @@ class PhoneNumberTextField extends StatefulWidget {
     this.suffixIcon,
   });
 
-  final String hintText;
+  final String? hintText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final bool isPassword;
