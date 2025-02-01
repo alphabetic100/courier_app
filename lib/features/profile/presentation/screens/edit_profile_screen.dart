@@ -1,17 +1,16 @@
+import 'dart:io';
+
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/profile/controller/edit_profile_controller.dart';
 import 'package:courierapp/features/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
 import '../../../../core/common/styles/get_text_style.dart';
 import '../../../../core/common/widgets/custom_bottom_app_bar.dart';
 import '../../../../core/common/widgets/custom_button.dart';
@@ -47,7 +46,14 @@ class EditProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         ontapBackButton: () {
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+
+            controller.getProfileDetails();
+
+          });
           Get.back();
+
         },
         actions: [
           Padding(
@@ -88,17 +94,40 @@ class EditProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Stack(
+                  Obx(() =>Stack(
                     children: [
                       CircleAvatar(
-                        backgroundImage: controller.profile?.data?.profileImage != null
-                            ? NetworkImage(controller.profile?.data?.profileImage)
-                            : AssetImage(ImagePath.profile),
-                        radius: getWidth(60),
+                        radius: getWidth(65),
+
+                        backgroundImage:editProfileController.profileImage.isNotEmpty?
+                        FileImage(File(editProfileController.profileImage.value)):
+                        initialImagePath.isNotEmpty
+                            ? NetworkImage(initialImagePath)
+                            : AssetImage(ImagePath.profile) as ImageProvider,
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: -5,
+                        child: IconButton(
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStatePropertyAll(
+                              const Color(0xFF0057B7),
+                            ),
+                          ),
+                          onPressed: () async {
+                            await editProfileController.getImage();
+                          },
+                          icon: const Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.white,
+                            size: 21,
+                          ),
+                        ),
                       ),
               
                     ],
-                  ),
+                  )),
+                  /*
                   SizedBox(height: getHeight(8),),
 
                   CustomTextButton(
@@ -110,7 +139,7 @@ class EditProfileScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontSize: getHeight(16),
                     color: Color(0xff003087),
-                  ),
+                  ),*/
                   SizedBox(height: getHeight(24),),
 
 
@@ -136,7 +165,7 @@ class EditProfileScreen extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: getHeight(16),),
-                  CustomTextAndTextFormField(text: "Email Address",controller: emailTEController,),
+                  CustomTextAndTextFormField(text: "Email Address",controller: emailTEController,readOnly: true,),
                   SizedBox(height: getHeight(16),),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,7 +200,7 @@ class EditProfileScreen extends StatelessWidget {
                     children: [
                       CustomText(text: "Verification status: ",fontSize: getWidth(16),color: Color(0xff262B2B),),
                       SizedBox(width: getWidth(4),),
-                      CustomText(text: "Verified ",fontSize: getWidth(16),color: Color(0xff2BCD31),),
+                      CustomText(text: verification == "true"?"Verified ":"Not Verified",fontSize: getWidth(16),color: Color(0xff2BCD31),),
                     ],
                   )
 
@@ -210,7 +239,10 @@ class EditProfileScreen extends StatelessWidget {
             HorizontalSpace(width: getWidth(16)),
             Expanded(
               child: CustomButton(
-                  onPressed: () {},
+                  onPressed: ()
+                  {
+                    editProfileController.updateProfile(fullName: fullNameTEController.text);
+                  },
                   child: CustomText(
                     text: "Save Changes",
                     fontWeight: FontWeight.bold,
@@ -226,7 +258,7 @@ class EditProfileScreen extends StatelessWidget {
 
 class CustomTextAndTextFormField extends StatelessWidget {
   const CustomTextAndTextFormField({
-    super.key, required this.text, required this.controller, this.validator,
+    super.key, required this.text, required this.controller, this.validator, this.readOnly,
 
   });
 
@@ -236,6 +268,7 @@ class CustomTextAndTextFormField extends StatelessWidget {
   final String text;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final bool? readOnly ;
 
 
   @override
@@ -252,6 +285,7 @@ class CustomTextAndTextFormField extends StatelessWidget {
         VerticalSpace(height: getHeight(10)),
         CustomTexFormField(
           controller: controller,
+          readOnly:readOnly?? false ,
 
 
           validator: validator),
