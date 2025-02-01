@@ -10,6 +10,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/chat_with_traveller/presentation/chat_with_traveller_screen.dart';
+import 'package:courierapp/features/profile/presentation/screens/others_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,13 +29,13 @@ class DeliveryDetailsScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TripDetailsTopBody(title: "Delivery Details"),
-              Column(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TripDetailsTopBody(title: "Delivery Details"),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+              child: Column(
                 children: [
                   Row(
                     children: [
@@ -94,21 +95,29 @@ class DeliveryDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              VerticalSpace(height: getHeight(20)),
-              Divider(
-                color: AppColors.grey,
+            ),
+            VerticalSpace(height: getHeight(20)),
+            Divider(
+              color: AppColors.grey,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => OthersProfileScreen());
+                },
+                child: BodyProfileCard(
+                    isVerified: true,
+                    profileImage: ImagePath.profile,
+                    profileName: "profileName",
+                    rattings: "5.00/6",
+                    suffixIcon: Icon(Icons.arrow_forward_ios)),
               ),
-              BodyProfileCard(
-                  isVerified: true,
-                  profileImage: ImagePath.profile,
-                  profileName: "profileName",
-                  rattings: "5.00/6",
-                  suffixIcon: Icon(Icons.arrow_forward_ios)),
-              Divider(
-                color: AppColors.grey,
-              ),
-            ],
-          ),
+            ),
+            Divider(
+              color: AppColors.grey,
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: CustomBottomAppBar(

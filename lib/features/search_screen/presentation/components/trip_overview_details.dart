@@ -5,10 +5,9 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
-import 'package:courierapp/features/profile/presentation/screens/traveller_information.dart';
+import 'package:courierapp/features/profile/presentation/screens/others_profile_screen.dart';
 import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TripOverviewDetails extends StatelessWidget {
@@ -25,7 +24,7 @@ class TripOverviewDetails extends StatelessWidget {
           GestureDetector(
             onTap: () {
               //TODO: Navigate to the Traveller Information page
-              Get.to(() => TravellerInformation());
+              Get.to(() => OthersProfileScreen());
             },
             child: BodyProfileCard(
               isVerified: true,
@@ -42,19 +41,19 @@ class TripOverviewDetails extends StatelessWidget {
           ),
           VerticalSpace(height: getHeight(10)),
           TripDetailsView(
-              tripTransport: "Buss",
-              availabileSpace: "12kg",
-              date: "14 Jan 2025",
-              tripAdvantate: [
-                "Will pickup the items from the sender's location.",
-                "Will deliver directly to recipient’s door."
-              ],
-              tripRules: [
-                "No perishable food items without proper packaging.",
-                "No fragile items unless securely packaged.",
-              ],
-              transportIcon: IconPath.directionsBus,
-              color: Colors.green),
+            tripTransport: "Buss",
+            availabileSpace: "12kg",
+            date: "14 Jan 2025",
+            tripAdvantate: [
+              "Will pickup the items from the sender's location.",
+              "Will deliver directly to recipient’s door."
+            ],
+            tripRules: [
+              "No perishable food items without proper packaging.",
+              "No fragile items unless securely packaged.",
+            ],
+            transportIcon: IconPath.directionsBus,
+          ),
           VerticalSpace(height: getHeight(10))
         ],
       ),

@@ -12,14 +12,14 @@ class TripDetailsView extends StatelessWidget {
       required this.availabileSpace,
       required this.tripRules,
       required this.transportIcon,
-      required this.color,
+
       required this.date,
       required this.tripAdvantate});
   final String transportIcon;
   final String tripTransport;
   final String availabileSpace;
   final String date;
-  final Color color;
+
   final List<String> tripRules;
   final List<String> tripAdvantate;
   @override

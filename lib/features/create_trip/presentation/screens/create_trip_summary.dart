@@ -44,7 +44,7 @@ class CreateTripSummary extends StatelessWidget {
                   "No fragile items unless securely packaged.",
                 ],
                 transportIcon: IconPath.directionsBus,
-                color: Colors.green),
+             ),
           )
         ],
       ),

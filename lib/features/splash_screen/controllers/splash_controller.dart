@@ -1,7 +1,4 @@
-import 'package:courierapp/core/services/Auth_service.dart';
-import 'package:courierapp/features/landing/presentation/screens/landing_screen.dart';
 import 'package:courierapp/features/splash_screen/presentation/screens/onboarding_screen_1.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
