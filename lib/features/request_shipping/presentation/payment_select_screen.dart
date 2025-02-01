@@ -3,6 +3,7 @@ import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
+import 'package:courierapp/core/common/widgets/show_payment_success_dialog.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
@@ -135,6 +136,11 @@ class PaymentSelectScreen extends StatelessWidget {
           primaryText: "Pay",
           onTap: () {
             // Get.to(() => PaymentMethodScreen());
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return ShowPaymentSuccessDialog();
+                });
           },
           secondaryWidget: Row(
             children: [

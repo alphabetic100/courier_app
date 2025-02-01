@@ -11,8 +11,8 @@ import 'package:courierapp/features/create_trip/presentation/screens/create_trip
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CreateTripScreen5 extends StatelessWidget {
-  const CreateTripScreen5({super.key});
+class SelectMaximumWeightScreen extends StatelessWidget {
+  const SelectMaximumWeightScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
