@@ -9,9 +9,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/common/widgets/progress_indicator.dart';
+
 class LoginController extends GetxController {
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passworadController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   RxBool rememberMe = false.obs;
 
   void toggleRememberMe() {
@@ -26,18 +28,19 @@ class LoginController extends GetxController {
         return status! < 500;
       },
     );
-    final Map<String, dynamic> requestbody = {
+    final Map<String, dynamic> requestBody = {
       "email": emailController.text.trim(),
-      "password": passworadController.text.trim(),
+      "password": passwordController.text.trim(),
       "fcmToken": "example_fcm_token"
     };
 
     try {
-      log(requestbody.toString());
+      showProgressIndicator();
+      log(requestBody.toString());
 
       final response = await dio.post(
         AppUrls.login,
-        data: requestbody,
+        data: requestBody,
       );
       log(response.statusCode.toString());
       log(response.toString());
@@ -47,23 +50,28 @@ class LoginController extends GetxController {
         final responseBody = response.data;
         final userName = responseBody["data"]["fullName"];
 
+
         successSnakbr(
           successMessage: "Logged in Successfully! Welcome back, $userName",
         );
 
-        Get.toNamed(AppRoute.landingScreen);
+        Get.offAllNamed(AppRoute.landingScreen);
         AuthService.saveToken(
             responseBody["data"]["accessToken"], responseBody["data"]["role"]);
         log(responseBody['data']["accessToken"]);
+        hideProgressIndicator();
       } else if (response.statusCode == 400) {
+        hideProgressIndicator();
         errorSnakbar(errorMessage: "Password incorrect");
       } else {
+        hideProgressIndicator();
         final errorMessage = response.data["message"];
         errorSnakbar(
             errorMessage:
                 errorMessage ?? "Something went wrong please try again");
       }
     } on DioException catch (e) {
+      hideProgressIndicator();
       log("something went wrong, error: $e");
       errorSnakbar(
           errorMessage: "Please check your internet connection and try again");
