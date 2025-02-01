@@ -6,7 +6,6 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
-import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:courierapp/features/profile/controller/profile_controller.dart';
 import 'package:courierapp/features/profile/presentation/components/profile_details_card.dart';
 import 'package:courierapp/features/profile/presentation/components/profile_trip_travel_box.dart';
@@ -15,19 +14,21 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/common/widgets/custom_button_widgets.dart';
+import '../../../landing/controller/landing_controller.dart';
 import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
   final LandingController landingController = Get.find<LandingController>();
-  final controller = Get.put(ProfileController());
+  final controller = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
+    controller.getProfileDetails();
     final profile = controller.profile?.data;
     return Scaffold(
       appBar: CustomAppBar(
         ontapBackButton: () {
-          landingController.changePage(0);
+         // landingController.changePage(0);
         },
         actions: [
           Padding(
@@ -216,7 +217,7 @@ class ProfileScreen extends StatelessWidget {
                                     'phoneNumber': profile?.phoneNumber ??
                                         '',
                                     "emailAddress": profile?.email ?? '',
-                                    "password":  '',
+                                    "password":  'Updated 23 days ago',
                                     "verification": profile?.isVerified.toString() ?? '',
                                   },
                                   curve: Curves.easeInOut);
