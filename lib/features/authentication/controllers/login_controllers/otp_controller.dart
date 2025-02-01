@@ -63,14 +63,16 @@ class OtpController extends GetxController {
     }
 
     try {
-      //showProgressIndicator();
+      showProgressIndicator();
       final response = await NetworkCaller()
           .postRequest(AppUrls.verifyOTP, body: requestBody);
       hideProgressIndicator();
       log(requestBody.toString());
       if (response.isSuccess) {
-      //  successSnakbr(successMessage: "OTP matched successfully");
-        Get.to(() => ResetPasswordScreen(email: email,));
+        //  successSnakbr(successMessage: "OTP matched successfully");
+        Get.to(() => ResetPasswordScreen(
+              email: email,
+            ));
       } else {
         errorSnakbar(
             errorMessage: response.errorMessage.isNotEmpty

@@ -39,7 +39,11 @@ class RequestShippingScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TripDetailsTopBody(title: "Request shipping"),
+            TripDetailsTopBody(
+              title: "Request shipping",
+              departingFrom: "32,C.nuñez de balboa, Madrid",
+              arrivingTo: "32,C.nuñez de balboa, Madrid",
+            ),
             VerticalSpace(height: getHeight(20)),
             Obx(() => ListView.builder(
                   shrinkWrap: true,

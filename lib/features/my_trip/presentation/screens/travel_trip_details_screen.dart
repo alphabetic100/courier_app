@@ -27,7 +27,11 @@ class TravelTripDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TripDetailsTopBody(title: "Trip Details"),
+            TripDetailsTopBody(
+              title: "Trip Details",
+              departingFrom: "32,C.nuñez de balboa, Madrid",
+              arrivingTo: "32,C.nuñez de balboa, Madrid",
+            ),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: getWidth(16),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:courierapp/core/common/widgets/error_snakbar.dart';
+import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/common/widgets/success_snakbar.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
@@ -18,7 +19,8 @@ class SingUpController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController forgotEmailController = TextEditingController();
   void toggleTermsAndConditions() {
     termsAndConditions.value = !termsAndConditions.value;
@@ -49,6 +51,7 @@ class SingUpController extends GetxController {
       },
     );
     try {
+      showProgressIndicator();
       final bodyDataString = jsonEncode(bodyData);
 
       final imageFile1 = await dio.MultipartFile.fromFile(
@@ -97,6 +100,8 @@ class SingUpController extends GetxController {
       log('Error: $e');
       errorSnakbar(
           errorMessage: "Please check your internet connection and try again");
+    } finally {
+      hideProgressIndicator();
     }
   }
 }

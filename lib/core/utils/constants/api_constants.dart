@@ -8,5 +8,9 @@ class AppUrls {
   static const String newPassword = '$_baseUrl/auth/change-password';
   static const String signUp = '$_baseUrl/users/register';
   static const String getProfile = '$_baseUrl/users/me';
+
+  static const String createTransport = "$_baseUrl/transports";
+
   static const String updateProfile = '$_baseUrl/users/update-profile';
+
 }

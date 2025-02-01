@@ -12,8 +12,13 @@ class TripDetailsTopBody extends StatelessWidget {
   const TripDetailsTopBody({
     super.key,
     required this.title,
+    required this.departingFrom,
+    required this.arrivingTo,
   });
+
   final String title;
+  final String departingFrom;
+  final String arrivingTo;
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +69,12 @@ class TripDetailsTopBody extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(
-                          text: "32,C.nuñez de balboa, Madrid",
+                          text: departingFrom,
                           color: AppColors.black,
                           fontWeight: FontWeight.bold,
                         ),
                         CustomText(
-                          text: "3, Rue des Invalides, Paris",
+                          text: arrivingTo,
                           color: AppColors.black,
                           fontWeight: FontWeight.bold,
                         )

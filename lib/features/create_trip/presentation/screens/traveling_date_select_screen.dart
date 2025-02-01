@@ -3,6 +3,7 @@ import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
+import 'package:courierapp/core/common/widgets/error_snakbar.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -26,42 +27,50 @@ class TravelingDateSelectScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CreateTripTopBody(title: "Create a Trip"),
-            CustomText(
-              text: "When are you traveling?",
-              color: AppColors.black,
-              fontSize: getWidth(18),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CreateTripTopBody(title: "Create a Trip"),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                  text: "When are you traveling?",
+                  color: AppColors.black,
+                  fontSize: getWidth(18),
+                ),
+                VerticalSpace(height: getHeight(16)),
+                CustomTexFormField(
+                  controller: tripController.dateTimeController,
+                  onTap: () {
+                    tripController.selectDate(context);
+                  },
+                  readOnly: true,
+                  hintText: "dd-mm-yy",
+                  suffixIcon: Icon(
+                    Icons.calendar_month,
+                    color: AppColors.grey,
+                  ),
+                )
+              ],
             ),
-            VerticalSpace(height: getHeight(16)),
-            CustomTexFormField(
-              controller: tripController.dateTimeController,
-              onTap: () {
-                tripController.selectDate(context);
-              },
-              readOnly: true,
-              hintText: "dd-mm-yy",
-              suffixIcon: Icon(
-                Icons.calendar_month,
-                color: AppColors.grey,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
       bottomNavigationBar: CustomBottomAppBar(
           isPrimaryButton: true,
           onTap: () {
-            Get.to(
-              () => SelectDepartingFromScreen(),
-              transition: Transition.rightToLeftWithFade,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOut,
-            );
+            tripController.dateTimeController.text.isNotEmpty
+                ? Get.to(
+                    () => SelectDepartingFromScreen(),
+                    transition: Transition.rightToLeftWithFade,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  )
+                : errorSnakbar(
+                    errorMessage: "Please select your traveling date");
           }),
     );
   }

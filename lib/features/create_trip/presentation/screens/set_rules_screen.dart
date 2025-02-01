@@ -120,7 +120,9 @@ class SetRulesScreen extends StatelessWidget {
             Expanded(
                 child: CustomButton(
                     isPrimary: false,
-                    onPressed: () {},
+                    onPressed: () {
+                      createTripController.addrule();
+                    },
                     child: CustomText(
                       text: "Set Another Rule",
                       color: AppColors.bodyTextColor,

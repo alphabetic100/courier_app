@@ -11,6 +11,9 @@ import 'package:courierapp/features/profile/controller/edit_profile_controller.d
 import 'package:courierapp/features/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+
+
 import '../../../../core/common/styles/get_text_style.dart';
 import '../../../../core/common/widgets/custom_bottom_app_bar.dart';
 import '../../../../core/common/widgets/custom_button.dart';
@@ -21,12 +24,10 @@ import '../../../../core/common/widgets/phone_number_text_field.dart';
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final editProfileController = Get.put(EditProfileController());
     final controller = Get.put(ProfileController());
-
 
     final Map<String, dynamic> arguments = Get.arguments;
 
@@ -37,11 +38,14 @@ class EditProfileScreen extends StatelessWidget {
     final String password = arguments["password"] ?? 'Enter your phone';
     final String verification = arguments["verification"] ?? 'Enter your phone';
 
-    TextEditingController fullNameTEController = TextEditingController(text: fullName);
-    TextEditingController emailTEController = TextEditingController(text: emailAddress );
-    TextEditingController passwordTEController = TextEditingController(text: password);
-    TextEditingController phoneNumberTEController = TextEditingController(text: phoneNumber);
-
+    TextEditingController fullNameTEController =
+        TextEditingController(text: fullName);
+    TextEditingController emailTEController =
+        TextEditingController(text: emailAddress);
+    TextEditingController passwordTEController =
+        TextEditingController(text: password);
+    TextEditingController phoneNumberTEController =
+        TextEditingController(text: phoneNumber);
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -84,19 +88,24 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                   ),
                   VerticalSpace(height: getHeight(20)),
-                  Divider(height: getHeight(1),color: Color(0xffCCD9D6),),
+                  Divider(
+                    height: getHeight(1),
+                    color: Color(0xffCCD9D6),
+                  ),
                 ],
               ),
             ),
             VerticalSpace(height: getHeight(20)),
             Padding(
-              padding:  EdgeInsets.only(left: getWidth(16),right: getHeight(16)),
+              padding:
+                  EdgeInsets.only(left: getWidth(16), right: getHeight(16)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Obx(() =>Stack(
                     children: [
                       CircleAvatar(
+
                         radius: getWidth(65),
 
                         backgroundImage:editProfileController.profileImage.isNotEmpty?
@@ -123,22 +132,35 @@ class EditProfileScreen extends StatelessWidget {
                             size: 21,
                           ),
                         ),
+
                       ),
-              
                     ],
+
                   )),
                   /*
                   SizedBox(height: getHeight(8),),
 
+
                   CustomTextButton(
                     isUnderline: true,
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     text: "Change profile",
                     fontWeight: FontWeight.w600,
                     fontSize: getHeight(16),
                     color: Color(0xff003087),
+
+                  ),
+                  SizedBox(
+                    height: getHeight(24),
+                  ),
+                  CustomTextAndTextFormField(
+                    text: "Full Name",
+                    controller: fullNameTEController,
+                  ),
+                  SizedBox(
+                    height: getHeight(16),
+                  ),
+
                   ),*/
                   SizedBox(height: getHeight(24),),
 
@@ -146,6 +168,7 @@ class EditProfileScreen extends StatelessWidget {
 
                   CustomTextAndTextFormField(text: "Full Name",controller: fullNameTEController,),
                   SizedBox(height: getHeight(16),),
+
 
                   Text(
                     "Phone Number",
@@ -164,9 +187,22 @@ class EditProfileScreen extends StatelessWidget {
                       //     value, singUpController.phoneNumberController.text);
                     },
                   ),
+
+                  SizedBox(
+                    height: getHeight(16),
+                  ),
+                  CustomTextAndTextFormField(
+                    text: "Email Address",
+                    controller: emailTEController,
+                  ),
+                  SizedBox(
+                    height: getHeight(16),
+                  ),
+
                   SizedBox(height: getHeight(16),),
                   CustomTextAndTextFormField(text: "Email Address",controller: emailTEController,readOnly: true,),
                   SizedBox(height: getHeight(16),),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -178,9 +214,7 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                       CustomTextButton(
                         isUnderline: true,
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         text: "Change",
                         fontWeight: FontWeight.w600,
                         fontSize: getHeight(14),
@@ -190,22 +224,33 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                   VerticalSpace(height: getHeight(10)),
                   CustomTexFormField(
-                      controller: passwordTEController,
-
-
-                      ),
-                  SizedBox(height: getHeight(16),),
-
+                    controller: passwordTEController,
+                  ),
+                  SizedBox(
+                    height: getHeight(16),
+                  ),
                   Row(
                     children: [
+                     CustomText(
+                        text: "Verification status: ",
+                        fontSize: getWidth(16),
+                        color: Color(0xff262B2B),
+                      ),
+                      SizedBox(
+                        width: getWidth(4),
+                      ),
+                      CustomText(
+                        text: "Verified ",
+                        fontSize: getWidth(16),
+                        color: Color(0xff2BCD31),
+                      ),
+
                       CustomText(text: "Verification status: ",fontSize: getWidth(16),color: Color(0xff262B2B),),
                       SizedBox(width: getWidth(4),),
                       CustomText(text: verification == "true"?"Verified ":"Not Verified",fontSize: getWidth(16),color: Color(0xff2BCD31),),
+
                     ],
                   )
-
-
-              
                 ],
               ),
             )
@@ -258,18 +303,16 @@ class EditProfileScreen extends StatelessWidget {
 
 class CustomTextAndTextFormField extends StatelessWidget {
   const CustomTextAndTextFormField({
+
     super.key, required this.text, required this.controller, this.validator, this.readOnly,
 
+
   });
-
-
-
 
   final String text;
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final bool? readOnly ;
-
 
   @override
   Widget build(BuildContext context) {
@@ -283,12 +326,14 @@ class CustomTextAndTextFormField extends StatelessWidget {
           color: AppColors.black,
         ),
         VerticalSpace(height: getHeight(10)),
+
         CustomTexFormField(
           controller: controller,
           readOnly:readOnly?? false ,
 
 
           validator: validator),
+
       ],
     );
   }

@@ -9,11 +9,13 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
+import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CreateTripSummary extends StatelessWidget {
-  const CreateTripSummary({super.key});
-
+  CreateTripSummary({super.key});
+  final CreateTripController tripController = Get.find<CreateTripController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,23 +30,27 @@ class CreateTripSummary extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TripDetailsTopBody(title: "Create a Trip"),
+          TripDetailsTopBody(
+            title: "Create a Trip",
+            departingFrom: tripController.selectDepartingController.text,
+            arrivingTo: tripController.selectArrivingController.text,
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
             child: TripDetailsView(
-                tripTransport: "Buss",
-                availabileSpace: "12kg",
-                date: "14 Jan 2025",
-                tripAdvantate: [
-                  "Will pickup the items from the sender's location.",
-                  "Will deliver directly to recipient’s door."
-                ],
-                tripRules: [
-                  "No perishable food items without proper packaging.",
-                  "No fragile items unless securely packaged.",
-                ],
-                transportIcon: IconPath.directionsBus,
-             ),
+              tripTransport: tripController.selectedTransportType,
+              availabileSpace: tripController.itemWeight.toString(),
+              date: tripController.dateTimeController.text,
+              tripAdvantate: [
+                "Will pickup the items from the sender's location.",
+                "Will deliver directly to recipient’s door."
+              ],
+              tripRules: [
+                "No perishable food items without proper packaging.",
+                "No fragile items unless securely packaged.",
+              ],
+              transportIcon: tripController.selectedIconPath,
+            ),
           )
         ],
       ),
@@ -75,7 +81,9 @@ class CreateTripSummary extends StatelessWidget {
             HorizontalSpace(width: getWidth(16)),
             Expanded(
               child: CustomButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    tripController.createTrip();
+                  },
                   child: CustomText(
                     text: "Create Trip",
                     fontWeight: FontWeight.bold,
