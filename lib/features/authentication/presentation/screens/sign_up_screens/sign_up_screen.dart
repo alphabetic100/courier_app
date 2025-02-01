@@ -83,11 +83,13 @@ class SignUpScreen extends StatelessWidget {
                     PhoneNumberTextField(
                       hintText: "Enter your phone number",
                       controller: singUpController.phoneNumberController,
+                      onChange: (value) {
+                        // Handle changes if needed
+                      },
+                      // Optional custom validator
                       validator: (value) {
+                        // Your custom validation logic
                         return null;
-
-                        // return AppHelperFunctions.phoneNumberValidator(
-                        //     value, singUpController.phoneNumberController.text);
                       },
                     ),
                     VerticalSpace(height: getHeight(16)),
