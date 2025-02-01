@@ -9,7 +9,6 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/controllers/login_controllers/login_controller.dart';
-import 'package:courierapp/features/authentication/presentation/screens/log_in_screens/forget_password_screen.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,7 +50,8 @@ class LoginScreen extends StatelessWidget {
                     VerticalSpace(height: getHeight(16)),
                     Text(
                       "Deliver smarter, faster, and hassle-free",
-                      style: getTextStyleMsrt(color: Color(0xFF677674),fontSize: getWidth(16)),
+                      style: getTextStyleMsrt(
+                          color: Color(0xFF677674), fontSize: getWidth(16)),
                     ),
                     VerticalSpace(height: getHeight(40)),
                     Text(

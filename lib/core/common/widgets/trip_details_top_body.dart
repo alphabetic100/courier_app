@@ -18,10 +18,9 @@ class TripDetailsTopBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-
       children: [
         Container(
-          color: Color(0xffFAFAFC),
+          color: Color(0xFFFAFAFC),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,13 +35,17 @@ class TripDetailsTopBody extends StatelessWidget {
                 ),
               ),
               VerticalSpace(height: getHeight(20)),
-              Container(height: getHeight(1),width: double.infinity,color: Color(0xffCCD9D6),)
+              Container(
+                height: getHeight(1),
+                width: double.infinity,
+                color: Color(0xffCCD9D6),
+              )
             ],
           ),
         ),
         VerticalSpace(height: getHeight(20)),
         Padding(
-          padding: EdgeInsets.only(left: getWidth(16),right: getWidth(16)),
+          padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
           child: SizedBox(
             width: AppSizes.width,
             child: SizedBox(
@@ -109,7 +112,11 @@ class TripDetailsTopBody extends StatelessWidget {
           ),
         ),
         VerticalSpace(height: getHeight(20)),
-        Container(height: getHeight(1),width: double.infinity,color: Color(0xffCCD9D6),),
+        Container(
+          height: getHeight(1),
+          width: double.infinity,
+          color: Color(0xffCCD9D6),
+        ),
         VerticalSpace(height: getHeight(20)),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
@@ -127,8 +134,12 @@ class TripDetailsTopBody extends StatelessWidget {
           ),
         ),
         VerticalSpace(height: getHeight(20)),
-        Container(height: getHeight(1),width: double.infinity,color: Color(0xffCCD9D6),),
-
+        Container(
+          height: getHeight(1),
+          width: double.infinity,
+          color: Color(0xffCCD9D6),
+        ),
+        VerticalSpace(height: getHeight(10))
       ],
     );
   }

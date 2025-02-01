@@ -3,8 +3,6 @@ import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
-import 'package:courierapp/core/common/widgets/payment_setup_card.dart';
-import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
@@ -39,7 +37,6 @@ class PaymentSelectScreen extends StatelessWidget {
         ],
       ),
       body: Column(
-
         children: [
           Container(
             color: Color(0xffFAFAFC),
@@ -57,69 +54,89 @@ class PaymentSelectScreen extends StatelessWidget {
                   ),
                 ),
                 VerticalSpace(height: getHeight(20)),
-                Container(height: getHeight(1),width: double.infinity,color: Color(0xffCCD9D6),),
+                Container(
+                  height: getHeight(1),
+                  width: double.infinity,
+                  color: Color(0xffCCD9D6),
+                ),
               ],
             ),
           ),
-
-          SizedBox(height: getHeight(8),),
+          SizedBox(
+            height: getHeight(8),
+          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                CustomTextAndTextFormField(text: "Card Name",hintText: "Enter your card name",),
-                SizedBox(height: getHeight(16),),
-                CustomTextAndTextFormField(text: "Card Number",hintText: "Enter your card number",),
-                SizedBox(height: getHeight(16),),
+                CustomTextAndTextFormField(
+                  text: "Card Name",
+                  hintText: "Enter your card name",
+                ),
+                SizedBox(
+                  height: getHeight(16),
+                ),
+                CustomTextAndTextFormField(
+                  text: "Card Number",
+                  hintText: "Enter your card number",
+                ),
+                SizedBox(
+                  height: getHeight(16),
+                ),
                 Row(
                   children: [
                     Expanded(
-                      child: CustomTextAndTextFormField(text: "Expiry Date",hintText: "MM/YY",),
+                      child: CustomTextAndTextFormField(
+                        text: "Expiry Date",
+                        hintText: "MM/YY",
+                      ),
                     ),
                     HorizontalSpace(width: getWidth(16)),
                     Expanded(
-                      child: CustomTextAndTextFormField(text: "CVV",hintText: "CVV",),
+                      child: CustomTextAndTextFormField(
+                        text: "CVV",
+                        hintText: "CVV",
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(height: getHeight(16),),
+                SizedBox(
+                  height: getHeight(16),
+                ),
                 Obx(() => Row(
-                  children: [
-                    Checkbox(
-                      fillColor: MaterialStateProperty.all(Color(0xff677674)),
-                      checkColor: Colors.white,
-                      value: paymentSetupController.isChecked.value,
-                      onChanged: (newValue) {
-                        paymentSetupController.toggleCheckbox();
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2), // Optional: if you want rounded corners
-                        side: BorderSide(color: Colors.white, width: 2), // Sets the border color and width
-                      ),
-                    ),
-
-                    GestureDetector(
-                      onTap: () => paymentSetupController.toggleCheckbox(),
-                      child: Text("Save this card for future use",
-                          style: TextStyle(fontSize: 16)),
-                    )
-                  ],
-                )),
+                      children: [
+                        Checkbox(
+                          fillColor: WidgetStateProperty.all(Color(0xff677674)),
+                          checkColor: Colors.white,
+                          value: paymentSetupController.isChecked.value,
+                          onChanged: (newValue) {
+                            paymentSetupController.toggleCheckbox();
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                2), // Optional: if you want rounded corners
+                            side: BorderSide(
+                                color: Colors.white,
+                                width: 2), // Sets the border color and width
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () => paymentSetupController.toggleCheckbox(),
+                          child: Text("Save this card for future use",
+                              style: TextStyle(fontSize: 16)),
+                        )
+                      ],
+                    )),
               ],
             ),
           ),
-
-
-
         ],
       ),
       bottomNavigationBar: CustomBottomAppBar(
-        primaryText: "Pay",
+          primaryText: "Pay",
           onTap: () {
-            Get.to(()=>PaymentMethodScreen());
-
+            Get.to(() => PaymentMethodScreen());
           },
-
           secondaryWidget: Row(
             children: [
               Text("\$",
@@ -144,9 +161,12 @@ class PaymentSelectScreen extends StatelessWidget {
 
 class CustomTextAndTextFormField extends StatelessWidget {
   const CustomTextAndTextFormField({
-    super.key, required this.text, required this.hintText, this.controller,
+    super.key,
+    required this.text,
+    required this.hintText,
+    this.controller,
   });
-  final String text,hintText;
+  final String text, hintText;
   final TextEditingController? controller;
 
   @override
@@ -154,9 +174,19 @@ class CustomTextAndTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: text,color: Color(0xff262B2B),fontWeight: FontWeight.bold,fontSize: getWidth(16),),
-        SizedBox(height: getHeight(8),),
-        CustomTexFormField(hintText: hintText,controller: controller,),
+        CustomText(
+          text: text,
+          color: Color(0xff262B2B),
+          fontWeight: FontWeight.bold,
+          fontSize: getWidth(16),
+        ),
+        SizedBox(
+          height: getHeight(8),
+        ),
+        CustomTexFormField(
+          hintText: hintText,
+          controller: controller,
+        ),
       ],
     );
   }
