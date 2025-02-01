@@ -6,8 +6,11 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 class PhoneNumberTextField extends StatefulWidget {
   const PhoneNumberTextField({
     super.key,
-    required this.hintText,
-    required this.controller,
+
+
+   this.hintText,
+    this.controller,
+
     this.validator,
     this.radius = 4.0,
     this.onChange,
@@ -15,8 +18,10 @@ class PhoneNumberTextField extends StatefulWidget {
     this.readOnly = false,
   });
 
-  final String hintText;
-  final TextEditingController controller;
+
+  final String? hintText;
+  final TextEditingController? controller;
+
   final String? Function(String?)? validator;
   final double radius;
   final Function(String)? onChange;

@@ -12,10 +12,16 @@ import 'package:courierapp/features/authentication/controllers/signup_controller
 import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
 import 'package:get/get.dart';
 
+import '../../features/profile/controller/profile_controller.dart';
+
 class ControllerBinder extends Bindings {
   @override
   void dependencies() {
     // LoginController
+    Get.lazyPut<ProfileController>(
+          () => ProfileController(),
+      fenix: true,
+    );
     Get.lazyPut<LoginController>(
       () => LoginController(),
       fenix: true,
@@ -81,10 +87,12 @@ class ControllerBinder extends Bindings {
       fenix: true,
     );
 
+
     //My trip controller
     Get.lazyPut<MyTripController>(
       () => MyTripController(),
       fenix: true,
     );
+
   }
 }

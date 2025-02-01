@@ -6,17 +6,17 @@ class SplashController extends GetxController {
     Future.delayed(
       const Duration(milliseconds: 1500),
       () {
-        // if (AuthService.hasToken()) {
-        //   Get.offAll(() => LandingScreen());
-        // } else {
-        //   Get.offAll(
-        //     () => const OnboardingScreen1(),
-        //     transition: Transition.rightToLeftWithFade,
-        //     duration: Duration(milliseconds: 400),
-        //     curve: Curves.easeOut,
-        //   );
-        // }
-        Get.offAll(() => OnboardingScreen1());
+        if (AuthService.hasToken()) {
+          Get.offAll(() => LandingScreen());
+        } else {
+          Get.offAll(
+            () => const OnboardingScreen1(),
+            transition: Transition.rightToLeftWithFade,
+            duration: Duration(milliseconds: 400),
+            curve: Curves.easeOut,
+          );
+        }
+       // Get.offAll(() => OnboardingScreen1());
       },
     );
   }

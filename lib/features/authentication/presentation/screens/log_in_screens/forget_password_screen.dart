@@ -12,7 +12,8 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
-  ForgetPasswordScreen({super.key});
+  final String email;
+  ForgetPasswordScreen({super.key, required this.email});
   final OtpController controller = OtpController();
   @override
   Widget build(BuildContext context) {
@@ -78,7 +79,8 @@ class ForgetPasswordScreen extends StatelessWidget {
             Spacer(),
             CustomButton(
                 onPressed: () {
-                  Get.to(() => ResetPasswordScreen());
+                  controller.verifyOTP(email);
+
                 },
                 child: CustomText(
                     text: "Next",

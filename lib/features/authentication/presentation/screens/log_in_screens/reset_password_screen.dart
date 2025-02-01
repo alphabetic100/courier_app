@@ -9,13 +9,17 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/login_controllers/reset_password_controller.dart';
 import 'login_screen.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
-  ResetPasswordScreen({super.key});
-  final TextEditingController newPasswordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final String email;
+  ResetPasswordScreen({super.key, required this.email});
+
+
+  final controller = Get.put(NewPasswordController());
+  final GlobalKey<FormState> _resetPasswordFormKey =
+  GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,33 +49,66 @@ class ResetPasswordScreen extends StatelessWidget {
                   fontWeight: FontWeight.w400),
             ),
             VerticalSpace(height: getHeight(20)),
-            CustomText(
-              text: "New Password",
-              fontSize: getWidth(14),
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
+            Form(
+              key: _resetPasswordFormKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    text: "New Password",
+                    fontSize: getWidth(14),
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  ),
+                  VerticalSpace(height: getHeight(10)),
+                  CustomTexFormField(
+                      controller: controller.passwordTEController,
+                      isPassword: true,
+                      hintText: "Enter your new password",
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Password is required";
+                      }
+                      if (value.length < 6) {
+                        return "Password must be at least 6 characters long";
+                      }
+                      return null;
+                    },),
+                  VerticalSpace(height: getHeight(20)),
+                  CustomText(
+                    text: "Confirm Password",
+                    fontSize: getWidth(14),
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  ),
+                ],
+              ),
             ),
             VerticalSpace(height: getHeight(10)),
             CustomTexFormField(
-                controller: newPasswordController,
+                controller: controller.confirmPasswordTEController,
                 isPassword: true,
-                hintText: "Enter your new password"),
-            VerticalSpace(height: getHeight(20)),
-            CustomText(
-              text: "Confirm Password",
-              fontSize: getWidth(14),
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
+                hintText: "Confirm your new password",
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Confirm Password is required";
+                }
+                if (value != controller.passwordTEController.text) {
+                  return "Passwords do not match";
+                }
+                return null;
+              },
             ),
-            VerticalSpace(height: getHeight(10)),
-            CustomTexFormField(
-                controller: confirmPasswordController,
-                isPassword: true,
-                hintText: "Confirm your new password"),
             Spacer(),
             CustomButton(
                 onPressed: () {
-                  Get.offAll(() => LoginScreen());
+                  if(_resetPasswordFormKey.currentState!.validate()){
+                    controller.createNewPassword(email);
+
+                  }
+
+
+                  //Get.offAll(() => LoginScreen());
                 },
                 child: CustomText(
                     text: "Next",

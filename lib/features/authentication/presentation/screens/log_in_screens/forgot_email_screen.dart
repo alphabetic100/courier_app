@@ -8,12 +8,13 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../core/common/widgets/custom_text_form_field.dart';
+import '../../../controllers/login_controllers/forget_email_controller.dart';
 import '../../../controllers/signup_controllers/sing_up_controller.dart';
 import 'forget_password_screen.dart';
 
 class ForgetEmailScreen extends StatelessWidget {
   ForgetEmailScreen({super.key});
-  final SingUpController singUpController = Get.find<SingUpController>();
+  final forgetEmailController = Get.put(ForgetEmailController());
   final _forgetEmailFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class ForgetEmailScreen extends StatelessWidget {
                   key: _forgetEmailFormKey,
                   child: CustomTexFormField(
 
-                    controller: singUpController.forgotEmailController,
+                    controller: forgetEmailController.forgotEmailTEController,
                     hintText: "Enter your email address",
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -67,9 +68,14 @@ class ForgetEmailScreen extends StatelessWidget {
                 ),
                 Spacer(),
                 CustomButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if(_forgetEmailFormKey.currentState!.validate()){
-                        Get.to(() => ForgetPasswordScreen());
+                        final isEmailSent = await forgetEmailController.forgetEmail();
+                        if(isEmailSent){
+                          Get.to(() => ForgetPasswordScreen(email: forgetEmailController.forgotEmailTEController.text,));
+
+                        }
+
                       }
 
                     },

@@ -75,8 +75,8 @@ class AppRoute {
     //              Auth Screens
     //Login Screens
     GetPage(name: loginScreen, page: () => LoginScreen()),
-    GetPage(name: forgetPassword, page: () => ForgetPasswordScreen()),
-    GetPage(name: createNewPassword, page: () => ResetPasswordScreen()),
+    //GetPage(name: forgetPassword, page: () => ForgetPasswordScreen()),
+    //GetPage(name: createNewPassword, page: () => ResetPasswordScreen()),
     //Signup Screens
     GetPage(name: signUpScreen, page: () => SignUpScreen()),
     GetPage(

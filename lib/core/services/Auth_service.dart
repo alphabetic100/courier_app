@@ -1,6 +1,10 @@
 
 import 'dart:developer';
+import 'package:get/get.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../routes/app_routes.dart';
 
 class AuthService {
   static const String _tokenKey = 'token';
@@ -54,7 +58,7 @@ class AuthService {
 
   // Navigate to the login screen (e.g., after logout or token expiry)
   static Future<void> goToLogin() async {
-    // Get.offAllNamed('/userSelection');
+    Get.offAllNamed(AppRoute.loginScreen);
   }
 
   // Getter for token
