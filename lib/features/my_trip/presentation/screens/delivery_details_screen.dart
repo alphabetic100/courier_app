@@ -9,7 +9,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
-import 'package:courierapp/features/chat_with_traveller/presentation/chat_with_traveller_screen.dart';
+import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
 import 'package:courierapp/features/profile/presentation/screens/others_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +129,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
-                    Get.to(() => ChatWithTravellerScreen());
+                    Get.to(() => ChatInboxScreen());
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

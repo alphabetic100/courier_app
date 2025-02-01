@@ -6,7 +6,7 @@ import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/features/chat_with_traveller/presentation/chat_with_traveller_screen.dart';
+import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
 import 'package:courierapp/features/request_shipping/presentation/request_shipping_screen.dart';
 import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
 import 'package:courierapp/features/search_screen/presentation/components/trip_overview_details.dart';
@@ -37,7 +37,7 @@ class TripOverviewScreen extends StatelessWidget {
 
           //Trip Overview Details
           Padding(
-            padding:  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+            padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
             child: TripOverviewDetails(),
           ),
         ],
@@ -52,7 +52,7 @@ class TripOverviewScreen extends StatelessWidget {
             CustomButton(
                 isPrimary: false,
                 onPressed: () {
-                  Get.to(() => ChatWithTravellerScreen());
+                  Get.to(() => ChatInboxScreen());
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
