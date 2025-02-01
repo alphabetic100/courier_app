@@ -1,9 +1,7 @@
 import 'package:courierapp/features/landing/presentation/screens/landing_screen.dart';
 import 'package:courierapp/features/search_screen/presentation/screens/search_result_screen.dart';
 import 'package:courierapp/features/search_screen/presentation/screens/search_screen.dart';
-import 'package:courierapp/features/authentication/presentation/screens/log_in_screens/forget_password_screen.dart';
 import 'package:courierapp/features/authentication/presentation/screens/log_in_screens/login_screen.dart';
-import 'package:courierapp/features/authentication/presentation/screens/log_in_screens/reset_password_screen.dart';
 import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/identity_verification_screen1.dart';
 import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/identity_verification_screen2.dart';
 import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/identity_verification_screen3.dart';

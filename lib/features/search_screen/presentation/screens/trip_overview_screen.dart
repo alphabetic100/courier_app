@@ -33,7 +33,11 @@ class TripOverviewScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TripDetailsTopBody(title: "Trip Overview"),
+          TripDetailsTopBody(
+            title: "Trip Overview",
+            departingFrom: "32,C.nuñez de balboa, Madrid",
+            arrivingTo: "32,C.nuñez de balboa, Madrid",
+          ),
 
           //Trip Overview Details
           Padding(

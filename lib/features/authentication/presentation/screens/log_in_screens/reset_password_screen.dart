@@ -16,10 +16,8 @@ class ResetPasswordScreen extends StatelessWidget {
   final String email;
   ResetPasswordScreen({super.key, required this.email});
 
-
   final controller = Get.put(NewPasswordController());
-  final GlobalKey<FormState> _resetPasswordFormKey =
-  GlobalKey<FormState>();
+  final GlobalKey<FormState> _resetPasswordFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +60,9 @@ class ResetPasswordScreen extends StatelessWidget {
                   ),
                   VerticalSpace(height: getHeight(10)),
                   CustomTexFormField(
-                      controller: controller.passwordTEController,
-                      isPassword: true,
-                      hintText: "Enter your new password",
+                    controller: controller.passwordTEController,
+                    isPassword: true,
+                    hintText: "Enter your new password",
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Password is required";
@@ -73,7 +71,8 @@ class ResetPasswordScreen extends StatelessWidget {
                         return "Password must be at least 6 characters long";
                       }
                       return null;
-                    },),
+                    },
+                  ),
                   VerticalSpace(height: getHeight(20)),
                   CustomText(
                     text: "Confirm Password",
@@ -86,9 +85,9 @@ class ResetPasswordScreen extends StatelessWidget {
             ),
             VerticalSpace(height: getHeight(10)),
             CustomTexFormField(
-                controller: controller.confirmPasswordTEController,
-                isPassword: true,
-                hintText: "Confirm your new password",
+              controller: controller.confirmPasswordTEController,
+              isPassword: true,
+              hintText: "Confirm your new password",
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Confirm Password is required";
@@ -102,11 +101,9 @@ class ResetPasswordScreen extends StatelessWidget {
             Spacer(),
             CustomButton(
                 onPressed: () {
-                  if(_resetPasswordFormKey.currentState!.validate()){
+                  if (_resetPasswordFormKey.currentState!.validate()) {
                     controller.createNewPassword(email);
-
                   }
-
 
                   //Get.offAll(() => LoginScreen());
                 },

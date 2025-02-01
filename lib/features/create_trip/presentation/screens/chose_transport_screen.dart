@@ -2,11 +2,11 @@ import 'package:courierapp/core/common/widgets/create_trip_top_body.dart';
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/common/widgets/error_snakbar.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/presentation/components/select_identity_card.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
 import 'package:courierapp/features/create_trip/presentation/screens/car_number_screen.dart';
@@ -18,13 +18,7 @@ class ChoseTransportScreen extends StatelessWidget {
   ChoseTransportScreen({super.key});
   final CreateTripController tripController = Get.find<CreateTripController>();
   final LandingController landingController = Get.find<LandingController>();
-  final List<String> titles = ["Car", "Train", "Buss", "Airplane"];
-  final List<String> iconPaths = [
-    IconPath.car,
-    IconPath.train,
-    IconPath.directionsBus,
-    IconPath.plane
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,27 +62,33 @@ class ChoseTransportScreen extends StatelessWidget {
                                 EdgeInsets.symmetric(vertical: getHeight(10)),
                             child: GestureDetector(
                                 onTap: () {
-                                  tripController.selectedIndex.value = index;
+                                  tripController.selectTransportType(index);
                                 },
                                 child: Obx(
                                   () => SelectIdentityCard(
                                       isSelected:
                                           tripController.selectedIndex.value ==
                                               index,
-                                      iconPath: iconPaths[index],
-                                      title: titles[index]),
+                                      iconPath: tripController.iconPaths[index],
+                                      title: tripController.titles[index]),
                                 )),
                           );
                         }),
                     Spacer(),
                     CustomButton(
                         onPressed: () {
-                          Get.to(
-                            () => CarNumberScreen(),
-                            transition: Transition.rightToLeftWithFade,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeOut,
-                          );
+                          if (tripController.selectedIndex.value < 4) {
+                            Get.to(
+                              () => CarNumberScreen(),
+                              transition: Transition.rightToLeftWithFade,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeOut,
+                            );
+                          } else {
+                            errorSnakbar(
+                                errorMessage:
+                                    "Please select your transport type");
+                          }
                         },
                         child: CustomText(
                           text: "Next",
