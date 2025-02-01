@@ -11,6 +11,7 @@ class CustomButton extends StatelessWidget {
     required this.child,
     this.padding,
     this.color,
+    this.radious,
   });
   final bool isPrimary;
   final VoidCallback onPressed;
@@ -19,6 +20,7 @@ class CustomButton extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? padding;
   final Color? color;
+  final double? radious;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,7 +32,7 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: color ??
               (isPrimary ? Theme.of(context).primaryColor : AppColors.white),
-          borderRadius: BorderRadius.circular(3),
+          borderRadius: BorderRadius.circular(radious ?? 3),
           border: Border.all(
             color:
                 isPrimary ? Theme.of(context).primaryColor : Color(0xFFCCD9D6),
