@@ -36,6 +36,7 @@ class TravelTripDetailScreen extends StatelessWidget {
                 children: [
                   TripDetailsView(
                       tripTransport: "Bus",
+                      carNumber: "DL-88372",
                       availabileSpace: "5kg",
                       tripRules: [
                         "No perishable food items without proper packaging.",

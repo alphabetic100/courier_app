@@ -12,14 +12,14 @@ class TripDetailsView extends StatelessWidget {
       required this.availabileSpace,
       required this.tripRules,
       required this.transportIcon,
-
       required this.date,
-      required this.tripAdvantate});
+      required this.tripAdvantate,
+      this.carNumber = ""});
   final String transportIcon;
   final String tripTransport;
   final String availabileSpace;
   final String date;
-
+  final String carNumber;
   final List<String> tripRules;
   final List<String> tripAdvantate;
   @override
@@ -52,6 +52,22 @@ class TripDetailsView extends StatelessWidget {
                 text: tripTransport,
                 fontWeight: FontWeight.normal,
               ),
+              if (carNumber.isNotEmpty) ...[
+                HorizontalSpace(width: getWidth(3)),
+                SizedBox(
+                  height: getHeight(15),
+                  child: VerticalDivider(
+                    thickness: 2,
+                    color: AppColors.grey,
+                  ),
+                ),
+                HorizontalSpace(width: getWidth(3)),
+                CustomText(
+                  text: carNumber,
+                  fontSize: getWidth(14),
+                  fontWeight: FontWeight.normal,
+                )
+              ],
               Expanded(child: SizedBox())
             ],
           ),

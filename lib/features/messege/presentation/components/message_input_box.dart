@@ -42,6 +42,19 @@ class MessageInputBox extends StatelessWidget {
               isPrimary: false,
               height: getHeight(55),
               width: getWidth(55),
+              onPressed: () {},
+              child: Center(
+                child: Icon(
+                  Icons.attach_file,
+                  color: AppColors.grey,
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            CustomButton(
+              isPrimary: true,
+              height: getHeight(55),
+              width: getWidth(55),
               onPressed: () {
                 chatController.sendMessage(chatController.textController.text);
                 chatController.textController.clear();
@@ -49,7 +62,7 @@ class MessageInputBox extends StatelessWidget {
               child: Center(
                 child: Icon(
                   Icons.send,
-                  color: AppColors.grey,
+                  color: AppColors.white,
                 ),
               ),
             )
