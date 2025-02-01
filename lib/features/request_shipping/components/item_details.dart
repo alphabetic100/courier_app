@@ -57,13 +57,14 @@ class ItemDetails extends StatelessWidget {
                 child: Obx(() => GestureDetector(
                       onTap: () => shippingController.pickImage(index),
                       child: SizedBox(
-                        width: getWidth(80),
+                        width: getWidth(85),
                         child: Stack(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
+                            Padding(
+                              padding: EdgeInsets.all(1),
                               child: DottedBorder(
-                                radius: Radius.circular(8),
+                                color: Colors.grey,
+                                radius: Radius.circular(12),
                                 child: Center(
                                   child: Container(
                                     decoration: BoxDecoration(
