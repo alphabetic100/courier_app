@@ -19,9 +19,10 @@ class ShowPaymentSuccessDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            "assets/icons/success.png",
-            height: getHeight(60),
+            "assets/icons/success1.png",
+            height: getHeight(70),
           ),
+          VerticalSpace(height: getHeight(10)),
           CustomText(
             text: "Request Sent",
             fontSize: getWidth(24),

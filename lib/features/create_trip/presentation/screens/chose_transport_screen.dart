@@ -9,7 +9,7 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/presentation/components/select_identity_card.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
-import 'package:courierapp/features/create_trip/presentation/screens/create_trip_screen2.dart';
+import 'package:courierapp/features/create_trip/presentation/screens/traveling_date_select_screen.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -81,7 +81,7 @@ class ChoseTransportScreen extends StatelessWidget {
               CustomButton(
                   onPressed: () {
                     Get.to(
-                      () => CreateTripScreen2(),
+                      () => TravelingDateSelectScreen(),
                       transition: Transition.rightToLeftWithFade,
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeOut,

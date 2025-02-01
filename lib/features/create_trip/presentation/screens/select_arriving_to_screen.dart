@@ -8,12 +8,12 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
-import 'package:courierapp/features/create_trip/presentation/screens/create_trip_screen5.dart';
+import 'package:courierapp/features/create_trip/presentation/screens/select_maximum_weight.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CreateTripScreen4 extends StatelessWidget {
-  const CreateTripScreen4({super.key});
+class SelectArrivingToScreen extends StatelessWidget {
+  const SelectArrivingToScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class CreateTripScreen4 extends StatelessWidget {
           isPrimaryButton: true,
           onTap: () {
             Get.to(
-              () => CreateTripScreen5(),
+              () => SelectMaximumWeightScreen(),
               transition: Transition.rightToLeftWithFade,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOut,
