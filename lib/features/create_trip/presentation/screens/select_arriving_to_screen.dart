@@ -37,7 +37,15 @@ class SelectArrivingToScreen extends StatelessWidget {
               color: AppColors.black,
               fontSize: getWidth(18),
             ),
-            VerticalSpace(height: getHeight(16)),
+            VerticalSpace(height: getHeight(10)),
+            CustomText(
+              text:
+                  "Please put here the address where you are going to arrive with the items",
+              color: AppColors.bodyTextColor,
+              fontSize: getWidth(15),
+              fontWeight: FontWeight.normal,
+            ),
+            VerticalSpace(height: getHeight(10)),
             TextField(
               style: getTextStyleMsrt(),
               decoration: InputDecoration(

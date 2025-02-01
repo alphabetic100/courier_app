@@ -9,7 +9,7 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/presentation/components/select_identity_card.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
-import 'package:courierapp/features/create_trip/presentation/screens/traveling_date_select_screen.dart';
+import 'package:courierapp/features/create_trip/presentation/screens/car_number_screen.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,61 +40,67 @@ class ChoseTransportScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-        child: SizedBox(
-          height: AppSizes.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CreateTripTopBody(title: "Create a trip"),
-              CustomText(
-                text: "Choose your type of transport",
-                color: AppColors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: getWidth(16),
+      body: SizedBox(
+        height: AppSizes.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CreateTripTopBody(title: "Create a trip"),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: "Choose your type of transport",
+                      color: AppColors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: getWidth(16),
+                    ),
+                    VerticalSpace(height: getHeight(20)),
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 4,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding:
+                                EdgeInsets.symmetric(vertical: getHeight(10)),
+                            child: GestureDetector(
+                                onTap: () {
+                                  tripController.selectedIndex.value = index;
+                                },
+                                child: Obx(
+                                  () => SelectIdentityCard(
+                                      isSelected:
+                                          tripController.selectedIndex.value ==
+                                              index,
+                                      iconPath: iconPaths[index],
+                                      title: titles[index]),
+                                )),
+                          );
+                        }),
+                    Spacer(),
+                    CustomButton(
+                        onPressed: () {
+                          Get.to(
+                            () => CarNumberScreen(),
+                            transition: Transition.rightToLeftWithFade,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeOut,
+                          );
+                        },
+                        child: CustomText(
+                          text: "Next",
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white,
+                        )),
+                    VerticalSpace(height: getHeight(15))
+                  ],
+                ),
               ),
-              VerticalSpace(height: getHeight(20)),
-              Expanded(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 4,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: getHeight(10)),
-                        child: GestureDetector(
-                            onTap: () {
-                              tripController.selectedIndex.value = index;
-                            },
-                            child: Obx(
-                              () => SelectIdentityCard(
-                                  isSelected:
-                                      tripController.selectedIndex.value ==
-                                          index,
-                                  iconPath: iconPaths[index],
-                                  title: titles[index]),
-                            )),
-                      );
-                    }),
-              ),
-              Spacer(),
-              CustomButton(
-                  onPressed: () {
-                    Get.to(
-                      () => TravelingDateSelectScreen(),
-                      transition: Transition.rightToLeftWithFade,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeOut,
-                    );
-                  },
-                  child: CustomText(
-                    text: "Next",
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  )),
-              VerticalSpace(height: getHeight(10))
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

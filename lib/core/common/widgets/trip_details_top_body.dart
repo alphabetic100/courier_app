@@ -129,7 +129,10 @@ class TripDetailsTopBody extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: getWidth(25),
               ),
-              CustomText(text: "\$12/kg×2"),
+              CustomText(
+                text: "\$12/kg×2",
+                fontWeight: FontWeight.w400,
+              ),
             ],
           ),
         ),
@@ -139,7 +142,7 @@ class TripDetailsTopBody extends StatelessWidget {
           width: double.infinity,
           color: Color(0xffCCD9D6),
         ),
-        VerticalSpace(height: getHeight(10))
+        VerticalSpace(height: getHeight(18))
       ],
     );
   }

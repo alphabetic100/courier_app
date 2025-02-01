@@ -9,6 +9,7 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/request_shipping/components/item_details.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
 import 'package:courierapp/routes/app_routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,20 +45,37 @@ class AddItem extends StatelessWidget {
               Container(
                 height: AppSizes.height * 0.1,
                 color: AppColors.white,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    children: [
-                      VerticalSpace(height: getHeight(16)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(child: ShowAppLogo()),
-                          MessageNotificationBox(),
-                        ],
-                      )
-                    ],
-                  ),
+                child: Column(
+                  children: [
+                    VerticalSpace(height: getHeight(16)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: getWidth(6),
+                              top: getWidth(6),
+                              bottom: getWidth(6)),
+                          child: CustomButton(
+                              isPrimary: false,
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Center(
+                                child: Icon(
+                                  CupertinoIcons.back,
+                                  color: AppColors.grey,
+                                ),
+                              )),
+                        ),
+                        HorizontalSpace(width: getWidth(10)),
+                        Expanded(child: ShowAppLogo()),
+                        Padding(
+                            padding: EdgeInsets.only(right: getWidth(6)),
+                            child: MessageNotificationBox()),
+                      ],
+                    )
+                  ],
                 ),
               ),
 
@@ -124,7 +142,6 @@ class AddItem extends StatelessWidget {
                                       height: getHeight(50),
                                       onPressed: () {
                                         Get.toNamed(AppRoute.searchScreen);
-
                                       },
                                       child: CustomText(
                                         text: "Add a Item",

@@ -11,8 +11,8 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:flutter/material.dart';
 
-class CreateTripScreen7 extends StatelessWidget {
-  const CreateTripScreen7({super.key});
+class CreateTripSummary extends StatelessWidget {
+  const CreateTripSummary({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,13 @@ class CreateTripScreen7 extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TripDetailsTopBody(title: "Create a Trip"),
-            TripDetailsView(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TripDetailsTopBody(title: "Create a Trip"),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+            child: TripDetailsView(
                 tripTransport: "Buss",
                 availabileSpace: "12kg",
                 date: "14 Jan 2025",
@@ -44,9 +44,9 @@ class CreateTripScreen7 extends StatelessWidget {
                   "No fragile items unless securely packaged.",
                 ],
                 transportIcon: IconPath.directionsBus,
-                color: Colors.green)
-          ],
-        ),
+             ),
+          )
+        ],
       ),
       bottomNavigationBar: CustomBottomAppBar(
         isPrimaryButton: false,

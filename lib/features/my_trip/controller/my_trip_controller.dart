@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 
 class MyTripController extends GetxController with GetTickerProviderStateMixin {
   late TabController tabController;
+  final PageController pageController = PageController();
   RxInt selectedIndex = 0.obs;
-
+  RxString status = "request panding".obs;
+  RxBool isPending = true.obs;
   @override
   void onInit() {
     super.onInit();

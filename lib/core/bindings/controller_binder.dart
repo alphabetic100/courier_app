@@ -2,6 +2,7 @@ import 'package:courierapp/features/authentication/controllers/signup_controller
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:courierapp/features/messege/controller/chat_screen_controller.dart';
+import 'package:courierapp/features/my_trip/controller/my_trip_controller.dart';
 import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
 import 'package:courierapp/features/authentication/controllers/login_controllers/login_controller.dart';
@@ -83,6 +84,13 @@ class ControllerBinder extends Bindings {
     //Create Trip controller
     Get.lazyPut<CreateTripController>(
       () => CreateTripController(),
+      fenix: true,
+    );
+
+
+    //My trip controller
+    Get.lazyPut<MyTripController>(
+      () => MyTripController(),
       fenix: true,
     );
 

@@ -1,6 +1,7 @@
 import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/common/widgets/error_snakbar.dart';
 import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -101,12 +102,13 @@ class IdentityVerificationScreen1 extends StatelessWidget {
                   HorizontalSpace(width: getHeight(16)),
                   Expanded(
                     child: CustomButton(
-                      color: Color(0xff003087),
+                        color: Color(0xff003087),
                         onPressed: () {
                           if (verificationController.selectedIndex.value < 4) {
                             Get.toNamed(AppRoute.identityVerificationScreen2);
                           } else {
-                            Get.snackbar("title", "message");
+                            errorSnakbar(
+                                errorMessage: "Please Select Your ID Type");
                           }
                         },
                         child: CustomText(

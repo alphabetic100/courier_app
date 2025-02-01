@@ -56,17 +56,20 @@ class MessageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+      body: Container(
+        color: Color(0xFFFAFAFC),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             VerticalSpace(height: getHeight(20)),
-            CustomText(
-              text: "Message",
-              fontWeight: FontWeight.bold,
-              color: AppColors.black,
-              fontSize: getWidth(25),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+              child: CustomText(
+                text: "Message",
+                fontWeight: FontWeight.bold,
+                color: AppColors.black,
+                fontSize: getWidth(25),
+              ),
             ),
             VerticalSpace(height: getHeight(20)),
             Divider(
@@ -74,6 +77,11 @@ class MessageScreen extends StatelessWidget {
             ),
             VerticalSpace(height: getHeight(20)),
             Expanded(
+              child: Container(
+                color: AppColors.white,
+                padding: EdgeInsets.symmetric(
+                  horizontal: getWidth(16),
+                ),
                 child: RefreshIndicator(
                     color: AppColors.primaryColor,
                     onRefresh: () async {},
@@ -94,6 +102,7 @@ class MessageScreen extends StatelessWidget {
                                     horizontal: getHeight(10),
                                     vertical: getHeight(15)),
                                 decoration: BoxDecoration(
+                                    color: Color(0xFFFAFAFC),
                                     border: Border.all(color: AppColors.grey),
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Row(
@@ -126,7 +135,9 @@ class MessageScreen extends StatelessWidget {
                               ),
                             ),
                           );
-                        })))
+                        })),
+              ),
+            )
           ],
         ),
       ),

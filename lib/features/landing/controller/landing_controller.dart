@@ -25,29 +25,29 @@ class LandingController extends GetxController {
   final List<Image> activeIcons = [
     Image.asset(
       IconPath.searchIcon,
-      height: getHeight(35),
-      width: getWidth(35),
+      height: getHeight(30),
+      width: getWidth(30),
       fit: BoxFit.cover,
       color: AppColors.primaryColor,
     ),
     Image.asset(
       IconPath.sendIcon,
-      height: getHeight(35),
-      width: getWidth(35),
+      height: getHeight(30),
+      width: getWidth(30),
       fit: BoxFit.cover,
       color: AppColors.primaryColor,
     ),
     Image.asset(
       IconPath.addIcon,
-      height: getHeight(35),
-      width: getWidth(35),
+      height: getHeight(30),
+      width: getWidth(30),
       fit: BoxFit.cover,
       color: AppColors.primaryColor,
     ),
     Image.asset(
       IconPath.profileIcon,
-      height: getHeight(35),
-      width: getWidth(35),
+      height: getHeight(30),
+      width: getWidth(30),
       fit: BoxFit.cover,
       color: AppColors.primaryColor,
     ),
@@ -56,17 +56,17 @@ class LandingController extends GetxController {
   final List<Image> inActiveIcons = [
     Image.asset(
       IconPath.searchIcon,
-      height: getHeight(30),
-      width: getWidth(30),
+      height: getHeight(25),
+      width: getWidth(25),
       fit: BoxFit.cover,
       color: AppColors.grey,
     ),
     Image.asset(IconPath.sendIcon,
-        height: getHeight(30), width: getWidth(30), fit: BoxFit.cover),
+        height: getHeight(25), width: getWidth(25), fit: BoxFit.cover),
     Image.asset(IconPath.addIcon,
-        height: getHeight(30), width: getWidth(30), fit: BoxFit.cover),
+        height: getHeight(25), width: getWidth(25), fit: BoxFit.cover),
     Image.asset(IconPath.profileIcon,
-        height: getHeight(30), width: getWidth(30), fit: BoxFit.cover),
+        height: getHeight(25), width: getWidth(25), fit: BoxFit.cover),
   ];
 
   @override

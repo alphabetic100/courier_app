@@ -8,14 +8,14 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
-import 'package:courierapp/features/chat_with_traveller/presentation/chat_with_traveller_screen.dart';
+import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
 import 'package:courierapp/features/profile/presentation/components/traveller_riview_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TravellerInformation extends StatelessWidget {
-  const TravellerInformation({super.key});
+class OthersProfileScreen extends StatelessWidget {
+  const OthersProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class TravellerInformation extends StatelessWidget {
             CreateTripTopBody(title: "Traveller Information"),
             VerticalSpace(height: getHeight(20)),
             Padding(
-              padding:  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+              padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -198,14 +198,14 @@ class TravellerInformation extends StatelessWidget {
               color: Color(0xffCCD9D6),
               height: getHeight(1),
             ),
-            
+
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: CustomButton(
                   isPrimary: false,
-                color: Color(0xffFAFAFC),
+                  color: Color(0xffFAFAFC),
                   onPressed: () {
-                    Get.to(() => ChatWithTravellerScreen());
+                    Get.to(() => ChatInboxScreen());
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

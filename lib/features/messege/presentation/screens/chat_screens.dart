@@ -26,37 +26,41 @@ class ChatInboxScreen extends StatelessWidget {
         child: Column(
           children: [
             VerticalSpace(height: getHeight(10)),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getHeight(16)),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage(ImagePath.profile),
-                      ),
-                      HorizontalSpace(width: getWidth(5)),
-                      CustomText(
-                        text: "Albert Flores",
-                        fontSize: getWidth(20),
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.black,
-                      ),
-                      HorizontalSpace(
-                        width: getWidth(5),
-                      ),
-                      CircleAvatar(
-                        radius: getWidth(7),
-                        backgroundColor: Colors.green,
-                      )
-                    ],
+            Column(
+              children: [
+                Container(
+                  color: Color(0xFFFAFAFC),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: AssetImage(ImagePath.profile),
+                        ),
+                        HorizontalSpace(width: getWidth(5)),
+                        CustomText(
+                          text: "Albert Flores",
+                          fontSize: getWidth(20),
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.black,
+                        ),
+                        HorizontalSpace(
+                          width: getWidth(5),
+                        ),
+                        CircleAvatar(
+                          radius: getWidth(4),
+                          backgroundColor: Colors.green,
+                        )
+                      ],
+                    ),
                   ),
-                  VerticalSpace(height: getHeight(20)),
-                  Divider(
-                    color: AppColors.grey,
-                  )
-                ],
-              ),
+                ),
+                VerticalSpace(height: getHeight(20)),
+                Divider(
+                  color: AppColors.grey,
+                )
+              ],
             ),
             Expanded(
               child: Obx(() {

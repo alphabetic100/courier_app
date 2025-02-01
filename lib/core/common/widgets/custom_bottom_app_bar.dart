@@ -22,12 +22,16 @@ class CustomBottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSizes.height * 0.18,
+      height: secondaryWidget != null
+          ? AppSizes.height * 0.18
+          : AppSizes.height * 0.1,
       padding: EdgeInsets.symmetric(
           horizontal: getWidth(16), vertical: getHeight(16)),
       color: AppColors.white,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: secondaryWidget != null
+            ? MainAxisAlignment.spaceAround
+            : MainAxisAlignment.end,
         children: [
           secondaryWidget ?? SizedBox.shrink(),
           secondaryWidget != null

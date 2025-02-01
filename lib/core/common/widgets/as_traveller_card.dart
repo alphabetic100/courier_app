@@ -3,11 +3,13 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
+import 'package:courierapp/features/my_trip/controller/my_trip_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AsTravellerCard extends StatelessWidget {
-  const AsTravellerCard({super.key});
-
+  AsTravellerCard({super.key});
+  final MyTripController myTripController = Get.find<MyTripController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,8 +78,10 @@ class AsTravellerCard extends StatelessWidget {
                 ),
                 HorizontalSpace(width: getWidth(5)),
                 CustomText(
-                  text: "Fully Booked",
-                  color: AppColors.error,
+                  text: myTripController.status.value,
+                  color: myTripController.status.value == "Active"
+                      ? AppColors.success
+                      : AppColors.error,
                   fontSize: getWidth(14),
                   fontWeight: FontWeight.w400,
                 ),

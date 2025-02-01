@@ -10,13 +10,15 @@ class BodyProfileCard extends StatelessWidget {
       required this.isVerified,
       required this.profileImage,
       required this.profileName,
-      required this.rattings,
+      this.rattings = "",
+      this.subtitle = "",
       required this.suffixIcon});
   final bool isVerified;
   final String profileImage;
   final String profileName;
   final String rattings;
   final Widget suffixIcon;
+  final String subtitle;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -49,8 +51,19 @@ class BodyProfileCard extends StatelessWidget {
       ),
       subtitle: Row(
         children: [
-          Icon(Icons.star_rounded, color: Color(0xFFFFC934)),
-          Text(rattings),
+          if (rattings.isNotEmpty) ...[
+            Icon(Icons.star_rounded, color: Color(0xFFFFC934)),
+            Text(rattings),
+          ],
+          if (subtitle.isNotEmpty) ...[
+            Expanded(
+              child: CustomText(
+                text: subtitle,
+                fontSize: getWidth(15),
+                fontWeight: FontWeight.normal,
+              ),
+            )
+          ]
         ],
       ),
       trailing: suffixIcon,

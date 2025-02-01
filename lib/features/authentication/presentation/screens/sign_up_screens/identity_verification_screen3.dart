@@ -1,6 +1,7 @@
 import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/common/widgets/error_snakbar.dart';
 import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -103,7 +104,9 @@ class IdentityVerificationScreen3 extends StatelessWidget {
                         onPressed: () {
                           if (verificationController.selfieImage.value ==
                               null) {
-                            Get.snackbar("title", " message");
+                            errorSnakbar(
+                                errorMessage:
+                                    "Please upload selfie holding your ID");
                           } else {
                             Get.toNamed(AppRoute.paymentSetupScreen);
                           }
