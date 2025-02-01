@@ -14,8 +14,8 @@ import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CreateTripScreen1 extends StatelessWidget {
-  CreateTripScreen1({super.key});
+class ChoseTransportScreen extends StatelessWidget {
+  ChoseTransportScreen({super.key});
   final CreateTripController tripController = Get.find<CreateTripController>();
   final LandingController landingController = Get.find<LandingController>();
   final List<String> titles = ["Car", "Train", "Buss", "Airplane"];

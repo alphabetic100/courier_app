@@ -1,4 +1,4 @@
-import 'package:courierapp/features/create_trip/presentation/screens/create_trip_screen1.dart';
+import 'package:courierapp/features/create_trip/presentation/screens/chose_transport_screen.dart';
 import 'package:courierapp/features/landing/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:courierapp/features/my_trip/presentation/screens/my_trip_screen.dart';
@@ -22,7 +22,7 @@ class LandingScreen extends StatelessWidget {
         children: [
           SearchScreen(),
           MyTripScreen(),
-          CreateTripScreen1(),
+          ChoseTransportScreen(),
           ProfileScreen(),
         ],
       ),

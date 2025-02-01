@@ -1,4 +1,3 @@
-
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -11,13 +10,13 @@ class CreateTripTopBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xffFAFAFC),
+      color: Color(0xFFFAFAFC),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           VerticalSpace(height: getHeight(10)),
           Padding(
-            padding:  EdgeInsets.only(left: getWidth(16)),
+            padding: EdgeInsets.only(left: getWidth(16)),
             child: CustomText(
               text: title,
               fontSize: getWidth(25),
@@ -30,7 +29,7 @@ class CreateTripTopBody extends StatelessWidget {
             color: Color(0xffCCD9D6),
             height: getHeight(1),
           ),
-
+          VerticalSpace(height: getHeight(25))
         ],
       ),
     );
