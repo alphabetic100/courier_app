@@ -9,6 +9,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
+import 'package:courierapp/features/create_trip/presentation/screens/chose_transport_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -60,6 +61,7 @@ class CreateTripSummary extends StatelessWidget {
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
+                    Get.offAll(ChoseTransportScreen());
                     // Get.defaultDialog(
                     //   title: "Worning",
                     // );

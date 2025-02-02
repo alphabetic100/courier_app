@@ -64,7 +64,9 @@ class CreateTripController extends GetxController {
       "from": selectDepartingController.text,
       "to": selectArrivingController.text,
       "weight": itemWeight.value,
-      "rulse": rulesSet,
+      "charge": selectedCharge.value,
+      "rulse": rulesSet.toList(),
+      "support": supportSet.toList(),
     };
 
     try {

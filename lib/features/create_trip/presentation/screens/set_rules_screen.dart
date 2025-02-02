@@ -15,17 +15,17 @@ import 'package:get/get.dart';
 
 class SetRulesScreen extends StatelessWidget {
   SetRulesScreen({super.key});
+
   final CreateTripController createTripController =
       Get.find<CreateTripController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
           Padding(
-            padding: EdgeInsets.only(
-              right: getWidth(16),
-            ),
+            padding: EdgeInsets.only(right: getWidth(16)),
             child: MessageNotificationBox(),
           ),
         ],
@@ -54,29 +54,39 @@ class SetRulesScreen extends StatelessWidget {
                   ),
                   VerticalSpace(height: getHeight(16)),
 
+                  // Fix for Obx widget
                   Obx(() => createTripController.rulesSet.isNotEmpty
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: List.generate(
-                              createTripController.rulesSet.length, (index) {
-                            return Row(
-                              children: [
-                                Icon(
-                                  Icons.error_outline,
-                                  color: AppColors.error,
-                                ),
-                                HorizontalSpace(width: getWidth(5)),
-                                CustomText(
-                                  text: createTripController.rulesSet[index],
-                                  color: AppColors.bodyTextColor,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: getWidth(14),
-                                )
-                              ],
-                            );
-                          }),
+                          children: createTripController.rulesSet
+                              .map((rule) => Row(
+                                    children: [
+                                      Icon(Icons.error_outline,
+                                          color: AppColors.error),
+                                      HorizontalSpace(width: getWidth(5)),
+                                      Expanded(
+                                        child: CustomText(
+                                          text: rule,
+                                          color: AppColors.bodyTextColor,
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: getWidth(14),
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(Icons.delete,
+                                            color: Colors.red),
+                                        onPressed: () {
+                                          createTripController.rulesSet
+                                              .remove(rule);
+                                        },
+                                      ),
+                                    ],
+                                  ))
+                              .toList(),
                         )
                       : SizedBox.shrink()),
+
+                  VerticalSpace(height: getHeight(16)),
 
                   CustomText(
                     text: "Most common",
@@ -85,61 +95,55 @@ class SetRulesScreen extends StatelessWidget {
                     fontSize: getWidth(16),
                   ),
                   VerticalSpace(height: getHeight(8)),
+
                   CustomButton(
-                      isPrimary: false,
-                      radious: getWidth(20),
-                      color: Color(0xFFFAFAFC),
-                      onPressed: () {
-                        createTripController.addrule(
-                            "No perishable food items without proper packaging.");
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.add,
-                            color: AppColors.bodyTextColor,
+                    isPrimary: false,
+                    radious: getWidth(20),
+                    color: Color(0xFFFAFAFC),
+                    onPressed: () {
+                      createTripController.addrule(
+                          "No perishable food items without proper packaging.");
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.add, color: AppColors.bodyTextColor),
+                        HorizontalSpace(width: getWidth(5)),
+                        Expanded(
+                          child: CustomText(
+                            text:
+                                "No perishable food items without proper packaging.",
+                            fontSize: getWidth(14),
+                            fontWeight: FontWeight.normal,
                           ),
-                          HorizontalSpace(width: getWidth(5)),
-                          Expanded(
-                            child: CustomText(
-                              text:
-                                  "No perishable food items without proper packaging.",
-                              fontSize: getWidth(14),
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ],
-                      )),
-                  //
+                        ),
+                      ],
+                    ),
+                  ),
 
                   VerticalSpace(height: getHeight(8)),
-                  //
 
                   CustomButton(
-                      isPrimary: false,
-                      radious: getWidth(20),
-                      color: Color(0xFFFAFAFC),
-                      onPressed: () {
-                        createTripController.addrule(
-                            "No fragile items unless securely packaged.");
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.add,
-                            color: AppColors.bodyTextColor,
+                    isPrimary: false,
+                    radious: getWidth(20),
+                    color: Color(0xFFFAFAFC),
+                    onPressed: () {
+                      createTripController.addrule(
+                          "No fragile items unless securely packaged.");
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.add, color: AppColors.bodyTextColor),
+                        HorizontalSpace(width: getWidth(5)),
+                        Expanded(
+                          child: CustomText(
+                            text: "No fragile items unless securely packaged.",
+                            fontSize: getWidth(14),
+                            fontWeight: FontWeight.normal,
                           ),
-                          HorizontalSpace(width: getWidth(5)),
-                          Expanded(
-                            child: CustomText(
-                              text:
-                                  "No fragile items unless securely packaged.",
-                              fontSize: getWidth(14),
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ],
-                      ))
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -152,34 +156,39 @@ class SetRulesScreen extends StatelessWidget {
         primaryWidget: Row(
           children: [
             Expanded(
-                child: CustomButton(
-                    isPrimary: false,
-                    onPressed: () {
-                      createTripController.addrule(
-                          createTripController.setRulesController.text);
-                    },
-                    child: CustomText(
-                      text: "Set Another Rule",
-                      color: AppColors.bodyTextColor,
-                      fontWeight: FontWeight.bold,
-                    ))),
+              child: CustomButton(
+                isPrimary: false,
+                onPressed: () {
+                  createTripController.addrule(
+                      createTripController.setRulesController.text.trim());
+                  createTripController.setRulesController.clear();
+                },
+                child: CustomText(
+                  text: "Set Another Rule",
+                  color: AppColors.bodyTextColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             HorizontalSpace(width: getWidth(8)),
             Expanded(
-                child: CustomButton(
-                    isPrimary: true,
-                    onPressed: () {
-                      Get.to(
-                        () => AddAdditionalSupportScreen(),
-                        transition: Transition.rightToLeftWithFade,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeOut,
-                      );
-                    },
-                    child: CustomText(
-                      text: "Next",
-                      color: AppColors.white,
-                      fontWeight: FontWeight.bold,
-                    )))
+              child: CustomButton(
+                isPrimary: true,
+                onPressed: () {
+                  Get.to(
+                    () => AddAdditionalSupportScreen(),
+                    transition: Transition.rightToLeftWithFade,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  );
+                },
+                child: CustomText(
+                  text: "Next",
+                  color: AppColors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ],
         ),
       ),
