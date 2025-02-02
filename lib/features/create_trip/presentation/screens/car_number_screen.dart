@@ -57,7 +57,7 @@ class CarNumberScreen extends StatelessWidget {
             Get.to(
               () => TravelingDateSelectScreen(),
               transition: Transition.rightToLeftWithFade,
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 200),
               curve: Curves.easeOut,
             );
           }),

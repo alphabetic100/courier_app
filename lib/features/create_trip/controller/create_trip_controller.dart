@@ -120,6 +120,8 @@ class CreateTripController extends GetxController {
     selectedIndex.value = index;
     selectedTransportType = titles[index];
     selectedIconPath = iconPaths[index];
+
+    log(selectedIconPath);
   }
 
 //Selete trip date

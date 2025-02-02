@@ -66,7 +66,7 @@ class TravelingDateSelectScreen extends StatelessWidget {
                 ? Get.to(
                     () => SelectDepartingFromScreen(),
                     transition: Transition.rightToLeftWithFade,
-                    duration: const Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 200),
                     curve: Curves.easeOut,
                   )
                 : errorSnakbar(

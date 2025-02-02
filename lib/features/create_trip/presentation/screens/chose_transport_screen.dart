@@ -81,7 +81,7 @@ class ChoseTransportScreen extends StatelessWidget {
                             Get.to(
                               () => CarNumberScreen(),
                               transition: Transition.rightToLeftWithFade,
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 200),
                               curve: Curves.easeOut,
                             );
                           } else {

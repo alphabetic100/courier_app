@@ -126,7 +126,7 @@ class AddAdditionalSupportScreen extends StatelessWidget {
                   Get.to(
                     () => CreateTripSummary(),
                     transition: Transition.rightToLeftWithFade,
-                    duration: const Duration(milliseconds: 300),
+                     duration: const Duration(milliseconds: 200),
                     curve: Curves.easeOut,
                   );
                 },
