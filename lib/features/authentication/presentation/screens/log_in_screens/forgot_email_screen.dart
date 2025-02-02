@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../core/common/widgets/custom_text_form_field.dart';
 import '../../../controllers/login_controllers/forget_email_controller.dart';
-import '../../../controllers/signup_controllers/sing_up_controller.dart';
 import 'forget_password_screen.dart';
 
 class ForgetEmailScreen extends StatelessWidget {

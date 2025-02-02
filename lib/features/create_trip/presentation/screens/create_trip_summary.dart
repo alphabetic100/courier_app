@@ -8,7 +8,6 @@ import 'package:courierapp/core/common/widgets/trip_details_view.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

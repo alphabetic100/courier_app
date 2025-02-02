@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/login_controllers/reset_password_controller.dart';
-import 'login_screen.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   final String email;
