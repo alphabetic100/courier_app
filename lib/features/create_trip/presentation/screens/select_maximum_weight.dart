@@ -8,7 +8,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
-import 'package:courierapp/features/create_trip/presentation/screens/set_rules_screen.dart';
+import 'package:courierapp/features/create_trip/presentation/screens/charge_per_kg_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,7 +65,7 @@ class SelectMaximumWeightScreen extends StatelessWidget {
                             activeColor: Color(0xFFF3F3F5),
                             value: tripController.isUnlimited.value,
                             onChanged: (value) {
-                              tripController.isUnlimited.value = value;
+                              tripController.makeUnlimited();
                             },
                           ),
                         ),
@@ -93,9 +93,12 @@ class SelectMaximumWeightScreen extends StatelessWidget {
                                       value: tripController.itemWeight.value,
                                       min: 1.0,
                                       max: 100,
+                                      divisions: 100,
                                       // divisions: 18,
                                       onChanged: (value) {
-                                        tripController.itemWeight.value = value;
+                                        tripController.itemWeight.value =
+                                            double.parse(
+                                                value.toStringAsFixed(1));
                                       },
                                     ),
                                   ),
@@ -138,9 +141,9 @@ class SelectMaximumWeightScreen extends StatelessWidget {
           isPrimaryButton: true,
           onTap: () {
             Get.to(
-              () => SetRulesScreen(),
+              () => ChargePerKgScreen(),
               transition: Transition.rightToLeftWithFade,
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 200),
               curve: Curves.easeOut,
             );
           }),

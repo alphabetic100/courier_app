@@ -14,11 +14,16 @@ class TripDetailsTopBody extends StatelessWidget {
     required this.title,
     required this.departingFrom,
     required this.arrivingTo,
+    required this.price,
+    this.priceSubText = "",
   });
 
   final String title;
   final String departingFrom;
   final String arrivingTo;
+  final String price;
+
+  final String priceSubText;
 
   @override
   Widget build(BuildContext context) {
@@ -129,15 +134,17 @@ class TripDetailsTopBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                text: "\$24",
+                text: price,
                 color: AppColors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: getWidth(25),
               ),
-              CustomText(
-                text: "\$12/kg×2",
-                fontWeight: FontWeight.w400,
-              ),
+              priceSubText.isNotEmpty
+                  ? CustomText(
+                      text: "\$12/kg×2",
+                      fontWeight: FontWeight.w400,
+                    )
+                  : SizedBox.shrink(),
             ],
           ),
         ),

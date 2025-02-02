@@ -43,6 +43,8 @@ class RequestShippingScreen extends StatelessWidget {
               title: "Request shipping",
               departingFrom: "32,C.nuñez de balboa, Madrid",
               arrivingTo: "32,C.nuñez de balboa, Madrid",
+              price: "20",
+              priceSubText: r"200\kg",
             ),
             VerticalSpace(height: getHeight(20)),
             Obx(() => ListView.builder(

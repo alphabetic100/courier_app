@@ -6,15 +6,17 @@ import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:flutter/material.dart';
 
 class TripDetailsView extends StatelessWidget {
-  const TripDetailsView(
-      {super.key,
-      required this.tripTransport,
-      required this.availabileSpace,
-      required this.tripRules,
-      required this.transportIcon,
-      required this.date,
-      required this.tripAdvantate,
-      this.carNumber = ""});
+  const TripDetailsView({
+    super.key,
+    required this.tripTransport,
+    required this.availabileSpace,
+    required this.tripRules,
+    required this.transportIcon,
+    required this.date,
+    required this.tripAdvantate,
+    this.carNumber = "",
+  });
+
   final String transportIcon;
   final String tripTransport;
   final String availabileSpace;
@@ -22,6 +24,7 @@ class TripDetailsView extends StatelessWidget {
   final String carNumber;
   final List<String> tripRules;
   final List<String> tripAdvantate;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -132,18 +135,20 @@ class TripDetailsView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                      height: getHeight(35),
-                      width: getWidth(30),
-                      child: Icon(
-                        Icons.check,
-                        color: AppColors.success.withOpacity(0.7),
-                      )),
+                    height: getHeight(35),
+                    width: getWidth(30),
+                    child: Icon(
+                      Icons.check,
+                      color: AppColors.success.withOpacity(0.7),
+                    ),
+                  ),
                   HorizontalSpace(width: getHeight(8)),
                   Expanded(
-                      child: CustomText(
-                    text: tripRules[index],
-                    fontWeight: FontWeight.normal,
-                  ))
+                    child: CustomText(
+                      text: tripAdvantate[index], // Corrected reference
+                      fontWeight: FontWeight.normal,
+                    ),
+                  )
                 ],
               );
             }),
@@ -154,18 +159,20 @@ class TripDetailsView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                      height: getHeight(35),
-                      width: getWidth(30),
-                      child: Icon(
-                        Icons.error_outline,
-                        color: AppColors.error,
-                      )),
+                    height: getHeight(35),
+                    width: getWidth(30),
+                    child: Icon(
+                      Icons.error_outline,
+                      color: AppColors.error,
+                    ),
+                  ),
                   HorizontalSpace(width: getHeight(8)),
                   Expanded(
-                      child: CustomText(
-                    text: tripRules[index],
-                    fontWeight: FontWeight.normal,
-                  ))
+                    child: CustomText(
+                      text: tripRules[index],
+                      fontWeight: FontWeight.normal,
+                    ),
+                  )
                 ],
               );
             })
