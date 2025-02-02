@@ -24,11 +24,13 @@ class CreateTripController extends GetxController {
   final TextEditingController selectArrivingController =
       TextEditingController();
   final TextEditingController setRulesController = TextEditingController();
+  final TextEditingController setAdditionalSupport = TextEditingController();
 
   String selectedTransportType = "";
   String date = "";
   RxDouble itemWeight = 1.0.obs;
-  List<String> rulesSet = [];
+  RxList<String> rulesSet = <String>[].obs;
+  RxList<String> supportSet = <String>[].obs;
   String selectedIconPath = "";
 
   // Helper variable
@@ -44,10 +46,20 @@ class CreateTripController extends GetxController {
     IconPath.plane
   ];
 
+  final List<String> chargeRange = [
+    '\$3',
+    '\$4',
+    '\$5',
+    '\$6',
+    '\$7',
+  ];
+  RxString selectedCharge = "\$4".obs;
+
 //Create trip
   Future<void> createTrip() async {
     final Map<String, dynamic> requestBody = {
       "transport": selectedTransportType,
+      "carNumber": carNumberController.text.trim(),
       "date": date,
       "from": selectDepartingController.text,
       "to": selectArrivingController.text,
@@ -74,17 +86,41 @@ class CreateTripController extends GetxController {
     }
   }
 
-  addrule() {
-    rulesSet.add(setRulesController.text);
+//Add Rule Func
+  addrule(String? value) {
+    if (value != null && value.isNotEmpty) {
+      rulesSet.add(value);
+    }
+
     setRulesController.clear();
   }
 
+//Add support Func
+  addSupport(String? value) {
+    if (value != null && value.isNotEmpty) {
+      supportSet.add(value);
+    }
+
+    setAdditionalSupport.clear();
+  }
+
+//Weight Picker
+  makeUnlimited() {
+    isUnlimited.value = !isUnlimited.value;
+
+    //TODO: Have to fix this here
+    itemWeight.value =
+        isUnlimited.value ? itemWeight.value = 1.0 : itemWeight.value;
+  }
+
+//Select Transport Type
   selectTransportType(int index) {
     selectedIndex.value = index;
     selectedTransportType = titles[index];
     selectedIconPath = iconPaths[index];
   }
 
+//Selete trip date
   Future selectDate(BuildContext context) async {
     DateTime? selectedDate = await showDatePicker(
       context: context,
@@ -104,5 +140,17 @@ class CreateTripController extends GetxController {
   void onInit() {
     super.onInit();
     selectedIndex.value = 4;
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    dateTimeController.dispose();
+    carNumberController.dispose();
+    selectDepartingController.dispose();
+    selectArrivingController.dispose();
+    setRulesController.dispose();
+    setAdditionalSupport.dispose();
   }
 }

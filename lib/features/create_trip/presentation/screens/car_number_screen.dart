@@ -36,7 +36,8 @@ class CarNumberScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: "What is your bus number? (Optional)",
+                  text:
+                      "What is your ${tripController.selectedTransportType.toLowerCase()} number? (Optional)",
                   color: AppColors.black,
                   fontSize: getWidth(18),
                 ),

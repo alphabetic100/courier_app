@@ -26,32 +26,30 @@ class CreateTripSummary extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TripDetailsTopBody(
-            title: "Create a Trip",
-            departingFrom: tripController.selectDepartingController.text,
-            arrivingTo: tripController.selectArrivingController.text,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-            child: TripDetailsView(
-              tripTransport: tripController.selectedTransportType,
-              availabileSpace: tripController.itemWeight.toString(),
-              date: tripController.dateTimeController.text,
-              tripAdvantate: [
-                "Will pickup the items from the sender's location.",
-                "Will deliver directly to recipient’s door."
-              ],
-              tripRules: [
-                "No perishable food items without proper packaging.",
-                "No fragile items unless securely packaged.",
-              ],
-              transportIcon: tripController.selectedIconPath,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TripDetailsTopBody(
+              title: "Create a Trip",
+              departingFrom: tripController.selectDepartingController.text,
+              arrivingTo: tripController.selectArrivingController.text,
+              price: "${tripController.selectedCharge.value}/kg",
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+              child: TripDetailsView(
+                tripTransport: tripController.selectedTransportType,
+                availabileSpace: tripController.itemWeight.toString(),
+                date: tripController.dateTimeController.text,
+                tripAdvantate: tripController.supportSet,
+                tripRules: tripController.rulesSet,
+                transportIcon: tripController.selectedIconPath,
+                carNumber: tripController.carNumberController.text,
+              ),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: CustomBottomAppBar(
         isPrimaryButton: false,

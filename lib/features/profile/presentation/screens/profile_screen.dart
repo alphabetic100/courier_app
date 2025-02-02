@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         ontapBackButton: () {
-         // landingController.changePage(0);
+          // landingController.changePage(0);
         },
         actions: [
           Padding(
@@ -59,7 +59,10 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   VerticalSpace(height: getHeight(20)),
-                  Divider(height: getHeight(1),color: Color(0xffCCD9D6),),
+                  Divider(
+                    height: getHeight(1),
+                    color: Color(0xffCCD9D6),
+                  ),
                 ],
               ),
             ),
@@ -75,9 +78,11 @@ class ProfileScreen extends StatelessWidget {
                       Stack(
                         children: [
                           CircleAvatar(
-                            backgroundImage: controller.profile?.data?.profileImage != null
-                                ? NetworkImage(controller.profile?.data?.profileImage)
-                                : AssetImage(ImagePath.profile),
+                            backgroundImage:
+                                controller.profile?.data?.profileImage != null
+                                    ? NetworkImage(
+                                        controller.profile?.data?.profileImage)
+                                    : AssetImage(ImagePath.profile),
                             radius: getWidth(60),
                           ),
                           Positioned(
@@ -85,7 +90,7 @@ class ProfileScreen extends StatelessWidget {
                               right: getWidth(10),
                               child: CircleAvatar(
                                 radius: getWidth(15),
-                                backgroundColor: AppColors.secondaryColor,
+                                backgroundColor: Color(0xFF2BCD31),
                                 child: Icon(
                                   Icons.check,
                                   color: Colors.white,
@@ -102,81 +107,85 @@ class ProfileScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(
-                                text: profile?.fullName.toString()??'',
+                                text: profile?.fullName.toString() ?? '',
                                 fontSize: getWidth(20),
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.black,
                               ),
                               CustomText(
-                                text: "Member since ${DateFormat('MMMM yyyy').format(profile?.createdAt ?? DateTime.now())}",
+                                text:
+                                    "Member since ${DateFormat('MMMM yyyy').format(profile?.createdAt ?? DateTime.now())}",
                                 fontSize: getWidth(14),
                                 fontWeight: FontWeight.normal,
                               ),
                             ],
                           ),
-
-
-                          IconButton(onPressed: (){
-
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    contentPadding:
-                                    EdgeInsets.all(getHeight(25)),
-                                    content: CustomText(
-                                        textAlign: TextAlign.center,
-                                        text:
-                                        "Are you sure you want to logout?",
-                                        fontSize: getWidth(20),
-                                        color: Color(0xFF0D0D0C),
-                                        fontWeight: FontWeight.w600),
-                                    actions: [
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomButtonV2(
-                                              width: getWidth(120),
-                                              color: Color(0xFFC2C2C2),
-                                              onTap: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: CustomText(
-                                                text: "No",
-                                                fontSize: getWidth(14),
-                                                fontWeight:
-                                                FontWeight.normal,
-                                              )),
-                                          CustomButtonV2(
-                                              width: getWidth(120),
-                                              color: Color(0xFFFF1717),
-                                              onTap: () {
-
-                                                controller.logOut();
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: CustomText(
-                                                text: "Yes",
-                                                fontSize: getWidth(14),
-                                                fontWeight:
-                                                FontWeight.normal,
-                                                color: Colors.white,
-                                              ))
-                                        ],
-                                      )
-                                    ],
-                                  );
-                                });
-
-                          }, icon: Icon(Icons.logout,color: Colors.red,size: 23,),)
+                          IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      contentPadding:
+                                          EdgeInsets.all(getHeight(25)),
+                                      content: CustomText(
+                                          textAlign: TextAlign.center,
+                                          text:
+                                              "Are you sure you want to logout?",
+                                          fontSize: getWidth(20),
+                                          color: Color(0xFF0D0D0C),
+                                          fontWeight: FontWeight.w600),
+                                      actions: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CustomButtonV2(
+                                                width: getWidth(120),
+                                                color: Color(0xFFC2C2C2),
+                                                onTap: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: CustomText(
+                                                  text: "No",
+                                                  fontSize: getWidth(14),
+                                                  fontWeight: FontWeight.normal,
+                                                )),
+                                            CustomButtonV2(
+                                                width: getWidth(120),
+                                                color: Color(0xFFFF1717),
+                                                onTap: () {
+                                                  controller.logOut();
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: CustomText(
+                                                  text: "Yes",
+                                                  fontSize: getWidth(14),
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.white,
+                                                ))
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  });
+                            },
+                            icon: Icon(
+                              Icons.logout,
+                              color: Colors.red,
+                              size: 23,
+                            ),
+                          )
                         ],
                       ),
                       VerticalSpace(height: getHeight(16)),
                     ],
                   ),
                 ),
-                Divider(height: getHeight(1),color: Color(0xffCCD9D6),),
+                Divider(
+                  height: getHeight(1),
+                  color: Color(0xffCCD9D6),
+                ),
                 VerticalSpace(height: getHeight(10)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
@@ -190,18 +199,22 @@ class ProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ProfileDetailsCard(
-                                title: "Name:", subtitle: profile?.fullName.toString()??''),
+                                title: "Name:",
+                                subtitle: profile?.fullName.toString() ?? ''),
                             ProfileDetailsCard(
-                                title: "Phone:", subtitle: profile?.phoneNumber??'N/A'),
+                                title: "Phone:",
+                                subtitle: profile?.phoneNumber ?? 'N/A'),
                             ProfileDetailsCard(
                                 title: "Email:",
-                                subtitle: profile?.email??'N/A'),
+                                subtitle: profile?.email ?? 'N/A'),
                             ProfileDetailsCard(
                                 title: "Password:",
                                 subtitle: "Updated 23 days ago"),
                             ProfileDetailsCard(
                               title: "Verification status:",
-                              subtitle: profile?.isVerified == true?"Verified": "Not Verified",
+                              subtitle: profile?.isVerified == true
+                                  ? "Verified"
+                                  : "Not Verified",
                               color: AppColors.secondaryColor,
                             )
                           ],
@@ -210,18 +223,15 @@ class ProfileScreen extends StatelessWidget {
                             onPressed: () {
                               Get.to(() => EditProfileScreen(),
                                   arguments: {
-                                    'imagePath': profile?.profileImage ??
-                                        '',
-                                    'fullName': profile?.fullName ??
-                                        '',
-                                    'phoneNumber': profile?.phoneNumber ??
-                                        '',
+                                    'imagePath': profile?.profileImage ?? '',
+                                    'fullName': profile?.fullName ?? '',
+                                    'phoneNumber': profile?.phoneNumber ?? '',
                                     "emailAddress": profile?.email ?? '',
-                                    "password":  'Updated 23 days ago',
-                                    "verification": profile?.isVerified.toString() ?? '',
+                                    "password": 'Updated 23 days ago',
+                                    "verification":
+                                        profile?.isVerified.toString() ?? '',
                                   },
                                   curve: Curves.easeInOut);
-
                             },
                             icon: Image.asset(
                               IconPath.editSquare,
@@ -233,10 +243,14 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 VerticalSpace(height: getHeight(20)),
-                Divider(height: getHeight(1),color: Color(0xffCCD9D6),),
+                Divider(
+                  height: getHeight(1),
+                  color: Color(0xffCCD9D6),
+                ),
                 VerticalSpace(height: getHeight(20)),
                 Padding(
-                  padding: EdgeInsets.only(left: getWidth(20),right: getHeight(20)),
+                  padding:
+                      EdgeInsets.only(left: getWidth(20), right: getHeight(20)),
                   child: Column(
                     children: [
                       SizedBox(
@@ -252,7 +266,9 @@ class ProfileScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: getHeight(16),),
+                      SizedBox(
+                        height: getHeight(16),
+                      ),
                       ProfileTripTravelBox(
                         title: "Earnings & Withdrawals",
                         amount: "\$1,250.00",

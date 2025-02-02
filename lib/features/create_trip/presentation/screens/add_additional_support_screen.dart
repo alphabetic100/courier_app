@@ -30,86 +30,115 @@ class AddAdditionalSupportScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CreateTripTopBody(title: "Create a trip"),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                  text: "Additional Support you’d like to offer (Optional)",
-                  color: AppColors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: getWidth(16),
-                ),
-                VerticalSpace(height: getHeight(16)),
-                CustomTexFormField(
-                  controller: createTripController.setRulesController,
-                  maxLines: 4,
-                  hintText: "e.g., Will deliver directly to recipient’s door.",
-                ),
-                VerticalSpace(height: getHeight(16)),
-                CustomText(
-                  text: "Most common",
-                  color: AppColors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: getWidth(16),
-                ),
-                VerticalSpace(height: getHeight(8)),
-                CustomButton(
-                    isPrimary: false,
-                    radious: getWidth(20),
-                    color: Color(0xFFFAFAFC),
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.add,
-                          color: AppColors.bodyTextColor,
-                        ),
-                        HorizontalSpace(width: getWidth(5)),
-                        Expanded(
-                          child: CustomText(
-                            text: "Can pick up parcels from senders.",
-                            fontSize: getWidth(14),
-                            fontWeight: FontWeight.normal,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CreateTripTopBody(title: "Create a trip"),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    text: "Additional Support you’d like to offer (Optional)",
+                    color: AppColors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: getWidth(16),
+                  ),
+                  VerticalSpace(height: getHeight(16)),
+                  CustomTexFormField(
+                    controller: createTripController.setAdditionalSupport,
+                    maxLines: 4,
+                    hintText:
+                        "e.g., Will deliver directly to recipient’s door.",
+                  ),
+                  VerticalSpace(height: getHeight(16)),
+                  Obx(() => createTripController.supportSet.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: List.generate(
+                              createTripController.supportSet.length, (index) {
+                            return Row(
+                              children: [
+                                Icon(
+                                  Icons.check,
+                                  color: AppColors.success,
+                                ),
+                                HorizontalSpace(width: getWidth(5)),
+                                CustomText(
+                                  text: createTripController.supportSet[index],
+                                  color: AppColors.bodyTextColor,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: getWidth(14),
+                                )
+                              ],
+                            );
+                          }),
+                        )
+                      : SizedBox.shrink()),
+                  CustomText(
+                    text: "Most common",
+                    color: AppColors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: getWidth(16),
+                  ),
+                  VerticalSpace(height: getHeight(8)),
+                  CustomButton(
+                      isPrimary: false,
+                      radious: getWidth(20),
+                      color: Color(0xFFFAFAFC),
+                      onPressed: () {
+                        createTripController
+                            .addSupport("Can pick up parcels from senders.");
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.add,
+                            color: AppColors.bodyTextColor,
                           ),
-                        ),
-                      ],
-                    )),
-                //
-
-                VerticalSpace(height: getHeight(8)),
-                //
-
-                CustomButton(
-                    isPrimary: false,
-                    radious: getWidth(20),
-                    color: Color(0xFFFAFAFC),
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.add,
-                          color: AppColors.bodyTextColor,
-                        ),
-                        HorizontalSpace(width: getWidth(5)),
-                        Expanded(
-                          child: CustomText(
-                            text: "Will deliver directly to recipient’s door.",
-                            fontSize: getWidth(14),
-                            fontWeight: FontWeight.normal,
+                          HorizontalSpace(width: getWidth(5)),
+                          Expanded(
+                            child: CustomText(
+                              text: "Can pick up parcels from senders.",
+                              fontSize: getWidth(14),
+                              fontWeight: FontWeight.normal,
+                            ),
                           ),
-                        ),
-                      ],
-                    ))
-              ],
+                        ],
+                      )),
+                  VerticalSpace(height: getHeight(8)),
+                  CustomButton(
+                      isPrimary: false,
+                      radious: getWidth(20),
+                      color: Color(0xFFFAFAFC),
+                      onPressed: () {
+                        createTripController.addSupport(
+                            "Will deliver directly to recipient’s door.");
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.add,
+                            color: AppColors.bodyTextColor,
+                          ),
+                          HorizontalSpace(width: getWidth(5)),
+                          Expanded(
+                            child: CustomText(
+                              text:
+                                  "Will deliver directly to recipient’s door.",
+                              fontSize: getWidth(14),
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ],
+                      ))
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: CustomBottomAppBar(
         isPrimaryButton: false,
@@ -119,7 +148,10 @@ class AddAdditionalSupportScreen extends StatelessWidget {
             Expanded(
                 child: CustomButton(
                     isPrimary: false,
-                    onPressed: () {},
+                    onPressed: () {
+                      createTripController.addSupport(
+                          createTripController.setAdditionalSupport.text);
+                    },
                     child: CustomText(
                       text: "Set Another Rule",
                       color: AppColors.bodyTextColor,
@@ -141,7 +173,7 @@ class AddAdditionalSupportScreen extends StatelessWidget {
                       text: "Next",
                       color: AppColors.white,
                       fontWeight: FontWeight.bold,
-                    )))
+                    ))),
           ],
         ),
       ),
