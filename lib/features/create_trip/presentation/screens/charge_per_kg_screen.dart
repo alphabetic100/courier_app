@@ -54,6 +54,9 @@ class ChargePerKgScreen extends StatelessWidget {
                         child: Obx(
                           () => DropdownButton<String>(
                             underline: SizedBox.shrink(),
+                            alignment: Alignment.center,
+                            iconEnabledColor: AppColors.black,
+                            iconSize: getWidth(35),
                             selectedItemBuilder: (context) => tripController
                                 .chargeRange
                                 .map<DropdownMenuItem<String>>((String value) {
