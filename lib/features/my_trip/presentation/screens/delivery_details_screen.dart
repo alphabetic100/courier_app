@@ -93,12 +93,40 @@ class DeliveryDetailsScreen extends StatelessWidget {
                         child: CustomText(
                           text: "Traveller has accepted the delivery request.",
                           fontSize: getWidth(14),
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.w600,
                           color: AppColors.secondaryColor,
                         ),
                       )
                     ],
                   ),
+                  VerticalSpace(height: getHeight(10)),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomButton(
+                          isPrimary: false,
+                          borderColor: AppColors.error,
+                          onPressed: () {},
+                          child: Icon(
+                            Icons.close,
+                            color: AppColors.error,
+                          ),
+                        ),
+                      ),
+                      HorizontalSpace(width: getWidth(12)),
+                      Expanded(
+                        child: CustomButton(
+                          isPrimary: false,
+                          borderColor: AppColors.success,
+                          onPressed: () {},
+                          child: Icon(
+                            Icons.check,
+                            color: AppColors.success,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),
