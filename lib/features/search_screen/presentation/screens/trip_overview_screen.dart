@@ -37,6 +37,8 @@ class TripOverviewScreen extends StatelessWidget {
             title: "Trip Overview",
             departingFrom: "32,C.nuñez de balboa, Madrid",
             arrivingTo: "32,C.nuñez de balboa, Madrid",
+            price: "20",
+            priceSubText: r"200\kg",
           ),
 
           //Trip Overview Details

@@ -36,7 +36,8 @@ class CarNumberScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: "What is your bus number? (Optional)",
+                  text:
+                      "What is your ${tripController.selectedTransportType.toLowerCase()} number? (Optional)",
                   color: AppColors.black,
                   fontSize: getWidth(18),
                 ),
@@ -56,7 +57,7 @@ class CarNumberScreen extends StatelessWidget {
             Get.to(
               () => TravelingDateSelectScreen(),
               transition: Transition.rightToLeftWithFade,
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 200),
               curve: Curves.easeOut,
             );
           }),

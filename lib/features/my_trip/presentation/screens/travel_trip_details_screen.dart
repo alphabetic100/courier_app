@@ -31,6 +31,8 @@ class TravelTripDetailScreen extends StatelessWidget {
               title: "Trip Details",
               departingFrom: "32,C.nuñez de balboa, Madrid",
               arrivingTo: "32,C.nuñez de balboa, Madrid",
+              price: "20",
+              priceSubText: r"12\kg",
             ),
             Padding(
               padding: EdgeInsets.symmetric(

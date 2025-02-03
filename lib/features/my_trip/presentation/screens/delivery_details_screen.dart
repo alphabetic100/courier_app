@@ -32,9 +32,14 @@ class DeliveryDetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TripDetailsTopBody(title: "Delivery Details",departingFrom: "32,C.nuñez de balboa, Madrid",arrivingTo: "32,C.nuñez de balboa, Madrid",),
+            TripDetailsTopBody(
+              title: "Delivery Details",
+              departingFrom: "32,C.nuñez de balboa, Madrid",
+              arrivingTo: "32,C.nuñez de balboa, Madrid",
+              price: "20",
+              priceSubText: r"12\kg",
+            ),
             Padding(
-              
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: Column(
                 children: [

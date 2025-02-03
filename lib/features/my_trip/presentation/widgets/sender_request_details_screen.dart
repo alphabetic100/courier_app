@@ -36,6 +36,8 @@ class SenderRequestDetailsScreen extends StatelessWidget {
               title: "Trip Details",
               departingFrom: "32,C.nuñez de balboa, Madrid",
               arrivingTo: "32,C.nuñez de balboa, Madrid",
+              price: "32",
+              priceSubText: r"10\kg",
             ),
             Padding(
               padding: EdgeInsets.symmetric(

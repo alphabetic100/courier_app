@@ -39,7 +39,13 @@ class PaymentMethodScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          TripDetailsTopBody(title: "Payment Method", departingFrom: "32,C.nuñez de balboa, Madrid", arrivingTo: "32,C.nuñez de balboa, Madrid",),
+          TripDetailsTopBody(
+            title: "Payment Method",
+            departingFrom: "32,C.nuñez de balboa, Madrid",
+            arrivingTo: "32,C.nuñez de balboa, Madrid",
+            price: "300",
+            priceSubText: r"30\kg",
+          ),
           SizedBox(
             height: getHeight(16),
           ),
