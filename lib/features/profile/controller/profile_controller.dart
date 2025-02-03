@@ -6,7 +6,6 @@ import '../../../core/common/widgets/progress_indicator.dart';
 import '../../../core/services/Auth_service.dart';
 import '../../../core/services/network_caller.dart';
 import '../../../core/utils/constants/api_constants.dart';
-import '../../../routes/app_routes.dart';
 import '../data/profile_model.dart';
 
 class ProfileController extends GetxController {
