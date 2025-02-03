@@ -28,6 +28,7 @@ class MyTripScreen extends StatelessWidget {
           SliverAppBar(
             automaticallyImplyLeading: false,
             backgroundColor: AppColors.white,
+            surfaceTintColor: Colors.transparent,
             floating: true,
             pinned: true,
             expandedHeight: getHeight(140),
