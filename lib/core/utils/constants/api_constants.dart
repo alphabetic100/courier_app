@@ -12,5 +12,6 @@ class AppUrls {
   static const String createTransport = "$_baseUrl/transports";
 
   static const String updateProfile = '$_baseUrl/users/update-profile';
+  static const String updatePassword = '$_baseUrl/users/update-password';
 
 }
