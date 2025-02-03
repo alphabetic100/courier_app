@@ -5,9 +5,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
-import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/sender_request_details_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -69,45 +67,49 @@ class SenderRequestCard extends StatelessWidget {
             VerticalSpace(height: getHeight(10)),
             Row(
               children: [
-                CustomButton(
-                    isPrimary: false,
-                    borderColor: AppColors.success,
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.check,
-                      color: AppColors.success,
-                    )),
-                HorizontalSpace(width: getWidth(8)),
-                CustomButton(
-                    isPrimary: false,
-                    onPressed: () {},
-                    borderColor: AppColors.error,
-                    child: Icon(
-                      Icons.close,
-                      color: AppColors.error,
-                    )),
-                HorizontalSpace(width: getWidth(8)),
                 Expanded(
                   child: CustomButton(
                       isPrimary: false,
-                      onPressed: () {
-                        Get.to(() => ChatInboxScreen());
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            CupertinoIcons.bubble_left,
-                            color: AppColors.grey,
-                          ),
-                          HorizontalSpace(width: getWidth(10)),
-                          CustomText(
-                            text: "Chat With Sender",
-                            fontWeight: FontWeight.bold,
-                          )
-                        ],
+                      borderColor: AppColors.success,
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.check,
+                        color: AppColors.success,
                       )),
                 ),
+                HorizontalSpace(width: getWidth(10)),
+                Expanded(
+                  child: CustomButton(
+                      isPrimary: false,
+                      onPressed: () {},
+                      borderColor: AppColors.error,
+                      child: Icon(
+                        Icons.close,
+                        color: AppColors.error,
+                      )),
+                ),
+                // HorizontalSpace(width: getWidth(8)),
+                // Expanded(
+                //   child: CustomButton(
+                //       isPrimary: false,
+                //       onPressed: () {
+                //         Get.to(() => ChatInboxScreen());
+                //       },
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.center,
+                //         children: [
+                //           Icon(
+                //             CupertinoIcons.bubble_left,
+                //             color: AppColors.grey,
+                //           ),
+                //           HorizontalSpace(width: getWidth(10)),
+                //           CustomText(
+                //             text: "Chat With Sender",
+                //             fontWeight: FontWeight.bold,
+                //           )
+                //         ],
+                //       )),
+                // ),
               ],
             ),
             VerticalSpace(height: getHeight(10)),
