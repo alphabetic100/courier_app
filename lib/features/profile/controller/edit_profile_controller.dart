@@ -27,11 +27,12 @@ class EditProfileController extends GetxController{
 
   Future<void> updateProfile({
     required String fullName,
+    required String phone,
 
   }) async {
     final Map<String, String> requestBody = {
       "fullName": fullName,
-      //"email": "jane4@example.com"
+      "phoneNumber": phone
     };
 
     try {
@@ -62,6 +63,9 @@ class EditProfileController extends GetxController{
       }
     }
   }
+
+
+
 
   Future<void> _sendPutRequestWithHeadersAndImages(
       String url,

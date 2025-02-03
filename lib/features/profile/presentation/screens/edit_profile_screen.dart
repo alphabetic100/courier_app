@@ -20,6 +20,7 @@ import '../../../../core/common/widgets/custom_button.dart';
 import '../../../../core/common/widgets/custom_text_button.dart';
 import '../../../../core/common/widgets/custom_text_form_field.dart';
 import '../../../../core/common/widgets/phone_number_text_field.dart';
+import 'change_password_screen.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -188,16 +189,8 @@ class EditProfileScreen extends StatelessWidget {
                     },
                   ),
 
-                  SizedBox(
-                    height: getHeight(16),
-                  ),
-                  CustomTextAndTextFormField(
-                    text: "Email Address",
-                    controller: emailTEController,
-                  ),
-                  SizedBox(
-                    height: getHeight(16),
-                  ),
+
+
 
                   SizedBox(height: getHeight(16),),
                   CustomTextAndTextFormField(text: "Email Address",controller: emailTEController,readOnly: true,),
@@ -214,7 +207,9 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                       CustomTextButton(
                         isUnderline: true,
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(()=>ChangePasswordScreen());
+                        },
                         text: "Change",
                         fontWeight: FontWeight.w600,
                         fontSize: getHeight(14),
@@ -231,19 +226,7 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                     CustomText(
-                        text: "Verification status: ",
-                        fontSize: getWidth(16),
-                        color: Color(0xff262B2B),
-                      ),
-                      SizedBox(
-                        width: getWidth(4),
-                      ),
-                      CustomText(
-                        text: "Verified ",
-                        fontSize: getWidth(16),
-                        color: Color(0xff2BCD31),
-                      ),
+                     
 
                       CustomText(text: "Verification status: ",fontSize: getWidth(16),color: Color(0xff262B2B),),
                       SizedBox(width: getWidth(4),),
@@ -286,7 +269,7 @@ class EditProfileScreen extends StatelessWidget {
               child: CustomButton(
                   onPressed: ()
                   {
-                    editProfileController.updateProfile(fullName: fullNameTEController.text);
+                    editProfileController.updateProfile(fullName: fullNameTEController.text,phone: phoneNumberTEController.text);
                   },
                   child: CustomText(
                     text: "Save Changes",
