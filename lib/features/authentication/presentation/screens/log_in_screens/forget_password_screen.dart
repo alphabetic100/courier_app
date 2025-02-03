@@ -78,11 +78,10 @@ class ForgetPasswordScreen extends StatelessWidget {
             CustomButton(
                 onPressed: () {
                   controller.verifyOTP(email);
-
                 },
                 child: CustomText(
                     text: "Next",
-                    fontSize: 18,
+                    fontSize: getWidth(18),
                     color: AppColors.white,
                     fontWeight: FontWeight.bold)),
             VerticalSpace(height: getHeight(16))

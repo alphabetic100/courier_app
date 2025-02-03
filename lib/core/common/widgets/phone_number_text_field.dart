@@ -6,11 +6,8 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 class PhoneNumberTextField extends StatefulWidget {
   const PhoneNumberTextField({
     super.key,
-
-
-   this.hintText,
+    this.hintText,
     this.controller,
-
     this.validator,
     this.radius = 4.0,
     this.onChange,
@@ -18,10 +15,8 @@ class PhoneNumberTextField extends StatefulWidget {
     this.readOnly = false,
   });
 
-
   final String? hintText;
   final TextEditingController? controller;
-
   final String? Function(String?)? validator;
   final double radius;
   final Function(String)? onChange;
@@ -64,18 +59,16 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               isDense: true,
-              isExpanded: false,
-              padding: const EdgeInsets.all(0),
-              dropdownColor: AppColors.white,
               value: _selectedCountryCode,
               onChanged: (newValue) {
                 if (newValue != null) {
                   setState(() => _selectedCountryCode = newValue);
                 }
               },
-              items: countryPhoneLengths.keys.map((code) {
-                return DropdownMenuItem(
-                  value: code,
+              selectedItemBuilder: (context) =>
+                  countryPhoneLengths.keys.map((code) {
+                return Container(
+                  alignment: Alignment.centerLeft,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -84,14 +77,24 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
                         child: const Icon(Icons.arrow_drop_down,
                             color: Colors.black),
                       ),
-                      const SizedBox(width: 4),
                       CustomText(
-                        text: code,
+                        text: "($_selectedCountryCode)",
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                         color: Colors.black,
                       ),
                     ],
+                  ),
+                );
+              }).toList(),
+              items: countryPhoneLengths.keys.map((code) {
+                return DropdownMenuItem(
+                  value: code,
+                  child: CustomText(
+                    text: code,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                    color: Colors.black,
                   ),
                 );
               }).toList(),

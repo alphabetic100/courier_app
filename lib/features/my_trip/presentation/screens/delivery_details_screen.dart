@@ -171,6 +171,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
                       Icon(
                         CupertinoIcons.bubble_left,
                         color: AppColors.grey,
+                        size: getHeight(28),
                       ),
                       HorizontalSpace(width: getWidth(5)),
                       CustomText(

@@ -42,19 +42,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: backButton
           ? Padding(
               padding: EdgeInsets.only(
-                  left: getWidth(12), top: getWidth(6), bottom: getWidth(6)),
-              child: CustomButton(
-                  isPrimary: false,
-                  onPressed: ontapBackButton ??
-                      () {
-                        Get.back();
-                      },
-                  child: Center(
+                left: getWidth(12),
+              ),
+              child: SizedBox(
+                width: 50,
+                height: 46,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: CustomButton(
+                    isPrimary: false,
+                    height: 46,
+                    width: 55,
+                    onPressed: ontapBackButton ?? () => Get.back(),
                     child: Icon(
                       CupertinoIcons.back,
                       color: AppColors.grey,
+                      size: 28,
                     ),
-                  )),
+                  ),
+                ),
+              ),
             )
           : null,
     );
