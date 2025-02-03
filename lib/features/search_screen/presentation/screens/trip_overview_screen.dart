@@ -30,30 +30,33 @@ class TripOverviewScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TripDetailsTopBody(
-            title: "Trip Overview",
-            departingFrom: "32,C.nuñez de balboa, Madrid",
-            arrivingTo: "32,C.nuñez de balboa, Madrid",
-            price: "20",
-            priceSubText: r"200\kg",
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TripDetailsTopBody(
+              title: "Trip Overview",
+              departingFrom: "32,C.nuñez de balboa, Madrid",
+              arrivingTo: "32,C.nuñez de balboa, Madrid",
+              price: "20",
+              priceSubText: r"200\kg",
+            ),
 
-          //Trip Overview Details
-          Padding(
-            padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
-            child: TripOverviewDetails(),
-          ),
-        ],
+            //Trip Overview Details
+            Padding(
+              padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+              child: TripOverviewDetails(),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
-        height: AppSizes.height * 0.165,
+        height: AppSizes.height * 0.17,
         padding: EdgeInsets.only(
             left: getHeight(16), right: getHeight(16), bottom: getHeight(16)),
         color: Color(0xffFFFFFF),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CustomButton(
                 isPrimary: false,
@@ -66,6 +69,7 @@ class TripOverviewScreen extends StatelessWidget {
                     Icon(
                       CupertinoIcons.bubble_left,
                       color: AppColors.grey,
+                      size: getHeight(30),
                     ),
                     HorizontalSpace(width: getWidth(5)),
                     CustomText(

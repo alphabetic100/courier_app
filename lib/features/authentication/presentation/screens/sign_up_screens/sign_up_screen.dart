@@ -229,7 +229,7 @@ class SignUpScreen extends StatelessWidget {
                           children: [
                             Image.asset(
                               IconPath.googleLogo,
-                              height: 25,
+                              height: getHeight(25),
                             ),
                             HorizontalSpace(width: getWidth(10)),
                             CustomText(

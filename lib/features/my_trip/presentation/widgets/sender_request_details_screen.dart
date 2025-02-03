@@ -154,49 +154,56 @@ class SenderRequestDetailsScreen extends StatelessWidget {
                   Obx(
                     () => Row(
                       children: [
-                        myTripController.isPending.value
-                            ? CustomButton(
-                                isPrimary: false,
-                                borderColor: AppColors.success,
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.check,
-                                  color: AppColors.success,
-                                ))
-                            : SizedBox.shrink(),
-                        HorizontalSpace(width: getWidth(8)),
-                        myTripController.isPending.value
-                            ? CustomButton(
-                                isPrimary: false,
-                                onPressed: () {},
-                                borderColor: AppColors.error,
-                                child: Icon(
-                                  Icons.close,
-                                  color: AppColors.error,
-                                ))
-                            : SizedBox.shrink(),
-                        HorizontalSpace(width: getWidth(8)),
                         Expanded(
+                          flex: 1,
                           child: CustomButton(
                               isPrimary: false,
                               onPressed: () {
                                 Get.to(() => ChatInboxScreen());
                               },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    CupertinoIcons.bubble_left,
-                                    color: AppColors.grey,
-                                  ),
-                                  HorizontalSpace(width: getWidth(10)),
-                                  CustomText(
-                                    text: "Chat With Sender",
-                                    fontWeight: FontWeight.bold,
-                                  )
-                                ],
+                              child: Icon(
+                                CupertinoIcons.bubble_left,
+                                color: AppColors.grey,
                               )),
                         ),
+                        HorizontalSpace(width: getWidth(8)),
+                        if (myTripController.isPending.value) ...[
+                          Expanded(
+                            flex: 1,
+                            child: CustomButton(
+                                isPrimary: false,
+                                borderColor: AppColors.error,
+                                onPressed: () {},
+                                child: Icon(
+                                  Icons.close,
+                                  color: AppColors.error,
+                                )),
+                          ),
+                          HorizontalSpace(width: getWidth(8)),
+                          Expanded(
+                            flex: 3,
+                            child: CustomButton(
+                                isPrimary: false,
+                                onPressed: () {},
+                                borderColor: AppColors.success,
+                                child: Icon(
+                                  Icons.check,
+                                  color: AppColors.success,
+                                )),
+                          )
+                        ] else ...[
+                          Expanded(
+                            flex: 3,
+                            child: CustomButton(
+                              onPressed: () {},
+                              child: CustomText(
+                                text: "I Picked Up the Parcel",
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ]
                       ],
                     ),
                   )

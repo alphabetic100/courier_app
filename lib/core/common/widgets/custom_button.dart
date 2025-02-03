@@ -1,4 +1,5 @@
 import 'package:courierapp/core/utils/constants/app_colors.dart';
+import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -30,11 +31,11 @@ class CustomButton extends StatelessWidget {
       child: Container(
         height: height,
         width: width,
-        padding: padding ?? const EdgeInsets.all(8.0),
+        padding: padding ?? EdgeInsets.all(getWidth(8)),
         decoration: BoxDecoration(
           color: color ??
               (isPrimary ? Theme.of(context).primaryColor : AppColors.white),
-          borderRadius: BorderRadius.circular(radious ?? 3),
+          borderRadius: BorderRadius.circular(radious ?? 4),
           border: Border.all(
             color: isPrimary
                 ? Theme.of(context).primaryColor

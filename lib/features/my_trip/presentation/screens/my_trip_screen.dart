@@ -28,12 +28,13 @@ class MyTripScreen extends StatelessWidget {
           SliverAppBar(
             automaticallyImplyLeading: false,
             backgroundColor: AppColors.white,
+            surfaceTintColor: Colors.transparent,
             floating: true,
             pinned: true,
-            expandedHeight: getHeight(140),
+            expandedHeight: getHeight(150),
             leading: Padding(
               padding: EdgeInsets.only(
-                  left: getWidth(12), top: getWidth(6), bottom: getWidth(6)),
+                  left: getWidth(12), top: getWidth(5), bottom: getWidth(5)),
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
@@ -53,6 +54,7 @@ class MyTripScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      VerticalSpace(height: getHeight(10)),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
                         child: CustomText(

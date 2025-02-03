@@ -6,7 +6,7 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
   final PageController pageController = PageController();
   RxInt selectedIndex = 0.obs;
   RxString status = "request panding".obs;
-  RxBool isPending = true.obs;
+  RxBool isPending = false.obs;
   @override
   void onInit() {
     super.onInit();

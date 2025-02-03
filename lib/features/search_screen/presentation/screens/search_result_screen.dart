@@ -28,7 +28,11 @@ class SearchResultScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16),top: getHeight(16)),
+                    padding: EdgeInsets.only(
+                      left: getWidth(16),
+                      right: getWidth(16),
+                      top: getHeight(16),
+                    ),
                     child: Column(
                       children: [
                         VerticalSpace(height: getHeight(16)),
@@ -37,7 +41,7 @@ class SearchResultScreen extends StatelessWidget {
                             Expanded(
                               child: CustomButton(
                                   padding: EdgeInsets.all(0),
-                                  height: getWidth(50),
+                                  height: 50,
                                   // width: getWidth(50),
                                   isPrimary: false,
                                   onPressed: () {},
@@ -88,7 +92,8 @@ class SearchResultScreen extends StatelessWidget {
                                                 ],
                                               ),
                                               CustomText(
-                                                text: "Saturday, 15 October, 2kg",
+                                                text:
+                                                    "Saturday, 15 October, 2kg",
                                                 fontSize: getWidth(12),
                                               )
                                             ],
@@ -103,10 +108,8 @@ class SearchResultScreen extends StatelessWidget {
                                   ])),
                             ),
                             HorizontalSpace(width: getWidth(16)),
-                            Padding(
-                              padding: EdgeInsets.only(),
-                              child: MessageNotificationBox(),
-                            ),
+                            // MessageNotificationBox(),
+                            MessageNotificationBox()
                           ],
                         )
                       ],

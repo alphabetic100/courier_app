@@ -1,7 +1,6 @@
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
-import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/features/messege/presentation/screens/message_screen.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,33 +13,33 @@ class MessageNotificationBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: getHeight(55),
-      width: getWidth(50),
-      child: Center(
+      height: 46,
+      width: 46,
+      child: Align(
+        alignment: Alignment.center,
         child: Stack(
           children: [
             CustomButton(
-                width: getWidth(50),
-                isPrimary: false,
-                onPressed: () {
-                  Get.to(() => MessageScreen());
-                },
-                child: SizedBox(
-                  width: getWidth(50),
-                  child: Icon(
-                    CupertinoIcons.bubble_left,
-                    color: AppColors.grey,
-                    size: getHeight(32),
-                  ),
-                )),
+              width: 50,
+              height: 50,
+              isPrimary: false,
+              onPressed: () {
+                Get.to(() => MessageScreen());
+              },
+              child: Icon(
+                CupertinoIcons.bubble_left,
+                color: AppColors.grey,
+                size: 28,
+              ),
+            ),
             Obx(
               () => searchScreenController.hasNotification.value
                   ? Positioned(
-                      top: getHeight(8),
-                      right: getWidth(5),
+                      top: 6,
+                      right: 5,
                       child: Container(
-                        height: getWidth(20),
-                        width: getWidth(20),
+                        height: 18,
+                        width: 18,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: AppColors.error,
@@ -48,7 +47,7 @@ class MessageNotificationBox extends StatelessWidget {
                         child: Center(
                           child: CustomText(
                             text: "1",
-                            fontSize: getWidth(10),
+                            fontSize: 10,
                             color: AppColors.white,
                           ),
                         ),
