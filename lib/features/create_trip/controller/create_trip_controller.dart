@@ -28,14 +28,16 @@ class CreateTripController extends GetxController {
 
   String selectedTransportType = "";
   String date = "";
+  String weight = "";
   RxDouble itemWeight = 1.0.obs;
+
   RxList<String> rulesSet = <String>[].obs;
   RxList<String> supportSet = <String>[].obs;
   String selectedIconPath = "";
 
   // Helper variable
   RxInt selectedIndex = 4.obs;
-  RxString departingLocation = "".obs;
+  RxString departingLocation = "1.0".obs;
   RxBool isUnlimited = false.obs;
 
   final List<String> titles = ["Car", "Train", "Buss", "Airplane"];
@@ -58,15 +60,15 @@ class CreateTripController extends GetxController {
 //Create trip
   Future<void> createTrip() async {
     final Map<String, dynamic> requestBody = {
-      "transport": selectedTransportType,
-      "carNumber": carNumberController.text.trim(),
+      "transportType": selectedTransportType,
+      "transportNumber": carNumberController.text.trim(),
       "date": date,
       "from": selectDepartingController.text,
       "to": selectArrivingController.text,
-      "weight": itemWeight.value,
-      "charge": selectedCharge.value,
+      "weight": weight,
+      "price": int.parse(selectedCharge.value.replaceAll("\$", "")),
       "rulse": rulesSet.toList(),
-      "support": supportSet.toList(),
+      "additional": supportSet.toList(),
     };
 
     try {
@@ -111,8 +113,11 @@ class CreateTripController extends GetxController {
     isUnlimited.value = !isUnlimited.value;
 
     //TODO: Have to fix this here
-    itemWeight.value =
-        isUnlimited.value ? itemWeight.value = 1.0 : itemWeight.value;
+    if (isUnlimited.value) {
+      weight = "unlimited";
+    } else {
+      weight = itemWeight.value.toString();
+    }
   }
 
 //Select Transport Type

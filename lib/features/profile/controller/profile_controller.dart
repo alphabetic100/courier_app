@@ -21,11 +21,10 @@ class ProfileController extends GetxController {
       final String token = AuthService.token!;
 
       final response =
-      await networkCaller.getRequest(AppUrls.getProfile, token: token);
-
+          await networkCaller.getRequest(AppUrls.getProfile, token: token);
+      hideProgressIndicator();
       if (response.isSuccess) {
         profile = ProfileModel.fromJson(response.responseData);
-
       } else {
         errorSnakbar(errorMessage: "Failed to load profile data");
       }
@@ -42,14 +41,11 @@ class ProfileController extends GetxController {
 
   Future<void> logOut() async {
     AuthService.logoutUser();
-
   }
 
   @override
   void onReady() {
     getProfileDetails();
     super.onReady();
-
-
   }
 }

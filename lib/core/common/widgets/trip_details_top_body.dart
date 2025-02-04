@@ -134,7 +134,7 @@ class TripDetailsTopBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                text: "\$$price",
+                text: "\$${price.replaceAll("\$", "")}",
                 color: AppColors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: getWidth(25),
