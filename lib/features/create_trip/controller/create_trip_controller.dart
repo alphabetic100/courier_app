@@ -7,6 +7,8 @@ import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
+import 'package:courierapp/features/landing/controller/landing_controller.dart';
+import 'package:courierapp/features/landing/presentation/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +16,7 @@ import 'package:intl/intl.dart';
 class CreateTripController extends GetxController {
 //Network Caller
   final NetworkCaller networkCaller = NetworkCaller();
+  final LandingController landingController = Get.find<LandingController>();
 
   //Text Editin Controllers and required variables
   final TextEditingController dateTimeController = TextEditingController();
@@ -80,6 +83,8 @@ class CreateTripController extends GetxController {
       hideProgressIndicator();
       if (response.isSuccess) {
         successSnakbr(successMessage: "Trip is created successfully");
+        landingController.currentPage.value = 0;
+        Get.offAll(() => LandingScreen());
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }
