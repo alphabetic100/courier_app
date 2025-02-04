@@ -8,8 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AsTravellerCard extends StatelessWidget {
-  AsTravellerCard({super.key});
+  AsTravellerCard(
+      {super.key,
+      required this.from,
+      required this.to,
+      required this.price,
+      required this.availableSpace,
+      required this.status});
   final MyTripController myTripController = Get.find<MyTripController>();
+  final String from;
+  final String to;
+  final String price;
+  final String availableSpace;
+  final String status;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,11 +45,11 @@ class AsTravellerCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomText(
-                      text: "Madrid",
+                      text: from,
                       color: AppColors.black,
                     ),
                     CustomText(
-                      text: "Paris",
+                      text: to,
                       color: AppColors.black,
                     )
                   ],
@@ -48,16 +59,18 @@ class AsTravellerCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     CustomText(
-                      text: "\$8/kg",
+                      text: "\$$price",
                       color: AppColors.black,
                       fontWeight: FontWeight.w700,
                       fontSize: getWidth(24),
                     ),
-                    VerticalSpace(height: getHeight(5)),
-                    CustomText(
-                      text: "Available: 5 kg",
-                      fontSize: getWidth(12),
-                    )
+                    if (availableSpace.isNotEmpty) ...[
+                      VerticalSpace(height: getHeight(5)),
+                      CustomText(
+                        text: "Available: $availableSpace kg",
+                        fontSize: getWidth(12),
+                      )
+                    ]
                   ],
                 )
               ],
