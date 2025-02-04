@@ -14,4 +14,5 @@ class AppUrls {
   static const String updateProfile = '$_baseUrl/users/update-profile';
   static const String meAsTraveller = "$_baseUrl/transports/me";
   static const String meAsSender = "$_baseUrl/bookings/my-bookings";
+  static const String transport = "$_baseUrl/transports";
 }

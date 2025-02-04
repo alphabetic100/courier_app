@@ -48,6 +48,8 @@ class SearchResultScreen extends StatelessWidget {
                                   child: Row(children: [
                                     GestureDetector(
                                       onTap: () {
+                                        searchScreenController
+                                            .clearTextFields();
                                         Get.back();
                                       },
                                       child: Icon(
@@ -71,7 +73,8 @@ class SearchResultScreen extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   CustomText(
-                                                    text: "Madrid",
+                                                    text: searchScreenController
+                                                        .senderController.text,
                                                     color: AppColors.black,
                                                     fontSize: getWidth(14),
                                                   ),
@@ -85,15 +88,17 @@ class SearchResultScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                   CustomText(
-                                                    text: "Madrid",
+                                                    text: searchScreenController
+                                                        .receiverController
+                                                        .text,
                                                     color: AppColors.black,
                                                     fontSize: getWidth(14),
                                                   ),
                                                 ],
                                               ),
                                               CustomText(
-                                                text:
-                                                    "Saturday, 15 October, 2kg",
+                                                text: searchScreenController
+                                                    .searchDate.value,
                                                 fontSize: getWidth(12),
                                               )
                                             ],

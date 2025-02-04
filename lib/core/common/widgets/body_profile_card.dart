@@ -1,6 +1,7 @@
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
+import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +13,15 @@ class BodyProfileCard extends StatelessWidget {
       required this.profileName,
       this.rattings = "",
       this.subtitle = "",
-      required this.suffixIcon});
+      required this.suffixIcon,
+      this.carNumber = ""});
   final bool isVerified;
   final String profileImage;
   final String profileName;
   final String rattings;
   final Widget suffixIcon;
   final String subtitle;
+  final String carNumber;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -26,7 +29,9 @@ class BodyProfileCard extends StatelessWidget {
       leading: Stack(
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage(ImagePath.profile),
+            backgroundImage: profileImage.isNotEmpty
+                ? NetworkImage(profileImage)
+                : AssetImage(ImagePath.profile),
           ),
           isVerified
               ? Positioned(
@@ -66,7 +71,20 @@ class BodyProfileCard extends StatelessWidget {
           ]
         ],
       ),
-      trailing: suffixIcon,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (carNumber.isNotEmpty) ...[
+            CustomText(
+              text: carNumber,
+              fontSize: getWidth(14),
+              fontWeight: FontWeight.normal,
+            ),
+            HorizontalSpace(width: getWidth(15)),
+          ],
+          suffixIcon,
+        ],
+      ),
     );
   }
 }
