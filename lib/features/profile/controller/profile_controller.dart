@@ -11,7 +11,7 @@ import '../data/profile_model.dart';
 class ProfileController extends GetxController {
   final NetworkCaller networkCaller = NetworkCaller();
   RxBool isLoading = false.obs;
-  ProfileModel? profile;
+ Rx< ProfileModel?> profile = Rx<ProfileModel?>(null);
 
   Future<void> getProfileDetails() async {
     try {
@@ -24,7 +24,7 @@ class ProfileController extends GetxController {
           await networkCaller.getRequest(AppUrls.getProfile, token: token);
       hideProgressIndicator();
       if (response.isSuccess) {
-        profile = ProfileModel.fromJson(response.responseData);
+        profile.value = ProfileModel.fromJson(response.responseData);
       } else {
         errorSnakbar(errorMessage: "Failed to load profile data");
       }

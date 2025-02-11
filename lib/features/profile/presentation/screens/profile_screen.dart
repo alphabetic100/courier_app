@@ -23,8 +23,8 @@ class ProfileScreen extends StatelessWidget {
   final controller = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
-    controller.getProfileDetails();
-    final profile = controller.profile?.data;
+    //controller.getProfileDetails();
+
     return Scaffold(
       appBar: CustomAppBar(
         ontapBackButton: () {
@@ -67,7 +67,9 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             VerticalSpace(height: getHeight(20)),
-            Column(
+           Obx((){
+             final profile = controller.profile.value?.data;
+             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
@@ -78,11 +80,11 @@ class ProfileScreen extends StatelessWidget {
                       Stack(
                         children: [
                           CircleAvatar(
-                            backgroundImage:
-                                controller.profile?.data?.profileImage != null
-                                    ? NetworkImage(
-                                        controller.profile?.data?.profileImage)
-                                    : AssetImage(ImagePath.profile),
+
+                            backgroundImage: controller.profile.value?.data?.profileImage != null
+                                ? NetworkImage(controller.profile.value?.data?.profileImage)
+                                : AssetImage(ImagePath.profile),
+
                             radius: getWidth(60),
                           ),
                           Positioned(
@@ -281,7 +283,8 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            );
+           })
           ],
         ),
       ),
