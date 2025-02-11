@@ -167,4 +167,14 @@ class CreateTripController extends GetxController {
     setRulesController.dispose();
     setAdditionalSupport.dispose();
   }
+
+  void clearForm() {
+    selectedIndex.value = 4;
+    dateTimeController.clear();
+    carNumberController.clear();
+    selectDepartingController.clear();
+    selectArrivingController.clear();
+    setRulesController.clear();
+    setAdditionalSupport.clear();
+  }
 }
