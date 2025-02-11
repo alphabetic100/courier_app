@@ -19,6 +19,8 @@ class IconPath {
   static const String plane = "$_basePath/travel.png";
   static const String car = "$_basePath/directions_car.png";
   static const String train = "$_basePath/directions_subway.png";
+  static const String qrBorder = "$_basePath/qr_border.png";
+  static const String worningIcon = "$_basePath/worning.png";
   //nav bar Icons
   static const String searchIcon = "$_basePath/Search.png";
   static const String sendIcon = "$_basePath/list_alt.png";

@@ -8,8 +8,8 @@ import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
+import 'package:courierapp/features/my_trip/presentation/widgets/qr_generate_dialog.dart';
 import 'package:courierapp/features/profile/presentation/screens/others_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,8 @@ class DeliveryDetailsScreen extends StatelessWidget {
               departingFrom: "32,C.nuñez de balboa, Madrid",
               arrivingTo: "32,C.nuñez de balboa, Madrid",
               price: "20",
-              priceSubText: r"12\kg".obs, date: '200',
+              priceSubText: r"12\kg".obs,
+              date: '200',
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
@@ -142,7 +143,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
                 },
                 child: BodyProfileCard(
                     isVerified: true,
-                    profileImage: ImagePath.profile,
+                    profileImage: "",
                     profileName: "profileName",
                     rattings: "5.00/6",
                     suffixIcon: Icon(Icons.arrow_forward_ios)),
@@ -160,6 +161,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
         primaryWidget: Row(
           children: [
             Expanded(
+              flex: 1,
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
@@ -173,37 +175,32 @@ class DeliveryDetailsScreen extends StatelessWidget {
                         color: AppColors.grey,
                         size: getHeight(28),
                       ),
-                      HorizontalSpace(width: getWidth(5)),
-                      CustomText(
-                        text: "Chat",
-                        fontWeight: FontWeight.bold,
-                        fontSize: getWidth(18),
-                      )
+                      // HorizontalSpace(width: getWidth(5)),
+                      // CustomText(
+                      //   text: "Chat",
+                      //   fontWeight: FontWeight.bold,
+                      //   fontSize: getWidth(18),
+                      // )
                     ],
                   )),
             ),
             HorizontalSpace(width: getWidth(16)),
             Expanded(
+              flex: 4,
               child: CustomButton(
-                  isPrimary: false,
+                  isPrimary: true,
                   onPressed: () {
-                    // Get.to(() => ChatWithTravellerScreen());
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return QrGenerateDialog();
+                        });
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/icons/track.png",
-                        color: AppColors.grey,
-                        height: getHeight(28),
-                      ),
-                      HorizontalSpace(width: getWidth(5)),
-                      CustomText(
-                        text: "Trak",
-                        fontWeight: FontWeight.bold,
-                        fontSize: getWidth(18),
-                      )
-                    ],
+                  child: CustomText(
+                    text: "Generate QR Code",
+                    fontWeight: FontWeight.bold,
+                    fontSize: getWidth(18),
+                    color: AppColors.white,
                   )),
             ),
           ],
