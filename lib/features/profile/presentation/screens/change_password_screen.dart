@@ -11,12 +11,11 @@ import 'package:get/get.dart';
 import '../../../../core/common/widgets/custom_app_bar.dart';
 import '../../../../core/common/widgets/message_notification_box.dart';
 
-
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
 
-  final ChangePasswordController controller = Get.put(ChangePasswordController());
-
+  final ChangePasswordController controller =
+      Get.put(ChangePasswordController());
 
   final GlobalKey<FormState> changePasswordFormKey = GlobalKey<FormState>();
 
@@ -26,7 +25,7 @@ class ChangePasswordScreen extends StatelessWidget {
       appBar: CustomAppBar(
         ontapBackButton: () {
           // Uncomment and modify this to enable back functionality
-          // Navigator.pop(context);
+          Navigator.pop(context);
         },
         actions: [
           Padding(
@@ -65,7 +64,6 @@ class ChangePasswordScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     VerticalSpace(height: getHeight(20)),
-
                     Form(
                       key: changePasswordFormKey,
                       child: Column(
@@ -108,7 +106,8 @@ class ChangePasswordScreen extends StatelessWidget {
                               if (value == null || value.isEmpty) {
                                 return "Confirm Password is required";
                               }
-                              if (value != controller.newPasswordTEController.text) {
+                              if (value !=
+                                  controller.newPasswordTEController.text) {
                                 return "Passwords do not match";
                               }
                               return null;
@@ -117,7 +116,8 @@ class ChangePasswordScreen extends StatelessWidget {
                           VerticalSpace(height: getHeight(20)),
                           CustomButton(
                             onPressed: () {
-                              if (changePasswordFormKey.currentState!.validate()) {
+                              if (changePasswordFormKey.currentState!
+                                  .validate()) {
                                 // Implement password change logic here
                                 controller.changePassword();
                               }

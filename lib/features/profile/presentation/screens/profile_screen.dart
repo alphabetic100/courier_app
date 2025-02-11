@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         ontapBackButton: () {
-          // landingController.changePage(0);
+          landingController.changePage(0);
         },
         actions: [
           Padding(

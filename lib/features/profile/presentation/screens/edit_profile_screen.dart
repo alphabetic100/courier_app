@@ -9,6 +9,7 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/profile/controller/edit_profile_controller.dart';
 import 'package:courierapp/features/profile/controller/profile_controller.dart';
+import 'package:courierapp/features/profile/presentation/screens/change_password_otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,6 @@ import '../../../../core/common/widgets/custom_button.dart';
 import '../../../../core/common/widgets/custom_text_button.dart';
 import '../../../../core/common/widgets/custom_text_form_field.dart';
 import '../../../../core/common/widgets/phone_number_text_field.dart';
-import 'change_password_screen.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -194,7 +194,7 @@ class EditProfileScreen extends StatelessWidget {
                       CustomTextButton(
                         isUnderline: true,
                         onPressed: () {
-                          Get.to(() => ChangePasswordScreen());
+                          Get.to(() => ChangePasswordOtpScreen());
                         },
                         text: "Change",
                         fontWeight: FontWeight.w600,
