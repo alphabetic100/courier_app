@@ -100,19 +100,19 @@ class SearchResultCard extends StatelessWidget {
               profileName: profileName,
               rattings: profileRetting,
               carNumber: carNumber,
-              suffixIcon: trynasportType == "Bus"
+              suffixIcon: trynasportType.toLowerCase() == "bus"
                   ? Image.asset(
                       IconPath.directionsBus,
                       height: getHeight(25),
                       color: AppColors.grey,
                     )
-                  : trynasportType == "Car"
+                  : trynasportType.toLowerCase() == "car"
                       ? Image.asset(
                           IconPath.car,
                           height: getHeight(25),
                           color: AppColors.grey,
                         )
-                      : trynasportType == "Airplane"
+                      : trynasportType.toLowerCase() == "airplane"
                           ? Image.asset(
                               IconPath.plane,
                               height: getHeight(25),
