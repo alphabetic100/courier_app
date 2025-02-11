@@ -4,7 +4,6 @@ import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
 import 'package:courierapp/core/common/widgets/trip_details_view.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/my_trip/controller/my_trip_controller.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/sender_request_card.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,8 @@ class TravelTripDetailScreen extends StatelessWidget {
               departingFrom: "32,C.nuñez de balboa, Madrid",
               arrivingTo: "32,C.nuñez de balboa, Madrid",
               price: "20",
-              priceSubText: r"12\kg",
+              priceSubText: r"12\kg".obs,
+              date: '42',
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -48,7 +48,6 @@ class TravelTripDetailScreen extends StatelessWidget {
                         "No perishable food items without proper packaging.",
                         "No fragile items unless securely packaged."
                       ],
-                      transportIcon: IconPath.directionsBus,
                       date: "14 Jan 2025",
                       tripAdvantate: [
                         "Will pickup the items from the sender's location.",

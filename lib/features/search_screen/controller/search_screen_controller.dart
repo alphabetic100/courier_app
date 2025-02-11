@@ -35,6 +35,7 @@ class SearchScreenController extends GetxController {
       hideProgressIndicator();
       if (response.isSuccess) {
         searchData.value = AllTripModel.fromJson(response.responseData);
+        log(searchData.toString());
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }

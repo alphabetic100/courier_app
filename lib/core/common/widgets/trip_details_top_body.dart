@@ -7,6 +7,7 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TripDetailsTopBody extends StatelessWidget {
   const TripDetailsTopBody({
@@ -15,15 +16,16 @@ class TripDetailsTopBody extends StatelessWidget {
     required this.departingFrom,
     required this.arrivingTo,
     required this.price,
-    this.priceSubText = "",
+    this.priceSubText,
+    required this.date,
   });
 
   final String title;
   final String departingFrom;
   final String arrivingTo;
   final String price;
-
-  final String priceSubText;
+  final String date;
+  final RxString? priceSubText;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,19 @@ class TripDetailsTopBody extends StatelessWidget {
           ),
         ),
         VerticalSpace(height: getHeight(20)),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: getWidth(16),
+          ),
+          alignment: Alignment.topLeft,
+          child: CustomText(
+            text: date,
+            color: Color(0xFF677674),
+            fontSize: getWidth(19),
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+        VerticalSpace(height: getHeight(10)),
         Padding(
           padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
           child: SizedBox(
@@ -139,12 +154,14 @@ class TripDetailsTopBody extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: getWidth(25),
               ),
-              priceSubText.isNotEmpty
-                  ? CustomText(
-                      text: "\$12/kg×2",
-                      fontWeight: FontWeight.w400,
-                    )
-                  : SizedBox.shrink(),
+              if (priceSubText != null) ...[
+                priceSubText!.value.isNotEmpty
+                    ? Obx(() => CustomText(
+                          text: priceSubText!.value,
+                          fontWeight: FontWeight.w400,
+                        ))
+                    : SizedBox.shrink(),
+              ]
             ],
           ),
         ),

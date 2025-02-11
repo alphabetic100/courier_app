@@ -114,4 +114,9 @@ class AppHelperFunctions {
 
     return countryPhoneLengths[countryCode] ?? -1;
   }
+
+  static String formateDate(String date) {
+    DateTime dateTime = DateTime.parse(date);
+    return DateFormat('MMM d, y').format(dateTime);
+  }
 }
