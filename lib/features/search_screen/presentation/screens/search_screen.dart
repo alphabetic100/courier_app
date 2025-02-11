@@ -65,7 +65,7 @@ class SearchScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        color: const Color(0xffFAFAFC),
+                        color: Colors.grey.withOpacity(0.1),
                       ),
                     ),
                   ],

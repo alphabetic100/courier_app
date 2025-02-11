@@ -65,13 +65,13 @@ class SearchScreenController extends GetxController {
 
   var items = <Item>[
     Item(
-        name: 'Laptop',
+        name: 'Laptop to New York',
         destination: 'New York',
         weight: '09 kg',
         from: "Madrid",
         imagePath: ImagePath.onboarding1),
     Item(
-        name: 'Books',
+        name: 'Books to Chicago',
         destination: 'Chicago',
         weight: '16 kg',
         from: "Cicago",
