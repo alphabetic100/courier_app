@@ -2,6 +2,10 @@ import 'dart:convert';
 
 import 'package:courierapp/core/common/widgets/create_trip_top_body.dart';
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
+import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
+import 'package:courierapp/core/common/widgets/custom_button.dart';
+import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/my_trip/controller/qr_controller.dart';
@@ -47,6 +51,16 @@ class QrCodeScannerScreen extends StatelessWidget {
           Spacer(),
           Spacer()
         ],
+      ),
+      bottomNavigationBar: CustomBottomAppBar(
+        isPrimaryButton: false,
+        onTap: () {},
+        primaryWidget: CustomButton(
+            onPressed: () {},
+            child: CustomText(
+              text: "Scan",
+              color: AppColors.white,
+            )),
       ),
     );
   }
