@@ -81,6 +81,7 @@ class AsTravellerCard extends StatelessWidget {
           Divider(
             color: AppColors.grey.withOpacity(0.8),
           ),
+          VerticalSpace(height: getWidth(10)),
           Padding(
             padding: EdgeInsets.only(left: getWidth(8)),
             child: Row(

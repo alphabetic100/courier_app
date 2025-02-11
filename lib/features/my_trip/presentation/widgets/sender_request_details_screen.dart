@@ -1,3 +1,4 @@
+import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/body_profile_card.dart';
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
@@ -79,6 +80,7 @@ class SenderRequestDetailsScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
@@ -97,26 +99,23 @@ class SenderRequestDetailsScreen extends StatelessWidget {
                         ],
                       ),
                       VerticalSpace(height: getHeight(10)),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            text: "Item description:",
-                            color: AppColors.titleTextColor,
-                            fontWeight: FontWeight.w700,
-                            fontSize: getWidth(15),
-                          ),
-                          HorizontalSpace(width: getWidth(5)),
-                          Expanded(
-                            child: CustomText(
-                              text:
-                                  "A laptop computer for work. Model- Lenovo Legion. ",
+                      Text.rich(TextSpan(children: [
+                        TextSpan(
+                            text: "Item descritiion:",
+                            style: getTextStyleMsrt(
+                              color: AppColors.titleTextColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: getWidth(15),
+                            )),
+                        TextSpan(
+                            text:
+                                " A laptop computer for work. Model- Lenovo Legion. ",
+                            style: getTextStyleMsrt(
+                              color: AppColors.grey,
                               fontWeight: FontWeight.w400,
                               fontSize: getWidth(15),
-                            ),
-                          ),
-                        ],
-                      ),
+                            ))
+                      ])),
                       VerticalSpace(height: getWidth(10)),
                       Row(
                         children: [

@@ -63,13 +63,13 @@ class MyTripCard extends StatelessWidget {
                         CustomText(
                           text: "Status:",
                           color: AppColors.black,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                         HorizontalSpace(width: getWidth(5)),
                         CustomText(
                           text: "Awaiting confirmation",
                           color: AppColors.secondaryColor,
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.w500,
                         ),
                       ],
                     )
