@@ -9,6 +9,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/my_trip/controller/qr_controller.dart';
+import 'package:courierapp/features/my_trip/presentation/widgets/deliverd_succes_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -56,7 +57,13 @@ class QrCodeScannerScreen extends StatelessWidget {
         isPrimaryButton: false,
         onTap: () {},
         primaryWidget: CustomButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return DeliverdSuccesDialog();
+                  });
+            },
             child: CustomText(
               text: "Scan",
               color: AppColors.white,
