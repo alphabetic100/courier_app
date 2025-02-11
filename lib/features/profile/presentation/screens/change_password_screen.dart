@@ -1,13 +1,10 @@
-import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
-import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/profile/controller/change_password_controller.dart';
-import 'package:courierapp/features/profile/controller/edit_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
