@@ -36,38 +36,40 @@ class MyTripScreen extends StatelessWidget {
               padding: EdgeInsets.only(
                   left: getWidth(12), top: getWidth(5), bottom: getWidth(5)),
               child: CustomButton(
-                  isPrimary: false,
-                  onPressed: () {
-                    landingController.changePage(0);
-                  },
-                  child: Center(
-                    child: Icon(
-                      CupertinoIcons.back,
-                      color: AppColors.grey,
-                    ),
-                  )),
+                isPrimary: false,
+                onPressed: () {
+                  landingController.changePage(0);
+                },
+                child: Center(
+                  child: Icon(
+                    CupertinoIcons.back,
+                    color: AppColors.grey,
+                  ),
+                ),
+              ),
             ),
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
-                color: Color(0xFFFAFAFC),
+                color: const Color(0xFFFAFAFC),
                 child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      VerticalSpace(height: getHeight(10)),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-                        child: CustomText(
-                          text: "My Trips",
-                          fontSize: getWidth(24),
-                          color: AppColors.titleTextColor,
-                          fontWeight: FontWeight.w700,
-                        ),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    VerticalSpace(height: getHeight(10)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                      child: CustomText(
+                        text: "My Trips",
+                        fontSize: getWidth(24),
+                        color: AppColors.titleTextColor,
+                        fontWeight: FontWeight.w700,
                       ),
-                      VerticalSpace(height: getHeight(10)),
-                      Divider(height: 1),
-                      VerticalSpace(height: getHeight(10))
-                    ]),
+                    ),
+                    VerticalSpace(height: getHeight(10)),
+                    const Divider(height: 1),
+                    VerticalSpace(height: getHeight(10)),
+                  ],
+                ),
               ),
             ),
             actions: [
@@ -91,7 +93,7 @@ class MyTripScreen extends StatelessWidget {
                           controller.selectedIndex.value = 0;
                           controller.pageController.animateToPage(
                             0,
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut,
                           );
                         },
@@ -132,7 +134,7 @@ class MyTripScreen extends StatelessWidget {
                           controller.selectedIndex.value = 1;
                           controller.pageController.animateToPage(
                             1,
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut,
                           );
                         },
@@ -181,7 +183,7 @@ class MyTripScreen extends StatelessWidget {
           children: [
             ListView.builder(
               padding: EdgeInsets.only(top: getHeight(4)),
-              itemCount: 10,
+              itemCount: 10, // Placeholder count
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.all(getWidth(16)),
@@ -194,21 +196,38 @@ class MyTripScreen extends StatelessWidget {
                 );
               },
             ),
-            ListView.builder(
-              padding: EdgeInsets.only(top: getHeight(4)),
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.all(getWidth(16)),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.to(() => TravelTripDetailScreen());
-                    },
-                    child: AsTravellerCard(),
-                  ),
+            Obx(() {
+              if (controller.myTravels.value == null ||
+                  controller.myTravels.value!.data.isEmpty) {
+                return const Center(
+                  child: CustomText(text: "No Travel Yet"),
                 );
-              },
-            ),
+              }
+              final tripDatas = controller.myTravels.value!.data;
+
+              return ListView.builder(
+                padding: EdgeInsets.only(top: getHeight(4)),
+                itemCount: tripDatas.length,
+                itemBuilder: (context, index) {
+                  final tripData = tripDatas[index];
+                  return Padding(
+                    padding: EdgeInsets.all(getWidth(16)),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => TravelTripDetailScreen());
+                      },
+                      child: AsTravellerCard(
+                        from: tripData.from,
+                        to: tripData.to,
+                        price: tripData.price.toString(),
+                        availableSpace: tripData.weight,
+                        status: "pending",
+                      ),
+                    ),
+                  );
+                },
+              );
+            }),
           ],
         ),
       ),

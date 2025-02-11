@@ -19,13 +19,39 @@ class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
   final SearchScreenController searchScreenController =
       Get.find<SearchScreenController>();
+  final formKey = GlobalKey<FormState>();
+
+  String? validateLocation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'This field is required';
+    }
+
+    if (value.length < 3) {
+      return 'Location must be at least 3 characters';
+    }
+    return null;
+  }
+
+  String? validateDateTime(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please select a date';
+    }
+    return null;
+  }
+
+  void onSearchPressed() {
+    if (formKey.currentState?.validate() ?? false) {
+      // All validations passed
+      Get.toNamed(AppRoute.searchResultScreen);
+      searchScreenController.searchTrip();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          // Wrap with SingleChildScrollView
           child: SizedBox(
             height: AppSizes.height,
             width: AppSizes.width,
@@ -39,7 +65,7 @@ class SearchScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        color: Color(0xffFAFAFC),
+                        color: const Color(0xffFAFAFC),
                       ),
                     ),
                   ],
@@ -48,14 +74,14 @@ class SearchScreen extends StatelessWidget {
                   height: AppSizes.height * 0.1,
                   color: AppColors.white,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       children: [
                         VerticalSpace(height: getHeight(16)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Expanded(child: ShowAppLogo()),
+                            const Expanded(child: ShowAppLogo()),
                             MessageNotificationBox(),
                           ],
                         )
@@ -64,46 +90,52 @@ class SearchScreen extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    top: AppSizes.height * 0.12,
-                    child: SizedBox(
-                      width: AppSizes.width,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                  top: AppSizes.height * 0.12,
+                  child: SizedBox(
+                    width: AppSizes.width,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                      child: Form(
+                        key: formKey,
                         child: Column(
                           children: [
                             Text.rich(
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: "From",
-                                      style: getTextStyleMsrt(
-                                        color: AppColors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: getWidth(25),
-                                      )),
+                                    text: "From",
+                                    style: getTextStyleMsrt(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: getWidth(25),
+                                    ),
+                                  ),
                                   TextSpan(
-                                      text: " wherever you want",
-                                      style: getTextStyleMsrt(
-                                        color:
-                                            Color(0xFFFEFEFE).withOpacity(0.5),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: getWidth(25),
-                                      )),
+                                    text: " wherever you want",
+                                    style: getTextStyleMsrt(
+                                      color: const Color(0xFFFEFEFE)
+                                          .withOpacity(0.5),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: getWidth(25),
+                                    ),
+                                  ),
                                   TextSpan(
-                                      text: " - To ",
-                                      style: getTextStyleMsrt(
-                                        color: AppColors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: getWidth(25),
-                                      )),
+                                    text: " - To ",
+                                    style: getTextStyleMsrt(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: getWidth(25),
+                                    ),
+                                  ),
                                   TextSpan(
-                                      text: "wherever you want",
-                                      style: getTextStyleMsrt(
-                                        color:
-                                            Color(0xFFFEFEFE).withOpacity(0.5),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: getWidth(25),
-                                      )),
+                                    text: "wherever you want",
+                                    style: getTextStyleMsrt(
+                                      color: const Color(0xFFFEFEFE)
+                                          .withOpacity(0.5),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: getWidth(25),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -120,6 +152,7 @@ class SearchScreen extends StatelessWidget {
                                     controller:
                                         searchScreenController.senderController,
                                     hintText: "From",
+                                    validator: validateLocation,
                                     prefixIcon: Icon(
                                       Icons.send,
                                       color: AppColors.secondaryColor,
@@ -130,6 +163,7 @@ class SearchScreen extends StatelessWidget {
                                     controller: searchScreenController
                                         .receiverController,
                                     hintText: "To",
+                                    validator: validateLocation,
                                     prefixIcon: Icon(
                                       Icons.location_on_outlined,
                                       color: AppColors.secondaryColor,
@@ -142,6 +176,7 @@ class SearchScreen extends StatelessWidget {
                                           .selectDate(context);
                                     },
                                     readOnly: true,
+                                    validator: validateDateTime,
                                     controller: searchScreenController
                                         .calenderController,
                                     hintText: "Calendar",
@@ -150,80 +185,73 @@ class SearchScreen extends StatelessWidget {
                                       color: AppColors.secondaryColor,
                                     ),
                                   ),
-                                  // VerticalSpace(height: getHeight(20)),
-                                  // CustomTexFormField(
-                                  //   controller: searchScreenController
-                                  //       .itemWeightController,
-                                  //   hintText: "Item weight",
-                                  //   prefixIcon: Icon(
-                                  //     CupertinoIcons.cube_box,
-                                  //     color: AppColors.secondaryColor,
-                                  //   ),
-                                  // ),
                                 ],
                               ),
                             ),
                             VerticalSpace(height: getHeight(16)),
                             CustomButton(
-                                height: getHeight(50),
-                                onPressed: () {
-                                  Get.toNamed(AppRoute.searchResultScreen);
-                                },
-                                child: CustomText(
-                                  text: "Search",
-                                  fontSize: getWidth(16),
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.w700,
-                                )),
+                              height: getHeight(50),
+                              onPressed: onSearchPressed,
+                              child: CustomText(
+                                text: "Search",
+                                fontSize: getWidth(16),
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                             VerticalSpace(height: getHeight(16)),
                             CustomButton(
-                                isPrimary: false,
-                                height: getHeight(50),
-                                onPressed: () {
-                                  Get.to(() => AddItem());
-                                  // Get.toNamed(AppRoute.searchResultScreen);
-                                },
-                                child: CustomText(
-                                  text: "Add a Item",
-                                  fontSize: getWidth(16),
-                                  color: Color(0xff677674),
-                                  fontWeight: FontWeight.w700,
-                                )),
+                              isPrimary: false,
+                              height: getHeight(50),
+                              onPressed: () {
+                                Get.to(() => AddItem());
+                              },
+                              child: CustomText(
+                                text: "Add a Item",
+                                fontSize: getWidth(16),
+                                color: const Color(0xff677674),
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                             VerticalSpace(height: getHeight(24)),
                             Align(
-                                alignment: Alignment.centerLeft,
-                                child: CustomText(
-                                  text: "Added Items",
-                                  fontSize: getWidth(16),
-                                  color: Color(0xff262B2B),
-                                  fontWeight: FontWeight.w700,
-                                  textAlign: TextAlign.start,
-                                )),
+                              alignment: Alignment.centerLeft,
+                              child: CustomText(
+                                text: "Added Items",
+                                fontSize: getWidth(16),
+                                color: const Color(0xff262B2B),
+                                fontWeight: FontWeight.w700,
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
                             VerticalSpace(height: getHeight(8)),
-                            Obx(() => ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount:
-                                      searchScreenController.items.length,
-                                  itemBuilder: (context, index) {
-                                    final item =
-                                        searchScreenController.items[index];
-                                    return Padding(
-                                      padding: EdgeInsets.only(
-                                          bottom: getHeight(20)),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          //requestShippingController.toggleSelection(index);
-                                        },
-                                        child: ItemCardTwo(item: item),
-                                      ),
-                                    );
-                                  },
-                                )),
+                            Obx(
+                              () => ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: searchScreenController.items.length,
+                                itemBuilder: (context, index) {
+                                  final item =
+                                      searchScreenController.items[index];
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.only(bottom: getHeight(20)),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        //requestShippingController.toggleSelection(index);
+                                      },
+                                      child: ItemCardTwo(item: item),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

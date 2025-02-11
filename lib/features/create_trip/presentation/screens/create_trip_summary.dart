@@ -40,7 +40,7 @@ class CreateTripSummary extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: TripDetailsView(
                 tripTransport: tripController.selectedTransportType,
-                availabileSpace: tripController.itemWeight.toString(),
+                availabileSpace: tripController.weight,
                 date: tripController.dateTimeController.text,
                 tripAdvantate: tripController.supportSet,
                 tripRules: tripController.rulesSet,
