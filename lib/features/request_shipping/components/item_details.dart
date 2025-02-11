@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
@@ -105,28 +106,37 @@ class ItemDetails extends StatelessWidget {
           text: "Item Weight",
           color: AppColors.black,
         ),
-        Row(
-          children: [
-            Obx(() => CustomText(
-                text:
-                    "${shippingController.itemWeight.value.toStringAsFixed(1)} kg")),
-            Expanded(
-              child: Obx(
-                () => Slider(
-                  activeColor: AppColors.primaryColor,
-                  value: shippingController.itemWeight.value,
-                  min: 0.5,
-                  max: 100,
-                  // divisions: 18,
-                  onChanged: (value) {
-                    shippingController.itemWeight.value = value;
-                  },
-                ),
-              ),
-            ),
-            CustomText(text: "100kg")
-          ],
-        ),
+        VerticalSpace(height: 10),
+        CustomButton(
+            height: getHeight(55),
+            isPrimary: false,
+            onPressed: () {},
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                child: Obx(
+                  () => DropdownButton<String>(
+                    isDense: true,
+                    isExpanded: true,
+                    underline: SizedBox.shrink(),
+                    padding: EdgeInsets.zero,
+                    elevation: 0,
+                    value: shippingController.itemWeight.value,
+                    onChanged: (value) {
+                      shippingController.itemWeight.value = value!;
+                    },
+                    items: ['5kg', '7kg', '10kg', '12kg', '15kg']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: CustomText(
+                          text: value,
+                          color: AppColors.black,
+                          fontSize: getWidth(15),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                )))
       ],
     );
   }

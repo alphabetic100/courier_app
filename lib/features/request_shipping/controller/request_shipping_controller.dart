@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RequestShippingController extends GetxController {
-  var itemWeight = 1.0.obs;
+  var itemWeight = "5kg".obs;
   RxInt selectedItems = 0.obs;
   RxString priceSubText = "".obs;
   RxList<String> selectedImages = [
