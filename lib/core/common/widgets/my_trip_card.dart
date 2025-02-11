@@ -16,7 +16,7 @@ class MyTripCard extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           border: Border.all(color: AppColors.grey.withOpacity(0.8)),
-          color: Color(0xFFCCD9D6).withOpacity(0.1)),
+          color: Color(0xFFFAFAFC)),
       child: Column(
         children: [
           SizedBox(
