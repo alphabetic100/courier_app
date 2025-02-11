@@ -6,10 +6,15 @@ import 'package:flutter/cupertino.dart';
 
 class ProfileTripTravelBox extends StatelessWidget {
   const ProfileTripTravelBox(
-      {super.key, required this.title, required this.amount, this.icon});
+      {super.key,
+      required this.title,
+      required this.amount,
+      this.icon,
+      this.color = AppColors.black});
   final String title;
   final String amount;
   final Widget? icon;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +37,7 @@ class ProfileTripTravelBox extends StatelessWidget {
                 text: amount,
                 fontWeight: FontWeight.bold,
                 fontSize: getWidth(25),
-                color: AppColors.black,
+                color: color,
               ),
             ],
           ),

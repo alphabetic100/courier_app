@@ -8,11 +8,11 @@ import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
 import 'package:courierapp/features/create_trip/presentation/screens/select_departing_from_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class TravelingDateSelectScreen extends StatelessWidget {
   TravelingDateSelectScreen({super.key});
@@ -49,8 +49,7 @@ class TravelingDateSelectScreen extends StatelessWidget {
                     tripController.selectDate(context);
                   },
                   readOnly: true,
-                  hintText:
-                      AppHelperFunctions.formateDate(DateTime.now().toString()),
+                  hintText: DateFormat('EEEE, MMMM d').format(DateTime.now()),
                   suffixIcon: Icon(
                     Icons.calendar_month,
                     color: AppColors.grey,
