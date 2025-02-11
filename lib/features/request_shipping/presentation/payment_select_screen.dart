@@ -13,9 +13,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PaymentSelectScreen extends StatelessWidget {
-  PaymentSelectScreen({super.key});
+  PaymentSelectScreen({super.key, });
   final PaymentSetupController paymentSetupController =
       Get.find<PaymentSetupController>();
+ 
 
   final List<String> titles = ["PayPal", "Apple Pay", "Credit Card"];
   final List<String> iconPaths = [

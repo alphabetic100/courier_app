@@ -12,6 +12,7 @@ import 'package:courierapp/features/create_trip/controller/create_trip_controlle
 import 'package:courierapp/features/create_trip/presentation/screens/select_departing_from_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class TravelingDateSelectScreen extends StatelessWidget {
   TravelingDateSelectScreen({super.key});
@@ -48,7 +49,7 @@ class TravelingDateSelectScreen extends StatelessWidget {
                     tripController.selectDate(context);
                   },
                   readOnly: true,
-                  hintText: "dd-mm-yy",
+                  hintText: DateFormat('EEEE, MMMM d').format(DateTime.now()),
                   suffixIcon: Icon(
                     Icons.calendar_month,
                     color: AppColors.grey,

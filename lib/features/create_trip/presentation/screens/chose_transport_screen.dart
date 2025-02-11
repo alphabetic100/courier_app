@@ -25,6 +25,7 @@ class ChoseTransportScreen extends StatelessWidget {
       appBar: CustomAppBar(
         ontapBackButton: () {
           landingController.changePage(0);
+          tripController.clearForm();
         },
         actions: [
           Padding(

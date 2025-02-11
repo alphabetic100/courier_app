@@ -55,6 +55,7 @@ class SearchResultBody extends StatelessWidget {
                       trynasportType: trip.transportType,
                       profileName: user.fullName,
                       isVerified: user.isVerified,
+                      trip: trip,
                     ),
                   );
                 });

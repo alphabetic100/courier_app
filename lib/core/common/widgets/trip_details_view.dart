@@ -11,13 +11,11 @@ class TripDetailsView extends StatelessWidget {
     required this.tripTransport,
     required this.availabileSpace,
     required this.tripRules,
-    required this.transportIcon,
-    required this.date,
+    this.date = "",
     required this.tripAdvantate,
     this.carNumber = "",
   });
 
-  final String transportIcon;
   final String tripTransport;
   final String availabileSpace;
   final String date;
@@ -38,11 +36,29 @@ class TripDetailsView extends StatelessWidget {
                 child: SizedBox(
                   height: getHeight(25),
                   width: getWidth(20),
-                  child: Image.asset(
-                    transportIcon,
-                    fit: BoxFit.fill,
-                    color: AppColors.secondaryColor,
-                  ),
+                  child: tripTransport.toLowerCase() == "bus"
+                      ? Image.asset(
+                          IconPath.directionsBus,
+                          height: getHeight(25),
+                          color: AppColors.secondaryColor,
+                        )
+                      : tripTransport.toLowerCase() == "car"
+                          ? Image.asset(
+                              IconPath.car,
+                              height: getHeight(25),
+                              color: AppColors.secondaryColor,
+                            )
+                          : tripTransport.toLowerCase() == "airplane"
+                              ? Image.asset(
+                                  IconPath.plane,
+                                  height: getHeight(25),
+                                  color: AppColors.secondaryColor,
+                                )
+                              : Image.asset(
+                                  IconPath.train,
+                                  height: getHeight(25),
+                                  color: AppColors.secondaryColor,
+                                ),
                 ),
               ),
               HorizontalSpace(width: getHeight(16)),
@@ -102,32 +118,34 @@ class TripDetailsView extends StatelessWidget {
               Expanded(child: SizedBox())
             ],
           ),
-          VerticalSpace(height: getHeight(10)),
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: getWidth(5)),
-                child: SizedBox(
-                    height: getHeight(25),
-                    width: getWidth(20),
-                    child: Icon(
-                      Icons.calendar_month,
-                      color: AppColors.secondaryColor,
-                    )),
-              ),
-              HorizontalSpace(width: getHeight(16)),
-              CustomText(
-                text: "Date: ",
-                fontWeight: FontWeight.w600,
-                color: AppColors.titleTextColor,
-              ),
-              CustomText(
-                text: date,
-                fontWeight: FontWeight.normal,
-              ),
-              Expanded(child: SizedBox())
-            ],
-          ),
+          if (date.isNotEmpty) ...[
+            VerticalSpace(height: getHeight(10)),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: getWidth(5)),
+                  child: SizedBox(
+                      height: getHeight(25),
+                      width: getWidth(20),
+                      child: Icon(
+                        Icons.calendar_month,
+                        color: AppColors.secondaryColor,
+                      )),
+                ),
+                HorizontalSpace(width: getHeight(16)),
+                CustomText(
+                  text: "Date: ",
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.titleTextColor,
+                ),
+                CustomText(
+                  text: date,
+                  fontWeight: FontWeight.normal,
+                ),
+                Expanded(child: SizedBox())
+              ],
+            ),
+          ],
           VerticalSpace(height: getHeight(10)),
           if (tripAdvantate.isNotEmpty)
             ...List.generate(tripAdvantate.length, (index) {

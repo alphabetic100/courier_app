@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/common/styles/get_text_style.dart';
@@ -65,7 +65,7 @@ class SearchScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        color: const Color(0xffFAFAFC),
+                        color: Colors.grey.withOpacity(0.1),
                       ),
                     ),
                   ],
@@ -164,10 +164,24 @@ class SearchScreen extends StatelessWidget {
                                         .receiverController,
                                     hintText: "To",
                                     validator: validateLocation,
-                                    prefixIcon: Icon(
-                                      Icons.location_on_outlined,
-                                      color: AppColors.secondaryColor,
+                                    prefixIcon: Padding(
+                                      padding: EdgeInsets.only(
+                                          top: getHeight(15),
+                                          right: getHeight(20),
+                                          left: getWidth(10),
+                                          bottom: getHeight(15)),
+                                      child: Image.asset(
+                                        ImagePath.location,
+                                        height: getHeight(25),
+                                        color: AppColors.secondaryColor,
+                                      ),
                                     ),
+                                    // prefixIcon: SizedBox(
+                                    //   child: Image.asset(
+                                    //     ImagePath.location,
+                                    //     fit: BoxFit.fill,
+                                    //   ),
+                                    // ),
                                   ),
                                   VerticalSpace(height: getHeight(20)),
                                   CustomTexFormField(

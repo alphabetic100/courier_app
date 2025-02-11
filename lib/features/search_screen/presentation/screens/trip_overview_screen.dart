@@ -6,18 +6,22 @@ import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
 import 'package:courierapp/features/request_shipping/presentation/request_shipping_screen.dart';
 import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
+import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
 import 'package:courierapp/features/search_screen/presentation/components/trip_overview_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TripOverviewScreen extends StatelessWidget {
-  TripOverviewScreen({super.key});
+  TripOverviewScreen({super.key, required this.trip});
   final TripOverviewController tripOverviewController =
       Get.find<TripOverviewController>();
+  final TransportData trip;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,16 +40,19 @@ class TripOverviewScreen extends StatelessWidget {
           children: [
             TripDetailsTopBody(
               title: "Trip Overview",
-              departingFrom: "32,C.nuñez de balboa, Madrid",
-              arrivingTo: "32,C.nuñez de balboa, Madrid",
-              price: "20",
-              priceSubText: r"200\kg",
+              departingFrom: trip.from,
+              arrivingTo: trip.to,
+              price: trip.price.toString().replaceAll("\$", ""),
+              priceSubText: "".obs,
+              date: AppHelperFunctions.formateDate(trip.date),
             ),
 
             //Trip Overview Details
             Padding(
               padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
-              child: TripOverviewDetails(),
+              child: TripOverviewDetails(
+                trip: trip,
+              ),
             ),
           ],
         ),
@@ -82,7 +89,9 @@ class TripOverviewScreen extends StatelessWidget {
             CustomButton(
                 isPrimary: true,
                 onPressed: () {
-                  Get.to(() => RequestShippingScreen());
+                  Get.to(() => RequestShippingScreen(
+                        trip: trip,
+                      ));
                 },
                 child: CustomText(
                   text: "Request Shipping",

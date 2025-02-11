@@ -2,7 +2,6 @@ import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/item.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
-import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:flutter/material.dart';
 
@@ -21,14 +20,15 @@ class ItemCardTwo extends StatelessWidget {
           color: Color(0xffFFFFFF),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-              color:
-              item.isSelected ? AppColors.primaryColor : AppColors.grey)),
+              color: item.isSelected
+                  ? AppColors.primaryColor
+                  : AppColors.grey.withOpacity(0.5))),
       child: Center(
         child: ListTile(
           title: CustomText(
             text: item.name,
             fontSize: getWidth(16),
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
             color: AppColors.titleTextColor,
           ),
           leading: ClipRRect(
@@ -42,42 +42,16 @@ class ItemCardTwo extends StatelessWidget {
               ),
             ),
           ),
-          subtitle: Row(
-            children: [
-              CustomText(
-                text: item.from,
-                fontWeight: FontWeight.normal,
-                fontSize: getWidth(14),
-              ),
-              HorizontalSpace(width: getWidth(5)),
-              Image.asset(
-                IconPath.arrow,
-                width: getWidth(30),
-                color: AppColors.grey,
-                fit: BoxFit.fill,
-              ),
-              HorizontalSpace(width: getWidth(5)),
-              CustomText(
-                text: item.destination,
-                fontWeight: FontWeight.normal,
-                fontSize: getWidth(14),
-              ),
-              HorizontalSpace(width: getWidth(5)),
-              SizedBox(
-                height: getHeight(20),
-                child: VerticalDivider(
-                  color: AppColors.grey,
-                ),
-              ),
-              HorizontalSpace(width: getWidth(5)),
-              CustomText(
-                text: "(${item.weight})",
-                fontWeight: FontWeight.normal,
-                fontSize: getWidth(14),
-              ),
-            ],
+          subtitle: CustomText(
+            text: "(${item.weight})",
+            fontWeight: FontWeight.normal,
+            fontSize: getWidth(14),
           ),
-          trailing: Image.asset(IconPath.moreIcon,height: getHeight(24),width: getWidth(24),),
+          trailing: Image.asset(
+            IconPath.moreIcon,
+            height: getHeight(24),
+            width: getWidth(24),
+          ),
         ),
       ),
     );

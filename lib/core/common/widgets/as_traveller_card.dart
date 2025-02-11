@@ -24,11 +24,11 @@ class AsTravellerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(getWidth(12)),
+      padding: EdgeInsets.all(getWidth(16)),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(4),
           border: Border.all(color: AppColors.grey.withOpacity(0.8)),
-          color: Color(0xFFCCD9D6).withOpacity(0.1)),
+          color: Color(0xFFFAFAFC)),
       child: Column(
         children: [
           SizedBox(
@@ -68,7 +68,8 @@ class AsTravellerCard extends StatelessWidget {
                       VerticalSpace(height: getHeight(5)),
                       CustomText(
                         text: "Available: $availableSpace kg",
-                        fontSize: getWidth(12),
+                        fontSize: getWidth(15),
+                        fontWeight: FontWeight.normal,
                       )
                     ]
                   ],
@@ -80,6 +81,7 @@ class AsTravellerCard extends StatelessWidget {
           Divider(
             color: AppColors.grey.withOpacity(0.8),
           ),
+          VerticalSpace(height: getWidth(10)),
           Padding(
             padding: EdgeInsets.only(left: getWidth(8)),
             child: Row(
@@ -87,7 +89,8 @@ class AsTravellerCard extends StatelessWidget {
                 CustomText(
                   text: "Status:",
                   color: AppColors.black,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w600,
+                  fontSize: getWidth(15),
                 ),
                 HorizontalSpace(width: getWidth(5)),
                 CustomText(
@@ -95,8 +98,8 @@ class AsTravellerCard extends StatelessWidget {
                   color: myTripController.status.value == "Active"
                       ? AppColors.success
                       : AppColors.error,
-                  fontSize: getWidth(14),
-                  fontWeight: FontWeight.w400,
+                  fontSize: getWidth(15),
+                  fontWeight: FontWeight.w600,
                 ),
               ],
             ),

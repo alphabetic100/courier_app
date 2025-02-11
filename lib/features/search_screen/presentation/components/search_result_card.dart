@@ -4,6 +4,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
+import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
 import 'package:courierapp/features/search_screen/presentation/screens/trip_overview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class SearchResultCard extends StatelessWidget {
       required this.carNumber,
       required this.trynasportType,
       required this.profileName,
-      required this.isVerified});
+      required this.isVerified, required this.trip});
 
   final String from;
   final String to;
@@ -32,12 +33,13 @@ class SearchResultCard extends StatelessWidget {
   final String carNumber;
   final String trynasportType;
   final bool isVerified;
+  final TransportData trip;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => TripOverviewScreen());
+        Get.to(() => TripOverviewScreen(trip: trip,));
       },
       child: Container(
         padding: EdgeInsets.all(getWidth(12)),

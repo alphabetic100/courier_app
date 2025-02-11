@@ -33,7 +33,7 @@ class TransportData {
   final String to;
   final String weight;
   final int price;
-  final List<String> rulse;
+  final List<String> rules;
   final List<String> additional;
   final User user;
 
@@ -46,7 +46,7 @@ class TransportData {
     required this.to,
     required this.weight,
     required this.price,
-    required this.rulse,
+    required this.rules,
     required this.additional,
     required this.user,
   });
@@ -61,7 +61,7 @@ class TransportData {
       to: json['to'] ?? '',
       weight: json['weight'] ?? '',
       price: json['price'] ?? 0,
-      rulse: (json['rulse'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      rules: (json['rulse'] as List?)?.map((e) => e.toString()).toList() ?? [],
       additional:
           (json['additional'] as List?)?.map((e) => e.toString()).toList() ??
               [],

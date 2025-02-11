@@ -3,17 +3,17 @@ import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/trip_details_view.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/core/utils/constants/icon_path.dart';
-import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/profile/presentation/screens/others_profile_screen.dart';
 import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
+import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class TripOverviewDetails extends StatelessWidget {
-  TripOverviewDetails({super.key});
+  TripOverviewDetails({super.key, required this.trip});
   final TripOverviewController tripOverviewController =
       Get.find<TripOverviewController>();
+  final TransportData trip;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,10 +27,10 @@ class TripOverviewDetails extends StatelessWidget {
               Get.to(() => OthersProfileScreen());
             },
             child: BodyProfileCard(
-              isVerified: true,
-              profileImage: ImagePath.profile,
-              profileName: "Albert Flores",
-              rattings: "4.8/5",
+              isVerified: trip.user.isVerified,
+              profileImage: trip.user.profileImage,
+              profileName: trip.user.fullName,
+              rattings: trip.user.averageRating.toString(),
               suffixIcon: Icon(
                 CupertinoIcons.forward,
                 size: getHeight(30),
@@ -41,18 +41,11 @@ class TripOverviewDetails extends StatelessWidget {
           ),
           VerticalSpace(height: getHeight(10)),
           TripDetailsView(
-            tripTransport: "Buss",
-            availabileSpace: "12kg",
-            date: "14 Jan 2025",
-            tripAdvantate: [
-              "Will pickup the items from the sender's location.",
-              "Will deliver directly to recipient’s door."
-            ],
-            tripRules: [
-              "No perishable food items without proper packaging.",
-              "No fragile items unless securely packaged.",
-            ],
-            transportIcon: IconPath.directionsBus,
+            tripTransport: trip.transportType,
+            availabileSpace: trip.weight,
+            tripAdvantate: trip.additional,
+            tripRules: trip.rules,
+            carNumber: trip.transportNumber,
           ),
           VerticalSpace(height: getHeight(10))
         ],

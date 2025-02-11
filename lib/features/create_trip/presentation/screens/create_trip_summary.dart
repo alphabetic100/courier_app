@@ -35,16 +35,15 @@ class CreateTripSummary extends StatelessWidget {
               departingFrom: tripController.selectDepartingController.text,
               arrivingTo: tripController.selectArrivingController.text,
               price: "${tripController.selectedCharge.value}/kg",
+              date: tripController.dateTimeController.text,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: TripDetailsView(
                 tripTransport: tripController.selectedTransportType,
                 availabileSpace: tripController.weight,
-                date: tripController.dateTimeController.text,
                 tripAdvantate: tripController.supportSet,
                 tripRules: tripController.rulesSet,
-                transportIcon: tripController.selectedIconPath,
                 carNumber: tripController.carNumberController.text,
               ),
             )
