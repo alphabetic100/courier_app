@@ -4,7 +4,6 @@ import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/sender_request_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +26,7 @@ class SenderRequestCard extends StatelessWidget {
           children: [
             BodyProfileCard(
                 isVerified: true,
-                profileImage: ImagePath.profile,
+                profileImage: "",
                 profileName: "Albert Tesla",
                 subtitle: "Laptop to New York (2.5kg)",
                 suffixIcon: CustomText(

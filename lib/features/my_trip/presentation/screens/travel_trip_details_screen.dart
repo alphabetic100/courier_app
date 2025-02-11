@@ -1,11 +1,18 @@
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
+import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
+import 'package:courierapp/core/common/widgets/custom_button.dart';
+import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
 import 'package:courierapp/core/common/widgets/trip_details_view.dart';
+import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
 import 'package:courierapp/features/my_trip/controller/my_trip_controller.dart';
+import 'package:courierapp/features/my_trip/presentation/widgets/qr_scanner_dialog.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/sender_request_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
