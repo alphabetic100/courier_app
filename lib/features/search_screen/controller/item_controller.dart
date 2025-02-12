@@ -27,6 +27,7 @@ class ItemController extends GetxController {
   ].obs;
 
   var itemWeight = "5kg".obs;
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -57,6 +58,8 @@ class ItemController extends GetxController {
     );
 
     try {
+      isLoading.value = true;
+
       final bodyData = {
         "name": itemName.text.trim(),
         "description": itemDescription.text.trim(),
@@ -90,14 +93,18 @@ class ItemController extends GetxController {
           'Authorization': AuthService.token,
         }),
       );
+      isLoading.value = false;
 
       if (response.statusCode == 200 || response.data["success"]) {
         successSnakbr(successMessage: "Item added successfully");
+        log(isLoading.value.toString());
       } else {
         errorSnakbar(errorMessage: response.data["message"]);
       }
     } catch (e) {
       log("Something went wrong, error: $e");
+    } finally {
+      isLoading.value = false;
     }
   }
 

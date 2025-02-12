@@ -146,8 +146,12 @@ class AddItem extends StatelessWidget {
                                         if (itemController
                                             .validator.currentState!
                                             .validate()) {
-                                          itemController.addItem();
-                                          Navigator.of(context).pop();
+                                          itemController
+                                              .addItem()
+                                              .then((value) {
+                                            Navigator.of(context).pop();
+                                            itemController.getMyItems();
+                                          });
                                         }
                                       },
                                       child: CustomText(

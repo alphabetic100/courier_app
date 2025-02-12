@@ -22,7 +22,7 @@ class ItemCardTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: AppSizes.width,
-      padding: EdgeInsets.all(getWidth(8)),
+      padding: EdgeInsets.symmetric(horizontal: getWidth(8)),
       decoration: BoxDecoration(
         color: Color(0xffFFFFFF),
         borderRadius: BorderRadius.circular(8),
