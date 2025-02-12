@@ -11,11 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../controller/forgot_email_and_otp_controller.dart';
+
 class ChangePasswordOtpScreen extends StatelessWidget {
-  const ChangePasswordOtpScreen({super.key});
+  final String email;
+  const ChangePasswordOtpScreen({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
+
+    final controller = Get.put(ForgotEmailAndOtpController());
     return Scaffold(
       appBar: CustomAppBar(),
       body: Column(
@@ -45,6 +50,7 @@ class ChangePasswordOtpScreen extends StatelessWidget {
                 ),
                 VerticalSpace(height: getHeight(10)),
                 PinCodeTextField(
+                  controller: controller.otpController,
                   backgroundColor: AppColors.white,
                   appContext: context,
                   length: 6,
@@ -80,7 +86,8 @@ class ChangePasswordOtpScreen extends StatelessWidget {
       bottomNavigationBar: CustomBottomAppBar(
           isPrimaryButton: true,
           onTap: () {
-            Get.to(() => ChangePasswordScreen());
+            controller.verifyOTP(email);
+
           }),
     );
   }

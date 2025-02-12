@@ -12,10 +12,11 @@ import '../../../../core/common/widgets/custom_app_bar.dart';
 import '../../../../core/common/widgets/message_notification_box.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
-  ChangePasswordScreen({super.key});
 
-  final ChangePasswordController controller =
-      Get.put(ChangePasswordController());
+  final String email;
+  ChangePasswordScreen({super.key, required this.email});
+
+  final ChangePasswordController controller = Get.put(ChangePasswordController());
 
   final GlobalKey<FormState> changePasswordFormKey = GlobalKey<FormState>();
 
