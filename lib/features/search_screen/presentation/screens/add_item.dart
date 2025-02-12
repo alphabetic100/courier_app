@@ -2,6 +2,7 @@ import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
+import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -146,11 +147,13 @@ class AddItem extends StatelessWidget {
                                         if (itemController
                                             .validator.currentState!
                                             .validate()) {
+                                          showProgressIndicator();
                                           itemController
                                               .addItem()
                                               .then((value) {
-                                            Navigator.of(context).pop();
                                             itemController.getMyItems();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
                                           });
                                         }
                                       },

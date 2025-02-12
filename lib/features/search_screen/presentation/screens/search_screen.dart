@@ -276,6 +276,7 @@ class SearchScreen extends StatelessWidget {
                                           child: ItemCardTwo(
                                             item: item,
                                             isSelected: false,
+                                            isdeletable: true,
                                           ),
                                         ),
                                       );

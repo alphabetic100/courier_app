@@ -37,7 +37,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
               departingFrom: "32,C.nuñez de balboa, Madrid",
               arrivingTo: "32,C.nuñez de balboa, Madrid",
               price: "20",
-              priceSubText: r"12\kg".obs,
+              priceSubText: r"12\kg",
               date: '200',
             ),
             Padding(

@@ -29,17 +29,11 @@ class ItemController extends GetxController {
   var itemWeight = "5kg".obs;
   RxBool isLoading = false.obs;
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getMyItems();
-  }
-
   Future<void> getMyItems() async {
     try {
       final response = await networkCaller.getRequest(AppUrls.getMyItems,
           token: AuthService.token);
+      log(AuthService.token.toString());
       if (response.isSuccess) {
         myItems.value = ItemModel.fromJson(response.responseData);
       }
@@ -135,5 +129,14 @@ class ItemController extends GetxController {
     if (image != null) {
       selectedImages[index] = image.path;
     }
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    Future.delayed(Duration(milliseconds: 200), () {
+      getMyItems();
+    });
   }
 }

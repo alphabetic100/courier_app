@@ -1,4 +1,5 @@
 import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/common/widgets/error_snakbar.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
@@ -13,9 +14,11 @@ class ItemCardTwo extends StatelessWidget {
     super.key,
     required this.item,
     required this.isSelected,
+    this.isdeletable = false,
   });
   final ItemData item;
   final bool isSelected;
+  final bool isdeletable;
   final ItemController itemController = Get.put(ItemController());
 
   @override
@@ -24,7 +27,9 @@ class ItemCardTwo extends StatelessWidget {
       width: AppSizes.width,
       padding: EdgeInsets.symmetric(horizontal: getWidth(8)),
       decoration: BoxDecoration(
-        color: Color(0xffFFFFFF),
+        color: isSelected
+            ? AppColors.primaryColor.withOpacity(0.2)
+            : AppColors.white,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: isSelected
@@ -38,19 +43,22 @@ class ItemCardTwo extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: item.image.isEmpty
-                ? SizedBox(
-                    height: getHeight(70),
-                    width: getWidth(60),
-                    child: Image.asset(
-                      ImagePath.noImage,
-                      fit: BoxFit.fill,
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(getWidth(8)),
+                    child: SizedBox(
+                      height: getHeight(55),
+                      width: getWidth(55),
+                      child: Image.asset(
+                        ImagePath.noImage,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   )
                 : ClipRRect(
                     borderRadius: BorderRadius.circular(getWidth(8)),
                     child: SizedBox(
-                      height: getHeight(70),
-                      width: getWidth(60),
+                      height: getHeight(55),
+                      width: getWidth(55),
                       child: Image.network(
                         item.image[0],
                         fit: BoxFit.fill,
@@ -103,7 +111,10 @@ class ItemCardTwo extends StatelessWidget {
               ),
               PopupMenuItem(
                 onTap: () {
-                  itemController.deleteItem(item.id);
+                  isdeletable
+                      ? itemController.deleteItem(item.id)
+                      : errorSnakbar(
+                          errorMessage: "Can't delet the selected item");
                 },
                 child: Row(
                   children: [

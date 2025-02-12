@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
@@ -72,6 +75,7 @@ class LandingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    log("++++++++++++++++++${ AuthService.token}");
     currentPage.value = 0;
   }
 
