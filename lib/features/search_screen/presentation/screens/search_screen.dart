@@ -1,4 +1,5 @@
 import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/common/styles/get_text_style.dart';
@@ -19,6 +20,7 @@ class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
   final SearchScreenController searchScreenController =
       Get.find<SearchScreenController>();
+  final ItemController itemController = Get.put(ItemController());
   final formKey = GlobalKey<FormState>();
 
   String? validateLocation(String? value) {
@@ -240,10 +242,8 @@ class SearchScreen extends StatelessWidget {
                             ),
                             VerticalSpace(height: getHeight(24)),
                             Obx(() {
-                              if (searchScreenController.myItems.value ==
-                                      null ||
-                                  searchScreenController
-                                      .myItems.value!.data.isEmpty) {
+                              if (itemController.myItems.value == null ||
+                                  itemController.myItems.value!.data.isEmpty) {
                                 return Column(
                                   children: [
                                     VerticalSpace(height: getHeight(35)),
@@ -261,8 +261,8 @@ class SearchScreen extends StatelessWidget {
                                   itemCount:
                                       searchScreenController.items.length,
                                   itemBuilder: (context, index) {
-                                    final item =
-                                        searchScreenController.items[index];
+                                    final item = itemController
+                                        .myItems.value!.data[index];
                                     return Padding(
                                       padding: EdgeInsets.only(
                                           bottom: getHeight(20)),
@@ -270,7 +270,10 @@ class SearchScreen extends StatelessWidget {
                                         onTap: () {
                                           //requestShippingController.toggleSelection(index);
                                         },
-                                        child: ItemCardTwo(item: item),
+                                        child: ItemCardTwo(
+                                          item: item,
+                                          isSelected: false,
+                                        ),
                                       ),
                                     );
                                   },

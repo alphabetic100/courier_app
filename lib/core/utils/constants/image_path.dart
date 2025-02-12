@@ -12,4 +12,5 @@ class ImagePath {
   static const String productPhoto = "$_basePath/image.png";
 
   static const String location = "assets/icons/pin_drop.png";
+  static const String noImage = "$_basePath/no_image.jpg";
 }
