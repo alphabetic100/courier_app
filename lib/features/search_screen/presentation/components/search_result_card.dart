@@ -21,7 +21,8 @@ class SearchResultCard extends StatelessWidget {
       required this.carNumber,
       required this.trynasportType,
       required this.profileName,
-      required this.isVerified, required this.trip});
+      required this.isVerified,
+      required this.trip});
 
   final String from;
   final String to;
@@ -39,7 +40,9 @@ class SearchResultCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => TripOverviewScreen(trip: trip,));
+        Get.to(() => TripOverviewScreen(
+              trip: trip,
+            ));
       },
       child: Container(
         padding: EdgeInsets.all(getWidth(12)),
@@ -82,11 +85,29 @@ class SearchResultCard extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         fontSize: getWidth(24),
                       ),
-                      VerticalSpace(height: getHeight(5)),
-                      CustomText(
-                        text: "Available: $availableSpace kg",
-                        fontSize: getWidth(12),
-                      )
+                      if (availableSpace == "0") ...[
+                        VerticalSpace(height: getHeight(5)),
+                        CustomText(
+                          text: "Full",
+                          color: AppColors.error,
+                          fontSize: getWidth(14),
+                        )
+                      ],
+                      if (availableSpace == "unlimited") ...[
+                        VerticalSpace(height: getHeight(5)),
+                        CustomText(
+                          text: "Available: Unlimited",
+                          fontWeight: FontWeight.normal,
+                          fontSize: getWidth(14),
+                        )
+                      ] else ...[
+                        VerticalSpace(height: getHeight(5)),
+                        CustomText(
+                          text: "Available: $availableSpace kg",
+                          fontWeight: FontWeight.normal,
+                          fontSize: getWidth(14),
+                        )
+                      ],
                     ],
                   )
                 ],
