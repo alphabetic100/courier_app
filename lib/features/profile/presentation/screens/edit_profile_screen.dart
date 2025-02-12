@@ -19,6 +19,7 @@ import '../../../../core/common/widgets/custom_button.dart';
 import '../../../../core/common/widgets/custom_text_button.dart';
 import '../../../../core/common/widgets/custom_text_form_field.dart';
 import '../../../../core/common/widgets/phone_number_text_field.dart';
+import '../../controller/forgot_email_and_otp_controller.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -27,6 +28,7 @@ class EditProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final editProfileController = Get.put(EditProfileController());
     final controller = Get.put(ProfileController());
+    final forgotEmailController = Get.put(ForgotEmailAndOtpController ());
 
     final Map<String, dynamic> arguments = Get.arguments;
 
@@ -194,6 +196,7 @@ class EditProfileScreen extends StatelessWidget {
                       CustomTextButton(
                         isUnderline: true,
                         onPressed: () {
+                          forgotEmailController.forgetEmail(emailTEController.text);
                           Get.to(() => ChangePasswordOtpScreen());
                         },
                         text: "Change",

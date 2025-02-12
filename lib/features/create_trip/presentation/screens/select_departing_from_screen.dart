@@ -13,10 +13,68 @@ import 'package:courierapp/features/create_trip/controller/create_trip_controlle
 import 'package:courierapp/features/create_trip/presentation/screens/select_arriving_to_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geocoding/geocoding.dart';
 
-class SelectDepartingFromScreen extends StatelessWidget {
-  SelectDepartingFromScreen({super.key});
+import '../../../../core/services/location_service.dart';
+import '../../../splash_screen/controllers/splash_controller.dart';
+
+class SelectDepartingFromScreen extends StatefulWidget {
+  const SelectDepartingFromScreen({super.key});
+
+  @override
+  _SelectDepartingFromScreenState createState() =>
+      _SelectDepartingFromScreenState();
+}
+
+class _SelectDepartingFromScreenState extends State<SelectDepartingFromScreen> {
   final CreateTripController tripController = Get.find<CreateTripController>();
+
+
+  GoogleMapController? mapController;
+
+  late LatLng selectedLocation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Ensure valid default coordinates
+    double latitude = SplashController .latitude.value;
+    double longitude = SplashController .longitude.value;
+
+    if (latitude == 0.0 || longitude == 0.0) {
+      latitude = 48.8566; // Default to Paris
+      longitude = 2.3522;
+    }
+
+    selectedLocation = LatLng(latitude, longitude);
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+  Future<void> _onLocationSelected(LatLng latLng) async {
+    setState(() {
+      selectedLocation = latLng;
+    });
+
+    try {
+      List<Placemark> placemarks =
+      await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+
+      if (placemarks.isNotEmpty) {
+        Placemark place = placemarks.first;
+        String address = "${place.locality}, ${place.country}";
+
+        tripController.selectDepartingController.text = address;
+      }
+    } catch (e) {
+      print("Error fetching address: $e");
+      errorSnakbar(errorMessage: "Failed to fetch location details");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +104,7 @@ class SelectDepartingFromScreen extends StatelessWidget {
                   VerticalSpace(height: getHeight(10)),
                   CustomText(
                     text:
-                        "Please put here the address where you are going to receive the items",
+                    "Please put here the address where you are going to receive the items",
                     color: AppColors.bodyTextColor,
                     fontSize: getWidth(15),
                     fontWeight: FontWeight.normal,
@@ -55,6 +113,7 @@ class SelectDepartingFromScreen extends StatelessWidget {
                   TextField(
                     controller: tripController.selectDepartingController,
                     style: getTextStyleMsrt(),
+                    readOnly: true,
                     decoration: InputDecoration(
                       suffixIcon: Padding(
                         padding: EdgeInsets.all(getWidth(16)),
@@ -64,7 +123,7 @@ class SelectDepartingFromScreen extends StatelessWidget {
                           color: AppColors.grey,
                         ),
                       ),
-                      hintText: "Paris, Spain",
+                      hintText: "Tap on the map to select a location",
                       hintStyle: getTextStyleMsrt(color: AppColors.grey),
                       filled: true,
                       fillColor: Colors.white,
@@ -79,6 +138,25 @@ class SelectDepartingFromScreen extends StatelessWidget {
                           color: AppColors.grey,
                         ),
                       ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: GoogleMap(
+                          onMapCreated: _onMapCreated,
+                          initialCameraPosition: CameraPosition(
+                            target: selectedLocation,
+                            zoom: 12,
+                          ),
+                          markers: {
+                            Marker(
+                              markerId: MarkerId("selected_location"),
+                              position: selectedLocation,
+                              draggable: true,
+                              onDragEnd: _onLocationSelected,
+                            ),
+                          },
+                          onTap: _onLocationSelected,
+                        ),
+                      ),
                     ),
                   )
                 ],
@@ -90,15 +168,17 @@ class SelectDepartingFromScreen extends StatelessWidget {
       bottomNavigationBar: CustomBottomAppBar(
         isPrimaryButton: true,
         onTap: () {
-          tripController.selectDepartingController.text.isNotEmpty
-              ? Get.to(
+          if (tripController.selectDepartingController.text.isNotEmpty) {
+            Get.to(
                   () => SelectArrivingToScreen(),
-                  transition: Transition.rightToLeftWithFade,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeOut,
-                )
-              : errorSnakbar(
-                  errorMessage: "Please select where are you departing from");
+              transition: Transition.rightToLeftWithFade,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeOut,
+            );
+          } else {
+            errorSnakbar(
+                errorMessage: "Please select where you are departing from");
+          }
         },
       ),
     );

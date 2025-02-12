@@ -12,11 +12,65 @@ import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
 import 'package:courierapp/features/create_trip/presentation/screens/select_maximum_weight.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class SelectArrivingToScreen extends StatelessWidget {
+import '../../../splash_screen/controllers/splash_controller.dart';
+
+class SelectArrivingToScreen extends StatefulWidget {
   SelectArrivingToScreen({super.key});
+
+  @override
+  State<SelectArrivingToScreen> createState() => _SelectArrivingToScreenState();
+}
+
+class _SelectArrivingToScreenState extends State<SelectArrivingToScreen> {
   final CreateTripController tripController = Get.find<CreateTripController>();
+  GoogleMapController? mapController;
+
+  late LatLng selectedLocation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Ensure valid default coordinates
+    double latitude = SplashController .latitude.value;
+    double longitude = SplashController .longitude.value;
+
+    if (latitude == 0.0 || longitude == 0.0) {
+      latitude = 48.8566; // Default to Paris
+      longitude = 2.3522;
+    }
+
+    selectedLocation = LatLng(latitude, longitude);
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+  Future<void> _onLocationSelected(LatLng latLng) async {
+    setState(() {
+      selectedLocation = latLng;
+    });
+
+    try {
+      List<Placemark> placemarks =
+      await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+
+      if (placemarks.isNotEmpty) {
+        Placemark place = placemarks.first;
+        String address = "${place.locality}, ${place.country}";
+
+        tripController.selectArrivingController.text = address;
+      }
+    } catch (e) {
+      print("Error fetching address: $e");
+      errorSnakbar(errorMessage: "Failed to fetch location details");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +109,7 @@ class SelectArrivingToScreen extends StatelessWidget {
                   TextField(
                     controller: tripController.selectArrivingController,
                     style: getTextStyleMsrt(),
+                    readOnly: true,
                     decoration: InputDecoration(
                       suffixIcon: Padding(
                         padding: EdgeInsets.all(getWidth(16)),
@@ -64,7 +119,7 @@ class SelectArrivingToScreen extends StatelessWidget {
                           color: AppColors.grey,
                         ),
                       ),
-                      hintText: "Paris, Spain",
+                      hintText: "Tap on the map to select a location",
                       hintStyle: getTextStyleMsrt(color: AppColors.grey),
                       filled: true,
                       fillColor: Colors.white,
@@ -77,6 +132,25 @@ class SelectArrivingToScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: AppColors.grey,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: GoogleMap(
+                          onMapCreated: _onMapCreated,
+                          initialCameraPosition: CameraPosition(
+                            target: selectedLocation,
+                            zoom: 12,
+                          ),
+                          markers: {
+                            Marker(
+                              markerId: MarkerId("selected_location"),
+                              position: selectedLocation,
+                              draggable: true,
+                              onDragEnd: _onLocationSelected,
+                            ),
+                          },
+                          onTap: _onLocationSelected,
                         ),
                       ),
                     ),
