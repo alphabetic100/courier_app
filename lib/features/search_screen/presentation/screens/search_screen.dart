@@ -227,7 +227,7 @@ class SearchScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            VerticalSpace(height: getHeight(24)),
+                            VerticalSpace(height: getHeight(8)),
                             Align(
                               alignment: Alignment.centerLeft,
                               child: CustomText(
@@ -238,28 +238,45 @@ class SearchScreen extends StatelessWidget {
                                 textAlign: TextAlign.start,
                               ),
                             ),
-                            VerticalSpace(height: getHeight(8)),
-                            Obx(
-                              () => ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: searchScreenController.items.length,
-                                itemBuilder: (context, index) {
-                                  final item =
-                                      searchScreenController.items[index];
-                                  return Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: getHeight(20)),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        //requestShippingController.toggleSelection(index);
-                                      },
-                                      child: ItemCardTwo(item: item),
+                            VerticalSpace(height: getHeight(24)),
+                            Obx(() {
+                              if (searchScreenController.myItems.value ==
+                                      null ||
+                                  searchScreenController
+                                      .myItems.value!.data.isEmpty) {
+                                return Column(
+                                  children: [
+                                    VerticalSpace(height: getHeight(35)),
+                                    CustomText(
+                                      text: "No items added yet",
+                                      fontSize: getWidth(14),
+                                      fontWeight: FontWeight.normal,
                                     ),
-                                  );
-                                },
-                              ),
-                            ),
+                                  ],
+                                );
+                              } else {
+                                return ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount:
+                                      searchScreenController.items.length,
+                                  itemBuilder: (context, index) {
+                                    final item =
+                                        searchScreenController.items[index];
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: getHeight(20)),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          //requestShippingController.toggleSelection(index);
+                                        },
+                                        child: ItemCardTwo(item: item),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                            }),
                           ],
                         ),
                       ),
