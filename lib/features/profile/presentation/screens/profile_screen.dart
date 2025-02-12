@@ -80,15 +80,15 @@ class ProfileScreen extends StatelessWidget {
                         Stack(
                           children: [
                             CircleAvatar(
-                              backgroundImage: controller
-                                          .profile.value?.data?.profileImage !=
-                                      null
-                                  ? NetworkImage(controller
-                                      .profile.value?.data?.profileImage)
-                                  : AssetImage(ImagePath.profile),
+                              backgroundImage:
+                                  controller.profile.value?.data.profileImage !=
+                                          null
+                                      ? NetworkImage(controller
+                                          .profile.value!.data.profileImage)
+                                      : AssetImage(ImagePath.profile),
                               radius: getWidth(50),
                             ),
-                            profile!.isVerified!
+                            profile!.isVerified
                                 ? Positioned(
                                     bottom: 0,
                                     right: getWidth(10),
@@ -112,14 +112,14 @@ class ProfileScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomText(
-                                  text: profile.fullName.toString() ?? '',
+                                  text: profile.fullName.toString(),
                                   fontSize: getWidth(20),
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.black,
                                 ),
                                 CustomText(
                                   text:
-                                      "Member since ${DateFormat('MMMM yyyy').format(profile.createdAt ?? DateTime.now())}",
+                                      "Member since ${DateFormat('MMMM yyyy').format(profile.createdAt)}",
                                   fontSize: getWidth(14),
                                   fontWeight: FontWeight.normal,
                                 ),
@@ -207,13 +207,12 @@ class ProfileScreen extends StatelessWidget {
                             children: [
                               ProfileDetailsCard(
                                   title: "Name:",
-                                  subtitle: profile.fullName.toString() ?? ''),
+                                  subtitle: profile.fullName.toString()),
                               ProfileDetailsCard(
                                   title: "Phone:",
-                                  subtitle: profile.phoneNumber ?? 'N/A'),
+                                  subtitle: profile.phoneNumber),
                               ProfileDetailsCard(
-                                  title: "Email:",
-                                  subtitle: profile.email ?? 'N/A'),
+                                  title: "Email:", subtitle: profile.email),
                               ProfileDetailsCard(
                                   title: "Password:",
                                   subtitle: "Updated 23 days ago"),
@@ -230,13 +229,13 @@ class ProfileScreen extends StatelessWidget {
                               onPressed: () {
                                 Get.to(() => EditProfileScreen(),
                                     arguments: {
-                                      'imagePath': profile.profileImage ?? '',
-                                      'fullName': profile.fullName ?? '',
-                                      'phoneNumber': profile.phoneNumber ?? '',
-                                      "emailAddress": profile.email ?? '',
+                                      'imagePath': profile.profileImage,
+                                      'fullName': profile.fullName,
+                                      'phoneNumber': profile.phoneNumber,
+                                      "emailAddress": profile.email,
                                       "password": 'Updated 23 days ago',
                                       "verification":
-                                          profile.isVerified.toString() ?? '',
+                                          profile.isVerified.toString(),
                                     },
                                     curve: Curves.easeInOut);
                               },
