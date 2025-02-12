@@ -255,21 +255,21 @@ class SearchScreen extends StatelessWidget {
                                   ],
                                 );
                               } else {
+                                final reversedItems = itemController
+                                    .myItems.value!.data.reversed
+                                    .toList();
+
                                 return ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
-                                  itemCount:
-                                      searchScreenController.items.length,
+                                  itemCount: reversedItems.length,
                                   itemBuilder: (context, index) {
-                                    final item = itemController
-                                        .myItems.value!.data[index];
+                                    final item = reversedItems[index];
                                     return Padding(
                                       padding: EdgeInsets.only(
                                           bottom: getHeight(20)),
                                       child: GestureDetector(
-                                        onTap: () {
-                                          //requestShippingController.toggleSelection(index);
-                                        },
+                                        onTap: () {},
                                         child: ItemCardTwo(
                                           item: item,
                                           isSelected: false,
@@ -279,7 +279,7 @@ class SearchScreen extends StatelessWidget {
                                   },
                                 );
                               }
-                            }),
+                            })
                           ],
                         ),
                       ),
