@@ -197,7 +197,7 @@ class EditProfileScreen extends StatelessWidget {
                         isUnderline: true,
                         onPressed: () {
                           forgotEmailController.forgetEmail(emailTEController.text);
-                          Get.to(() => ChangePasswordOtpScreen());
+
                         },
                         text: "Change",
                         fontWeight: FontWeight.w600,

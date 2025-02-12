@@ -21,7 +21,7 @@ import 'edit_profile_screen.dart';
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
   final LandingController landingController = Get.find<LandingController>();
-  final controller = Get.find<ProfileController>();
+  final controller = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     //controller.getProfileDetails();
@@ -78,6 +78,8 @@ class ProfileScreen extends StatelessWidget {
                 VerticalSpace(height: getHeight(20)),
                 Obx(() {
                   final profile = controller.profile.value?.data;
+                  final String? profileImage = profile?.profileImage;
+                  final bool hasValidProfileImage = profileImage != null && profileImage.isNotEmpty;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -89,12 +91,9 @@ class ProfileScreen extends StatelessWidget {
                             Stack(
                               children: [
                                 CircleAvatar(
-                                  backgroundImage: controller.profile.value
-                                              ?.data.profileImage !=
-                                          null
-                                      ? NetworkImage(controller
-                                          .profile.value!.data.profileImage)
-                                      : AssetImage(ImagePath.profile),
+                                  backgroundImage: hasValidProfileImage
+                                      ? NetworkImage(profileImage)
+                                      : AssetImage(ImagePath.profile) as ImageProvider,
                                   radius: getWidth(50),
                                 ),
                                 profile!.isVerified
