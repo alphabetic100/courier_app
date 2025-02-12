@@ -7,6 +7,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/request_shipping/components/item_details.dart';
+import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class AddItem extends StatelessWidget {
   AddItem({super.key});
   final SearchScreenController searchScreenController =
       Get.find<SearchScreenController>();
+  final ItemController itemController = Get.put(ItemController());
+  final GlobalKey<FormState> validator = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,12 +138,18 @@ class AddItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // item Details part
-                                  ItemDetails(),
+                                  ItemDetails(
+                                    validator: validator,
+                                  ),
                                   VerticalSpace(height: getHeight(16)),
                                   CustomButton(
                                       height: getHeight(50),
                                       onPressed: () {
-                                        Navigator.of(context).pop();
+                                        if (validator.currentState!
+                                            .validate()) {
+                                          itemController.addItem();
+                                          Navigator.of(context).pop();
+                                        }
                                       },
                                       child: CustomText(
                                         text: "Add a Item",
