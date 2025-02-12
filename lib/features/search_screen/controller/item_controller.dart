@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:courierapp/core/common/widgets/error_snakbar.dart';
 import 'package:courierapp/core/common/widgets/success_snakbar.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
@@ -16,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 class ItemController extends GetxController {
   NetworkCaller networkCaller = NetworkCaller();
   Rx<ItemModel?> myItems = Rx<ItemModel?>(null);
+  final GlobalKey<FormState> validator = GlobalKey<FormState>();
   final TextEditingController itemName = TextEditingController();
   final TextEditingController itemDescription = TextEditingController();
   RxList<String> selectedImages = [
@@ -26,13 +26,6 @@ class ItemController extends GetxController {
     "",
   ].obs;
 
-  List imageList = [
-    "",
-    "",
-    "",
-    "",
-    "",
-  ];
   var itemWeight = "5kg".obs;
 
   @override
@@ -62,6 +55,7 @@ class ItemController extends GetxController {
         return status! < 500;
       },
     );
+
     try {
       final bodyData = {
         "name": itemName.text.trim(),
@@ -70,18 +64,32 @@ class ItemController extends GetxController {
       };
       final requestBodyData = jsonEncode(bodyData);
 
+      List<dio.MultipartFile> imageFiles = [];
+      for (String imagePath in selectedImages) {
+        if (imagePath.isNotEmpty) {
+          final imageFile = await dio.MultipartFile.fromFile(
+            imagePath,
+            filename: imagePath.split('/').last,
+          );
+          imageFiles.add(imageFile);
+        }
+      }
+
       final formData = dio.FormData.fromMap({
         'bodyData': requestBodyData,
-        "image": selectedImages,
+        "image": imageFiles,
       });
+
       log('FormData Fields: ${formData.fields}');
       log('FormData Files: ${formData.files}');
 
-      final response = await dioClient.post(AppUrls.getMyItems,
-          data: formData,
-          options: Options(headers: {
-            'Authorization': AuthService.token,
-          }));
+      final response = await dioClient.post(
+        AppUrls.getMyItems,
+        data: formData,
+        options: Options(headers: {
+          'Authorization': AuthService.token,
+        }),
+      );
 
       if (response.statusCode == 200 || response.data["success"]) {
         successSnakbr(successMessage: "Item added successfully");
@@ -89,7 +97,7 @@ class ItemController extends GetxController {
         errorSnakbar(errorMessage: response.data["message"]);
       }
     } catch (e) {
-      log("something went wrong, error: $e");
+      log("Something went wrong, error: $e");
     }
   }
 
@@ -119,11 +127,6 @@ class ItemController extends GetxController {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       selectedImages[index] = image.path;
-      imageList[index] = await dio.MultipartFile.fromFile(
-        image.path,
-        filename: image.path.split('/').last,
-      );
-      log(imageList[2].toString());
     }
   }
 }

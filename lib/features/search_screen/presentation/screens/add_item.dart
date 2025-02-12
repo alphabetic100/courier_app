@@ -18,7 +18,7 @@ class AddItem extends StatelessWidget {
   final SearchScreenController searchScreenController =
       Get.find<SearchScreenController>();
   final ItemController itemController = Get.put(ItemController());
-  final GlobalKey<FormState> validator = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,14 +138,13 @@ class AddItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // item Details part
-                                  ItemDetails(
-                                    validator: validator,
-                                  ),
+                                  ItemDetails(),
                                   VerticalSpace(height: getHeight(16)),
                                   CustomButton(
                                       height: getHeight(50),
                                       onPressed: () {
-                                        if (validator.currentState!
+                                        if (itemController
+                                            .validator.currentState!
                                             .validate()) {
                                           itemController.addItem();
                                           Navigator.of(context).pop();

@@ -17,90 +17,114 @@ class ItemCardTwo extends StatelessWidget {
   final ItemData item;
   final bool isSelected;
   final ItemController itemController = Get.put(ItemController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: AppSizes.width,
+      padding: EdgeInsets.all(getWidth(8)),
       decoration: BoxDecoration(
-          color: Color(0xffFFFFFF),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-              color: isSelected
-                  ? AppColors.primaryColor
-                  : AppColors.grey.withOpacity(0.5))),
-      child: Center(
-        child: ListTile(
-          title: CustomText(
-            text: item.name,
-            fontSize: getWidth(16),
-            fontWeight: FontWeight.w700,
-            color: AppColors.titleTextColor,
-          ),
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: item.image.isEmpty
-                  ? Image.asset(
+        color: Color(0xffFFFFFF),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: isSelected
+              ? AppColors.primaryColor
+              : AppColors.grey.withOpacity(0.5),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: item.image.isEmpty
+                ? SizedBox(
+                    height: getHeight(70),
+                    width: getWidth(60),
+                    child: Image.asset(
                       ImagePath.noImage,
-                      height: getHeight(60),
-                      width: getWidth(40),
                       fit: BoxFit.fill,
-                    )
-                  : Image.network(item.image[0]),
+                    ),
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(getWidth(8)),
+                    child: SizedBox(
+                      height: getHeight(70),
+                      width: getWidth(60),
+                      child: Image.network(
+                        item.image[0],
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+          ),
+          HorizontalSpace(width: getWidth(8)),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                  text: item.name,
+                  fontSize: getWidth(16),
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.titleTextColor,
+                ),
+                SizedBox(height: getHeight(5)),
+                CustomText(
+                  text: "(${item.weight}kg)",
+                  fontWeight: FontWeight.normal,
+                  fontSize: getWidth(14),
+                ),
+              ],
             ),
           ),
-          subtitle: CustomText(
-            text: "(${item.weight}kg)",
-            fontWeight: FontWeight.normal,
-            fontSize: getWidth(14),
+
+          // Popup Menu (Trailing)
+          PopupMenuButton(
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                onTap: () {},
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit,
+                      color: AppColors.secondaryColor,
+                      size: getWidth(20),
+                    ),
+                    HorizontalSpace(width: getWidth(5)),
+                    CustomText(
+                      text: "Edit",
+                      color: AppColors.secondaryColor,
+                      fontSize: getWidth(12),
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                onTap: () {
+                  itemController.deleteItem(item.id);
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete,
+                      color: AppColors.error,
+                      size: getWidth(20),
+                    ),
+                    HorizontalSpace(width: getWidth(5)),
+                    CustomText(
+                      text: "Delete",
+                      fontSize: getWidth(12),
+                      fontWeight: FontWeight.normal,
+                      color: AppColors.error,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          trailing: PopupMenuButton(
-              itemBuilder: (context) => [
-                    PopupMenuItem(
-                        onTap: () {},
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.edit,
-                              color: AppColors.secondaryColor,
-                              size: getWidth(20),
-                            ),
-                            HorizontalSpace(
-                              width: getWidth(5),
-                            ),
-                            CustomText(
-                              text: "Edit",
-                              color: AppColors.secondaryColor,
-                              fontSize: getWidth(12),
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ],
-                        )),
-                    PopupMenuItem(
-                        onTap: () {
-                          itemController.deleteItem(item.id);
-                        },
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.delete,
-                              color: AppColors.error,
-                              size: getWidth(20),
-                            ),
-                            HorizontalSpace(
-                              width: getWidth(5),
-                            ),
-                            CustomText(
-                              text: "Delete",
-                              fontSize: getWidth(12),
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.error,
-                            ),
-                          ],
-                        ))
-                  ]),
-        ),
+        ],
       ),
     );
   }
