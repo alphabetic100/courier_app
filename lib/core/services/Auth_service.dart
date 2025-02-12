@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 import 'package:get/get.dart';
 
@@ -9,20 +8,17 @@ import '../../routes/app_routes.dart';
 class AuthService {
   static const String _tokenKey = 'token';
 
-
   // Singleton instance for SharedPreferences
   static late SharedPreferences _preferences;
 
   // Private variables to hold token and userId
   static String? _token;
 
-
   // Initialize SharedPreferences (call this during app startup)
   static Future<void> init() async {
     _preferences = await SharedPreferences.getInstance();
     // Load token and userId from SharedPreferences into private variables
     _token = _preferences.getString(_tokenKey);
-
   }
 
   // Check if a token exists in local storage

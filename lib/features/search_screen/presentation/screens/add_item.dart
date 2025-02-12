@@ -8,7 +8,6 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/request_shipping/components/item_details.dart';
 import 'package:courierapp/features/search_screen/controller/search_screen_controller.dart';
-import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -141,7 +140,7 @@ class AddItem extends StatelessWidget {
                                   CustomButton(
                                       height: getHeight(50),
                                       onPressed: () {
-                                        Get.toNamed(AppRoute.searchScreen);
+                                        Navigator.of(context).pop();
                                       },
                                       child: CustomText(
                                         text: "Add a Item",

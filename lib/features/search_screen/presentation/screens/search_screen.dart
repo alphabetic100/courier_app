@@ -1,4 +1,5 @@
 import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/common/styles/get_text_style.dart';
@@ -19,6 +20,7 @@ class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
   final SearchScreenController searchScreenController =
       Get.find<SearchScreenController>();
+  final ItemController itemController = Get.put(ItemController());
   final formKey = GlobalKey<FormState>();
 
   String? validateLocation(String? value) {
@@ -227,7 +229,7 @@ class SearchScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            VerticalSpace(height: getHeight(24)),
+                            VerticalSpace(height: getHeight(8)),
                             Align(
                               alignment: Alignment.centerLeft,
                               child: CustomText(
@@ -238,28 +240,46 @@ class SearchScreen extends StatelessWidget {
                                 textAlign: TextAlign.start,
                               ),
                             ),
-                            VerticalSpace(height: getHeight(8)),
-                            Obx(
-                              () => ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: searchScreenController.items.length,
-                                itemBuilder: (context, index) {
-                                  final item =
-                                      searchScreenController.items[index];
-                                  return Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: getHeight(20)),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        //requestShippingController.toggleSelection(index);
-                                      },
-                                      child: ItemCardTwo(item: item),
+                            VerticalSpace(height: getHeight(24)),
+                            Obx(() {
+                              if (itemController.myItems.value == null ||
+                                  itemController.myItems.value!.data.isEmpty) {
+                                return Column(
+                                  children: [
+                                    VerticalSpace(height: getHeight(35)),
+                                    CustomText(
+                                      text: "No items added yet",
+                                      fontSize: getWidth(14),
+                                      fontWeight: FontWeight.normal,
                                     ),
-                                  );
-                                },
-                              ),
-                            ),
+                                  ],
+                                );
+                              } else {
+                                final reversedItems = itemController
+                                    .myItems.value!.data.reversed
+                                    .toList();
+
+                                return ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: reversedItems.length,
+                                  itemBuilder: (context, index) {
+                                    final item = reversedItems[index];
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: getHeight(20)),
+                                      child: GestureDetector(
+                                        onTap: () {},
+                                        child: ItemCardTwo(
+                                          item: item,
+                                          isSelected: false,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                            })
                           ],
                         ),
                       ),

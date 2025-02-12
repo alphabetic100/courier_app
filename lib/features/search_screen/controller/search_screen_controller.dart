@@ -24,6 +24,7 @@ class SearchScreenController extends GetxController {
 
   Rx<AllTripModel?> searchData = Rx<AllTripModel?>(null);
 
+
   Future<void> searchTrip() async {
     final requestUrl =
         "${AppUrls.transport}?from=${senderController.text}&to=${receiverController.text}&date=${calenderController.text}";
@@ -44,6 +45,7 @@ class SearchScreenController extends GetxController {
     }
   }
 
+
   Future selectDate(BuildContext context) async {
     DateTime? selectedDate = await showDatePicker(
       context: context,
@@ -62,6 +64,8 @@ class SearchScreenController extends GetxController {
     receiverController.clear();
     calenderController.clear();
   }
+
+ 
 
   var items = <Item>[
     Item(
