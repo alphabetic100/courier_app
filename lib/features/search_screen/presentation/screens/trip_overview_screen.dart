@@ -43,7 +43,6 @@ class TripOverviewScreen extends StatelessWidget {
               departingFrom: trip.from,
               arrivingTo: trip.to,
               price: trip.price.toString().replaceAll("\$", ""),
-              priceSubText: "".obs,
               date: AppHelperFunctions.formateDate(trip.date),
             ),
 

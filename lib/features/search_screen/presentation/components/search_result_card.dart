@@ -121,7 +121,7 @@ class SearchResultCard extends StatelessWidget {
               isVerified: isVerified,
               profileImage: profileUrl,
               profileName: profileName,
-              rattings: profileRetting,
+              rattings: double.parse(profileRetting).toStringAsFixed(1),
               carNumber: carNumber,
               suffixIcon: trynasportType.toLowerCase() == "bus"
                   ? Image.asset(

@@ -6,16 +6,17 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class TripDetailsTopBody extends StatelessWidget {
-  const TripDetailsTopBody({
+class RequestShippingTopBody extends StatelessWidget {
+  RequestShippingTopBody({
     super.key,
     required this.title,
     required this.departingFrom,
     required this.arrivingTo,
     required this.price,
-    this.priceSubText,
     required this.date,
   });
 
@@ -24,8 +25,9 @@ class TripDetailsTopBody extends StatelessWidget {
   final String arrivingTo;
   final String price;
   final String date;
-  final String? priceSubText;
 
+  final RequestShippingController shippingController =
+      Get.put(RequestShippingController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -147,20 +149,22 @@ class TripDetailsTopBody extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomText(
-                text: "\$${price.replaceAll("\$", "")}",
-                color: AppColors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: getWidth(25),
+              Obx(
+                () => CustomText(
+                  text:
+                      "\$${(int.parse(price.replaceAll("\$", "")) * (shippingController.selectedItems.length))}",
+                  color: AppColors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: getWidth(25),
+                ),
               ),
-              if (priceSubText != null) ...[
-                priceSubText!.isNotEmpty
-                    ? CustomText(
-                        text: priceSubText!,
-                        fontWeight: FontWeight.w400,
-                      )
-                    : SizedBox.shrink(),
-              ]
+              Obx(
+                () => CustomText(
+                  text:
+                      "\$${(int.parse(price.replaceAll("\$", "")))}/kg ${(shippingController.selectedItems.length)}",
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ],
           ),
         ),

@@ -40,7 +40,7 @@ class SenderRequestDetailsScreen extends StatelessWidget {
               departingFrom: "32,C.nuñez de balboa, Madrid",
               arrivingTo: "32,C.nuñez de balboa, Madrid",
               price: "32",
-              priceSubText: r"10\kg".obs,
+              priceSubText: r"10\kg",
               date: '522',
             ),
             Column(

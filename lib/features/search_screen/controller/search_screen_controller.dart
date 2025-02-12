@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../core/common/widgets/item.dart';
-import '../../../core/utils/constants/image_path.dart';
 
 class SearchScreenController extends GetxController {
   final NetworkCaller networkCaller = NetworkCaller();
@@ -65,20 +63,5 @@ class SearchScreenController extends GetxController {
     calenderController.clear();
   }
 
- 
 
-  var items = <Item>[
-    Item(
-        name: 'Laptop to New York',
-        destination: 'New York',
-        weight: '09 kg',
-        from: "Madrid",
-        imagePath: ImagePath.onboarding1),
-    Item(
-        name: 'Books to Chicago',
-        destination: 'Chicago',
-        weight: '16 kg',
-        from: "Cicago",
-        imagePath: ImagePath.onboarding2),
-  ].obs;
 }

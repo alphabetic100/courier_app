@@ -25,7 +25,6 @@ class SplashController extends GetxController {
             curve: Curves.easeOut,
           );
         }
-        // Get.offAll(() => OnboardingScreen1());
       },
     );
   }
