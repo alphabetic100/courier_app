@@ -2,6 +2,7 @@ import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
+import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -18,7 +19,7 @@ class AddItem extends StatelessWidget {
   final SearchScreenController searchScreenController =
       Get.find<SearchScreenController>();
   final ItemController itemController = Get.put(ItemController());
-  final GlobalKey<FormState> validator = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,17 +139,22 @@ class AddItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // item Details part
-                                  ItemDetails(
-                                    validator: validator,
-                                  ),
+                                  ItemDetails(),
                                   VerticalSpace(height: getHeight(16)),
                                   CustomButton(
                                       height: getHeight(50),
                                       onPressed: () {
-                                        if (validator.currentState!
+                                        if (itemController
+                                            .validator.currentState!
                                             .validate()) {
-                                          itemController.addItem();
-                                          Navigator.of(context).pop();
+                                          showProgressIndicator();
+                                          itemController
+                                              .addItem()
+                                              .then((value) {
+                                            itemController.getMyItems();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                          });
                                         }
                                       },
                                       child: CustomText(

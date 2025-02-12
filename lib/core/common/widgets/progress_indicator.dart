@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../utils/constants/app_colors.dart';
 import '../../utils/constants/app_sizes.dart';
 
-
 void showProgressIndicator() {
   Get.dialog(
     Center(
@@ -19,7 +18,8 @@ void showProgressIndicator() {
   );
 }
 
-void hideProgressIndicator() {
+Future<void> hideProgressIndicator() async {
+  await Future.delayed(Duration(milliseconds: 100));
   if (Get.isDialogOpen ?? false) {
     Get.back();
   }

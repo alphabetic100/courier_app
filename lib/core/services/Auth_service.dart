@@ -46,6 +46,7 @@ class AuthService {
       // Reset private variables
       _token = null;
       // Redirect to the login screen
+      log("+++++++++++++ Logout called");
       await goToLogin();
     } catch (e) {
       log('Error during logout: $e');

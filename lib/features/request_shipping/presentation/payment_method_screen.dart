@@ -3,24 +3,27 @@ import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/common/widgets/payment_setup_card.dart';
-import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/payment_setup_controller.dart';
+import 'package:courierapp/features/request_shipping/components/request_shiping_top_body.dart';
 import 'package:courierapp/features/request_shipping/presentation/payment_select_screen.dart';
 import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PaymentMethodScreen extends StatelessWidget {
-  PaymentMethodScreen({super.key, this.trip, required this.priceSubtext});
+  PaymentMethodScreen({
+    super.key,
+    this.trip,
+  });
   final PaymentSetupController paymentSetupController =
       Get.find<PaymentSetupController>();
   final TransportData? trip;
-  final RxString priceSubtext;
+  // final RxString priceSubtext;
   final List<String> titles = ["PayPal", "Apple Pay", "Credit Card"];
   final List<String> iconPaths = [
     IconPath.payPalLogo,
@@ -42,12 +45,11 @@ class PaymentMethodScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          TripDetailsTopBody(
+          RequestShippingTopBody(
             title: "Payment Method",
             departingFrom: trip!.from,
             arrivingTo: trip!.to,
             price: trip!.price.toString(),
-            priceSubText: priceSubtext,
             date: AppHelperFunctions.formateDate(trip!.date),
           ),
           SizedBox(

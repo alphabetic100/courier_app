@@ -3,17 +3,19 @@ import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
-import 'package:courierapp/core/common/widgets/item_card.dart';
+import 'package:courierapp/core/common/widgets/item_card_two.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
-import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/helpers/app_helper.dart';
+import 'package:courierapp/features/request_shipping/components/request_shiping_top_body.dart';
 import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
 import 'package:courierapp/features/request_shipping/presentation/payment_method_screen.dart';
 import 'package:courierapp/features/request_shipping/presentation/payment_select_screen.dart';
+import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
+import 'package:courierapp/features/search_screen/presentation/screens/add_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +24,7 @@ class RequestShippingScreen extends StatelessWidget {
   RequestShippingScreen({super.key, required this.trip});
   final RequestShippingController requestShippingController =
       Get.put(RequestShippingController());
+  final ItemController itemController = Get.put(ItemController());
   final TransportData trip;
   @override
   Widget build(BuildContext context) {
@@ -41,33 +44,42 @@ class RequestShippingScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TripDetailsTopBody(
+            RequestShippingTopBody(
               title: "Request shipping",
               departingFrom: trip.from,
               arrivingTo: trip.to,
               price: trip.price.toString(),
-              priceSubText: requestShippingController.priceSubText,
               date: AppHelperFunctions.formateDate(trip.date),
             ),
             VerticalSpace(height: getHeight(20)),
             Obx(() => ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: requestShippingController.items.length,
+                  itemCount: itemController.myItems.value!.data.length,
                   itemBuilder: (context, index) {
-                    final item = requestShippingController.items[index];
+                    final item = itemController.myItems.value!.data[index];
                     return Padding(
                       padding: EdgeInsets.only(bottom: getHeight(20)),
                       child: GestureDetector(
                         onTap: () {
-                          requestShippingController.toggleSelection(
-                              index, trip.price);
-                          //  requestShippingController.checkSelected(index);
+                          requestShippingController.toggleSelection(index);
                         },
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: getWidth(16), right: getWidth(16)),
-                          child: ItemCard(item: item),
+                        child: Obx(
+                          () => Padding(
+                            padding: EdgeInsets.only(
+                                left: getWidth(16), right: getWidth(16)),
+                            child: ItemCardTwo(
+                              isdeletable: requestShippingController
+                                      .selectedItems
+                                      .contains(index)
+                                  ? false
+                                  : true,
+                              item: item,
+                              isSelected: requestShippingController
+                                  .selectedItems
+                                  .contains(index),
+                            ),
+                          ),
                         ),
                       ),
                     );
@@ -123,7 +135,9 @@ class RequestShippingScreen extends StatelessWidget {
             Expanded(
               child: CustomButton(
                   isPrimary: false,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => AddItem());
+                  },
                   child: CustomText(
                     fontWeight: FontWeight.w600,
                     text: "Add Another",
@@ -136,7 +150,6 @@ class RequestShippingScreen extends StatelessWidget {
                   onPressed: () {
                     Get.to(() => PaymentMethodScreen(
                           trip: trip,
-                          priceSubtext: requestShippingController.priceSubText,
                         ));
                   },
                   child: CustomText(
