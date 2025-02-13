@@ -91,6 +91,10 @@ class ItemController extends GetxController {
 
       if (response.statusCode == 200 || response.data["success"]) {
         successSnakbr(successMessage: "Item added successfully");
+        selectedImages.value = selectedImages
+            .map((image) => image.isNotEmpty ? "" : image)
+            .toList();
+
         log(isLoading.value.toString());
       } else {
         errorSnakbar(errorMessage: response.data["message"]);
