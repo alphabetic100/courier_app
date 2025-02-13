@@ -152,7 +152,7 @@ class RequestShippingTopBody extends StatelessWidget {
               Obx(
                 () => CustomText(
                   text:
-                      "\$${(int.parse(price.replaceAll("\$", "")) * (shippingController.selectedItems.length))}",
+                      "\$${(int.parse(price.replaceAll("\$", "")) * (double.parse(shippingController.selectedItemWeigth.value)))}",
                   color: AppColors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: getWidth(25),
@@ -161,7 +161,7 @@ class RequestShippingTopBody extends StatelessWidget {
               Obx(
                 () => CustomText(
                   text:
-                      "\$${(int.parse(price.replaceAll("\$", "")))}/kg ${(shippingController.selectedItems.length)}",
+                      "\$${(int.parse(price.replaceAll("\$", "")))}/kg×${shippingController.selectedItemWeigth.value}kg",
                   fontWeight: FontWeight.w400,
                 ),
               ),

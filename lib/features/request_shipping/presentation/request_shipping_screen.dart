@@ -52,39 +52,42 @@ class RequestShippingScreen extends StatelessWidget {
               date: AppHelperFunctions.formateDate(trip.date),
             ),
             VerticalSpace(height: getHeight(20)),
-            Obx(() => ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: itemController.myItems.value!.data.length,
-                  itemBuilder: (context, index) {
-                    final item = itemController.myItems.value!.data[index];
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: getHeight(20)),
-                      child: GestureDetector(
-                        onTap: () {
-                          requestShippingController.toggleSelection(index);
-                        },
-                        child: Obx(
-                          () => Padding(
-                            padding: EdgeInsets.only(
-                                left: getWidth(16), right: getWidth(16)),
-                            child: ItemCardTwo(
-                              isdeletable: requestShippingController
-                                      .selectedItems
-                                      .contains(index)
-                                  ? false
-                                  : true,
-                              item: item,
-                              isSelected: requestShippingController
-                                  .selectedItems
-                                  .contains(index),
-                            ),
-                          ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: itemController.myItems.value!.data.length,
+              itemBuilder: (context, index) {
+                final item = itemController.myItems.value!.data[index];
+                return Padding(
+                  padding: EdgeInsets.only(bottom: getHeight(20)),
+                  child: GestureDetector(
+                    onTap: () {
+                      requestShippingController.toggleSelection(
+                          index,
+                          item.id,
+                          double.parse(item.weight.toString())
+                              .toStringAsFixed(1)
+                              .toString());
+                    },
+                    child: Obx(
+                      () => Padding(
+                        padding: EdgeInsets.only(
+                            left: getWidth(16), right: getWidth(16)),
+                        child: ItemCardTwo(
+                          isdeletable:
+                              requestShippingController.selectedIndex.value !=
+                                  index,
+                          item: item,
+                          isSelected:
+                              requestShippingController.selectedIndex.value ==
+                                  index,
                         ),
                       ),
-                    );
-                  },
-                )),
+                    ),
+                  ),
+                );
+              },
+            ),
             Padding(
               padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               child: Column(
