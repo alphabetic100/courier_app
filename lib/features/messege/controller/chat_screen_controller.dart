@@ -54,4 +54,10 @@ class ChatController extends GetxController {
       messages.refresh();
     }
   }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  }
 }
