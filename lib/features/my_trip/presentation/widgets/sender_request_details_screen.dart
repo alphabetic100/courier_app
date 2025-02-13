@@ -208,7 +208,9 @@ class SenderRequestDetailsScreen extends StatelessWidget {
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
-                    Get.to(() => ChatInboxScreen());
+                    Get.to(() => ChatInboxScreen(
+                          user2ndId: "",
+                        ));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

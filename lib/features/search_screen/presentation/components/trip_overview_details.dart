@@ -24,7 +24,8 @@ class TripOverviewDetails extends StatelessWidget {
           GestureDetector(
             onTap: () {
               //TODO: Navigate to the Traveller Information page
-              Get.to(() => OthersProfileScreen());
+           Get.to(() => OthersProfileScreen(),arguments: trip.user.id);   
+
             },
             child: BodyProfileCard(
               isVerified: trip.user.isVerified,

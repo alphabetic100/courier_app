@@ -165,7 +165,10 @@ class DeliveryDetailsScreen extends StatelessWidget {
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
-                    Get.to(() => ChatInboxScreen());
+                    Get.to(() => ChatInboxScreen(
+                          user2ndId: "",
+                          //TODO: Chat user id
+                        ));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

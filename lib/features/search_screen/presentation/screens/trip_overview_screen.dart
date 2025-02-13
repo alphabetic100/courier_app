@@ -67,7 +67,9 @@ class TripOverviewScreen extends StatelessWidget {
             CustomButton(
                 isPrimary: false,
                 onPressed: () {
-                  Get.to(() => ChatInboxScreen());
+                  Get.to(() => ChatInboxScreen(
+                        user2ndId: trip.user.id,
+                      ));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

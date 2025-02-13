@@ -102,6 +102,17 @@ class RequestShippingScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  CustomButton(
+                      height: getHeight(60),
+                      isPrimary: false,
+                      onPressed: () {
+                        Get.to(() => AddItem());
+                      },
+                      child: CustomText(
+                        fontWeight: FontWeight.w600,
+                        text: "Add a Item",
+                      )),
+                  VerticalSpace(height: getHeight(10)),
                   CustomText(
                     text: "Message",
                     fontSize: getWidth(16),
@@ -156,18 +167,6 @@ class RequestShippingScreen extends StatelessWidget {
           children: [
             Expanded(
               child: CustomButton(
-                  isPrimary: false,
-                  onPressed: () {
-                    Get.to(() => AddItem());
-                  },
-                  child: CustomText(
-                    fontWeight: FontWeight.w600,
-                    text: "Add Another",
-                  )),
-            ),
-            HorizontalSpace(width: getWidth(16)),
-            Expanded(
-              child: CustomButton(
                   isPrimary: true,
                   onPressed: () {
                     if (requestShippingController.selectedIndex.value < 0) {
@@ -184,7 +183,7 @@ class RequestShippingScreen extends StatelessWidget {
                     }
                   },
                   child: CustomText(
-                    text: "Next",
+                    text: "Pay",
                     color: AppColors.white,
                     fontWeight: FontWeight.w600,
                   )),
