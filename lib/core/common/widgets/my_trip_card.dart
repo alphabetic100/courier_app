@@ -86,7 +86,7 @@ class MyTripCard extends StatelessWidget {
             isVerified: true,
             profileImage: "",
             profileName: "Albert Flores",
-            rattings: "4.8/5",
+            rattings: "4.85",
             suffixIcon: SizedBox(
               width: AppSizes.width * 0.4,
               child: Row(
