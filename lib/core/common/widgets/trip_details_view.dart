@@ -193,7 +193,7 @@ class TripDetailsView extends StatelessWidget {
                   )
                 ],
               );
-            })
+            }),
         ],
       ),
     );

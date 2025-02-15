@@ -233,7 +233,9 @@ class MyTripScreen extends StatelessWidget {
                     padding: EdgeInsets.all(getWidth(16)),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(() => TravelTripDetailScreen());
+                        Get.to(() => TravelTripDetailScreen(
+                              trip: tripData,
+                            ));
                       },
                       child: AsTravellerCard(
                         from: tripData.from,

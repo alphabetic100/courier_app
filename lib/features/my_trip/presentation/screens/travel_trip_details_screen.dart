@@ -5,13 +5,16 @@ import 'package:courierapp/core/common/widgets/trip_details_view.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/my_trip/controller/my_trip_controller.dart';
+import 'package:courierapp/features/my_trip/models/me_as_traveller_model.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/sender_request_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class TravelTripDetailScreen extends StatelessWidget {
-  TravelTripDetailScreen({super.key});
+  TravelTripDetailScreen({super.key, required this.trip});
   final MyTripController myTripController = Get.find<MyTripController>();
+  final TransportData trip;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,11 +31,10 @@ class TravelTripDetailScreen extends StatelessWidget {
           children: [
             TripDetailsTopBody(
               title: "Trip Details",
-              departingFrom: "32,C.nuñez de balboa, Madrid",
-              arrivingTo: "32,C.nuñez de balboa, Madrid",
-              price: "20",
-              priceSubText: r"12\kg",
-              date: '42',
+              departingFrom: trip.from,
+              arrivingTo: trip.to,
+              price: "${trip.price.toString()}/kg",
+              date: DateFormat("MMM d, yyyy").format(DateTime.parse(trip.date)),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -41,23 +43,17 @@ class TravelTripDetailScreen extends StatelessWidget {
               child: Column(
                 children: [
                   TripDetailsView(
-                      tripTransport: "Bus",
-                      carNumber: "DL-88372",
-                      availabileSpace: "5kg",
-                      tripRules: [
-                        "No perishable food items without proper packaging.",
-                        "No fragile items unless securely packaged."
-                      ],
-                      date: "14 Jan 2025",
-                      tripAdvantate: [
-                        "Will pickup the items from the sender's location.",
-                        "Will deliver directly to recipient’s door."
-                      ]),
+                      tripTransport: trip.transportType,
+                      carNumber: trip.transportNumber,
+                      availabileSpace: "",
+                      tripRules: trip.rules,
+                      tripAdvantate: trip.additional),
                   // if (myTripController.status.value
                   //     .toLowerCase()
                   //     .contains("panding")) ...[
                   VerticalSpace(height: getHeight(20)),
                   SenderRequestCard(),
+                  VerticalSpace(height: getHeight(20))
                   // ]
                 ],
               ),
