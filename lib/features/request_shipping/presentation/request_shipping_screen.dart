@@ -14,7 +14,6 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/request_shipping/components/request_shiping_top_body.dart';
 import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
-import 'package:courierapp/features/request_shipping/presentation/payment_method_screen.dart';
 import 'package:courierapp/features/request_shipping/presentation/payment_select_screen.dart';
 import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:courierapp/features/search_screen/models/all_trip_model.dart';

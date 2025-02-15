@@ -196,6 +196,7 @@ class SignUpScreen extends StatelessWidget {
                             errorSnakbar(
                                 errorMessage:
                                     "Please read the terms & conditions");
+                            return;
                           }
                           if (_formKey.currentState!.validate()) {
                             Get.toNamed(AppRoute.identityVerificationScreen1);
