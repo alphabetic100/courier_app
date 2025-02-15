@@ -1,8 +1,14 @@
 import 'dart:developer';
+import 'package:courierapp/core/services/Auth_service.dart';
+import 'package:courierapp/core/services/network_caller.dart';
+import 'package:courierapp/core/utils/constants/api_constants.dart';
+import 'package:courierapp/features/request_shipping/presentation/payment_method_screen.dart';
+import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RequestShippingController extends GetxController {
+  final NetworkCaller networkCaller = NetworkCaller();
   final TextEditingController senderMessageTEController =
       TextEditingController();
   RxInt selectedIndex = (-1).obs;
@@ -29,5 +35,32 @@ class RequestShippingController extends GetxController {
     }
 
     log("Selected index: ${selectedIndex.value}");
+  }
+
+  Future<void> requestTransport(TransportData trip) async {
+    final requestBody = {
+      "postId": postID.value,
+      "itemId": selectedItemId.value,
+      "price": price.value,
+      "message": senderMessageTEController.text,
+    };
+
+    try {
+      final response = await networkCaller.postRequest(AppUrls.requestBooking,
+          body: requestBody, token: AuthService.token);
+
+      if (response.isSuccess) {
+        log("+++++++++++++++++++++++Booking successfull++++++++++++++++++++++++");
+        Get.to(
+          () => Get.to(
+            () => PaymentMethodScreen(
+              trip: trip,
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      log("something went wrong, error: $e");
+    }
   }
 }

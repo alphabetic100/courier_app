@@ -177,9 +177,7 @@ class RequestShippingScreen extends StatelessWidget {
                       log(requestShippingController.postID.value);
                       log(requestShippingController.selectedItemId.value);
                       log(requestShippingController.price.value);
-                      Get.to(() => PaymentMethodScreen(
-                            trip: trip,
-                          ));
+                      requestShippingController.requestTransport(trip);
                     }
                   },
                   child: CustomText(
