@@ -4,13 +4,15 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
+import 'package:courierapp/features/my_trip/controller/qr_controller.dart';
 import 'package:courierapp/features/my_trip/presentation/screens/qr_code_generator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class QrGenerateDialog extends StatelessWidget {
-  const QrGenerateDialog({super.key});
-
+  QrGenerateDialog({super.key, required this.qrHEX});
+  final QrController qrController = Get.put(QrController());
+  final String qrHEX;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -65,6 +67,7 @@ class QrGenerateDialog extends StatelessWidget {
               isPrimary: true,
               onPressed: () {
                 Navigator.of(context).pop();
+                qrController.qrData.value = qrHEX;
                 Get.to(() => QRCodeGeneratorScreen());
               },
               child: CustomText(

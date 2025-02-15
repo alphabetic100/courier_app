@@ -20,6 +20,7 @@ import 'package:get/get.dart';
 
 class DeliveryDetailsScreen extends StatelessWidget {
   const DeliveryDetailsScreen({super.key, required this.booking});
+
   final BookingData booking;
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -118,34 +120,6 @@ class DeliveryDetailsScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  // VerticalSpace(height: getHeight(10)),
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: CustomButton(
-                  //         isPrimary: false,
-                  //         borderColor: AppColors.error,
-                  //         onPressed: () {},
-                  //         child: Icon(
-                  //           Icons.close,
-                  //           color: AppColors.error,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     HorizontalSpace(width: getWidth(12)),
-                  //     Expanded(
-                  //       child: CustomButton(
-                  //         isPrimary: false,
-                  //         borderColor: AppColors.success,
-                  //         onPressed: () {},
-                  //         child: Icon(
-                  //           Icons.check,
-                  //           color: AppColors.success,
-                  //         ),
-                  //       ),
-                  //     )
-                  //   ],
-                  // )
                 ],
               ),
             ),
@@ -206,7 +180,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
                         color: AppColors.grey,
                         size: getHeight(28),
                       ),
-                      if (booking.status == "pending") ...[
+                      if (booking.status != "pending") ...[
                         HorizontalSpace(width: getWidth(5)),
                         CustomText(
                           text: "Chat",
@@ -217,7 +191,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
                     ],
                   )),
             ),
-            if (booking.status != "pending") ...[
+            if (booking.status == "pending") ...[
               HorizontalSpace(width: getWidth(16)),
               Expanded(
                 flex: 4,
@@ -227,7 +201,9 @@ class DeliveryDetailsScreen extends StatelessWidget {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return QrGenerateDialog();
+                            return QrGenerateDialog(
+                              qrHEX: booking.bookingId,
+                            );
                           });
                     },
                     child: CustomText(
