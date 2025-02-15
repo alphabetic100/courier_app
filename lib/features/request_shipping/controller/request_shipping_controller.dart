@@ -37,11 +37,18 @@ class RequestShippingController extends GetxController {
     log("Selected index: ${selectedIndex.value}");
   }
 
+  getPrice(String pricex) {
+    selectedItemWeigth.value.isNotEmpty
+        ? price.value =
+            "\$${(int.parse(pricex.replaceAll("\$", "")) * (double.parse(selectedItemWeigth.value)))}"
+        : price.value = "\$0";
+  }
+
   Future<void> requestTransport(TransportData trip) async {
     final requestBody = {
       "postId": postID.value,
       "itemId": selectedItemId.value,
-      "price": price.value,
+      "price": double.parse(price.value.replaceAll("\$", "")),
       "message": senderMessageTEController.text,
     };
 

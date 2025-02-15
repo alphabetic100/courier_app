@@ -75,6 +75,8 @@ class RequestShippingScreen extends StatelessWidget {
                               .toStringAsFixed(1)
                               .toString(),
                         );
+                        requestShippingController
+                            .getPrice(trip.price.toString());
                       },
                       child: Obx(
                         () => Padding(
