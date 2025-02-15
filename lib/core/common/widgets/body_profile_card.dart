@@ -63,7 +63,7 @@ class BodyProfileCard extends StatelessWidget {
           if (rattings.isNotEmpty) ...[
             Icon(Icons.star_rounded, color: Color(0xFFFFC934)),
             CustomText(
-              text: double.parse(rattings).toStringAsFixed(1),
+              text: "${double.parse(rattings).toStringAsFixed(1)}/5",
               color: AppColors.black,
               fontSize: getWidth(14),
               fontWeight: FontWeight.normal,

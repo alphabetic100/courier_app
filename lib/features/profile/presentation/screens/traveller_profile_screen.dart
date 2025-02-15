@@ -109,7 +109,7 @@ class TravellerProfileScreen extends StatelessWidget {
                         const Icon(Icons.star_rounded,
                             color: Color(0xFFFFC934)),
                         CustomText(
-                          text: user.averageRating.toStringAsFixed(1),
+                          text: "${user.averageRating.toStringAsFixed(1)}/5",
                           fontWeight: FontWeight.w400,
                           fontSize: getWidth(14),
                         ),
