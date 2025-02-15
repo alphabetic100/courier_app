@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/custom_text_form_field.dart';
+import 'package:courierapp/core/common/widgets/error_snakbar.dart';
 import 'package:courierapp/core/common/widgets/item_card_two.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
@@ -26,6 +29,7 @@ class RequestShippingScreen extends StatelessWidget {
       Get.put(RequestShippingController());
   final ItemController itemController = Get.put(ItemController());
   final TransportData trip;
+  final GlobalKey<FormState> validator = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +45,8 @@ class RequestShippingScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
+          child: Form(
+        key: validator,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -52,44 +58,61 @@ class RequestShippingScreen extends StatelessWidget {
               date: AppHelperFunctions.formateDate(trip.date),
             ),
             VerticalSpace(height: getHeight(20)),
-            Obx(() => ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: itemController.myItems.value!.data.length,
-                  itemBuilder: (context, index) {
-                    final item = itemController.myItems.value!.data[index];
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: getHeight(20)),
-                      child: GestureDetector(
-                        onTap: () {
-                          requestShippingController.toggleSelection(index);
-                        },
-                        child: Obx(
-                          () => Padding(
-                            padding: EdgeInsets.only(
-                                left: getWidth(16), right: getWidth(16)),
-                            child: ItemCardTwo(
-                              isdeletable: requestShippingController
-                                      .selectedItems
-                                      .contains(index)
-                                  ? false
-                                  : true,
-                              item: item,
-                              isSelected: requestShippingController
-                                  .selectedItems
-                                  .contains(index),
-                            ),
+            Obx(
+              () => ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: itemController.myItems.value!.data.length,
+                itemBuilder: (context, index) {
+                  final item = itemController.myItems.value!.data[index];
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: getHeight(20)),
+                    child: GestureDetector(
+                      onTap: () {
+                        requestShippingController.toggleSelection(
+                          index,
+                          item.id,
+                          double.parse(item.weight.toString())
+                              .toStringAsFixed(1)
+                              .toString(),
+                        );
+                      },
+                      child: Obx(
+                        () => Padding(
+                          padding: EdgeInsets.only(
+                              left: getWidth(16), right: getWidth(16)),
+                          child: ItemCardTwo(
+                            isdeletable:
+                                requestShippingController.selectedIndex.value !=
+                                    index,
+                            item: item,
+                            isSelected:
+                                requestShippingController.selectedIndex.value ==
+                                    index,
                           ),
                         ),
                       ),
-                    );
-                  },
-                )),
+                    ),
+                  );
+                },
+              ),
+            ),
             Padding(
               padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  CustomButton(
+                      height: getHeight(60),
+                      isPrimary: false,
+                      onPressed: () {
+                        Get.to(() => AddItem());
+                      },
+                      child: CustomText(
+                        fontWeight: FontWeight.w600,
+                        text: "Add a Item",
+                      )),
+                  VerticalSpace(height: getHeight(10)),
                   CustomText(
                     text: "Message",
                     fontSize: getWidth(16),
@@ -100,15 +123,25 @@ class RequestShippingScreen extends StatelessWidget {
                     height: getHeight(8),
                   ),
                   CustomTexFormField(
+                    controller:
+                        requestShippingController.senderMessageTEController,
                     hintText: "Message for your traveller ",
                     maxLines: 4,
+                    validator: (p0) {
+                      if (p0 == null || p0.isEmpty) {
+                        return "Message is required";
+                      } else if (p0.length < 10) {
+                        return "Message should be at least 10 characters long";
+                      }
+                      return null;
+                    },
                   )
                 ],
               ),
             )
           ],
         ),
-      ),
+      )),
       bottomNavigationBar: CustomBottomAppBar(
         onTap: () {
           Get.to(() => PaymentSelectScreen());
@@ -134,26 +167,23 @@ class RequestShippingScreen extends StatelessWidget {
           children: [
             Expanded(
               child: CustomButton(
-                  isPrimary: false,
-                  onPressed: () {
-                    Get.to(() => AddItem());
-                  },
-                  child: CustomText(
-                    fontWeight: FontWeight.w600,
-                    text: "Add Another",
-                  )),
-            ),
-            HorizontalSpace(width: getWidth(16)),
-            Expanded(
-              child: CustomButton(
                   isPrimary: true,
                   onPressed: () {
-                    Get.to(() => PaymentMethodScreen(
-                          trip: trip,
-                        ));
+                    if (requestShippingController.selectedIndex.value < 0) {
+                      errorSnakbar(errorMessage: "Please select your item");
+                      return;
+                    } else if (validator.currentState!.validate()) {
+                      requestShippingController.postID.value = trip.id;
+                      log(requestShippingController.postID.value);
+                      log(requestShippingController.selectedItemId.value);
+                      log(requestShippingController.price.value);
+                      Get.to(() => PaymentMethodScreen(
+                            trip: trip,
+                          ));
+                    }
                   },
                   child: CustomText(
-                    text: "Next",
+                    text: "Pay",
                     color: AppColors.white,
                     fontWeight: FontWeight.w600,
                   )),

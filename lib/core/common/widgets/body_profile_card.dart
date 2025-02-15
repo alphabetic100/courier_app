@@ -50,15 +50,24 @@ class BodyProfileCard extends StatelessWidget {
               : SizedBox.shrink(),
         ],
       ),
-      title: CustomText(
-        text: profileName,
-        color: AppColors.black,
+      title: SizedBox(
+        width: AppSizes.width * 0.5,
+        child: CustomText(
+          text: profileName,
+          color: AppColors.black,
+          textOverflow: TextOverflow.ellipsis,
+        ),
       ),
       subtitle: Row(
         children: [
           if (rattings.isNotEmpty) ...[
             Icon(Icons.star_rounded, color: Color(0xFFFFC934)),
-            Text(rattings),
+            CustomText(
+              text: double.parse(rattings).toStringAsFixed(1),
+              color: AppColors.black,
+              fontSize: getWidth(14),
+              fontWeight: FontWeight.normal,
+            )
           ],
           if (subtitle.isNotEmpty) ...[
             Expanded(
@@ -75,10 +84,15 @@ class BodyProfileCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (carNumber.isNotEmpty) ...[
-            CustomText(
-              text: carNumber,
-              fontSize: getWidth(14),
-              fontWeight: FontWeight.normal,
+            Container(
+              alignment: Alignment.centerRight,
+              width: AppSizes.width * 0.2,
+              child: CustomText(
+                text: carNumber,
+                textOverflow: TextOverflow.ellipsis,
+                fontSize: getWidth(14),
+                fontWeight: FontWeight.normal,
+              ),
             ),
             HorizontalSpace(width: getWidth(15)),
           ],

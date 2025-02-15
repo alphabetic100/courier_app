@@ -24,6 +24,7 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       meAsTravellerPosts();
     });
+    selectedIndex.value = 0;
   }
 
   Future<void> meAsTravellerPosts() async {

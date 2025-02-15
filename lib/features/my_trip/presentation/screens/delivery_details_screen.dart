@@ -1,3 +1,4 @@
+import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/body_profile_card.dart';
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
@@ -62,25 +63,23 @@ class DeliveryDetailsScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  Row(
-                    children: [
-                      CustomText(
-                        text: "Item description:",
-                        fontSize: getWidth(14),
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.black,
-                      ),
-                      HorizontalSpace(width: getWidth(5)),
-                      Expanded(
-                        child: CustomText(
-                          text:
-                              "A laptop computer for work. Model- Lenovo Legion.",
+                  Text.rich(TextSpan(children: [
+                    TextSpan(
+                        text: "Item descritiion:",
+                        style: getTextStyleMsrt(
+                          color: AppColors.titleTextColor,
+                          fontWeight: FontWeight.w700,
                           fontSize: getWidth(14),
-                          fontWeight: FontWeight.normal,
-                        ),
-                      )
-                    ],
-                  ),
+                        )),
+                    TextSpan(
+                        text:
+                            " A laptop computer for work. Model- Lenovo Legion. ",
+                        style: getTextStyleMsrt(
+                          color: AppColors.grey,
+                          fontWeight: FontWeight.w400,
+                          fontSize: getWidth(14),
+                        ))
+                  ])),
                   Row(
                     children: [
                       CustomText(
@@ -145,7 +144,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
                     isVerified: true,
                     profileImage: "",
                     profileName: "profileName",
-                    rattings: "5.00/6",
+                    rattings: "5.00",
                     suffixIcon: Icon(Icons.arrow_forward_ios)),
               ),
             ),
@@ -165,7 +164,10 @@ class DeliveryDetailsScreen extends StatelessWidget {
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
-                    Get.to(() => ChatInboxScreen());
+                    Get.to(() => ChatInboxScreen(
+                          user2ndId: "",
+                          //TODO: Chat user id
+                        ));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

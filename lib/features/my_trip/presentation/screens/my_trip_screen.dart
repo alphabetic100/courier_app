@@ -38,6 +38,7 @@ class MyTripScreen extends StatelessWidget {
               child: CustomButton(
                 isPrimary: false,
                 onPressed: () {
+                  controller.selectedIndex.value = 0;
                   landingController.changePage(0);
                 },
                 child: Center(

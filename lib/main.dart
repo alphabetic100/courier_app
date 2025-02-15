@@ -8,5 +8,5 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(ProfileController());
   await AuthService.init();
-  runApp(const MyApp());
+  runApp( MyApp());
 }

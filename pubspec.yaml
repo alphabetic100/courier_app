@@ -53,6 +53,7 @@ dependencies:
   geolocator: ^13.0.1
   location:
   permission_handler:
+  web_socket_channel: ^3.0.2
 
   # Icons
   cupertino_icons: ^1.0.8

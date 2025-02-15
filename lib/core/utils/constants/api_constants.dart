@@ -8,7 +8,7 @@ class AppUrls {
   static const String newPassword = '$_baseUrl/auth/change-password';
   static const String signUp = '$_baseUrl/users/register';
   static const String getProfile = '$_baseUrl/users/me';
-
+  static const String profile = "$_baseUrl/users/";
   static const String createTransport = "$_baseUrl/transports";
   static const String updateProfile = '$_baseUrl/users/update-profile';
   static const String meAsTraveller = "$_baseUrl/transports/me";
@@ -22,4 +22,6 @@ class AppUrls {
   // static const String meAsSender = "$_baseUrl/bookings/my-bookings";
 
   // static const String transport = "$_baseUrl/transports";
+
+  static const String connectSocket = "ws://10.0.20.36:5002/api/v1";
 }

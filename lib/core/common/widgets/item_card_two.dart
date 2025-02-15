@@ -75,6 +75,7 @@ class ItemCardTwo extends StatelessWidget {
                   text: item.name,
                   fontSize: getWidth(16),
                   fontWeight: FontWeight.w700,
+                  textOverflow: TextOverflow.ellipsis,
                   color: AppColors.titleTextColor,
                 ),
                 SizedBox(height: getHeight(5)),

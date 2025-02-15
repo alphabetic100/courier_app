@@ -93,9 +93,10 @@ class MessageScreen extends StatelessWidget {
                                 EdgeInsets.symmetric(vertical: getHeight(10)),
                             child: GestureDetector(
                               onTap: () => Get.to(() => ChatInboxScreen(
-                                  // profileImagePath: ImagePath.profile,
-                                  // userName: "Mr. Sodium Chloride",
-                                  // userHandle: 'sdfe',
+                                    // profileImagePath: ImagePath.profile,
+                                    // userName: "Mr. Sodium Chloride",
+                                    // userHandle: 'sdfe',
+                                    user2ndId: "",
                                   )),
                               child: Container(
                                 padding: EdgeInsets.symmetric(

@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChatInboxScreen extends StatelessWidget {
-  const ChatInboxScreen({super.key});
-
+  const ChatInboxScreen({super.key, required this.user2ndId});
+  final String user2ndId;
   @override
   Widget build(BuildContext context) {
     final ChatController chatController = Get.find<ChatController>();
