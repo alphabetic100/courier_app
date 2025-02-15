@@ -14,7 +14,6 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/request_shipping/components/request_shiping_top_body.dart';
 import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
-import 'package:courierapp/features/request_shipping/presentation/payment_method_screen.dart';
 import 'package:courierapp/features/request_shipping/presentation/payment_select_screen.dart';
 import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
@@ -32,6 +31,7 @@ class RequestShippingScreen extends StatelessWidget {
   final GlobalKey<FormState> validator = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    requestShippingController.getPrice(trip.price.toString());
     return Scaffold(
       appBar: CustomAppBar(
         backgroundColor: Color(0xffFAFAFC),
@@ -76,6 +76,8 @@ class RequestShippingScreen extends StatelessWidget {
                               .toStringAsFixed(1)
                               .toString(),
                         );
+                        requestShippingController
+                            .getPrice(trip.price.toString());
                       },
                       child: Obx(
                         () => Padding(
@@ -177,9 +179,7 @@ class RequestShippingScreen extends StatelessWidget {
                       log(requestShippingController.postID.value);
                       log(requestShippingController.selectedItemId.value);
                       log(requestShippingController.price.value);
-                      Get.to(() => PaymentMethodScreen(
-                            trip: trip,
-                          ));
+                      requestShippingController.requestTransport(trip);
                     }
                   },
                   child: CustomText(

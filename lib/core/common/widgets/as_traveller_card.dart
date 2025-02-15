@@ -64,7 +64,7 @@ class AsTravellerCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     CustomText(
-                      text: "\$$price",
+                      text: "\$$price/kg",
                       color: AppColors.black,
                       fontWeight: FontWeight.w700,
                       fontSize: getWidth(24),

@@ -6,15 +6,16 @@ import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:flutter/material.dart';
 
 class BodyProfileCard extends StatelessWidget {
-  const BodyProfileCard(
-      {super.key,
-      required this.isVerified,
-      required this.profileImage,
-      required this.profileName,
-      this.rattings = "",
-      this.subtitle = "",
-      required this.suffixIcon,
-      this.carNumber = ""});
+  const BodyProfileCard({
+    super.key,
+    required this.isVerified,
+    required this.profileImage,
+    required this.profileName,
+    this.rattings = "",
+    this.subtitle = "",
+    required this.suffixIcon,
+    this.carNumber = "",
+  });
   final bool isVerified;
   final String profileImage;
   final String profileName;
@@ -22,6 +23,7 @@ class BodyProfileCard extends StatelessWidget {
   final Widget suffixIcon;
   final String subtitle;
   final String carNumber;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -63,10 +65,17 @@ class BodyProfileCard extends StatelessWidget {
           if (rattings.isNotEmpty) ...[
             Icon(Icons.star_rounded, color: Color(0xFFFFC934)),
             CustomText(
-              text: double.parse(rattings).toStringAsFixed(1),
+              text: "${double.parse(rattings).toStringAsFixed(1)}/5",
               color: AppColors.black,
               fontSize: getWidth(14),
               fontWeight: FontWeight.normal,
+            )
+          ],
+          if (rattings.isNotEmpty && subtitle.isNotEmpty) ...[
+            SizedBox(
+              height: getHeight(35),
+              width: getWidth(20),
+              child: VerticalDivider(color: Color(0xffCCD9D6)),
             )
           ],
           if (subtitle.isNotEmpty) ...[

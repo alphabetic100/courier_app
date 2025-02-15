@@ -41,20 +41,20 @@ class IdentityVerificationScreen2 extends StatelessWidget {
             ),
             VerticalSpace(height: getHeight(16)),
             Text(
-              "Upload a valid ID to keep our platform secure.",
+              "Make sure that all the details are visible ad clearly readable",
               style: getTextStyleMsrt(
                   color: AppColors.bodyTextColor, fontSize: getWidth(16)),
             ),
             VerticalSpace(height: getHeight(40)),
             CustomText(
-              text: "Upload Front Photo of ID",
+              text: "Upload Front side of ID",
               fontWeight: FontWeight.w600,
               color: AppColors.titleTextColor,
             ),
             VerticalSpace(height: getHeight(10)),
             Obx(() {
               return GestureDetector(
-                onTap: verificationController.pickImage,
+                onTap: verificationController.pickFontImage,
                 child: DottedBorder(
                   borderType: BorderType.RRect,
                   color: AppColors.grey.withOpacity(0.5),
@@ -62,11 +62,11 @@ class IdentityVerificationScreen2 extends StatelessWidget {
                   child: SizedBox(
                       height: getHeight(220),
                       width: double.infinity,
-                      child: verificationController.selectedImage.value != null
+                      child: verificationController.fontSideImage.value != null
                           ? ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.file(
-                                verificationController.selectedImage.value!,
+                                verificationController.fontSideImage.value!,
                                 fit: BoxFit.cover,
                               ),
                             )
@@ -102,13 +102,13 @@ class IdentityVerificationScreen2 extends StatelessWidget {
                     child: CustomButton(
                         color: Color(0xff003087),
                         onPressed: () {
-                          if (verificationController.selectedImage.value ==
+                          if (verificationController.fontSideImage.value ==
                               null) {
                             errorSnakbar(
                                 errorMessage:
                                     "Please upload font photo of your ID");
                           } else {
-                            Get.toNamed(AppRoute.identityVerificationScreen3);
+                            Get.toNamed(AppRoute.identityVerificationScreen4);
                           }
                         },
                         child: CustomText(

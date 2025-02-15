@@ -8,7 +8,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/identity_verification_controller.dart';
-import 'package:courierapp/routes/app_routes.dart';
+import 'package:courierapp/features/authentication/controllers/signup_controllers/sing_up_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +17,7 @@ class IdentityVerificationScreen3 extends StatelessWidget {
   IdentityVerificationScreen3({super.key});
   final IdentityVerificationController verificationController =
       Get.find<IdentityVerificationController>();
+  final SingUpController singUpController = Get.find<SingUpController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,7 +109,24 @@ class IdentityVerificationScreen3 extends StatelessWidget {
                                 errorMessage:
                                     "Please upload selfie holding your ID");
                           } else {
-                            Get.toNamed(AppRoute.paymentSetupScreen);
+                            final value =
+                                verificationController.selectedIndex.value;
+                            singUpController.signUp(
+                              selectedIdType: value == 0
+                                  ? "nationalId"
+                                  : value == 1
+                                      ? "passport"
+                                      : value == 2
+                                          ? "license"
+                                          : "",
+                              imagePath1: verificationController
+                                  .fontSideImage.value!.path,
+                              imagePath2: verificationController
+                                  .selfieImage.value!.path,
+                              imagePath3: verificationController
+                                  .backSideImage.value!.path,
+                              bodyData: singUpController.getRequestBody(),
+                            );
                           }
                         },
                         child: CustomText(

@@ -1,5 +1,3 @@
-
-
 import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
@@ -8,23 +6,17 @@ import 'package:courierapp/core/common/widgets/show_app_logo.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/core/utils/constants/icon_path.dart';
+import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/identity_verification_controller.dart';
-import 'package:courierapp/features/authentication/presentation/components/select_identity_card.dart';
 import 'package:courierapp/routes/app_routes.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class IdentityVerificationScreen1 extends StatelessWidget {
-  IdentityVerificationScreen1({super.key});
+class IdentityVerificationScreen4 extends StatelessWidget {
+  IdentityVerificationScreen4({super.key});
   final IdentityVerificationController verificationController =
       Get.find<IdentityVerificationController>();
-  final List<String> titles = ["National ID", "Passport", "Driver’s License"];
-  final List<String> iconPaths = [
-    IconPath.nationalID,
-    IconPath.passportIcon,
-    IconPath.drivingLicence
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,48 +36,51 @@ class IdentityVerificationScreen1 extends StatelessWidget {
               "Verify Your Identity",
               style: getTextStyleMsrt(
                   color: AppColors.black,
-                  fontSize: getWidth(32),
+                  fontSize: getWidth(35),
                   fontWeight: FontWeight.bold),
             ),
             VerticalSpace(height: getHeight(16)),
             Text(
-              "Upload a valid ID with a picture to keep our platform secure.",
-              style: getTextStyleMsrt(color: AppColors.bodyTextColor),
+              "Upload a valid ID to keep our platform secure.",
+              style: getTextStyleMsrt(
+                  color: AppColors.bodyTextColor, fontSize: getWidth(16)),
             ),
             VerticalSpace(height: getHeight(40)),
             CustomText(
-              text: "Select ID Type",
+              text: "Upload Front side of ID",
               fontWeight: FontWeight.w600,
-              fontSize: getWidth(14),
               color: AppColors.titleTextColor,
             ),
             VerticalSpace(height: getHeight(10)),
-            Expanded(
-                child: ListView.builder(
-                    itemCount: titles.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: getHeight(20)),
-                        child: Obx(() {
-                          return GestureDetector(
-                            onTap: () {
-                              verificationController.selectedIndex.value =
-                                  index;
-                            
-                            },
-                            child: SelectIdentityCard(
-                                isSelected: verificationController
-                                            .selectedIndex.value ==
-                                        index
-                                    ? true
-                                    : false,
-                                iconPath: iconPaths[index],
-                                title: titles[index]),
-                          );
-                        }),
-                      );
-                    })),
+            Obx(() {
+              return GestureDetector(
+                onTap: verificationController.pickBackImage,
+                child: DottedBorder(
+                  borderType: BorderType.RRect,
+                  color: AppColors.grey.withOpacity(0.5),
+                  radius: Radius.circular(8),
+                  child: SizedBox(
+                      height: getHeight(220),
+                      width: double.infinity,
+                      child: verificationController.backSideImage.value != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.file(
+                                verificationController.backSideImage.value!,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Padding(
+                              padding:
+                                  EdgeInsets.symmetric(vertical: getHeight(50)),
+                              child: Image.asset(
+                                ImagePath.uploadPhoto,
+                                height: getHeight(20),
+                              ),
+                            )),
+                ),
+              );
+            }),
             Spacer(),
             SizedBox(
               width: AppSizes.width,
@@ -102,16 +97,18 @@ class IdentityVerificationScreen1 extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         )),
                   ),
-                  HorizontalSpace(width: getHeight(16)),
+                  HorizontalSpace(width: getHeight(20)),
                   Expanded(
                     child: CustomButton(
                         color: Color(0xff003087),
                         onPressed: () {
-                          if (verificationController.selectedIndex.value < 4) {
-                            Get.toNamed(AppRoute.identityVerificationScreen2);
-                          } else {
+                          if (verificationController.backSideImage.value ==
+                              null) {
                             errorSnakbar(
-                                errorMessage: "Please Select Your ID Type");
+                                errorMessage:
+                                    "Please upload font photo of your ID");
+                          } else {
+                            Get.toNamed(AppRoute.identityVerificationScreen3);
                           }
                         },
                         child: CustomText(

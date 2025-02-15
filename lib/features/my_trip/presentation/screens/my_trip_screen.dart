@@ -7,6 +7,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/landing/controller/landing_controller.dart';
+import 'package:courierapp/features/my_trip/controller/my_bookings_controller.dart';
 import 'package:courierapp/features/my_trip/controller/my_trip_controller.dart';
 import 'package:courierapp/features/my_trip/presentation/screens/delivery_details_screen.dart';
 import 'package:courierapp/features/my_trip/presentation/screens/travel_trip_details_screen.dart';
@@ -21,6 +22,8 @@ class MyTripScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final MyTripController controller = Get.put(MyTripController());
     final LandingController landingController = Get.find<LandingController>();
+    final MyBookingsController myBookingsController =
+        Get.put(MyBookingsController());
 
     return Scaffold(
       body: NestedScrollView(
@@ -182,21 +185,36 @@ class MyTripScreen extends StatelessWidget {
             controller.selectedIndex.value = index;
           },
           children: [
-            ListView.builder(
-              padding: EdgeInsets.only(top: getHeight(4)),
-              itemCount: 10, // Placeholder count
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.all(getWidth(16)),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.to(() => DeliveryDetailsScreen());
-                    },
-                    child: MyTripCard(),
-                  ),
+            Obx(() {
+              if (myBookingsController.myBookings.value == null ||
+                  myBookingsController.myBookings.value!.data.isEmpty) {
+                return const Center(
+                  child: CustomText(text: "No Bookings Yet"),
                 );
-              },
-            ),
+              }
+
+              return ListView.builder(
+                padding: EdgeInsets.only(top: getHeight(4)),
+                itemCount: 10, // Placeholder count
+                itemBuilder: (context, index) {
+                  final booking =
+                      myBookingsController.myBookings.value!.data[index];
+                  return Padding(
+                    padding: EdgeInsets.all(getWidth(16)),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => DeliveryDetailsScreen(
+                              booking: booking,
+                            ));
+                      },
+                      child: MyBookingsCard(
+                        booking: booking,
+                      ),
+                    ),
+                  );
+                },
+              );
+            }),
             Obx(() {
               if (controller.myTravels.value == null ||
                   controller.myTravels.value!.data.isEmpty) {
@@ -215,7 +233,9 @@ class MyTripScreen extends StatelessWidget {
                     padding: EdgeInsets.all(getWidth(16)),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(() => TravelTripDetailScreen());
+                        Get.to(() => TravelTripDetailScreen(
+                              trip: tripData,
+                            ));
                       },
                       child: AsTravellerCard(
                         from: tripData.from,

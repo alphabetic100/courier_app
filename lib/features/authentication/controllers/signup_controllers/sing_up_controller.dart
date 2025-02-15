@@ -6,7 +6,7 @@ import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/common/widgets/success_snakbar.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
-import 'package:courierapp/routes/app_routes.dart';
+import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/get_started_screen.dart';
 import 'package:dio/dio.dart' as dio;
 
 import 'package:dio/dio.dart';
@@ -39,8 +39,10 @@ class SingUpController extends GetxController {
   }
 
   Future<void> signUp({
+    required String selectedIdType,
     required String imagePath1,
     required String imagePath2,
+    required String imagePath3,
     required Map<String, dynamic> bodyData,
   }) async {
     final Dio dioClient = Dio();
@@ -62,10 +64,19 @@ class SingUpController extends GetxController {
         imagePath2,
         filename: imagePath2.split('/').last,
       );
+      final imageFile3 = await dio.MultipartFile.fromFile(
+        imagePath3,
+        filename: imagePath3.split('/').last,
+      );
+      List imageLists = [
+        imageFile1,
+        imageFile2,
+        imageFile3,
+      ];
+
       final formData = dio.FormData.fromMap({
         'bodyData': bodyDataString,
-        'license': imageFile1,
-        'passport': imageFile2,
+        selectedIdType: imageLists,
       });
 
       log('FormData Fields: ${formData.fields}');
@@ -79,12 +90,12 @@ class SingUpController extends GetxController {
           },
         ),
       );
-
+      hideProgressIndicator();
       log('Response Status Code: ${response.statusCode}');
       log('Response Data: ${response.data}');
       if (response.statusCode == 201) {
         successSnakbr(successMessage: "Successfully created account");
-        Get.toNamed(AppRoute.landingScreen);
+        Get.offAll(() => GetStartedScreen());
         AuthService.saveToken(response.data["data"]["accessToken"],
             response.data["data"]["role"]);
       } else if (response.statusCode == 409) {
@@ -96,10 +107,11 @@ class SingUpController extends GetxController {
             errorMessage:
                 errorMessage ?? "Something went wrong, please try again");
       }
-    } catch (e) {
+    } on dio.DioException catch (e) {
+      hideProgressIndicator();
+
       log('Error: $e');
-      errorSnakbar(
-          errorMessage: "Please check your internet connection and try again");
+      Future.delayed(Duration(microseconds: 500));
     } finally {
       hideProgressIndicator();
     }

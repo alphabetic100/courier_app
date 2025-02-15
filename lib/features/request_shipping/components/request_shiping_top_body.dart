@@ -30,6 +30,7 @@ class RequestShippingTopBody extends StatelessWidget {
       Get.put(RequestShippingController());
   @override
   Widget build(BuildContext context) {
+   
     return Column(
       children: [
         Container(
@@ -151,9 +152,7 @@ class RequestShippingTopBody extends StatelessWidget {
             children: [
               Obx(
                 () => CustomText(
-                  text: shippingController.selectedItemWeigth.value.isNotEmpty
-                      ? "\$${(int.parse(price.replaceAll("\$", "")) * (double.parse(shippingController.selectedItemWeigth.value)))}"
-                      : "\$0",
+                  text: shippingController.price.value,
                   color: AppColors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: getWidth(25),

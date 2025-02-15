@@ -4,11 +4,12 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
+import 'package:courierapp/features/my_trip/models/my_bookings_model.dart';
 import 'package:flutter/material.dart';
 
-class MyTripCard extends StatelessWidget {
-  const MyTripCard({super.key});
-
+class MyBookingsCard extends StatelessWidget {
+  const MyBookingsCard({super.key, required this.booking});
+  final BookingData booking;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +30,7 @@ class MyTripCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomText(
-                      text: "Laptop to New York",
+                      text: booking.itemName,
                       fontSize: getWidth(17),
                       color: AppColors.black,
                       fontWeight: FontWeight.w600,
@@ -67,7 +68,7 @@ class MyTripCard extends StatelessWidget {
                         ),
                         HorizontalSpace(width: getWidth(5)),
                         CustomText(
-                          text: "Awaiting confirmation",
+                          text: booking.status,
                           color: AppColors.secondaryColor,
                           fontWeight: FontWeight.w500,
                         ),
@@ -83,10 +84,10 @@ class MyTripCard extends StatelessWidget {
             color: AppColors.grey.withOpacity(0.8),
           ),
           BodyProfileCard(
-            isVerified: true,
-            profileImage: "",
-            profileName: "Albert Flores",
-            rattings: "4.85",
+            isVerified: booking.isVerified,
+            profileImage: booking.profileImage,
+            profileName: booking.fullName,
+            rattings: booking.averageRating.toStringAsFixed(1),
             suffixIcon: SizedBox(
               width: AppSizes.width * 0.4,
               child: Row(
@@ -99,11 +100,29 @@ class MyTripCard extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                   HorizontalSpace(width: getWidth(10)),
-                  Image.asset(
-                    IconPath.directionsBus,
-                    height: getHeight(25),
-                    color: AppColors.grey,
-                  ),
+                  //  trynasportType.toLowerCase() == "bus"
+                  //       ? Image.asset(
+                  //           IconPath.directionsBus,
+                  //           height: getHeight(25),
+                  //           color: AppColors.grey,
+                  //         )
+                  //       : trynasportType.toLowerCase() == "car"
+                  //           ? Image.asset(
+                  //               IconPath.car,
+                  //               height: getHeight(25),
+                  //               color: AppColors.grey,
+                  //             )
+                  //           : trynasportType.toLowerCase() == "airplane"
+                  //               ? Image.asset(
+                  //                   IconPath.plane,
+                  //                   height: getHeight(25),
+                  //                   color: AppColors.grey,
+                  //                 )
+                  //               : Image.asset(
+                  //                   IconPath.train,
+                  //                   height: getHeight(25),
+                  //                   color: AppColors.grey,
+                  //                 ),
                 ],
               ),
             ),

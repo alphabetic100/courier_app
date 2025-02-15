@@ -23,12 +23,14 @@ class SenderRequestCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: AppColors.grey.withOpacity(0.5))),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BodyProfileCard(
                 isVerified: true,
                 profileImage: "",
                 profileName: "Albert Tesla",
-                subtitle: "Laptop to New York (2.5kg)",
+                subtitle: "Total 32 Trips",
+                rattings: 4.22.toString(),
                 suffixIcon: CustomText(
                   text: "\$17",
                   color: AppColors.titleTextColor,
@@ -38,6 +40,13 @@ class SenderRequestCard extends StatelessWidget {
             VerticalSpace(height: getHeight(10)),
             Divider(
               color: AppColors.grey,
+            ),
+            VerticalSpace(height: getHeight(10)),
+            CustomText(
+              text: "Laptop to New York (2.5kg)",
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+              fontSize: getWidth(15),
             ),
             VerticalSpace(height: getHeight(10)),
             CustomText(

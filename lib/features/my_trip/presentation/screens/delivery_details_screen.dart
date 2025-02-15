@@ -9,16 +9,19 @@ import 'package:courierapp/core/common/widgets/trip_details_top_body.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
+import 'package:courierapp/features/my_trip/models/my_bookings_model.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/qr_generate_dialog.dart';
-import 'package:courierapp/features/profile/presentation/screens/others_profile_screen.dart';
+import 'package:courierapp/features/profile/presentation/screens/traveller_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DeliveryDetailsScreen extends StatelessWidget {
-  const DeliveryDetailsScreen({super.key});
+  const DeliveryDetailsScreen({super.key, required this.booking});
 
+  final BookingData booking;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,18 +40,37 @@ class DeliveryDetailsScreen extends StatelessWidget {
               title: "Delivery Details",
               departingFrom: "32,C.nuñez de balboa, Madrid",
               arrivingTo: "32,C.nuñez de balboa, Madrid",
-              price: "20",
+              price: booking.price.toString(),
               priceSubText: r"12\kg",
-              date: '200',
+              date: "12/24/12",
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => TravellerProfileScreen(),
+                      arguments: booking.travelerId);
+                },
+                child: BodyProfileCard(
+                    isVerified: booking.isVerified,
+                    profileImage: booking.profileImage,
+                    profileName: booking.fullName,
+                    rattings: booking.averageRating.toString(),
+                    suffixIcon: Icon(Icons.arrow_forward_ios)),
+              ),
+            ),
+            Divider(
+              color: Color(0xffCCD9D6),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
                       CustomText(
-                        text: "Item name:",
+                        text: "Item name: ",
                         fontSize: getWidth(14),
                         fontWeight: FontWeight.w600,
                         color: AppColors.black,
@@ -56,7 +78,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
                       HorizontalSpace(width: getWidth(5)),
                       Expanded(
                         child: CustomText(
-                          text: "Laptop to New York",
+                          text: booking.itemName,
                           fontSize: getWidth(14),
                           fontWeight: FontWeight.normal,
                         ),
@@ -65,15 +87,14 @@ class DeliveryDetailsScreen extends StatelessWidget {
                   ),
                   Text.rich(TextSpan(children: [
                     TextSpan(
-                        text: "Item descritiion:",
+                        text: "Item descritiion: ",
                         style: getTextStyleMsrt(
                           color: AppColors.titleTextColor,
                           fontWeight: FontWeight.w700,
                           fontSize: getWidth(14),
                         )),
                     TextSpan(
-                        text:
-                            " A laptop computer for work. Model- Lenovo Legion. ",
+                        text: booking.itemDescription,
                         style: getTextStyleMsrt(
                           color: AppColors.grey,
                           fontWeight: FontWeight.w400,
@@ -91,7 +112,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
                       HorizontalSpace(width: getWidth(5)),
                       Expanded(
                         child: CustomText(
-                          text: "Traveller has accepted the delivery request.",
+                          text: booking.status,
                           fontSize: getWidth(14),
                           fontWeight: FontWeight.w600,
                           color: AppColors.secondaryColor,
@@ -99,58 +120,40 @@ class DeliveryDetailsScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  // VerticalSpace(height: getHeight(10)),
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: CustomButton(
-                  //         isPrimary: false,
-                  //         borderColor: AppColors.error,
-                  //         onPressed: () {},
-                  //         child: Icon(
-                  //           Icons.close,
-                  //           color: AppColors.error,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     HorizontalSpace(width: getWidth(12)),
-                  //     Expanded(
-                  //       child: CustomButton(
-                  //         isPrimary: false,
-                  //         borderColor: AppColors.success,
-                  //         onPressed: () {},
-                  //         child: Icon(
-                  //           Icons.check,
-                  //           color: AppColors.success,
-                  //         ),
-                  //       ),
-                  //     )
-                  //   ],
-                  // )
                 ],
               ),
             ),
-            VerticalSpace(height: getHeight(20)),
             Divider(
-              color: AppColors.grey,
+              color: Color(0xffCCD9D6),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-              child: GestureDetector(
-                onTap: () {
-                  Get.to(() => OthersProfileScreen());
-                },
-                child: BodyProfileCard(
-                    isVerified: true,
-                    profileImage: "",
-                    profileName: "profileName",
-                    rattings: "5.00",
-                    suffixIcon: Icon(Icons.arrow_forward_ios)),
+              child: SizedBox(
+                height: getHeight(200),
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(right: getWidth(10)),
+                        child: Container(
+                          height: getHeight(180),
+                          width: AppSizes.width * 0.7,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(getWidth(12)),
+                            image: DecorationImage(
+                                image: AssetImage(
+                                  ImagePath.productPhoto,
+                                ),
+                                fit: BoxFit.contain),
+                          ),
+                        ),
+                      );
+                    }),
               ),
             ),
-            Divider(
-              color: AppColors.grey,
-            ),
+            VerticalSpace(height: getHeight(20)),
           ],
         ),
       ),
@@ -177,34 +180,40 @@ class DeliveryDetailsScreen extends StatelessWidget {
                         color: AppColors.grey,
                         size: getHeight(28),
                       ),
-                      // HorizontalSpace(width: getWidth(5)),
-                      // CustomText(
-                      //   text: "Chat",
-                      //   fontWeight: FontWeight.bold,
-                      //   fontSize: getWidth(18),
-                      // )
+                      if (booking.status != "pending") ...[
+                        HorizontalSpace(width: getWidth(5)),
+                        CustomText(
+                          text: "Chat",
+                          fontWeight: FontWeight.bold,
+                          fontSize: getWidth(18),
+                        )
+                      ]
                     ],
                   )),
             ),
-            HorizontalSpace(width: getWidth(16)),
-            Expanded(
-              flex: 4,
-              child: CustomButton(
-                  isPrimary: true,
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return QrGenerateDialog();
-                        });
-                  },
-                  child: CustomText(
-                    text: "Generate QR Code",
-                    fontWeight: FontWeight.bold,
-                    fontSize: getWidth(18),
-                    color: AppColors.white,
-                  )),
-            ),
+            if (booking.status == "pending") ...[
+              HorizontalSpace(width: getWidth(16)),
+              Expanded(
+                flex: 4,
+                child: CustomButton(
+                    isPrimary: true,
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return QrGenerateDialog(
+                              qrHEX: booking.bookingId,
+                            );
+                          });
+                    },
+                    child: CustomText(
+                      text: "Generate QR Code",
+                      fontWeight: FontWeight.bold,
+                      fontSize: getWidth(18),
+                      color: AppColors.white,
+                    )),
+              ),
+            ]
           ],
         ),
       ),
