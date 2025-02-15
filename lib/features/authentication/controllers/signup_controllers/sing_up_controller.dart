@@ -39,8 +39,10 @@ class SingUpController extends GetxController {
   }
 
   Future<void> signUp({
+    required String selectedIdType,
     required String imagePath1,
     required String imagePath2,
+    required String imagePath3,
     required Map<String, dynamic> bodyData,
   }) async {
     final Dio dioClient = Dio();
@@ -62,10 +64,19 @@ class SingUpController extends GetxController {
         imagePath2,
         filename: imagePath2.split('/').last,
       );
+      final imageFile3 = await dio.MultipartFile.fromFile(
+        imagePath3,
+        filename: imagePath3.split('/').last,
+      );
+      List imageLists = [
+        imageFile1,
+        imageFile2,
+        imageFile3,
+      ];
+
       final formData = dio.FormData.fromMap({
         'bodyData': bodyDataString,
-        'license': imageFile1,
-        'passport': imageFile2,
+        selectedIdType: imageLists,
       });
 
       log('FormData Fields: ${formData.fields}');

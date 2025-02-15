@@ -83,11 +83,22 @@ class PaymentSetupScreen extends StatelessWidget {
                         child: CustomButton(
                             isPrimary: false,
                             onPressed: () {
+                              final value =
+                                  verificationController.selectedIndex.value;
                               singUpController.signUp(
+                                selectedIdType: value == 0
+                                    ? "nationalId"
+                                    : value == 1
+                                        ? "passport"
+                                        : value == 2
+                                            ? "license"
+                                            : "",
                                 imagePath1: verificationController
-                                    .selectedImage.value!.path,
+                                    .fontSideImage.value!.path,
                                 imagePath2: verificationController
                                     .selfieImage.value!.path,
+                                imagePath3: verificationController
+                                    .backSideImage.value!.path,
                                 bodyData: singUpController.getRequestBody(),
                               );
                             },
@@ -99,7 +110,7 @@ class PaymentSetupScreen extends StatelessWidget {
                       HorizontalSpace(width: getHeight(20)),
                       Expanded(
                         child: CustomButton(
-                          color: Color(0xff003087),
+                            color: Color(0xff003087),
                             onPressed: () {
                               Get.to(PaymentSetupScreen2());
                             },

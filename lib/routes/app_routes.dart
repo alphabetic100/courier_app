@@ -1,3 +1,4 @@
+import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/identity_verification_screen4.dart';
 import 'package:courierapp/features/landing/presentation/screens/landing_screen.dart';
 import 'package:courierapp/features/search_screen/presentation/screens/search_result_screen.dart';
 import 'package:courierapp/features/search_screen/presentation/screens/search_screen.dart';
@@ -31,6 +32,7 @@ class AppRoute {
   static String identityVerificationScreen1 = "/IdentityVerificationScreen1";
   static String identityVerificationScreen2 = "/IdentityVerificationScreen2";
   static String identityVerificationScreen3 = "/IdentityVerificationScreen3";
+  static String identityVerificationScreen4 = "/IdentityVerificationScreen4";
 
   static String paymentSetupScreen = "/paymentSetupScreen";
   static String paymentSetupScreen2 = "/paymentSetupScreen";
@@ -93,6 +95,13 @@ class AppRoute {
     GetPage(
       name: identityVerificationScreen3,
       page: () => IdentityVerificationScreen3(),
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    ),
+    GetPage(
+      name: identityVerificationScreen4,
+      page: () => IdentityVerificationScreen4(),
       transition: Transition.rightToLeftWithFade,
       transitionDuration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
