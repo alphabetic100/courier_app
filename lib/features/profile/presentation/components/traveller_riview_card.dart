@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
+import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:flutter/material.dart';
 
 class TravellerRiviewCard extends StatelessWidget {
@@ -16,13 +20,17 @@ class TravellerRiviewCard extends StatelessWidget {
   final String review;
   @override
   Widget build(BuildContext context) {
+    log(profileUrl);
     return ListTile(
       leading: Column(
         children: [
           CircleAvatar(
             radius: getWidth(15),
-            backgroundImage: AssetImage(profileUrl),
+            backgroundImage: profileUrl.isNotEmpty
+                ? NetworkImage(profileUrl)
+                : AssetImage(ImagePath.profile),
           ),
+          VerticalSpace(height: getWidth(5)),
         ],
       ),
       title: Row(

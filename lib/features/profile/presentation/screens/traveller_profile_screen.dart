@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:courierapp/core/common/widgets/create_trip_top_body.dart';
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
@@ -10,18 +12,18 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
-import 'package:courierapp/features/profile/controller/others_profile_controller.dart';
+import 'package:courierapp/features/profile/controller/traveller_profile_controller.dart';
 import 'package:courierapp/features/profile/presentation/components/traveller_riview_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class OthersProfileScreen extends StatelessWidget {
-  final OthersProfileController profileController =
-      Get.put(OthersProfileController());
+class TravellerProfileScreen extends StatelessWidget {
+  final TravellerProfileController profileController =
+      Get.put(TravellerProfileController());
 
-  OthersProfileScreen({super.key});
+  TravellerProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +103,7 @@ class OthersProfileScreen extends StatelessWidget {
                       color: AppColors.black,
                       fontWeight: FontWeight.w800,
                     ),
+                    VerticalSpace(height: getHeight(5)),
                     Row(
                       children: [
                         const Icon(Icons.star_rounded,
@@ -118,9 +121,23 @@ class OthersProfileScreen extends StatelessWidget {
                         const Icon(Icons.history,
                             color: AppColors.secondaryColor),
                         HorizontalSpace(width: getHeight(16)),
+                        // CustomText(
+                        //   text:
+                        //       "Member since ${DateFormat("MMMM yyyy").format(DateTime.parse(user))}",
+                        //   fontWeight: FontWeight.normal,
+                        //   color: const Color(0xff677674),
+                        // ),
+                      ],
+                    ),
+                    VerticalSpace(height: getHeight(16)),
+                    Row(
+                      children: [
+                        const Icon(Icons.calendar_month,
+                            color: AppColors.secondaryColor),
+                        HorizontalSpace(width: getHeight(16)),
                         CustomText(
                           text:
-                              "Member since ${DateFormat("MMMM yyyy").format(DateTime.parse(user.createdAt))}",
+                              "${user.totalTrips} trips - ${user.totalReviewsWithComments} comments",
                           fontWeight: FontWeight.normal,
                           color: const Color(0xff677674),
                         ),
@@ -132,12 +149,34 @@ class OthersProfileScreen extends StatelessWidget {
               VerticalSpace(height: getHeight(16)),
               Divider(color: Color(0xffCCD9D6), height: 1),
               VerticalSpace(height: getHeight(16)),
-              TravellerRiviewCard(
-                profileUrl: ImagePath.profile,
-                userName: "Darrell Steward",
-                ratting: "4/5",
-                review:
-                    "Kept me updated throughout the delivery process. Everything went smoothly",
+              ListView.builder(
+                  itemCount:
+                      profileController.showMore.value ? user.review.length : 2,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final review = user.review[index];
+
+                    return TravellerRiviewCard(
+                      profileUrl: review.user.profileImage,
+                      userName: review.user.fullName,
+                      ratting: "${review.rating}/5",
+                      review: review.comment,
+                    );
+                  }),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                child: CustomTextButton(
+                  onPressed: () {
+                    profileController.showMore.value =
+                        !profileController.showMore.value;
+                  },
+                  text: profileController.showMore.value
+                      ? "Show less"
+                      : "Show More",
+                  isUnderline: true,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -155,7 +194,7 @@ class OthersProfileScreen extends StatelessWidget {
                       HorizontalSpace(width: getWidth(5)),
                       const CustomText(
                         text: "Chat With Traveller",
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ),

@@ -3,16 +3,17 @@ import 'dart:developer';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
-import 'package:courierapp/features/profile/data/others_profile_model.dart';
+import 'package:courierapp/features/profile/data/traveller_profile_model.dart';
 import 'package:get/get.dart';
 
-class OthersProfileController extends GetxController {
+class TravellerProfileController extends GetxController {
   final NetworkCaller networkCaller = NetworkCaller();
+  RxBool showMore = false.obs;
   RxBool isLoading = false.obs;
-  Rx<OthersProfileModel?> othersProfile = Rx<OthersProfileModel?>(null);
+  Rx<TravellerProfileModel?> othersProfile = Rx<TravellerProfileModel?>(null);
 
   Future<void> getOthersProfileDetails(String userId) async {
-    final requestUrl = "${AppUrls.profile}/$userId";
+    final requestUrl = "${AppUrls.travellerProfile}67976c113c3cdbebdd409a1b";
     try {
       isLoading.value = true;
       final String? token = AuthService.token;
@@ -20,11 +21,11 @@ class OthersProfileController extends GetxController {
         AuthService.logoutUser();
         return;
       }
-
+      log(userId);
       final response = await networkCaller.getRequest(requestUrl, token: token);
       if (response.isSuccess) {
         othersProfile.value =
-            OthersProfileModel.fromJson(response.responseData);
+            TravellerProfileModel.fromJson(response.responseData);
       } else {
         Get.snackbar("Error", "Failed to load profile data");
       }

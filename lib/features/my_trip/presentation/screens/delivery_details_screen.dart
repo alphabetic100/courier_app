@@ -11,7 +11,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/qr_generate_dialog.dart';
-import 'package:courierapp/features/profile/presentation/screens/others_profile_screen.dart';
+import 'package:courierapp/features/profile/presentation/screens/traveller_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -138,7 +138,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: GestureDetector(
                 onTap: () {
-                  Get.to(() => OthersProfileScreen());
+                  Get.to(() => TravellerProfileScreen());
                 },
                 child: BodyProfileCard(
                     isVerified: true,

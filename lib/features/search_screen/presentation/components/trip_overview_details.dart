@@ -3,7 +3,7 @@ import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/trip_details_view.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
-import 'package:courierapp/features/profile/presentation/screens/others_profile_screen.dart';
+import 'package:courierapp/features/profile/presentation/screens/traveller_profile_screen.dart';
 import 'package:courierapp/features/search_screen/controller/trip_overview_controller.dart';
 import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,8 +24,7 @@ class TripOverviewDetails extends StatelessWidget {
           GestureDetector(
             onTap: () {
               //TODO: Navigate to the Traveller Information page
-           Get.to(() => OthersProfileScreen(),arguments: trip.user.id);   
-
+              Get.to(() => TravellerProfileScreen(), arguments: trip.user.id);
             },
             child: BodyProfileCard(
               isVerified: trip.user.isVerified,
