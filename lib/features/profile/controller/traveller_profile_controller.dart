@@ -13,7 +13,7 @@ class TravellerProfileController extends GetxController {
   Rx<TravellerProfileModel?> othersProfile = Rx<TravellerProfileModel?>(null);
 
   Future<void> getOthersProfileDetails(String userId) async {
-    final requestUrl = "${AppUrls.travellerProfile}67976c113c3cdbebdd409a1b";
+    final requestUrl = "${AppUrls.travellerProfile}$userId";
     try {
       isLoading.value = true;
       final String? token = AuthService.token;

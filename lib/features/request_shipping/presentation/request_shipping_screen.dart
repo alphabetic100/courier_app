@@ -31,6 +31,7 @@ class RequestShippingScreen extends StatelessWidget {
   final GlobalKey<FormState> validator = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    requestShippingController.getPrice(trip.price.toString());
     return Scaffold(
       appBar: CustomAppBar(
         backgroundColor: Color(0xffFAFAFC),

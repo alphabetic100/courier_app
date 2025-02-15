@@ -149,35 +149,44 @@ class TravellerProfileScreen extends StatelessWidget {
               VerticalSpace(height: getHeight(16)),
               Divider(color: Color(0xffCCD9D6), height: 1),
               VerticalSpace(height: getHeight(16)),
-              ListView.builder(
-                  itemCount:
-                      profileController.showMore.value ? user.review.length : 2,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final review = user.review[index];
+              if (user.review.isNotEmpty) ...[
+                ListView.builder(
+                    itemCount: profileController.showMore.value
+                        ? user.review.length
+                        : 2,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final review = user.review[index];
 
-                    return TravellerRiviewCard(
-                      profileUrl: review.user.profileImage,
-                      userName: review.user.fullName,
-                      ratting: "${review.rating}/5",
-                      review: review.comment,
-                    );
-                  }),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-                child: CustomTextButton(
-                  onPressed: () {
-                    profileController.showMore.value =
-                        !profileController.showMore.value;
-                  },
-                  text: profileController.showMore.value
-                      ? "Show less"
-                      : "Show More",
-                  isUnderline: true,
-                  fontWeight: FontWeight.bold,
+                      return TravellerRiviewCard(
+                        profileUrl: review.user.profileImage,
+                        userName: review.user.fullName,
+                        ratting: "${review.rating}/5",
+                        review: review.comment,
+                      );
+                    }),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                  child: CustomTextButton(
+                    onPressed: () {
+                      profileController.showMore.value =
+                          !profileController.showMore.value;
+                    },
+                    text: profileController.showMore.value
+                        ? "Show less"
+                        : "Show More",
+                    isUnderline: true,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
+              ] else ...[
+                Center(
+                    child: CustomText(
+                  text: "Traveller has no reviews",
+                  fontWeight: FontWeight.normal,
+                ))
+              ],
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: CustomButton(

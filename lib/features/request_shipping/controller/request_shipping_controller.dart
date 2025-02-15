@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
@@ -53,20 +54,20 @@ class RequestShippingController extends GetxController {
     };
 
     try {
+      showProgressIndicator();
       final response = await networkCaller.postRequest(AppUrls.requestBooking,
           body: requestBody, token: AuthService.token);
-
+      //  hideProgressIndicator();
       if (response.isSuccess) {
         log("+++++++++++++++++++++++Booking successfull++++++++++++++++++++++++");
-        Get.to(
-          () => Get.to(
-            () => PaymentMethodScreen(
+
+        Get.to(() => PaymentMethodScreen(
               trip: trip,
-            ),
-          ),
-        );
+            ));
       }
+      hideProgressIndicator();
     } catch (e) {
+      hideProgressIndicator();
       log("something went wrong, error: $e");
     }
   }
