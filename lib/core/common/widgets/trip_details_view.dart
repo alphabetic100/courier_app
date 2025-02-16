@@ -112,7 +112,11 @@ class TripDetailsView extends StatelessWidget {
                 color: AppColors.titleTextColor,
               ),
               CustomText(
-                text: availabileSpace,
+                text: availabileSpace != "unlimited"
+                    ? availabileSpace.contains("kg")
+                        ? availabileSpace
+                        : "${availabileSpace}kg"
+                    : "Unlimited",
                 fontWeight: FontWeight.normal,
               ),
               Expanded(child: SizedBox())
