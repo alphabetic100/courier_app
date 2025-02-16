@@ -45,7 +45,7 @@ class TravelTripDetailScreen extends StatelessWidget {
                   TripDetailsView(
                       tripTransport: trip.transportType,
                       carNumber: trip.transportNumber,
-                      availabileSpace: "",
+                      availabileSpace: trip.weight,
                       tripRules: trip.rules,
                       tripAdvantate: trip.additional),
                   // if (myTripController.status.value

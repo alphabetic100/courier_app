@@ -61,19 +61,24 @@ class SearchResultCard extends StatelessWidget {
                     height: getHeight(40),
                   ),
                   HorizontalSpace(width: getWidth(10)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        text: from,
-                        color: AppColors.black,
-                      ),
-                      CustomText(
-                        text: to,
-                        color: AppColors.black,
-                      )
-                    ],
+                  SizedBox(
+                    width: AppSizes.width * 0.4,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(
+                          text: from,
+                          color: AppColors.black,
+                          textOverflow: TextOverflow.ellipsis,
+                        ),
+                        CustomText(
+                          text: to,
+                          color: AppColors.black,
+                          textOverflow: TextOverflow.ellipsis,
+                        )
+                      ],
+                    ),
                   ),
                   Spacer(),
                   Column(
