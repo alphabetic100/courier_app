@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:courierapp/core/common/widgets/create_trip_top_body.dart';
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
@@ -17,7 +15,6 @@ import 'package:courierapp/features/profile/presentation/components/traveller_ri
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class TravellerProfileScreen extends StatelessWidget {
   final TravellerProfileController profileController =
@@ -115,7 +112,7 @@ class TravellerProfileScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    VerticalSpace(height: getHeight(16)),
+                    VerticalSpace(height: getHeight(8)),
                     Row(
                       children: [
                         const Icon(Icons.history,
@@ -129,7 +126,22 @@ class TravellerProfileScreen extends StatelessWidget {
                         // ),
                       ],
                     ),
-                    VerticalSpace(height: getHeight(16)),
+                    if (user.isVerified) ...[
+                      VerticalSpace(height: getHeight(8)),
+                      Row(
+                        children: [
+                          const Icon(Icons.check_circle_outline,
+                              color: AppColors.secondaryColor),
+                          HorizontalSpace(width: getHeight(16)),
+                          CustomText(
+                            text: "Verified Profile",
+                            fontWeight: FontWeight.normal,
+                            color: const Color(0xff677674),
+                          ),
+                        ],
+                      ),
+                    ],
+                    VerticalSpace(height: getHeight(8)),
                     Row(
                       children: [
                         const Icon(Icons.calendar_month,
