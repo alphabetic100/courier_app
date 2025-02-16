@@ -41,7 +41,7 @@ class CreateTripSummary extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
               child: TripDetailsView(
                 tripTransport: tripController.selectedTransportType,
-                availabileSpace: tripController.itemWeight.value.toString(),
+                availabileSpace: tripController.weight,
                 tripAdvantate: tripController.supportSet,
                 tripRules: tripController.rulesSet,
                 carNumber: tripController.carNumberController.text,
