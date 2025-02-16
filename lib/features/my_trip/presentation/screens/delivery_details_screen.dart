@@ -11,6 +11,7 @@ import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
@@ -88,7 +89,34 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                         profileImage: detail.profileImage,
                         profileName: detail.fullName,
                         rattings: detail.averageRating.toString(),
-                        suffixIcon: Icon(Icons.arrow_forward_ios)),
+                        carNumber: detail.transportNumber,
+                        suffixIcon: detail.transportType.toLowerCase() == "bus"
+                            ? Image.asset(
+                                IconPath.directionsBus,
+                                height: getHeight(25),
+                                color: AppColors.grey,
+                              )
+                            : detail.transportType.toLowerCase() == "car"
+                                ? Image.asset(
+                                    IconPath.car,
+                                    height: getHeight(25),
+                                    color: AppColors.grey,
+                                  )
+                                : detail.transportType.toLowerCase() ==
+                                        "airplane"
+                                    ? Image.asset(
+                                        IconPath.plane,
+                                        height: getHeight(25),
+                                        color: AppColors.grey,
+                                      )
+                                    : detail.transportType.toLowerCase() ==
+                                            "train"
+                                        ? Image.asset(
+                                            IconPath.train,
+                                            height: getHeight(25),
+                                            color: AppColors.grey,
+                                          )
+                                        : SizedBox.shrink()),
                   ),
                 ),
                 Divider(

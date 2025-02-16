@@ -23,6 +23,8 @@ class BodyProfileCard extends StatelessWidget {
   final Widget suffixIcon;
   final String subtitle;
   final String carNumber;
+  
+
 
   @override
   Widget build(BuildContext context) {

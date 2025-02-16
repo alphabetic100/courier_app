@@ -49,6 +49,16 @@ class AddAdditionalSupportScreen extends StatelessWidget {
                 maxLines: 4,
                 hintText: "e.g., Will deliver directly to recipient’s door.",
               ),
+              VerticalSpace(height: getHeight(20)),
+              CustomButton(
+                  height: getHeight(55),
+                  isPrimary: false,
+                  onPressed: () {
+                    createTripController.addSupport(
+                        createTripController.setAdditionalSupport.text.trim());
+                    createTripController.setAdditionalSupport.clear();
+                  },
+                  child: CustomText(text: "Apply")),
               VerticalSpace(height: getHeight(16)),
 
               // List of additional support items
@@ -107,9 +117,10 @@ class AddAdditionalSupportScreen extends StatelessWidget {
               child: CustomButton(
                 isPrimary: false,
                 onPressed: () {
-                  createTripController.addSupport(
-                      createTripController.setAdditionalSupport.text.trim());
-                  createTripController.setAdditionalSupport.clear();
+                  // createTripController.addSupport(
+                  //     createTripController.setAdditionalSupport.text.trim());
+                  // createTripController.setAdditionalSupport.clear();
+                  Get.back();
                 },
                 child: CustomText(
                   text: "Set Another Rule",
@@ -126,7 +137,7 @@ class AddAdditionalSupportScreen extends StatelessWidget {
                   Get.to(
                     () => CreateTripSummary(),
                     transition: Transition.rightToLeftWithFade,
-                     duration: const Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 200),
                     curve: Curves.easeOut,
                   );
                 },
@@ -143,7 +154,6 @@ class AddAdditionalSupportScreen extends StatelessWidget {
     );
   }
 
- 
   Widget _buildSupportOption(String text) {
     return CustomButton(
       isPrimary: false,

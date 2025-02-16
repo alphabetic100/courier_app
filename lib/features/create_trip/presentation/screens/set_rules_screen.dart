@@ -52,9 +52,18 @@ class SetRulesScreen extends StatelessWidget {
                     maxLines: 4,
                     hintText: "e.g., No fragile items",
                   ),
+                  VerticalSpace(height: getHeight(20)),
+                  CustomButton(
+                      height: getHeight(55),
+                      isPrimary: false,
+                      onPressed: () {
+                        createTripController.addrule(createTripController
+                            .setRulesController.text
+                            .trim());
+                        createTripController.setRulesController.clear();
+                      },
+                      child: CustomText(text: "Apply")),
                   VerticalSpace(height: getHeight(16)),
-
-                  // Fix for Obx widget
                   Obx(() => createTripController.rulesSet.isNotEmpty
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,9 +94,7 @@ class SetRulesScreen extends StatelessWidget {
                               .toList(),
                         )
                       : SizedBox.shrink()),
-
                   VerticalSpace(height: getHeight(16)),
-
                   CustomText(
                     text: "Most common",
                     color: AppColors.black,
@@ -95,7 +102,6 @@ class SetRulesScreen extends StatelessWidget {
                     fontSize: getWidth(16),
                   ),
                   VerticalSpace(height: getHeight(8)),
-
                   CustomButton(
                     isPrimary: false,
                     radious: getWidth(20),
@@ -119,9 +125,7 @@ class SetRulesScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   VerticalSpace(height: getHeight(8)),
-
                   CustomButton(
                     isPrimary: false,
                     radious: getWidth(20),
@@ -155,22 +159,22 @@ class SetRulesScreen extends StatelessWidget {
         onTap: () {},
         primaryWidget: Row(
           children: [
-            Expanded(
-              child: CustomButton(
-                isPrimary: false,
-                onPressed: () {
-                  createTripController.addrule(
-                      createTripController.setRulesController.text.trim());
-                  createTripController.setRulesController.clear();
-                },
-                child: CustomText(
-                  text: "Set Another Rule",
-                  color: AppColors.bodyTextColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            HorizontalSpace(width: getWidth(8)),
+            // Expanded(
+            //   child: CustomButton(
+            //     isPrimary: false,
+            //     onPressed: () {
+            //       createTripController.addrule(
+            //           createTripController.setRulesController.text.trim());
+            //       createTripController.setRulesController.clear();
+            //     },
+            //     child: CustomText(
+            //       text: "Set Another Rule",
+            //       color: AppColors.bodyTextColor,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
+            // HorizontalSpace(width: getWidth(8)),
             Expanded(
               child: CustomButton(
                 isPrimary: true,
@@ -178,7 +182,7 @@ class SetRulesScreen extends StatelessWidget {
                   Get.to(
                     () => AddAdditionalSupportScreen(),
                     transition: Transition.rightToLeftWithFade,
-                     duration: const Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 200),
                     curve: Curves.easeOut,
                   );
                 },

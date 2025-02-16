@@ -154,6 +154,7 @@ class CreateTripController extends GetxController {
   void onInit() {
     super.onInit();
     selectedIndex.value = 4;
+    itemWeight.value = 1.0;
   }
 
   @override
