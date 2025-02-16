@@ -17,6 +17,13 @@ class AppUrls {
   static const String transport = "$_baseUrl/transports";
   static const String requestBooking = "$_baseUrl/bookings/request-booking";
   static const String mySingleBooking = "$_baseUrl/bookings/my-single-booking/";
+  static const String generateHexCode = "$_baseUrl/bookings/generate-code";
+  static const String generateCodeDeliverd =
+      "$_baseUrl/bookings/generate-code-delivered";
+
+  static const String verifyPicupCode = "$_baseUrl/bookings/verify-code";
+  static const String verifyCodeDeliverd =
+      "$_baseUrl/bookings/verify-code-delivered";
 
   static const String updatePassword = '$_baseUrl/users/update-password';
   static const String getMyItems = "$_baseUrl/items";
