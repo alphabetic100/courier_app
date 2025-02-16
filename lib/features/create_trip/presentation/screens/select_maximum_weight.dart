@@ -18,6 +18,7 @@ class SelectMaximumWeightScreen extends StatelessWidget {
   final CreateTripController tripController = Get.find<CreateTripController>();
   @override
   Widget build(BuildContext context) {
+    tripController.getWeight();
     return Scaffold(
       appBar: CustomAppBar(
         actions: [

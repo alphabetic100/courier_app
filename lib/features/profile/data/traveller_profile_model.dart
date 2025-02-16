@@ -26,6 +26,8 @@ class TravelerData {
   final String fullName;
   final String profileImage;
   final bool isVerified;
+  final String createdAt;
+  final String updatedAt;
   final List<Review> review;
   final double averageRating;
   final int totalTrips;
@@ -36,6 +38,8 @@ class TravelerData {
     required this.fullName,
     required this.profileImage,
     required this.isVerified,
+    required this.createdAt,
+    required this.updatedAt,
     required this.review,
     required this.averageRating,
     required this.totalTrips,
@@ -48,10 +52,12 @@ class TravelerData {
       fullName: json['fullName'] ?? "",
       profileImage: json['profileImage'] ?? "",
       isVerified: json['isVerified'] ?? false,
+      createdAt: json['createdAt'] ?? "",
+      updatedAt: json['updatedAt'] ?? "",
       review:
           (json['review'] as List?)?.map((e) => Review.fromJson(e)).toList() ??
               [],
-      averageRating: (json['averageRating'] ?? 0.0).toDouble(),
+      averageRating: (json['averageRating'] ?? 0).toDouble(),
       totalTrips: json['totalTrips'] ?? 0,
       totalReviewsWithComments: json['totalReviewsWithComments'] ?? 0,
     );

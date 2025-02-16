@@ -37,10 +37,11 @@ class AsTravellerCard extends StatelessWidget {
               children: [
                 Image.asset(
                   IconPath.destn,
-                  height: getHeight(40),
+                  height: getHeight(55),
                 ),
                 HorizontalSpace(width: getWidth(10)),
                 SizedBox(
+                  height: getHeight(58),
                   width: AppSizes.width * 0.4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

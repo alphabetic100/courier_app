@@ -48,6 +48,8 @@ class SearchScreen extends StatelessWidget {
       // All validations passed
       Get.toNamed(AppRoute.searchResultScreen);
       searchScreenController.searchTrip();
+      log(searchScreenController.senderController.text);
+      log(searchScreenController.receiverController.text);
     }
   }
 

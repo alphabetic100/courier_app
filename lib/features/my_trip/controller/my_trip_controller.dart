@@ -45,6 +45,23 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  Future<void> refreshTravellPosts() async {
+    try {
+      final response = await networkCaller.getRequest(AppUrls.meAsTraveller,
+          token: AuthService.token);
+
+      if (response.isSuccess) {
+        myTravels.value = MeAsTravellerModel.fromJson(response.responseData);
+
+        log(myTravels.value.toString());
+      } else {
+        errorSnakbar(errorMessage: response.errorMessage);
+      }
+    } catch (e) {
+      log("Something went wrong, error: $e");
+    }
+  }
+
   @override
   void onClose() {
     tabController.dispose();

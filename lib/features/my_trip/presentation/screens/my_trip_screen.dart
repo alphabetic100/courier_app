@@ -185,70 +185,79 @@ class MyTripScreen extends StatelessWidget {
             controller.selectedIndex.value = index;
           },
           children: [
-            Obx(() {
-              if (myBookingsController.myBookings.value == null ||
-                  myBookingsController.myBookings.value!.data.isEmpty) {
-                return const Center(
-                  child: CustomText(text: "No Bookings Yet"),
-                );
-              }
+            RefreshIndicator(
+                child: Obx(() {
+                  if (myBookingsController.myBookings.value == null ||
+                      myBookingsController.myBookings.value!.data.isEmpty) {
+                    return const Center(
+                      child: CustomText(text: "No Bookings Yet"),
+                    );
+                  }
 
-              return ListView.builder(
-                padding: EdgeInsets.only(top: getHeight(4)),
-                itemCount: 10, // Placeholder count
-                itemBuilder: (context, index) {
-                  final booking =
-                      myBookingsController.myBookings.value!.data[index];
-                  return Padding(
-                    padding: EdgeInsets.all(getWidth(16)),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(() => DeliveryDetailsScreen(
-                              booking: booking,
-                            ));
-                      },
-                      child: MyBookingsCard(
-                        booking: booking,
-                      ),
-                    ),
+                  return ListView.builder(
+                    padding: EdgeInsets.only(top: getHeight(4)),
+                    itemCount:
+                        myBookingsController.myBookings.value!.data.length,
+                    itemBuilder: (context, index) {
+                      final booking = myBookingsController
+                          .myBookings.value!.data.reversed
+                          .toList()[index];
+                      return Padding(
+                        padding: EdgeInsets.all(getWidth(16)),
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(() => DeliveryDetailsScreen(
+                                  bookingID: booking.bookingId,
+                                ));
+                          },
+                          child: MyBookingsCard(
+                            booking: booking,
+                          ),
+                        ),
+                      );
+                    },
                   );
-                },
-              );
-            }),
-            Obx(() {
-              if (controller.myTravels.value == null ||
-                  controller.myTravels.value!.data.isEmpty) {
-                return const Center(
-                  child: CustomText(text: "No Travel Yet"),
-                );
-              }
-              final tripDatas = controller.myTravels.value!.data;
+                }),
+                onRefresh: () => myBookingsController.getMyBookings()),
 
-              return ListView.builder(
-                padding: EdgeInsets.only(top: getHeight(4)),
-                itemCount: tripDatas.length,
-                itemBuilder: (context, index) {
-                  final tripData = tripDatas[index];
-                  return Padding(
-                    padding: EdgeInsets.all(getWidth(16)),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(() => TravelTripDetailScreen(
-                              trip: tripData,
-                            ));
-                      },
-                      child: AsTravellerCard(
-                        from: tripData.from,
-                        to: tripData.to,
-                        price: tripData.price.toString(),
-                        availableSpace: tripData.weight,
-                        status: "pending",
-                      ),
-                    ),
+            // As Traveller part
+            RefreshIndicator(
+                child: Obx(() {
+                  if (controller.myTravels.value == null ||
+                      controller.myTravels.value!.data.isEmpty) {
+                    return const Center(
+                      child: CustomText(text: "No Travel Yet"),
+                    );
+                  }
+                  final tripDatas =
+                      controller.myTravels.value!.data.reversed.toList();
+
+                  return ListView.builder(
+                    padding: EdgeInsets.only(top: getHeight(4)),
+                    itemCount: tripDatas.length,
+                    itemBuilder: (context, index) {
+                      final tripData = tripDatas[index];
+                      return Padding(
+                        padding: EdgeInsets.all(getWidth(16)),
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(() => TravelTripDetailScreen(
+                                  trip: tripData,
+                                ));
+                          },
+                          child: AsTravellerCard(
+                            from: tripData.from,
+                            to: tripData.to,
+                            price: tripData.price.toString(),
+                            availableSpace: tripData.weight,
+                            status: "pending",
+                          ),
+                        ),
+                      );
+                    },
                   );
-                },
-              );
-            }),
+                }),
+                onRefresh: () => controller.refreshTravellPosts())
           ],
         ),
       ),

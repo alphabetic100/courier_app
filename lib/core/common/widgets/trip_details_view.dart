@@ -1,3 +1,4 @@
+
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -112,7 +113,11 @@ class TripDetailsView extends StatelessWidget {
                 color: AppColors.titleTextColor,
               ),
               CustomText(
-                text: availabileSpace,
+                text: availabileSpace != "unlimited"
+                    ? availabileSpace.contains("kg")
+                        ? availabileSpace
+                        : "${availabileSpace}kg"
+                    : "Unlimited",
                 fontWeight: FontWeight.normal,
               ),
               Expanded(child: SizedBox())

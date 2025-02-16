@@ -57,9 +57,9 @@ class TransportData {
       transportType: json['transportType'] ?? '',
       transportNumber: json['transportNumber'] ?? '',
       date: json['date'] ?? '',
-      from: json['from']?.trim() ?? '', // Trim to remove unwanted spaces
+      from: json['from']?.trim() ?? '',
       to: json['to']?.trim() ?? '',
-      weight: json['weight'] ?? '',
+      weight: json['weight'] ?? '', // Ensure empty string if null
       price: json['price'] ?? 0,
       rules: (json['rulse'] as List?)?.map((e) => e.toString()).toList() ?? [],
       additional:
@@ -75,7 +75,7 @@ class User {
   final String fullName;
   final String profileImage;
   final bool isVerified;
-  final double averageRating; 
+  final double averageRating;
 
   User({
     required this.id,
@@ -89,10 +89,9 @@ class User {
     return User(
       id: json['id'] ?? '',
       fullName: json['fullName'] ?? '',
-      profileImage: json['profileImage'] ?? '',
+      profileImage: json['profileImage'] ?? '', // Ensure empty string if null
       isVerified: json['isVerified'] ?? false,
-      averageRating:
-          (json['averageRating'] ?? 0).toDouble(), 
+      averageRating: (json['averageRating'] ?? 0).toDouble(),
     );
   }
 }

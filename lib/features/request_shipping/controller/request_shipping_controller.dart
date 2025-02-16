@@ -60,7 +60,7 @@ class RequestShippingController extends GetxController {
       //  hideProgressIndicator();
       if (response.isSuccess) {
         log("+++++++++++++++++++++++Booking successfull++++++++++++++++++++++++");
-
+        Get.back();
         Get.to(() => PaymentMethodScreen(
               trip: trip,
             ));

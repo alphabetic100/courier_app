@@ -125,6 +125,10 @@ class CreateTripController extends GetxController {
     }
   }
 
+  getWeight() {
+    weight = itemWeight.value.toString();
+  }
+
 //Select Transport Type
   selectTransportType(int index) {
     selectedIndex.value = index;
@@ -154,6 +158,7 @@ class CreateTripController extends GetxController {
   void onInit() {
     super.onInit();
     selectedIndex.value = 4;
+    itemWeight.value = 1.0;
   }
 
   @override

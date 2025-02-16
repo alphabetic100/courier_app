@@ -38,7 +38,7 @@ class MyBookingsCard extends StatelessWidget {
                     Row(
                       children: [
                         CustomText(
-                          text: "Madrid",
+                          text: "Dhaka",
                           fontSize: getWidth(15),
                           color: AppColors.black,
                           fontWeight: FontWeight.w600,
@@ -94,35 +94,37 @@ class MyBookingsCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CustomText(
-                    text: "DL-88372",
+                    text: booking.transportNumber,
                     color: AppColors.grey,
                     fontSize: getWidth(14),
                     fontWeight: FontWeight.w400,
                   ),
                   HorizontalSpace(width: getWidth(10)),
-                  //  trynasportType.toLowerCase() == "bus"
-                  //       ? Image.asset(
-                  //           IconPath.directionsBus,
-                  //           height: getHeight(25),
-                  //           color: AppColors.grey,
-                  //         )
-                  //       : trynasportType.toLowerCase() == "car"
-                  //           ? Image.asset(
-                  //               IconPath.car,
-                  //               height: getHeight(25),
-                  //               color: AppColors.grey,
-                  //             )
-                  //           : trynasportType.toLowerCase() == "airplane"
-                  //               ? Image.asset(
-                  //                   IconPath.plane,
-                  //                   height: getHeight(25),
-                  //                   color: AppColors.grey,
-                  //                 )
-                  //               : Image.asset(
-                  //                   IconPath.train,
-                  //                   height: getHeight(25),
-                  //                   color: AppColors.grey,
-                  //                 ),
+                  booking.transportType.toLowerCase() == "bus"
+                      ? Image.asset(
+                          IconPath.directionsBus,
+                          height: getHeight(25),
+                          color: AppColors.grey,
+                        )
+                      : booking.transportType.toLowerCase() == "car"
+                          ? Image.asset(
+                              IconPath.car,
+                              height: getHeight(25),
+                              color: AppColors.grey,
+                            )
+                          : booking.transportType.toLowerCase() == "airplane"
+                              ? Image.asset(
+                                  IconPath.plane,
+                                  height: getHeight(25),
+                                  color: AppColors.grey,
+                                )
+                              : booking.transportType.toLowerCase() == "train"
+                                  ? Image.asset(
+                                      IconPath.train,
+                                      height: getHeight(25),
+                                      color: AppColors.grey,
+                                    )
+                                  : SizedBox.shrink()
                 ],
               ),
             ),
