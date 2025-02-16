@@ -16,6 +16,7 @@ class AppUrls {
   static const String meAsSender = "$_baseUrl/bookings/my-bookings";
   static const String transport = "$_baseUrl/transports";
   static const String requestBooking = "$_baseUrl/bookings/request-booking";
+  static const String mySingleBooking = "$_baseUrl/bookings/my-single-booking/";
 
   static const String updatePassword = '$_baseUrl/users/update-password';
   static const String getMyItems = "$_baseUrl/items";

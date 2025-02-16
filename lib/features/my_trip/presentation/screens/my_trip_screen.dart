@@ -205,7 +205,7 @@ class MyTripScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Get.to(() => DeliveryDetailsScreen(
-                              booking: booking,
+                              bookingID: booking.bookingId,
                             ));
                       },
                       child: MyBookingsCard(

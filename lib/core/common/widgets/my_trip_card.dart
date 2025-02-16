@@ -38,7 +38,7 @@ class MyBookingsCard extends StatelessWidget {
                     Row(
                       children: [
                         CustomText(
-                          text: "Madrid",
+                          text: "Dhaka",
                           fontSize: getWidth(15),
                           color: AppColors.black,
                           fontWeight: FontWeight.w600,
