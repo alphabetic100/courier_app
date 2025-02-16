@@ -77,6 +77,7 @@ class ChoseTransportScreen extends StatelessWidget {
                         }),
                     Spacer(),
                     CustomButton(
+                        height: getHeight(50),
                         onPressed: () {
                           if (tripController.selectedIndex.value < 4) {
                             Get.to(

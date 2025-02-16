@@ -15,6 +15,7 @@ import 'package:courierapp/features/profile/presentation/components/traveller_ri
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class TravellerProfileScreen extends StatelessWidget {
   final TravellerProfileController profileController =
@@ -118,12 +119,12 @@ class TravellerProfileScreen extends StatelessWidget {
                         const Icon(Icons.history,
                             color: AppColors.secondaryColor),
                         HorizontalSpace(width: getHeight(16)),
-                        // CustomText(
-                        //   text:
-                        //       "Member since ${DateFormat("MMMM yyyy").format(DateTime.parse(user))}",
-                        //   fontWeight: FontWeight.normal,
-                        //   color: const Color(0xff677674),
-                        // ),
+                        CustomText(
+                          text:
+                              "Member since ${DateFormat("MMMM yyyy").format(DateTime.parse(user.createdAt))}",
+                          fontWeight: FontWeight.normal,
+                          color: const Color(0xff677674),
+                        ),
                       ],
                     ),
                     if (user.isVerified) ...[
