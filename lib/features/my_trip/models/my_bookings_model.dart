@@ -33,6 +33,8 @@ class BookingData {
   final double price;
   final String status;
   final double averageRating;
+  final String transportType;
+  final String transportNumber;
   final String itemName;
   final String itemDescription;
   final double itemWeight;
@@ -50,6 +52,8 @@ class BookingData {
     required this.price,
     required this.status,
     required this.averageRating,
+    required this.transportType,
+    required this.transportNumber,
     required this.itemName,
     required this.itemDescription,
     required this.itemWeight,
@@ -68,7 +72,9 @@ class BookingData {
       itemId: json['itemId'] ?? "",
       price: (json['price'] ?? 0).toDouble(),
       status: json['status'] ?? "",
-      averageRating: (json['averageRating'] ?? 0.0).toDouble(),
+      averageRating: (json['averageRating'] ?? 0).toDouble(),
+      transportType: json['transportType'] ?? "",
+      transportNumber: json['transportNumber'] ?? "",
       itemName: json['itemName'] ?? "",
       itemDescription: json['itemDescription'] ?? "",
       itemWeight: (json['itemWeight'] ?? 0).toDouble(),

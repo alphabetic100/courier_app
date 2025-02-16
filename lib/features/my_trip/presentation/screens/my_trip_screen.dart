@@ -195,7 +195,8 @@ class MyTripScreen extends StatelessWidget {
 
               return ListView.builder(
                 padding: EdgeInsets.only(top: getHeight(4)),
-                itemCount: 10, // Placeholder count
+                itemCount: myBookingsController
+                    .myBookings.value!.data.length, // Placeholder count
                 itemBuilder: (context, index) {
                   final booking =
                       myBookingsController.myBookings.value!.data[index];
