@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 
 import 'app.dart';
 import 'core/services/Auth_service.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(ProfileController());
   await AuthService.init();
-  runApp( MyApp());
+  runApp(MyApp());
 }

@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-
 class SearchScreenController extends GetxController {
   final NetworkCaller networkCaller = NetworkCaller();
   RxBool hasNotification = true.obs;
@@ -22,10 +21,15 @@ class SearchScreenController extends GetxController {
 
   Rx<AllTripModel?> searchData = Rx<AllTripModel?>(null);
 
-
   Future<void> searchTrip() async {
+    final date = DateTime.parse(calenderController.text);
+    DateTime newDate = DateTime(date.year, date.month, date.day, 10, 30, 00);
+    String formattedDate = newDate.toUtc().toIso8601String();
+
+    log(formattedDate);
+
     final requestUrl =
-        "${AppUrls.transport}?from=${senderController.text}&to=${receiverController.text}&date=${calenderController.text}";
+        "${AppUrls.transport}?from=${senderController.text}&to=${receiverController.text}&date=$formattedDate";
     log(requestUrl);
     try {
       showProgressIndicator();
@@ -42,7 +46,6 @@ class SearchScreenController extends GetxController {
       log("something went wrong, error: $e");
     }
   }
-
 
   Future selectDate(BuildContext context) async {
     DateTime? selectedDate = await showDatePicker(
@@ -62,6 +65,4 @@ class SearchScreenController extends GetxController {
     receiverController.clear();
     calenderController.clear();
   }
-
-
 }
