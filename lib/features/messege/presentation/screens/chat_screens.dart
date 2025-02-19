@@ -12,8 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChatInboxScreen extends StatelessWidget {
-  const ChatInboxScreen({super.key, required this.user2ndId});
+  const ChatInboxScreen(
+      {super.key,
+      required this.user2ndId,
+      required this.userName,
+      required this.profileImage});
   final String user2ndId;
+  final String userName;
+  final String profileImage;
   @override
   Widget build(BuildContext context) {
     final ChatController chatController = Get.find<ChatController>();
@@ -36,11 +42,13 @@ class ChatInboxScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         CircleAvatar(
-                          backgroundImage: AssetImage(ImagePath.profile),
+                          backgroundImage: profileImage.isNotEmpty
+                              ? NetworkImage(profileImage)
+                              : AssetImage(ImagePath.profile),
                         ),
                         HorizontalSpace(width: getWidth(5)),
                         CustomText(
-                          text: "Albert Flores",
+                          text: userName,
                           fontSize: getWidth(20),
                           fontWeight: FontWeight.bold,
                           color: AppColors.black,

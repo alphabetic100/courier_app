@@ -69,6 +69,8 @@ class TripOverviewScreen extends StatelessWidget {
                 onPressed: () {
                   Get.to(() => ChatInboxScreen(
                         user2ndId: trip.user.id,
+                        profileImage: trip.user.profileImage,
+                        userName: trip.user.fullName,
                       ));
                 },
                 child: Row(

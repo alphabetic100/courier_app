@@ -238,6 +238,8 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                       onPressed: () {
                         Get.to(() => ChatInboxScreen(
                               user2ndId: "",
+                              profileImage: "",
+                              userName: "",
                               //TODO: Chat user id
                             ));
                       },

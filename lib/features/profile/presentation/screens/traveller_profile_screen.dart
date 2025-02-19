@@ -206,7 +206,11 @@ class TravellerProfileScreen extends StatelessWidget {
                   isPrimary: false,
                   color: const Color(0xffFAFAFC),
                   onPressed: () {
-                    Get.to(() => ChatInboxScreen(user2ndId: user.id));
+                    Get.to(() => ChatInboxScreen(
+                          user2ndId: user.id,
+                          profileImage: user.profileImage,
+                          userName: user.fullName,
+                        ));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

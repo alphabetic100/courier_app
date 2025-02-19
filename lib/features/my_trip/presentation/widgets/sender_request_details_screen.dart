@@ -210,6 +210,8 @@ class SenderRequestDetailsScreen extends StatelessWidget {
                   onPressed: () {
                     Get.to(() => ChatInboxScreen(
                           user2ndId: "",
+                          profileImage: "",
+                          userName: "",
                         ));
                   },
                   child: Row(
