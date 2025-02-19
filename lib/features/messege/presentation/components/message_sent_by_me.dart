@@ -33,11 +33,18 @@ class MessageSentByMe extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             if (image != null) ...[
-              Image.network(image!, height: 150, fit: BoxFit.cover),
-              const SizedBox(height: 8),
+              if (image!.isNotEmpty) ...[
+                Image.network(image!, height: 150, fit: BoxFit.cover),
+                const SizedBox(height: 8),
+              ]
             ],
-            CustomText(
-                text: message, color: Colors.white, fontSize: getHeight(16)),
+            if (message.isNotEmpty) ...[
+              CustomText(
+                  text: message,
+                  color: AppColors.white,
+                  fontSize: getHeight(16)),
+              const SizedBox(height: 4),
+            ],
             const SizedBox(height: 4),
             CustomText(
                 text: _formatTimestamp(time),

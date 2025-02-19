@@ -98,6 +98,7 @@ class SingUpController extends GetxController {
         Get.offAll(() => GetStartedScreen());
         AuthService.saveToken(response.data["data"]["accessToken"],
             response.data["data"]["role"]);
+        AuthService.saveId(id: response.data['data']['id']);
       } else if (response.statusCode == 409) {
         errorSnakbar(
             errorMessage: "A user is allreadey exist with this email address");

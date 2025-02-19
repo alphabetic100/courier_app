@@ -98,16 +98,26 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
                     final message =
                         chatController.messages.reversed.toList()[index];
                     log(message.toString());
-                    //      return null;
-
+                    // final image =
+                    //     chatController.generatedImageLink.value.isNotEmpty
+                    //         ? chatController.generatedImageLink.value
+                    //         : "";
                     return message["senderId"] == userId
                         ? MessageSentByMe(
                             message: message['content'],
                             time: message['updatedAt'],
+                            image: (message["image"] != null &&
+                                    message["image"].isNotEmpty)
+                                ? message["image"][0]
+                                : "",
                           )
                         : ReceivedMessage(
                             message: message['content'],
                             time: message['updatedAt'],
+                            image: (message["image"] != null &&
+                                    message["image"].isNotEmpty)
+                                ? message["image"][0]
+                                : "",
                           );
                   },
                 );

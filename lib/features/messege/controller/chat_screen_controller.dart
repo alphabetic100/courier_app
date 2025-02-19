@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:dio/dio.dart' as dio;
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
 import 'package:courierapp/features/messege/controller/web_socket_client.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,6 +28,7 @@ class ChatController extends GetxController {
   RxBool showAttuchIcon = true.obs;
   RxString selectedImage = "".obs;
   RxString roomId = "".obs;
+  RxString generatedImageLink = "".obs;
   showSendbox() {
     if (textController.text.isEmpty) {
       showAttuchIcon.value = true;
@@ -45,11 +47,16 @@ class ChatController extends GetxController {
     socketClient.joinRoom(id, user2Id);
   }
 
-  //Send message
-  Future<void> sendMessage(
-      {required String message,
-      required String reciverId,
-      String? image}) async {
+  Future<void> sendMessage({
+    required String message,
+    required String reciverId,
+    String? image,
+  }) async {
+    // Prevent sending empty messages with no image
+    if (message.isEmpty && (image == null || image.isEmpty)) {
+      return;
+    }
+
     try {
       final Map<String, dynamic> messageBody = {
         "type": "sendMessage",
@@ -57,17 +64,17 @@ class ChatController extends GetxController {
         "senderId": AuthService.userId,
         "receiverId": reciverId,
         "content": message,
-        "image": [],
+        "image": (image != null && image.isNotEmpty) ? [image] : [],
       };
 
       socketClient.sendMessage(messageBody);
     } catch (e) {
-      log("Seomething went wrong, error: $e");
+      log("Something went wrong, error: $e");
     }
   }
 
-  //Revice message
-  void reciveMessage() {
+  //message status change
+  void viewMessage() {
     String id = AuthService.userId.toString();
     socketClient.viewMessage(roomId.value, id);
   }
@@ -84,6 +91,44 @@ class ChatController extends GetxController {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       selectedImage.value = image.path;
+    }
+  }
+
+  // Generate image link
+  Future<void> generateImageLink() async {
+    final Dio dioClient = Dio();
+    dioClient.options = BaseOptions(
+      connectTimeout: Duration(seconds: 12),
+      validateStatus: (status) {
+        return status! < 500;
+      },
+    );
+    try {
+      final imageFile1 = await dio.MultipartFile.fromFile(
+        selectedImage.value,
+        filename: selectedImage.value.split('/').last,
+      );
+      List image = [imageFile1];
+
+      final formData = dio.FormData.fromMap({
+        "chatImage": image,
+      });
+
+      final response = await dioClient.post(AppUrls.generateImageLink,
+          data: formData,
+          options: Options(headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': AuthService.token,
+          }));
+
+      if (response.statusCode == 200) {
+        // final responseData = jsonDecode(response.data);
+        final imageLink = response.data["data"][0];
+        log("Generated Image Link $imageLink");
+        generatedImageLink.value = imageLink;
+      }
+    } catch (e) {
+      log("something went wrong, error: $e");
     }
   }
 

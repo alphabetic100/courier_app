@@ -32,12 +32,20 @@ class ReceivedMessage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (image != null) ...[
-              Image.network(image!, height: 150, fit: BoxFit.cover),
-              const SizedBox(height: 8),
+              if (image != null) ...[
+                if (image!.isNotEmpty) ...[
+                  Image.network(image!, height: 150, fit: BoxFit.cover),
+                  const SizedBox(height: 8),
+                ]
+              ]
             ],
-            CustomText(
-                text: message, color: AppColors.black, fontSize: getHeight(16)),
-            const SizedBox(height: 4),
+            if (message.isNotEmpty) ...[
+              CustomText(
+                  text: message,
+                  color: AppColors.black,
+                  fontSize: getHeight(16)),
+              const SizedBox(height: 4),
+            ],
             CustomText(
                 text: _formatTimestamp(time),
                 color: Colors.black54,

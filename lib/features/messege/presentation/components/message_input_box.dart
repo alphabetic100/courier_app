@@ -125,11 +125,26 @@ class MessageInputBox extends StatelessWidget {
                     isPrimary: true,
                     height: getHeight(55),
                     width: getWidth(55),
-                    onPressed: () {
+                    onPressed: () async {
+                      String? imageUrl;
+
+                      // If an image is selected, upload it and get the link
+                      if (chatController.selectedImage.value.isNotEmpty) {
+                        await chatController.generateImageLink();
+                        imageUrl = chatController.generatedImageLink.value;
+                      }
+
+                      // Send message with the uploaded image (if available)
                       chatController.sendMessage(
-                          message: chatController.textController.text,
-                          reciverId: reciverId);
+                        message: chatController.textController.text,
+                        reciverId: reciverId,
+                        image: imageUrl,
+                      );
+
+                      // Reset UI state
+                      chatController.selectedImage.value = "";
                       chatController.textController.clear();
+                      chatController.showAttuchIcon.value = true;
                     },
                     child: Center(
                       child: Icon(

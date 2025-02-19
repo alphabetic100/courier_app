@@ -35,4 +35,5 @@ class AppUrls {
 
   static const String connectSocket = "ws://10.0.20.36:5002/api/v1";
   static const String getMyChatLists = "$_baseUrl/chats/getMyChat";
+  static const String generateImageLink = "$_baseUrl/chats/generate-imagelink";
 }
