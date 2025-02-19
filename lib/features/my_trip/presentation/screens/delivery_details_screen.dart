@@ -249,7 +249,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                             color: AppColors.grey,
                             size: getHeight(28),
                           ),
-                          if (detail.status == "pending") ...[
+                          if (detail.status != "pending") ...[
                             HorizontalSpace(width: getWidth(5)),
                             CustomText(
                               text: "Chat",
@@ -260,7 +260,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                         ],
                       )),
                 ),
-                if (detail.status != "pending") ...[
+                if (detail.status == "pending") ...[
                   HorizontalSpace(width: getWidth(16)),
                   Expanded(
                     flex: 4,

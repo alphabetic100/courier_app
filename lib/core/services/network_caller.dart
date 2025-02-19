@@ -135,8 +135,8 @@ class NetworkCaller {
             responseData: null,
           );
         case 500:
-          // AuthService.logoutUser();
-          // log(AuthService.token.toString());
+          AuthService.logoutUser();
+          log(AuthService.token.toString());
           return ResponseData(
             isSuccess: false,
             statusCode: response.statusCode,
