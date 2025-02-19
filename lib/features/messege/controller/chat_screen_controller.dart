@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
 import 'package:courierapp/features/messege/controller/web_socket_client.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class ChatController extends GetxController {
 
   RxBool showAttuchIcon = true.obs;
   RxString selectedImage = "".obs;
+  RxString roomId = "".obs;
   showSendbox() {
     if (textController.text.isEmpty) {
       showAttuchIcon.value = true;
@@ -34,11 +36,37 @@ class ChatController extends GetxController {
 
   // Create Chat room
   Future<void> createChatRoom({
-    required String user1Id,
     required String user2Id,
   }) async {
-    log('Creating chat room with user1: $user1Id and user2: $user2Id');
-    socketClient.joinRoom(user1Id, user2Id);
+    final id = AuthService.userId.toString();
+    socketClient.joinRoom(id, user2Id);
+  }
+
+  //Send message
+  Future<void> sendMessage(
+      {required String message,
+      required String reciverId,
+      String? image}) async {
+    try {
+      final Map<String, dynamic> messageBody = {
+        "type": "sendMessage",
+        "chatroomId": roomId.value,
+        "senderId": AuthService.userId,
+        "receiverId": reciverId,
+        "content": message,
+        "image": image,
+      };
+
+      socketClient.sendMessage(messageBody);
+    } catch (e) {
+      log("Seomething went wrong, error: $e");
+    }
+  }
+
+  //Revice message
+  void reciveMessage() {
+    String id = AuthService.userId.toString();
+    socketClient.viewMessage(roomId.value, id);
   }
 
   var messages = <Map<String, dynamic>>[
@@ -61,29 +89,6 @@ class ChatController extends GetxController {
       'sentStatus': 'delivered'
     },
   ].obs;
-
-  void sendMessage(String text, {String? imagePath}) {
-    if (text.trim().isNotEmpty || imagePath != null) {
-      final now = DateTime.now();
-      final formattedTime =
-          "${now.hour}:${now.minute.toString().padLeft(2, '0')} ${now.hour >= 12 ? 'PM' : 'AM'}";
-
-      messages.add({
-        'isSent': true,
-        'text': text.trim(),
-        'time': formattedTime,
-        'sentStatus': 'sent',
-        'image': imagePath, // Store image if there is one
-      });
-
-      // Optionally, you can send the message and image to the server
-      socketClient.sendMessage({
-        'text': text.trim(),
-        'image': imagePath,
-        'time': formattedTime,
-      });
-    }
-  }
 
   void updateMessageStatus(int index, String status) {
     if (index >= 0 && index < messages.length) {

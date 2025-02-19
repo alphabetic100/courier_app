@@ -19,6 +19,7 @@ class AuthService {
     _preferences = await SharedPreferences.getInstance();
     // Load token and userId from SharedPreferences into private variables
     _token = _preferences.getString(_tokenKey);
+    getId();
   }
 
   // Check if a token exists in local storage
@@ -70,6 +71,7 @@ class AuthService {
 
   static Future saveId({required String id}) async {
     _preferences = await SharedPreferences.getInstance();
+    log("id saveing");
     await _preferences.setString("ID", id);
   }
 

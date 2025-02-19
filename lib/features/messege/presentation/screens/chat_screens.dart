@@ -33,8 +33,7 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    chatController.createChatRoom(
-        user1Id: "67b16a5e50e667bdaa7e2022", user2Id: widget.user2ndId);
+    chatController.createChatRoom(user2Id: widget.user2ndId);
   }
 
   @override
@@ -147,7 +146,10 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
                     )
                   : SizedBox.shrink()),
             ),
-            MessageInputBox(chatController: chatController),
+            MessageInputBox(
+              chatController: chatController,
+              reciverId: widget.user2ndId,
+            ),
           ],
         ),
       ),

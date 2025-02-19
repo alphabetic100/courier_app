@@ -13,8 +13,9 @@ import 'package:get/get.dart';
 
 class MessageInputBox extends StatelessWidget {
   final ChatController chatController;
-  
-  const MessageInputBox({super.key, required this.chatController});
+  final String reciverId;
+  const MessageInputBox(
+      {super.key, required this.chatController, required this.reciverId});
 
   @override
   Widget build(BuildContext context) {
@@ -125,8 +126,9 @@ class MessageInputBox extends StatelessWidget {
                     height: getHeight(55),
                     width: getWidth(55),
                     onPressed: () {
-                      chatController
-                          .sendMessage(chatController.textController.text);
+                      chatController.sendMessage(
+                          message: chatController.textController.text,
+                          reciverId: reciverId);
                       chatController.textController.clear();
                     },
                     child: Center(
