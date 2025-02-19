@@ -19,7 +19,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../splash_screen/controllers/splash_controller.dart';
 
 class SelectArrivingToScreen extends StatefulWidget {
-  SelectArrivingToScreen({super.key});
+  const SelectArrivingToScreen({super.key});
 
   @override
   State<SelectArrivingToScreen> createState() => _SelectArrivingToScreenState();

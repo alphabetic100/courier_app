@@ -9,9 +9,11 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/messege/controller/chat_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MessageInputBox extends StatelessWidget {
   final ChatController chatController;
+  
   const MessageInputBox({super.key, required this.chatController});
 
   @override
@@ -96,21 +98,27 @@ class MessageInputBox extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  CustomButton(
-                    isPrimary: false,
-                    height: getHeight(55),
-                    width: getWidth(55),
-                    onPressed: () {
-                      
-                    },
-                    child: Center(
-                      child: Icon(
-                        Icons.attach_file,
-                        color: AppColors.grey,
-                      ),
-                    ),
-                  ),
+                  Obx(() => chatController.showAttuchIcon.value
+                      ? Row(
+                          children: [
+                            const SizedBox(width: 8),
+                            CustomButton(
+                              isPrimary: false,
+                              height: getHeight(55),
+                              width: getWidth(55),
+                              onPressed: () {
+                                chatController.pickImage();
+                              },
+                              child: Center(
+                                child: Icon(
+                                  Icons.attach_file,
+                                  color: AppColors.grey,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : SizedBox.shrink()),
                   const SizedBox(width: 8),
                   CustomButton(
                     isPrimary: true,

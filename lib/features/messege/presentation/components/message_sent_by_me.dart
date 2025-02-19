@@ -1,4 +1,3 @@
-// Message sent by the user
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -8,12 +7,14 @@ class MessageSentByMe extends StatelessWidget {
   final String message;
   final String time;
   final String sentStatus;
+  final String? image;
 
   const MessageSentByMe({
     super.key,
     required this.message,
     required this.time,
     required this.sentStatus,
+    this.image,
   });
 
   @override
@@ -31,6 +32,11 @@ class MessageSentByMe extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            if (image != null) ...[
+              Image.network(image!,
+                  height: 150, fit: BoxFit.cover), 
+              const SizedBox(height: 8),
+            ],
             CustomText(
                 text: message, color: Colors.white, fontSize: getHeight(16)),
             const SizedBox(height: 4),

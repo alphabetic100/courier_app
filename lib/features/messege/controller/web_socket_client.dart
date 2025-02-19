@@ -74,7 +74,7 @@ class WebSocketClient {
   }
 
   //Callback function for incoming message
-  void setOnMessageRecive(Function(String) callback) {
+  void setOnMessageReceived(Function(String) callback) {
     onMessageRecived = callback;
   }
 }

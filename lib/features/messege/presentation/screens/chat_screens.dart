@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
@@ -11,7 +13,7 @@ import 'package:courierapp/features/messege/presentation/components/recived_mess
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChatInboxScreen extends StatelessWidget {
+class ChatInboxScreen extends StatefulWidget {
   const ChatInboxScreen(
       {super.key,
       required this.user2ndId,
@@ -20,10 +22,23 @@ class ChatInboxScreen extends StatelessWidget {
   final String user2ndId;
   final String userName;
   final String profileImage;
+
+  @override
+  State<ChatInboxScreen> createState() => _ChatInboxScreenState();
+}
+
+class _ChatInboxScreenState extends State<ChatInboxScreen> {
+  final ChatController chatController = Get.find<ChatController>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    chatController.createChatRoom(
+        user1Id: "67b16a5e50e667bdaa7e2022", user2Id: widget.user2ndId);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final ChatController chatController = Get.find<ChatController>();
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(),
@@ -42,13 +57,13 @@ class ChatInboxScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         CircleAvatar(
-                          backgroundImage: profileImage.isNotEmpty
-                              ? NetworkImage(profileImage)
+                          backgroundImage: widget.profileImage.isNotEmpty
+                              ? NetworkImage(widget.profileImage)
                               : AssetImage(ImagePath.profile),
                         ),
                         HorizontalSpace(width: getWidth(5)),
                         CustomText(
-                          text: userName,
+                          text: widget.userName,
                           fontSize: getWidth(20),
                           fontWeight: FontWeight.bold,
                           color: AppColors.black,
@@ -91,6 +106,46 @@ class ChatInboxScreen extends StatelessWidget {
                   },
                 );
               }),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Obx(() => chatController.selectedImage.isNotEmpty
+                  ? Padding(
+                      padding: EdgeInsets.only(left: getWidth(16)),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: getHeight(100),
+                            width: getWidth(100),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                image: FileImage(
+                                  File(chatController.selectedImage.value),
+                                ),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                              right: 1,
+                              top: 2,
+                              child: GestureDetector(
+                                onTap: () {
+                                  chatController.selectedImage.value = "";
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                  shadows: [
+                                    Shadow(),
+                                  ],
+                                ),
+                              ))
+                        ],
+                      ),
+                    )
+                  : SizedBox.shrink()),
             ),
             MessageInputBox(chatController: chatController),
           ],

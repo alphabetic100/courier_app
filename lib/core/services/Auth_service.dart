@@ -60,4 +60,18 @@ class AuthService {
 
   // Getter for token
   static String? get token => _token;
+  static String? _id;
+
+  static Future<String?> getId() async {
+    _preferences = await SharedPreferences.getInstance();
+    _id = _preferences.getString("ID");
+    return _id;
+  }
+
+  static Future saveId({required String id}) async {
+    _preferences = await SharedPreferences.getInstance();
+    await _preferences.setString("ID", id);
+  }
+
+  static String? get userId => _id;
 }
