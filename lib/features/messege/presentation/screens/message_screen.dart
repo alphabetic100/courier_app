@@ -28,30 +28,6 @@ class Message {
 
 class MessageScreen extends StatelessWidget {
   MessageScreen({super.key});
-  final List<Message> messages = [
-    Message(
-      name: 'Liam Parker',
-      lastMessage: 'Hei, there, what\'s Up ???',
-      time: '05:47 PM',
-      avatarUrl: ImagePath.backGroundImage,
-      seen: false,
-    ),
-    Message(
-      name: 'Sophia Lee',
-      lastMessage: 'Have you been to any co...',
-      time: '12:25 PM',
-      avatarUrl: ImagePath.backGroundImage,
-      seen: true,
-    ),
-    Message(
-      name: 'Ethan Taylor',
-      lastMessage: 'Hey! How\'s your day goin...',
-      time: '10:42 AM',
-      avatarUrl: ImagePath.backGroundImage,
-      seen: false,
-    ),
-    // Add more messages as needed
-  ];
   final MessageScreenController controller = Get.put(MessageScreenController());
   @override
   Widget build(BuildContext context) {
@@ -111,7 +87,6 @@ class MessageScreen extends StatelessWidget {
                                       userName: user.user.fullName.isNotEmpty
                                           ? user.user.fullName
                                           : "User",
-                                      // userHandle: 'sdfe',
                                       user2ndId: user.user.id,
                                     )),
                                 child: Container(
