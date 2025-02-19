@@ -19,7 +19,7 @@ class AuthService {
     _preferences = await SharedPreferences.getInstance();
     // Load token and userId from SharedPreferences into private variables
     _token = _preferences.getString(_tokenKey);
-    getId();
+    _id = await getId();
   }
 
   // Check if a token exists in local storage
@@ -46,6 +46,7 @@ class AuthService {
 
       // Reset private variables
       _token = null;
+      _id = null;
       // Redirect to the login screen
       log("+++++++++++++ Logout called");
       await goToLogin();

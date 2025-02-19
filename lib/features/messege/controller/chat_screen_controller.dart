@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:courierapp/core/services/Auth_service.dart';
@@ -17,10 +18,12 @@ class ChatController extends GetxController {
     super.onInit();
     socketClient.connect(AppUrls.connectSocket);
     socketClient.setOnMessageReceived((message) {
-      log("Message received: $message");
+      log("Raw WebSocket Message Received: $message");
+      _handleIncomingMessage(message);
     });
   }
 
+  var messages = <Map<String, dynamic>>[].obs;
   RxBool showAttuchIcon = true.obs;
   RxString selectedImage = "".obs;
   RxString roomId = "".obs;
@@ -54,7 +57,7 @@ class ChatController extends GetxController {
         "senderId": AuthService.userId,
         "receiverId": reciverId,
         "content": message,
-        "image": image,
+        "image": [],
       };
 
       socketClient.sendMessage(messageBody);
@@ -69,27 +72,6 @@ class ChatController extends GetxController {
     socketClient.viewMessage(roomId.value, id);
   }
 
-  var messages = <Map<String, dynamic>>[
-    {
-      'isSent': false,
-      'text': 'Hi! Just wanted to say I love your profile!',
-      'time': '10:30 AM',
-      'sentStatus': 'delivered'
-    },
-    {
-      'isSent': true,
-      'text': 'Would be cool to meet up if our paths cross!',
-      'time': '10:32 AM',
-      'sentStatus': 'seen'
-    },
-    {
-      'isSent': false,
-      'text': 'That\'s a cool idea, let\'s meet tomorrow',
-      'time': '10:35 AM',
-      'sentStatus': 'delivered'
-    },
-  ].obs;
-
   void updateMessageStatus(int index, String status) {
     if (index >= 0 && index < messages.length) {
       messages[index]['sentStatus'] = status;
@@ -102,6 +84,69 @@ class ChatController extends GetxController {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       selectedImage.value = image.path;
+    }
+  }
+
+  void _handleIncomingMessage(String rawMessage) {
+    final decodedMessage = jsonDecode(rawMessage);
+
+    if (decodedMessage['type'] == 'loadMessages') {
+      final conversation = decodedMessage['conversation'];
+      if (conversation != null && conversation['id'] != null) {
+        roomId.value = conversation['id'];
+        messages.clear();
+        for (var msg in conversation['messages']) {
+          _addMessage(
+            msg['id'],
+            msg['content'],
+            msg['senderId'],
+            msg['conversationId'],
+            msg['isRead'],
+            msg['updatedAt'],
+            msg['image'] ?? [],
+          );
+        }
+      }
+    } else if (decodedMessage['type'] == 'receiveMessage' ||
+        decodedMessage['type'] == 'messageSent') {
+      final message = decodedMessage['message'];
+      if (message != null) {
+        _addMessage(
+          message['id'],
+          message['content'],
+          message['senderId'],
+          message['conversationId'],
+          message['isRead'],
+          message['updatedAt'],
+          message['image'] ?? [], // Handle images properly
+        );
+      }
+    }
+  }
+
+  void _addMessage(
+    String messageId,
+    String content,
+    String senderId,
+    String conversationId,
+    bool isRead,
+    String updatedAt,
+    List<dynamic> imageUrls, // Accept list of images
+  ) {
+    if (!messages.any((msg) => msg['id'] == messageId)) {
+      messages.add({
+        'id': messageId,
+        'content': content,
+        'senderId': senderId,
+        'conversationId': conversationId,
+        'isRead': isRead,
+        'updatedAt': updatedAt,
+        'image': imageUrls, // Store images
+      });
+      debugPrint(
+          "Added message: $content from $senderId with images: $imageUrls");
+    } else {
+      debugPrint("Duplicate message ignored: $content from $senderId");
     }
   }
 }

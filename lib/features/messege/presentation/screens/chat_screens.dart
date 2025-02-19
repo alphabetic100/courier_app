@@ -1,7 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
@@ -38,6 +40,7 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userId = AuthService.userId.toString();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(),
@@ -87,20 +90,24 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
             Expanded(
               child: Obx(() {
                 return ListView.builder(
+                  reverse: true,
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   itemCount: chatController.messages.length,
                   itemBuilder: (context, index) {
-                    final message = chatController.messages[index];
-                    return message['isSent']
+                    final message =
+                        chatController.messages.reversed.toList()[index];
+                    log(message.toString());
+                    //      return null;
+
+                    return message["senderId"] == userId
                         ? MessageSentByMe(
-                            message: message['text'],
-                            time: message['time'],
-                            sentStatus: message['sentStatus'],
+                            message: message['content'],
+                            time: message['updatedAt'],
                           )
                         : ReceivedMessage(
-                            message: message['text'],
-                            time: message['time'],
+                            message: message['content'],
+                            time: message['updatedAt'],
                           );
                   },
                 );
