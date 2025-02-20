@@ -19,6 +19,7 @@ class AuthService {
     _preferences = await SharedPreferences.getInstance();
     // Load token and userId from SharedPreferences into private variables
     _token = _preferences.getString(_tokenKey);
+    _id = await getId();
   }
 
   // Check if a token exists in local storage
@@ -45,6 +46,7 @@ class AuthService {
 
       // Reset private variables
       _token = null;
+      _id = null;
       // Redirect to the login screen
       log("+++++++++++++ Logout called");
       await goToLogin();
@@ -60,4 +62,19 @@ class AuthService {
 
   // Getter for token
   static String? get token => _token;
+  static String? _id;
+
+  static Future<String?> getId() async {
+    _preferences = await SharedPreferences.getInstance();
+    _id = _preferences.getString("ID");
+    return _id;
+  }
+
+  static Future saveId({required String id}) async {
+    _preferences = await SharedPreferences.getInstance();
+    log("id saveing");
+    await _preferences.setString("ID", id);
+  }
+
+  static String? get userId => _id;
 }

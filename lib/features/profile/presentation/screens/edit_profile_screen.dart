@@ -9,7 +9,6 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/profile/controller/edit_profile_controller.dart';
 import 'package:courierapp/features/profile/controller/profile_controller.dart';
-import 'package:courierapp/features/profile/presentation/screens/change_password_otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

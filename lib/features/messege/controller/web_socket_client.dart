@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -75,7 +74,7 @@ class WebSocketClient {
   }
 
   //Callback function for incoming message
-  void setOnMessageRecive(Function(String) callback) {
+  void setOnMessageReceived(Function(String) callback) {
     onMessageRecived = callback;
   }
 }

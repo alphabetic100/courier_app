@@ -8,7 +8,6 @@ import '../../../core/common/widgets/progress_indicator.dart';
 import '../../../core/common/widgets/success_snakbar.dart';
 import '../../../core/services/network_caller.dart';
 import '../../../core/utils/constants/api_constants.dart';
-import '../../authentication/presentation/screens/log_in_screens/reset_password_screen.dart';
 import '../presentation/screens/change_password_otp_screen.dart';
 import '../presentation/screens/change_password_screen.dart';
 

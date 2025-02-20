@@ -57,8 +57,10 @@ class LoginController extends GetxController {
         Get.offAllNamed(AppRoute.landingScreen);
         AuthService.saveToken(
             responseBody["data"]["accessToken"], responseBody["data"]["role"]);
-        
+        AuthService.saveId(id: responseBody['data']['id']);
+
         log(responseBody['data']["accessToken"]);
+        log("Id is : ${responseBody['data']["id"]}");
         hideProgressIndicator();
       } else if (response.statusCode == 400) {
         hideProgressIndicator();

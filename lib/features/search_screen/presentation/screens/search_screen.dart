@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:flutter/material.dart';
@@ -210,6 +211,9 @@ class SearchScreen extends StatelessWidget {
                           CustomButton(
                             height: getHeight(50),
                             onPressed: onSearchPressed,
+                            // onPressed: () {
+                            //   AuthService.logoutUser();
+                            // },
                             child: CustomText(
                               text: "Search",
                               fontSize: getWidth(16),

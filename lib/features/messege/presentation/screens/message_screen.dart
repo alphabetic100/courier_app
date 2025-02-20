@@ -4,7 +4,9 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/features/messege/controller/message_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import 'chat_screens.dart';
@@ -27,31 +29,7 @@ class Message {
 
 class MessageScreen extends StatelessWidget {
   MessageScreen({super.key});
-  final List<Message> messages = [
-    Message(
-      name: 'Liam Parker',
-      lastMessage: 'Hei, there, what\'s Up ???',
-      time: '05:47 PM',
-      avatarUrl: ImagePath.backGroundImage,
-      seen: false,
-    ),
-    Message(
-      name: 'Sophia Lee',
-      lastMessage: 'Have you been to any co...',
-      time: '12:25 PM',
-      avatarUrl: ImagePath.backGroundImage,
-      seen: true,
-    ),
-    Message(
-      name: 'Ethan Taylor',
-      lastMessage: 'Hey! How\'s your day goin...',
-      time: '10:42 AM',
-      avatarUrl: ImagePath.backGroundImage,
-      seen: false,
-    ),
-    // Add more messages as needed
-  ];
-
+  final MessageScreenController controller = Get.put(MessageScreenController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,60 +61,91 @@ class MessageScreen extends StatelessWidget {
                   horizontal: getWidth(16),
                 ),
                 child: RefreshIndicator(
-                    color: AppColors.primaryColor,
-                    onRefresh: () async {},
-                    child: ListView.builder(
-                        itemCount: messages.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding:
-                                EdgeInsets.symmetric(vertical: getHeight(10)),
-                            child: GestureDetector(
-                              onTap: () => Get.to(() => ChatInboxScreen(
-                                    // profileImagePath: ImagePath.profile,
-                                    // userName: "Mr. Sodium Chloride",
-                                    // userHandle: 'sdfe',
-                                    user2ndId: "",
-                                  )),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: getHeight(10),
-                                    vertical: getHeight(15)),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFFAFAFC),
-                                    border: Border.all(color: AppColors.grey),
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundImage:
-                                          AssetImage(ImagePath.profile),
-                                      radius: getWidth(15),
-                                    ),
-                                    HorizontalSpace(width: getWidth(10)),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CustomText(
-                                          text: messages[index].name,
-                                          color: AppColors.black,
-                                          fontSize: getWidth(18),
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        CustomText(
-                                          text: messages[index].lastMessage,
-                                          fontWeight: FontWeight.normal,
-                                        )
-                                      ],
-                                    )
-                                  ],
+                  color: AppColors.primaryColor,
+                  onRefresh: () => controller.getMyChatList(),
+                  child: Obx(
+                    () {
+                      final chatList = controller.chatlists.value;
+                      if (chatList == null) {
+                        return SpinKitFadingCircle(
+                          color: AppColors.primaryColor,
+                          size: getWidth(50),
+                        );
+                        // return Center(
+                        //   child: Text("Check your internet connection"),
+                        // );
+                      } else if (chatList.data.isEmpty) {
+                        return Center(
+                          child: Text("You have no conversation"),
+                        );
+                      } else {
+                        return ListView.builder(
+                          itemCount: chatList.data.length,
+                          itemBuilder: (context, index) {
+                            final user = chatList.data[index];
+                            return Padding(
+                              padding:
+                                  EdgeInsets.symmetric(vertical: getHeight(10)),
+                              child: GestureDetector(
+                                onTap: () => Get.to(() => ChatInboxScreen(
+                                      profileImage: user.user.profileImage,
+                                      userName: user.user.fullName.isNotEmpty
+                                          ? user.user.fullName
+                                          : "User",
+                                      user2ndId: user.user.id,
+                                    )),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: getHeight(10),
+                                      vertical: getHeight(15)),
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFFFAFAFC),
+                                      border: Border.all(color: AppColors.grey),
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundImage:
+                                            user.user.profileImage.isNotEmpty
+                                                ? NetworkImage(
+                                                    user.user.profileImage)
+                                                : AssetImage(ImagePath.profile),
+                                        radius: getWidth(15),
+                                      ),
+                                      HorizontalSpace(width: getWidth(10)),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomText(
+                                            text: user.user.fullName.isNotEmpty
+                                                ? user.user.fullName
+                                                : "User",
+                                            color: AppColors.black,
+                                            fontSize: getWidth(18),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          CustomText(
+                                            text: user.lastMessage.isNotEmpty
+                                                ? user.lastMessage
+                                                : "message not supported",
+                                            fontWeight: FontWeight.normal,
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        })),
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
+                ),
               ),
             )
           ],

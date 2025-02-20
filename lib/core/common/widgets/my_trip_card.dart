@@ -37,25 +37,35 @@ class MyBookingsCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        CustomText(
-                          text: "Dhaka",
-                          fontSize: getWidth(15),
-                          color: AppColors.black,
-                          fontWeight: FontWeight.w600,
+                        SizedBox(
+                          width: booking.from.length > 20
+                              ? AppSizes.width * 0.3
+                              : null,
+                          child: CustomText(
+                            text: booking.from,
+                            fontSize: getWidth(15),
+                            color: AppColors.black,
+                            fontWeight: FontWeight.w600,
+                            textOverflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 5, right: 5),
                           child: Image.asset(
                             IconPath.arrow,
-                            width: getWidth(20),
+                            width: getWidth(28),
                             fit: BoxFit.fitWidth,
                           ),
                         ),
-                        CustomText(
-                          text: "Madrid",
-                          fontSize: getWidth(15),
-                          color: AppColors.black,
-                          fontWeight: FontWeight.w600,
+                        SizedBox(
+                          width: AppSizes.width * 0.3,
+                          child: CustomText(
+                            text: booking.to,
+                            fontSize: getWidth(15),
+                            color: AppColors.black,
+                            fontWeight: FontWeight.w600,
+                            textOverflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),

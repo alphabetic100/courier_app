@@ -15,7 +15,11 @@ class LandingController extends GetxController {
 
   changePage(int page) {
     currentPage.value = page;
-    pageController.jumpToPage(page);
+    pageController.animateToPage(
+      page,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   final List<String> labels = const [
@@ -75,7 +79,7 @@ class LandingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    log("++++++++++++++++++${ AuthService.token}");
+    log("++++++++++++++++++${AuthService.token}");
     currentPage.value = 0;
   }
 

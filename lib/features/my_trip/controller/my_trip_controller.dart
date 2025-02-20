@@ -65,6 +65,7 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
   @override
   void onClose() {
     tabController.dispose();
+    pageController.dispose(); 
     super.onClose();
   }
 }

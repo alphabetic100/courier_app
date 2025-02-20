@@ -9,10 +9,13 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/messege/controller/chat_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MessageInputBox extends StatelessWidget {
   final ChatController chatController;
-  const MessageInputBox({super.key, required this.chatController});
+  final String reciverId;
+  const MessageInputBox(
+      {super.key, required this.chatController, required this.reciverId});
 
   @override
   Widget build(BuildContext context) {
@@ -96,28 +99,52 @@ class MessageInputBox extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  CustomButton(
-                    isPrimary: false,
-                    height: getHeight(55),
-                    width: getWidth(55),
-                    onPressed: () {},
-                    child: Center(
-                      child: Icon(
-                        Icons.attach_file,
-                        color: AppColors.grey,
-                      ),
-                    ),
-                  ),
+                  Obx(() => chatController.showAttuchIcon.value
+                      ? Row(
+                          children: [
+                            const SizedBox(width: 8),
+                            CustomButton(
+                              isPrimary: false,
+                              height: getHeight(55),
+                              width: getWidth(55),
+                              onPressed: () {
+                                chatController.pickImage();
+                              },
+                              child: Center(
+                                child: Icon(
+                                  Icons.attach_file,
+                                  color: AppColors.grey,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : SizedBox.shrink()),
                   const SizedBox(width: 8),
                   CustomButton(
                     isPrimary: true,
                     height: getHeight(55),
                     width: getWidth(55),
-                    onPressed: () {
-                      chatController
-                          .sendMessage(chatController.textController.text);
+                    onPressed: () async {
+                      String? imageUrl;
+
+                      // If an image is selected, upload it and get the link
+                      if (chatController.selectedImage.value.isNotEmpty) {
+                        await chatController.generateImageLink();
+                        imageUrl = chatController.generatedImageLink.value;
+                      }
+
+                      // Send message with the uploaded image (if available)
+                      chatController.sendMessage(
+                        message: chatController.textController.text,
+                        reciverId: reciverId,
+                        image: imageUrl,
+                      );
+
+                      // Reset UI state
+                      chatController.selectedImage.value = "";
                       chatController.textController.clear();
+                      chatController.showAttuchIcon.value = true;
                     },
                     child: Center(
                       child: Icon(
