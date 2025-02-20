@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
@@ -10,7 +12,7 @@ import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/payment_setup_controller.dart';
 import 'package:courierapp/features/request_shipping/components/request_shiping_top_body.dart';
-import 'package:courierapp/features/request_shipping/presentation/payment_select_screen.dart';
+import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
 import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +20,7 @@ import 'package:get/get.dart';
 import '../../../core/services/stripe_service.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
-  PaymentMethodScreen({super.key, this.trip});
+  const PaymentMethodScreen({super.key, this.trip});
 
   final TransportData? trip;
 
@@ -27,8 +29,10 @@ class PaymentMethodScreen extends StatefulWidget {
 }
 
 class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
+  final RequestShippingController shippingController =
+      Get.put(RequestShippingController());
   final PaymentSetupController paymentSetupController =
-  Get.find<PaymentSetupController>();
+      Get.find<PaymentSetupController>();
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +69,17 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                 ),
                 SizedBox(height: getHeight(8)),
                 Obx(
-                      () => Padding(
+                  () => Padding(
                     padding: EdgeInsets.only(bottom: getHeight(16)),
                     child: PaymentSetupCard(
                       onTap: () {
                         paymentSetupController.selectedCard.value = 0;
                       },
-                      iconPath: IconPath.creditCardLogo, // Replace with Stripe logo if available
+                      iconPath: IconPath
+                          .creditCardLogo, // Replace with Stripe logo if available
                       title: "Stripe",
-                      isCardSelected: paymentSetupController.selectedCard.value == 0,
+                      isCardSelected:
+                          paymentSetupController.selectedCard.value == 0,
                     ),
                   ),
                 ),
@@ -84,6 +90,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       ),
       bottomNavigationBar: CustomBottomAppBar(
         onTap: () async {
+          log(shippingController.price.value);
+          final price =
+              double.parse(shippingController.price.value.replaceAll("\$", ""));
+          log("++++++++++++++++$price");
+          log("selected item id : ${shippingController.selectedItemId.value}");
+
           try {
             setState(() {
               StripeService.isLoading = false; // Reset loading state
@@ -92,10 +104,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
             // akhan a customerId1,parcelId1,travelerAccountId1 diben
             await StripeService.instance.paymentStart(
-                customerId1: "", price1: 1, parcelId1: '', travelerAccountId1: '',);
-
-
-
+              customerId1: widget.trip!.id,
+              price1: price,
+              parcelId1: shippingController.selectedItemId.value,
+              travelerAccountId1: widget.trip!.user.id,
+            );
           } finally {
             setState(() {
               StripeService.isLoading = false; // Reset loading state
@@ -114,7 +127,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             Expanded(
               child: CustomText(
                 text:
-                "You will be refunded if your courier does not accept your order",
+                    "You will be refunded if your courier does not accept your order",
                 fontWeight: FontWeight.normal,
               ),
             ),
