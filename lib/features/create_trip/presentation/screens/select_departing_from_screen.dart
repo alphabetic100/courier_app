@@ -65,9 +65,11 @@ class _SelectDepartingFromScreenState extends State<SelectDepartingFromScreen> {
 
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks.first;
-        String address = "${place.locality}, ${place.country}";
+        String address = " ${place.street}, ${place.subLocality} ${place.locality} ${place.country}";
 
         tripController.selectDepartingController.text = address;
+        tripController.lat1 = latLng.latitude;
+        tripController.long1 = latLng.longitude;
       }
     } catch (e) {
       print("Error fetching address: $e");

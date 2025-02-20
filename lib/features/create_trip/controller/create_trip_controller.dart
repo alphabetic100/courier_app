@@ -60,6 +60,11 @@ class CreateTripController extends GetxController {
   ];
   RxString selectedCharge = "\$4".obs;
 
+  var lat1 = 0.0;
+  var lat2 = 0.0;
+  var long1 = 0.0;
+  var long2 = 0.0;
+
 //Create trip
   Future<void> createTrip() async {
     final Map<String, dynamic> requestBody = {
@@ -72,6 +77,10 @@ class CreateTripController extends GetxController {
       "price": int.parse(selectedCharge.value.replaceAll("\$", "")),
       "rulse": rulesSet.toList(),
       "additional": supportSet.toList(),
+      "lat1": lat1,
+      "lon1": long1,
+      "lat2":  lat2,
+      "lon2": long2
     };
 
     try {
@@ -81,7 +90,10 @@ class CreateTripController extends GetxController {
       final response = await networkCaller.postRequest(AppUrls.createTransport,
           token: AuthService.token, body: requestBody);
       hideProgressIndicator();
+      debugPrint(response.statusCode.toString());
       if (response.isSuccess) {
+        debugPrint("--------------------------------------------------");
+        debugPrint("---------------------${response.responseData}--------------------------");
         successSnakbr(successMessage: "Trip is created successfully");
         landingController.currentPage.value = 0;
         Get.offAll(() => LandingScreen());
