@@ -268,7 +268,11 @@ class MyTripScreen extends StatelessWidget {
                             to: tripData.to,
                             price: tripData.price.toString(),
                             availableSpace: tripData.weight,
-                            status: "pending",
+                            status: tripData.weight != "0"
+                                ? tripData.pendingCount > 0
+                                    ? "${tripData.pendingCount} Requests Pending"
+                                    : "No Request Yet"
+                                : "Fully Booked",
                           ),
                         ),
                       );
