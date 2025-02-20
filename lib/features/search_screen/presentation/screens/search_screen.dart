@@ -210,10 +210,10 @@ class SearchScreen extends StatelessWidget {
                           VerticalSpace(height: getHeight(16)),
                           CustomButton(
                             height: getHeight(50),
-                            //  onPressed: onSearchPressed,
-                            onPressed: () {
-                              AuthService.logoutUser();
-                            },
+                            onPressed: onSearchPressed,
+                            // onPressed: () {
+                            //   AuthService.logoutUser();
+                            // },
                             child: CustomText(
                               text: "Search",
                               fontSize: getWidth(16),

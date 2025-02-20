@@ -6,6 +6,7 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/messege/controller/message_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import 'chat_screens.dart';
@@ -66,9 +67,13 @@ class MessageScreen extends StatelessWidget {
                     () {
                       final chatList = controller.chatlists.value;
                       if (chatList == null) {
-                        return Center(
-                          child: Text("Check your internet connection"),
+                        return SpinKitFadingCircle(
+                          color: AppColors.primaryColor,
+                          size: getWidth(50),
                         );
+                        // return Center(
+                        //   child: Text("Check your internet connection"),
+                        // );
                       } else if (chatList.data.isEmpty) {
                         return Center(
                           child: Text("You have no conversation"),
