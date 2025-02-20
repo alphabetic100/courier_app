@@ -99,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
                                 profile!.isVerified
                                     ? Positioned(
                                         bottom: 0,
-                                        right: getWidth(10),
+  right: getWidth(10),
                                         child: CircleAvatar(
                                           radius: getWidth(15),
                                           backgroundColor: Color(0xFF2BCD31),
