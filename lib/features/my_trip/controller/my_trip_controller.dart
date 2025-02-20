@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:courierapp/core/common/widgets/error_snakbar.dart';
-import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
@@ -17,6 +16,7 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
   RxInt selectedIndex = 0.obs;
   RxString status = "request panding".obs;
   RxBool isPending = false.obs;
+  RxBool isLoading = false.obs;
   @override
   void onInit() {
     super.onInit();
@@ -29,10 +29,10 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
 
   Future<void> meAsTravellerPosts() async {
     try {
-      showProgressIndicator();
+      isLoading.value = true;
       final response = await networkCaller.getRequest(AppUrls.meAsTraveller,
           token: AuthService.token);
-      hideProgressIndicator();
+      isLoading.value = false;
       if (response.isSuccess) {
         myTravels.value = MeAsTravellerModel.fromJson(response.responseData);
 
@@ -65,7 +65,7 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
   @override
   void onClose() {
     tabController.dispose();
-    pageController.dispose(); 
+    pageController.dispose();
     super.onClose();
   }
 }

@@ -9,12 +9,11 @@ import 'core/utils/stripe_keys.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Get.put(ProfileController());
+  // Get.put(ProfileController());
   await AuthService.init();
   await _setup();
   runApp(MyApp());
 }
-
 
 Future<void> _setup() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -233,6 +233,14 @@ class MyTripScreen extends StatelessWidget {
             // As Traveller part
             RefreshIndicator(
                 child: Obx(() {
+                  if (controller.isLoading.value) {
+                    return Center(
+                      child: SpinKitFadingCircle(
+                        color: AppColors.primaryColor,
+                        size: getWidth(50),
+                      ),
+                    );
+                  }
                   if (controller.myTravels.value == null ||
                       controller.myTravels.value!.data.isEmpty) {
                     return const Center(
