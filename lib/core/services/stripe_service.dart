@@ -142,7 +142,7 @@ class StripeService {
       if (response.data != null && response.data['payment_method'] != null) {
         String paymentMethodId = response.data['payment_method'];
 
-        paymentConfirm(paymentMethodId);
+        await paymentConfirm(paymentMethodId);
 
         log('Payment Method ID: $paymentMethodId');
       }
