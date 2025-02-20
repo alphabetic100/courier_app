@@ -5,6 +5,7 @@ import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/common/widgets/payment_setup_card.dart';
+import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
@@ -39,6 +40,21 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     return Scaffold(
       appBar: CustomAppBar(
         backgroundColor: const Color(0xffFAFAFC),
+        ontapBackButton: () {
+          Get.back();
+          // AlertDialog(
+          //   title: CustomText(
+          //     text: "Alert",
+          //     color: AppColors.error,
+          //   ),
+          //   content: CustomText(
+          //     text:
+          //         "If the payment is not completed, your booking will be canceled.",
+          //     fontSize: getWidth(14),
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // );
+        },
         actions: [
           Padding(
             padding: EdgeInsets.only(
@@ -93,8 +109,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           log(shippingController.price.value);
           final price =
               double.parse(shippingController.price.value.replaceAll("\$", ""));
-          log("++++++++++++++++$price");
-          log("selected item id : ${shippingController.selectedItemId.value}");
+          final customerId = AuthService.customerId;
+          Future.delayed(Duration(milliseconds: 100));
+          log("Payment Price: $price");
+          log("Booking id : ${shippingController.bookingId.value}");
+          log("Customer id : $customerId");
+          log("Traveller id: ${widget.trip!.user.accountId}");
 
           try {
             setState(() {
@@ -104,10 +124,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
             // akhan a customerId1,parcelId1,travelerAccountId1 diben
             await StripeService.instance.paymentStart(
-              customerId1: widget.trip!.id,
+              customerId1: customerId.toString(),
               price1: price,
-              parcelId1: shippingController.selectedItemId.value,
-              travelerAccountId1: widget.trip!.user.id,
+              parcelId1: shippingController.bookingId.value,
+              travelerAccountId1: widget.trip!.user.accountId,
             );
           } finally {
             setState(() {

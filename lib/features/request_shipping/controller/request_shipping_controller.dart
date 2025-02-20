@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
@@ -17,6 +18,7 @@ class RequestShippingController extends GetxController {
   RxString price = "".obs;
   RxString postID = "".obs;
   RxString selectedItemWeigth = "".obs;
+  RxString bookingId = "".obs;
   void toggleSelection(
     int index,
     String itemId,
@@ -60,6 +62,10 @@ class RequestShippingController extends GetxController {
       //  hideProgressIndicator();
       if (response.isSuccess) {
         log("+++++++++++++++++++++++Booking successfull++++++++++++++++++++++++");
+        final id = response.responseData["data"]["id"];
+        bookingId.value = id;
+        log("booking id is : $bookingId");
+
         Get.back();
         Get.to(() => PaymentMethodScreen(
               trip: trip,

@@ -1,8 +1,11 @@
 import 'dart:developer';
+import 'package:courierapp/core/common/widgets/error_snakbar.dart';
+import 'package:courierapp/core/common/widgets/show_payment_success_dialog.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:get/get.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -10,40 +13,41 @@ import 'package:http/http.dart' as http;
 import '../utils/constants/api_constants.dart';
 import '../utils/stripe_keys.dart';
 
-
-
-
 class StripeService {
   StripeService._();
   static final StripeService instance = StripeService._();
 
-   String? customerId,parcelId,travelerAccountId;
+  String? customerId, parcelId, travelerAccountId;
   double? price;
-
 
   static bool isLoading = false;
 
-
-  Future<void >savePaymentMethodStart({required String customerId1, required double price1,required String pmId,required String parcelId1,required String travelerAccountId1  })  async{
-    customerId=customerId1;
-    price=price1;
+  Future<void> savePaymentMethodStart(
+      {required String customerId1,
+      required double price1,
+      required String pmId,
+      required String parcelId1,
+      required String travelerAccountId1}) async {
+    customerId = customerId1;
+    price = price1;
     parcelId = parcelId1;
     travelerAccountId = travelerAccountId1;
-
 
     debugPrint('customerId: $customerId');
     debugPrint('parcelId: $parcelId');
     debugPrint('travelerAccountId: $travelerAccountId');
     debugPrint('price: $price');
 
-
     await paymentConfirm(pmId);
   }
 
-
-  Future<void> paymentStart({required String customerId1, required double price1,required String parcelId1,required String travelerAccountId1 })  async{
-    customerId=customerId1;
-    price=price1;
+  Future<void> paymentStart(
+      {required String customerId1,
+      required double price1,
+      required String parcelId1,
+      required String travelerAccountId1}) async {
+    customerId = customerId1;
+    price = price1;
     parcelId = parcelId1;
     travelerAccountId = travelerAccountId1;
     debugPrint('customerId: $customerId');
@@ -51,8 +55,6 @@ class StripeService {
 
     await setupPaymentMethod();
   }
-
-
 
   Future<void> setupPaymentMethod() async {
     try {
@@ -77,6 +79,7 @@ class StripeService {
       log('Setup Failed: $e');
     }
   }
+
   Future<String?> _createSetupIntent() async {
     try {
       final Dio dio = Dio();
@@ -104,6 +107,7 @@ class StripeService {
       return null;
     }
   }
+
   Future<void> _confirmSetupIntent(String setupIntentClientSecret) async {
     try {
       await Stripe.instance.presentPaymentSheet();
@@ -135,13 +139,10 @@ class StripeService {
       log('Response Status: ${response.statusCode}');
       log('Response Data: ${response.data}');
 
-
       if (response.data != null && response.data['payment_method'] != null) {
         String paymentMethodId = response.data['payment_method'];
 
         paymentConfirm(paymentMethodId);
-
-
 
         log('Payment Method ID: $paymentMethodId');
       }
@@ -150,47 +151,42 @@ class StripeService {
     }
   }
 
-Future<void> paymentConfirm(String pmId) async {
+  Future<void> paymentConfirm(String pmId) async {
+    final url = Uri.parse(AppUrls.confirmPayment);
 
+    debugPrint(url.toString());
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': AuthService.token.toString(),
+    };
+    final body = jsonEncode({
+      "customerId": customerId,
+      "paymentMethodId": pmId,
+      "amount": price,
+      "parcelId": parcelId,
+      "travelerAccountId": travelerAccountId
+    });
+    log(body);
+    log(AuthService.token.toString());
+    try {
+      //isLoading = true;
 
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: body,
+      );
 
-  final url = Uri.parse(AppUrls.confirmPayment );
+      log(response.statusCode.toString());
+      //isLoading = false;
 
-  debugPrint(url.toString());
-  final headers = {
-    'Content-Type': 'application/json',
-    'Authorization':AuthService.token.toString(),
-  };
-  final body = jsonEncode({
-  "customerId": customerId,
-  "paymentMethodId": pmId,
-  "amount": price,
-  "parcelId": parcelId,
-  "travelerAccountId": travelerAccountId
-
-  });
- log(body);
- log(AuthService.token.toString());
-  try {
-    //isLoading = true;
-
-    final response = await http.post(
-      url,
-      headers: headers,
-      body: body,
-    );
-
-    log(response.statusCode.toString());
-    //isLoading = false;
-
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      log(responseData.toString());
-      if (responseData['success'] == true) {
-
-
-       // Get.to(() =>  RequestShippingScreen ());
-        /*Get.snackbar(
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        log(responseData.toString());
+        if (responseData['success'] == true) {
+          Get.defaultDialog(content: ShowPaymentSuccessDialog());
+          //  Get.offAll(() => ());
+          /*Get.snackbar(
           "Success",
           "Your payment is successful.",
           snackPosition: SnackPosition.TOP,
@@ -201,22 +197,23 @@ Future<void> paymentConfirm(String pmId) async {
           margin: const EdgeInsets.all(10),
           borderRadius: 8,
         );*/
-      } else {
-        //isLoading = false;
-        /*
+        } else {
+          //isLoading = false;
+          /*
         EasyLoading.show(
           status: 'Please check your card information',
         );*/
+          errorSnakbar(errorMessage: "Something went wrong, please try again");
+        }
+      } else {
+        // isLoading = false;
+        log('Request failed with status: ${response.body}');
       }
-    } else {
-     // isLoading = false;
-      log('Request failed with status: ${response.body}');
+    } catch (e) {
+      // isLoading = false;
+      log('An error occurred: $e');
     }
-  } catch (e) {
-   // isLoading = false;
-    log('An error occurred: $e');
   }
-}
 
 //start Backend api called
 

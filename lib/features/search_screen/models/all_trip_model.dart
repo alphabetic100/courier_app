@@ -59,7 +59,7 @@ class TransportData {
       date: json['date'] ?? '',
       from: json['from']?.trim() ?? '',
       to: json['to']?.trim() ?? '',
-      weight: json['weight'] ?? '', // Ensure empty string if null
+      weight: json['weight']?.toString() ?? '0', // Ensure weight is a string
       price: json['price'] ?? 0,
       rules: (json['rulse'] as List?)?.map((e) => e.toString()).toList() ?? [],
       additional:
@@ -76,6 +76,7 @@ class User {
   final String profileImage;
   final bool isVerified;
   final double averageRating;
+  final String accountId;
 
   User({
     required this.id,
@@ -83,6 +84,7 @@ class User {
     required this.profileImage,
     required this.isVerified,
     required this.averageRating,
+    required this.accountId,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -92,6 +94,7 @@ class User {
       profileImage: json['profileImage'] ?? '', // Ensure empty string if null
       isVerified: json['isVerified'] ?? false,
       averageRating: (json['averageRating'] ?? 0).toDouble(),
+      accountId: json['accountId'] ?? '', 
     );
   }
 }

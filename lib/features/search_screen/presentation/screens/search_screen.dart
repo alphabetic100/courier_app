@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:flutter/material.dart';
