@@ -43,8 +43,10 @@ class ChatController extends GetxController {
   Future<void> createChatRoom({
     required String user2Id,
   }) async {
-    final id = AuthService.userId.toString();
-    socketClient.joinRoom(id, user2Id);
+    final userId = AuthService.userId;
+    final id = await AuthService.getId();
+    log("$userId  $id");
+    socketClient.joinRoom(userId, user2Id);
   }
 
   Future<void> sendMessage({

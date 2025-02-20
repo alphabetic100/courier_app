@@ -26,7 +26,7 @@ class WebSocketClient {
   }
 
 //Join room
-  void joinRoom(String user1Id, String user2Id) {
+  void joinRoom(String? user1Id, String user2Id) {
     final message = jsonEncode({
       "type": "joinRoom",
       "user1Id": user1Id,

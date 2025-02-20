@@ -12,50 +12,55 @@ class MessageNotificationBox extends StatelessWidget {
       Get.find<SearchScreenController>();
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 46,
-      width: 46,
-      child: Align(
-        alignment: Alignment.center,
-        child: Stack(
-          children: [
-            CustomButton(
-              width: 50,
-              height: 50,
-              isPrimary: false,
-              onPressed: () {
-                Get.to(() => MessageScreen());
-              },
-              child: Icon(
-                CupertinoIcons.bubble_left,
-                color: AppColors.grey,
-                size: 28,
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => MessageScreen());
+      },
+      child: SizedBox(
+        height: 46,
+        width: 46,
+        child: Align(
+          alignment: Alignment.center,
+          child: Stack(
+            children: [
+              CustomButton(
+                width: 50,
+                height: 50,
+                isPrimary: false,
+                onPressed: () {
+                  Get.to(() => MessageScreen());
+                },
+                child: Icon(
+                  CupertinoIcons.bubble_left,
+                  color: AppColors.grey,
+                  size: 28,
+                ),
               ),
-            ),
-            Obx(
-              () => searchScreenController.hasNotification.value
-                  ? Positioned(
-                      top: 6,
-                      right: 5,
-                      child: Container(
-                        height: 18,
-                        width: 18,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColors.error,
-                        ),
-                        child: Center(
-                          child: CustomText(
-                            text: "1",
-                            fontSize: 10,
-                            color: AppColors.white,
+              Obx(
+                () => searchScreenController.hasNotification.value
+                    ? Positioned(
+                        top: 6,
+                        right: 5,
+                        child: Container(
+                          height: 18,
+                          width: 18,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.error,
+                          ),
+                          child: Center(
+                            child: CustomText(
+                              text: "1",
+                              fontSize: 10,
+                              color: AppColors.white,
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  : SizedBox.shrink(),
-            ),
-          ],
+                      )
+                    : SizedBox.shrink(),
+              ),
+            ],
+          ),
         ),
       ),
     );

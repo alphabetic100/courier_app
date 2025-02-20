@@ -14,6 +14,7 @@ import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/core/utils/helpers/app_helper.dart';
+import 'package:courierapp/features/messege/presentation/components/view_Image_screen.dart';
 import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
 import 'package:courierapp/features/my_trip/controller/delivery_details_controller.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/qr_generate_dialog.dart';
@@ -201,21 +202,28 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: EdgeInsets.only(right: getWidth(10)),
-                            child: Container(
-                              height: getHeight(120),
-                              width: AppSizes.width * 0.7,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(getWidth(12)),
-                                image: DecorationImage(
-                                    image: detail.itemImage.isNotEmpty
-                                        ? NetworkImage(
-                                            detail.itemImage[index],
-                                          )
-                                        : AssetImage(
-                                            ImagePath.noImage,
-                                          ),
-                                    fit: BoxFit.cover),
+                            child: GestureDetector(
+                              onTap: () => Get.to(() => ViewImageScreen(
+                                    imageUrl: detail.itemImage.isNotEmpty
+                                        ? detail.itemImage[index]
+                                        : "",
+                                  )),
+                              child: Container(
+                                height: getHeight(120),
+                                width: AppSizes.width * 0.7,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(getWidth(12)),
+                                  image: DecorationImage(
+                                      image: detail.itemImage.isNotEmpty
+                                          ? NetworkImage(
+                                              detail.itemImage[index],
+                                            )
+                                          : AssetImage(
+                                              ImagePath.noImage,
+                                            ),
+                                      fit: BoxFit.cover),
+                                ),
                               ),
                             ),
                           );
@@ -237,9 +245,9 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                       isPrimary: false,
                       onPressed: () {
                         Get.to(() => ChatInboxScreen(
-                              user2ndId: "",
-                              profileImage: "",
-                              userName: "",
+                              user2ndId: detail.travelerId,
+                              profileImage: detail.profileImage,
+                              userName: detail.fullName,
                               //TODO: Chat user id
                             ));
                       },

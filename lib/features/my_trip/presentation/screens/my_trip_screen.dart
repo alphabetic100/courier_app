@@ -13,6 +13,7 @@ import 'package:courierapp/features/my_trip/presentation/screens/delivery_detail
 import 'package:courierapp/features/my_trip/presentation/screens/travel_trip_details_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class MyTripScreen extends StatelessWidget {
@@ -187,6 +188,14 @@ class MyTripScreen extends StatelessWidget {
           children: [
             RefreshIndicator(
                 child: Obx(() {
+                  if (myBookingsController.isLoading.value) {
+                    return Center(
+                      child: SpinKitFadingCircle(
+                        color: AppColors.primaryColor,
+                        size: getWidth(50),
+                      ),
+                    );
+                  }
                   if (myBookingsController.myBookings.value == null ||
                       myBookingsController.myBookings.value!.data.isEmpty) {
                     return const Center(
@@ -218,7 +227,8 @@ class MyTripScreen extends StatelessWidget {
                     },
                   );
                 }),
-                onRefresh: () => myBookingsController.getMyBookings()),
+                onRefresh: () =>
+                    myBookingsController.getMyBookings(onRefresh: true)),
 
             // As Traveller part
             RefreshIndicator(

@@ -1,7 +1,9 @@
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
+import 'package:courierapp/features/messege/presentation/components/view_Image_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class MessageSentByMe extends StatelessWidget {
@@ -34,7 +36,14 @@ class MessageSentByMe extends StatelessWidget {
           children: [
             if (image != null) ...[
               if (image!.isNotEmpty) ...[
-                Image.network(image!, height: 150, fit: BoxFit.cover),
+                GestureDetector(
+                    onTap: () => Get.to(
+                          () => ViewImageScreen(
+                            imageUrl: image,
+                          ),
+                        ),
+                    child: Image.network(image!,
+                        width: double.infinity, fit: BoxFit.fill)),
                 const SizedBox(height: 8),
               ]
             ],

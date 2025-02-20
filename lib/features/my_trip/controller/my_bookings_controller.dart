@@ -10,11 +10,17 @@ import 'package:get/get.dart';
 class MyBookingsController extends GetxController {
   final NetworkCaller networkCaller = NetworkCaller();
   Rx<MyBookingsModel?> myBookings = Rx<MyBookingsModel?>(null);
+  RxBool isLoading = false.obs;
 
-  Future<void> getMyBookings() async {
+  Future<void> getMyBookings({bool onRefresh = false}) async {
     try {
+      if (!onRefresh) {
+        isLoading.value = true;
+      }
+
       final response = await networkCaller.getRequest(AppUrls.meAsSender,
           token: AuthService.token);
+      isLoading.value = false;
       if (response.isSuccess) {
         myBookings.value = MyBookingsModel.fromJson(response.responseData);
       } else {

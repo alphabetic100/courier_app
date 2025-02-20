@@ -49,7 +49,8 @@ class LoginController extends GetxController {
         // Successful response
         final responseBody = response.data;
         final userName = responseBody["data"]["fullName"];
-
+        log("_______________________${responseBody["data"]["id"]}");
+        await AuthService.saveId(id: responseBody['data']['id']);
         successSnakbr(
           successMessage: "Logged in Successfully! Welcome back, $userName",
         );
@@ -57,10 +58,10 @@ class LoginController extends GetxController {
         Get.offAllNamed(AppRoute.landingScreen);
         AuthService.saveToken(
             responseBody["data"]["accessToken"], responseBody["data"]["role"]);
-        AuthService.saveId(id: responseBody['data']['id']);
 
         log(responseBody['data']["accessToken"]);
         log("Id is : ${responseBody['data']["id"]}");
+
         hideProgressIndicator();
       } else if (response.statusCode == 400) {
         hideProgressIndicator();
