@@ -87,15 +87,23 @@ class TripDetailsTopBody extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(
-                          text: departingFrom,
-                          color: AppColors.black,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(
+                          width: AppSizes.width * 0.8,
+                          child: CustomText(
+                            text: departingFrom,
+                            color: AppColors.black,
+                            fontWeight: FontWeight.bold,
+                            textOverflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        CustomText(
-                          text: arrivingTo,
-                          color: AppColors.black,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(
+                          width: AppSizes.width * 0.8,
+                          child: CustomText(
+                            text: arrivingTo,
+                            color: AppColors.black,
+                            fontWeight: FontWeight.bold,
+                            textOverflow: TextOverflow.ellipsis,
+                          ),
                         )
                       ],
                     ),

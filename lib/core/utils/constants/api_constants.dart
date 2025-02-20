@@ -28,6 +28,12 @@ class AppUrls {
   static const String updatePassword = '$_baseUrl/users/update-password';
   static const String getMyItems = "$_baseUrl/items";
   static const String confirmPayment = "$_baseUrl/payments/payment";
+  static const String getMyTotalIncome = "$_baseUrl/bookings/my-income";
+  static const String getMyTripsAndTravels =
+      "$_baseUrl/bookings/traveler-booking-count";
+  static const String getMyDeliveryAsSendr =
+      "$_baseUrl//bookings/my-booking-count";
+  static const String carbonEmissions = "$_baseUrl/users/carbon-immussion";
 
   // static const String meAsTraveller = "$_baseUrl/transports/me";
   // static const String meAsSender = "$_baseUrl/bookings/my-bookings";

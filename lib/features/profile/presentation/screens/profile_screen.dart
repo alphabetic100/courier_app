@@ -254,7 +254,12 @@ class ProfileScreen extends StatelessWidget {
                                           'fullName': profile.fullName,
                                           'phoneNumber': profile.phoneNumber,
                                           "emailAddress": profile.email,
-                                          "password": 'Updated 23 days ago',
+                                          "password": profile
+                                                      .passwordUpdatedAt !=
+                                                  null
+                                              ? AppHelperFunctions.timeAgo(
+                                                  profile.passwordUpdatedAt!)
+                                              : "Not updated yet",
                                           "verification":
                                               profile.isVerified.toString(),
                                         },
@@ -286,11 +291,18 @@ class ProfileScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ProfileTripTravelBox(
-                                      title: "Trips as Traveler", amount: "50"),
+                                      title: "Trips as Traveler",
+                                      amount: controller
+                                              .totalTripsas.value.isNotEmpty
+                                          ? controller.totalTripsas.value
+                                          : "0"),
                                   HorizontalSpace(width: getWidth(20)),
                                   ProfileTripTravelBox(
                                       title: "Deliveries as Sender",
-                                      amount: "25"),
+                                      amount: controller
+                                              .totalDelivery.value.isNotEmpty
+                                          ? controller.totalDelivery.value
+                                          : "0"),
                                 ],
                               ),
                             ),
@@ -299,7 +311,9 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             ProfileTripTravelBox(
                               title: "carbon emissions reduced",
-                              amount: "XXXX",
+                              amount: controller.carbonEmission.value.isNotEmpty
+                                  ? controller.carbonEmission.value
+                                  : "XXXX",
                               color: AppColors.success,
                             ),
                           ],
