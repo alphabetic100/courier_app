@@ -2,6 +2,7 @@ import 'dart:convert';
 
 ProfileModel profileModelFromJson(String str) =>
     ProfileModel.fromJson(json.decode(str));
+
 String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
@@ -36,22 +37,24 @@ class Data {
   String id;
   String fullName;
   String email;
-  String profileImage;
+  String? profileImage; // Nullable
   String phoneNumber;
   bool isVerified;
-  String license;
-  String passport;
-  String nationalId;
+  List<String> license; // List instead of String
+  List<String> passport; // List instead of String
+  List<String> nationalId; // List instead of String
   String status;
   DateTime createdAt;
   DateTime updatedAt;
   int averageRating;
+  String customerId; // Added missing customerId field
+  DateTime? passwordUpdatedAt; // Nullable DateTime
 
   Data({
     required this.id,
     required this.fullName,
     required this.email,
-    required this.profileImage,
+    this.profileImage,
     required this.phoneNumber,
     required this.isVerified,
     required this.license,
@@ -61,18 +64,20 @@ class Data {
     required this.createdAt,
     required this.updatedAt,
     required this.averageRating,
+    required this.customerId,
+    this.passwordUpdatedAt,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"] ?? "",
         fullName: json["fullName"] ?? "",
         email: json["email"] ?? "",
-        profileImage: json["profileImage"] ?? "",
+        profileImage: json["profileImage"], // Nullable
         phoneNumber: json["phoneNumber"] ?? "N/A",
         isVerified: json["isVerified"] ?? false,
-        license: json["license"] ?? "",
-        passport: json["passport"] ?? "",
-        nationalId: json["nationalId"] ?? "",
+        license: List<String>.from(json["license"] ?? []), // List
+        passport: List<String>.from(json["passport"] ?? []), // List
+        nationalId: List<String>.from(json["nationalId"] ?? []), // List
         status: json["status"] ?? "",
         createdAt: json["createdAt"] != null
             ? DateTime.parse(json["createdAt"])
@@ -81,6 +86,10 @@ class Data {
             ? DateTime.parse(json["updatedAt"])
             : DateTime.now(),
         averageRating: json["averageRating"] ?? 0,
+        customerId: json["customerId"] ?? "",
+        passwordUpdatedAt: json["passwordUpdatedAt"] != null
+            ? DateTime.parse(json["passwordUpdatedAt"])
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -97,5 +106,7 @@ class Data {
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "averageRating": averageRating,
+        "customerId": customerId,
+        "passwordUpdatedAt": passwordUpdatedAt?.toIso8601String(),
       };
 }

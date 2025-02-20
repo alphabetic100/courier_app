@@ -16,7 +16,7 @@ class ProfileController extends GetxController {
     try {
       isLoading.value = true;
       log(AuthService.token.toString());
-      final String token = AuthService.token!;
+      final String? token = AuthService.token;
       final response =
           await networkCaller.getRequest(AppUrls.getProfile, token: token);
       isLoading.value = false;
@@ -44,4 +44,11 @@ class ProfileController extends GetxController {
     getProfileDetails();
     super.onReady();
   }
+
+  // @override
+  // void onInit() {
+  //   // TODO: implement onInit
+  //   super.onInit();
+  //   getProfileDetails();
+  // }
 }

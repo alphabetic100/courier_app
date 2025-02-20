@@ -7,6 +7,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/profile/controller/profile_controller.dart';
 import 'package:courierapp/features/profile/presentation/components/profile_details_card.dart';
 import 'package:courierapp/features/profile/presentation/components/profile_trip_travel_box.dart';
@@ -79,7 +80,11 @@ class ProfileScreen extends StatelessWidget {
                 Obx(() {
                   final profile = controller.profile.value?.data;
                   final String? profileImage = profile?.profileImage;
-                  final bool hasValidProfileImage = profileImage != null && profileImage.isNotEmpty;
+                  final bool hasValidProfileImage =
+                      profileImage != null && profileImage.isNotEmpty;
+                  if (profile == null) {
+                    return Scaffold();
+                  }
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -93,13 +98,14 @@ class ProfileScreen extends StatelessWidget {
                                 CircleAvatar(
                                   backgroundImage: hasValidProfileImage
                                       ? NetworkImage(profileImage)
-                                      : AssetImage(ImagePath.profile) as ImageProvider,
+                                      : AssetImage(ImagePath.profile)
+                                          as ImageProvider,
                                   radius: getWidth(50),
                                 ),
-                                profile!.isVerified
+                                profile.isVerified
                                     ? Positioned(
                                         bottom: 0,
-  right: getWidth(10),
+                                        right: getWidth(10),
                                         child: CircleAvatar(
                                           radius: getWidth(15),
                                           backgroundColor: Color(0xFF2BCD31),
@@ -226,7 +232,8 @@ class ProfileScreen extends StatelessWidget {
                                       title: "Email:", subtitle: profile.email),
                                   ProfileDetailsCard(
                                       title: "Password:",
-                                      subtitle: "Updated 23 days ago"),
+                                      subtitle: AppHelperFunctions.timeAgo(
+                                          profile.updatedAt)),
                                   ProfileDetailsCard(
                                     title: "Verification status:",
                                     subtitle: profile.isVerified == true
