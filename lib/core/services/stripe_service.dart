@@ -184,7 +184,12 @@ class StripeService {
         final responseData = jsonDecode(response.body);
         log(responseData.toString());
         if (responseData['success'] == true) {
-          Get.defaultDialog(content: ShowPaymentSuccessDialog());
+          Get.defaultDialog(
+              barrierDismissible: false,
+              backgroundColor: Colors.transparent,
+              titlePadding: EdgeInsets.zero,
+              contentPadding: EdgeInsets.zero,
+              content: ShowPaymentSuccessDialog());
           //  Get.offAll(() => ());
           /*Get.snackbar(
           "Success",

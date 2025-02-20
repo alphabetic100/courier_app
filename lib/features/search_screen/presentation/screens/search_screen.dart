@@ -211,7 +211,12 @@ class SearchScreen extends StatelessWidget {
                             height: getHeight(50),
                             onPressed: onSearchPressed,
                             // onPressed: () {
-                            //   AuthService.logoutUser();
+                            //   // AuthService.logoutUser();
+                            //   showDialog(
+                            //       context: context,
+                            //       builder: (_) {
+                            //         return ShowPaymentSuccessDialog();
+                            //       });
                             // },
                             child: CustomText(
                               text: "Search",

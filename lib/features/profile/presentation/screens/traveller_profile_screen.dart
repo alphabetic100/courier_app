@@ -75,7 +75,9 @@ class TravellerProfileScreen extends StatelessWidget {
                     Stack(
                       children: [
                         CircleAvatar(
-                          backgroundImage: AssetImage(ImagePath.profile),
+                          backgroundImage: user.profileImage.isNotEmpty
+                              ? NetworkImage(user.profileImage)
+                              : AssetImage(ImagePath.profile),
                           radius: getWidth(42),
                         ),
                         if (user.isVerified)
