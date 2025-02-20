@@ -22,6 +22,14 @@ class ProfileController extends GetxController {
       isLoading.value = false;
       if (response.isSuccess) {
         profile.value = ProfileModel.fromJson(response.responseData);
+
+        //Save customer id
+        if (profile.value != null) {
+          AuthService.saveCustomerId(
+              customerID: profile.value!.data.customerId);
+        }
+        final customerId = AuthService.customerId;
+        log("customer id is : $customerId");
       } else {
         errorSnakbar(errorMessage: "Failed to load profile data");
       }
