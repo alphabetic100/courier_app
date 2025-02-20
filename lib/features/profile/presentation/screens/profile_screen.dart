@@ -232,8 +232,11 @@ class ProfileScreen extends StatelessWidget {
                                       title: "Email:", subtitle: profile.email),
                                   ProfileDetailsCard(
                                       title: "Password:",
-                                      subtitle: AppHelperFunctions.timeAgo(
-                                          profile.updatedAt)),
+                                      subtitle:
+                                          profile.passwordUpdatedAt != null
+                                              ? AppHelperFunctions.timeAgo(
+                                                  profile.passwordUpdatedAt!)
+                                              : "Not updated yet"),
                                   ProfileDetailsCard(
                                     title: "Verification status:",
                                     subtitle: profile.isVerified == true
