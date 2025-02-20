@@ -27,6 +27,7 @@ class AppUrls {
 
   static const String updatePassword = '$_baseUrl/users/update-password';
   static const String getMyItems = "$_baseUrl/items";
+  static const String confirmPayment = "$_baseUrl/payments/payment";
 
   // static const String meAsTraveller = "$_baseUrl/transports/me";
   // static const String meAsSender = "$_baseUrl/bookings/my-bookings";

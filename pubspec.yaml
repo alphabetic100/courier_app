@@ -56,6 +56,10 @@ dependencies:
   image_gallery_saver_plus: ^3.0.5 
   share_plus:
   qr_flutter: ^4.1.0
+  flutter_stripe: ^11.2.0
+
+  flutter_paypal_payment:
+  webview_flutter: ^4.10.0
   # photo_manager:
 
   # Icons

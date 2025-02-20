@@ -1,4 +1,7 @@
+
 import 'package:get/get.dart';
+
+
 
 class PaymentSetupController extends GetxController {
   RxInt selectedCard = 4.obs;
@@ -9,4 +12,8 @@ class PaymentSetupController extends GetxController {
   void toggleCheckbox() {
     isChecked.value = !isChecked.value;
   }
+
+
+
+
 }

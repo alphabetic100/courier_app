@@ -15,26 +15,26 @@ import 'package:courierapp/features/search_screen/models/all_trip_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PaymentMethodScreen extends StatelessWidget {
-  PaymentMethodScreen({
-    super.key,
-    this.trip,
-  });
-  final PaymentSetupController paymentSetupController =
-      Get.find<PaymentSetupController>();
+import '../../../core/services/stripe_service.dart';
+
+class PaymentMethodScreen extends StatefulWidget {
+  PaymentMethodScreen({super.key, this.trip});
+
   final TransportData? trip;
-  // final RxString priceSubtext;
-  final List<String> titles = ["PayPal", "Apple Pay", "Credit Card"];
-  final List<String> iconPaths = [
-    IconPath.payPalLogo,
-    IconPath.appleLogo,
-    IconPath.creditCardLogo
-  ];
+
+  @override
+  State<PaymentMethodScreen> createState() => _PaymentMethodScreenState();
+}
+
+class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
+  final PaymentSetupController paymentSetupController =
+  Get.find<PaymentSetupController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        backgroundColor: Color(0xffFAFAFC),
+        backgroundColor: const Color(0xffFAFAFC),
         actions: [
           Padding(
             padding: EdgeInsets.only(
@@ -47,76 +47,81 @@ class PaymentMethodScreen extends StatelessWidget {
         children: [
           RequestShippingTopBody(
             title: "Payment Method",
-            departingFrom: trip!.from,
-            arrivingTo: trip!.to,
-            price: trip!.price.toString(),
-            date: AppHelperFunctions.formateDate(trip!.date),
+            departingFrom: widget.trip!.from,
+            arrivingTo: widget.trip!.to,
+            price: widget.trip!.price.toString(),
+            date: AppHelperFunctions.formateDate(widget.trip!.date),
           ),
-          SizedBox(
-            height: getHeight(16),
-          ),
+          SizedBox(height: getHeight(16)),
           Padding(
-            padding: EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+            padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: "Choose Payment Method",
+                  text: "Chose Payment Method",
                   fontWeight: FontWeight.w600,
-                  color: Color(0xff262B2B),
+                  color: const Color(0xff262B2B),
                 ),
-                SizedBox(
-                  height: getHeight(8),
+                SizedBox(height: getHeight(8)),
+                Obx(
+                      () => Padding(
+                    padding: EdgeInsets.only(bottom: getHeight(16)),
+                    child: PaymentSetupCard(
+                      onTap: () {
+                        paymentSetupController.selectedCard.value = 0;
+                      },
+                      iconPath: IconPath.creditCardLogo, // Replace with Stripe logo if available
+                      title: "Stripe",
+                      isCardSelected: paymentSetupController.selectedCard.value == 0,
+                    ),
+                  ),
                 ),
-                ListView.builder(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Obx(
-                        () {
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: getHeight(16)),
-                            child: PaymentSetupCard(
-                                onTap: () {
-                                  paymentSetupController.selectedCard.value =
-                                      index;
-                                },
-                                iconPath: iconPaths[index],
-                                title: titles[index],
-                                isCardSelected:
-                                    paymentSetupController.selectedCard.value ==
-                                        index),
-                          );
-                        },
-                      );
-                    }),
               ],
             ),
           ),
         ],
       ),
       bottomNavigationBar: CustomBottomAppBar(
-          onTap: () {
-            Get.to(PaymentSelectScreen());
-          },
-          secondaryWidget: Row(
-            children: [
-              Text("\$",
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.secondaryColor)),
-              HorizontalSpace(width: getWidth(10)),
-              Expanded(
-                child: CustomText(
-                  text:
-                      "You will be refunded if your courier does not accept your order",
-                  fontWeight: FontWeight.normal,
-                ),
+        onTap: () async {
+          try {
+            setState(() {
+              StripeService.isLoading = false; // Reset loading state
+            });
+            // Save payment method
+
+            // akhan a customerId1,parcelId1,travelerAccountId1 diben
+            await StripeService.instance.paymentStart(
+                customerId1: "", price1: 1, parcelId1: '', travelerAccountId1: '',);
+
+
+
+          } finally {
+            setState(() {
+              StripeService.isLoading = false; // Reset loading state
+            });
+          }
+          //Get.to(PaymentSelectScreen());
+        },
+        secondaryWidget: Row(
+          children: [
+            Text("\$",
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.secondaryColor)),
+            HorizontalSpace(width: getWidth(10)),
+            Expanded(
+              child: CustomText(
+                text:
+                "You will be refunded if your courier does not accept your order",
+                fontWeight: FontWeight.normal,
               ),
-            ],
-          ),
-          isPrimaryButton: true),
+            ),
+          ],
+        ),
+        isPrimaryButton: true,
+      ),
     );
   }
 }
