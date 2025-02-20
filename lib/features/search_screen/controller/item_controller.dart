@@ -109,8 +109,10 @@ class ItemController extends GetxController {
   Future<void> deleteItem(String itemId) async {
     final requestUrl = "${AppUrls.getMyItems}/$itemId";
     try {
-      final response =
-          await networkCaller.deleteRequest(requestUrl, AuthService.token);
+      final response = await networkCaller.postRequest(
+        requestUrl,
+        token: AuthService.token,
+      );
       if (response.isSuccess) {
         myItems.value!.data.removeWhere(
           (element) => element.id == itemId,

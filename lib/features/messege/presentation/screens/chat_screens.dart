@@ -40,7 +40,7 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userId = AuthService.userId.toString();
+    final userId = AuthService.userId;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(),
@@ -48,40 +48,43 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
         height: AppSizes.height,
         child: Column(
           children: [
-            VerticalSpace(height: getHeight(10)),
+            Container(color: Color(0xFFFAFAFC), height: getHeight(10)),
             Column(
               children: [
                 Container(
                   color: Color(0xFFFAFAFC),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          backgroundImage: widget.profileImage.isNotEmpty
-                              ? NetworkImage(widget.profileImage)
-                              : AssetImage(ImagePath.profile),
-                        ),
-                        HorizontalSpace(width: getWidth(5)),
-                        CustomText(
-                          text: widget.userName,
-                          fontSize: getWidth(20),
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.black,
-                        ),
-                        HorizontalSpace(
-                          width: getWidth(5),
-                        ),
-                        CircleAvatar(
-                          radius: getWidth(4),
-                          backgroundColor: Colors.green,
-                        )
-                      ],
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: widget.profileImage.isNotEmpty
+                                ? NetworkImage(widget.profileImage)
+                                : AssetImage(ImagePath.profile),
+                          ),
+                          HorizontalSpace(width: getWidth(5)),
+                          CustomText(
+                            text: widget.userName,
+                            fontSize: getWidth(20),
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.black,
+                          ),
+                          HorizontalSpace(
+                            width: getWidth(5),
+                          ),
+                          CircleAvatar(
+                            radius: getWidth(4),
+                            backgroundColor: Colors.green,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                VerticalSpace(height: getHeight(20)),
+                Container(color: Color(0xFFFAFAFC), height: getHeight(10)),
                 Divider(
                   color: AppColors.grey,
                 )
