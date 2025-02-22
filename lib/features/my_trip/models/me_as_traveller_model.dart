@@ -38,7 +38,7 @@ class TransportData {
   final List<String> additional;
   final String createdAt;
   final String updatedAt;
-  final List<dynamic> booking;
+  final List<Booking> booking;
   final int pendingCount;
 
   TransportData({
@@ -76,8 +76,28 @@ class TransportData {
               [],
       createdAt: json["createdAt"] ?? "",
       updatedAt: json["updatedAt"] ?? "",
-      booking: json["booking"] ?? [],
+      booking: (json["booking"] as List?)
+              ?.map((e) => Booking.fromJson(e))
+              .toList() ??
+          [],
       pendingCount: json["pendingCount"] ?? 0,
+    );
+  }
+}
+
+class Booking {
+  final String id;
+  final String status;
+
+  Booking({
+    required this.id,
+    required this.status,
+  });
+
+  factory Booking.fromJson(Map<String, dynamic> json) {
+    return Booking(
+      id: json["id"] ?? "",
+      status: json["status"] ?? "",
     );
   }
 }

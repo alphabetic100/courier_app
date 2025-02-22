@@ -41,29 +41,40 @@ class ShowPaymentSuccessDialog extends StatelessWidget {
           ),
           VerticalSpace(height: getHeight(10)),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Icon(
                 Icons.arrow_forward,
                 color: AppColors.secondaryColor,
               ),
-              CustomText(
-                text: "Albert Flores will review your request.",
-                fontWeight: FontWeight.normal,
-                fontSize: getWidth(14),
+              HorizontalSpace(width: getWidth(5)),
+              SizedBox(
+                width: AppSizes.width * 0.4,
+                child: CustomText(
+                  text: "Albert Flores will review your request.",
+                  fontWeight: FontWeight.normal,
+                  fontSize: getWidth(14),
+                ),
               )
             ],
           ),
           VerticalSpace(height: getHeight(10)),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Icon(
                 Icons.arrow_forward,
                 color: AppColors.secondaryColor,
               ),
-              CustomText(
-                text: "Albert Flores will review your request.",
-                fontWeight: FontWeight.normal,
-                fontSize: getWidth(14),
+              HorizontalSpace(width: getWidth(5)),
+              SizedBox(
+                width: AppSizes.width * 0.4,
+                child: CustomText(
+                  text:
+                      "You’ll be notified when Albert accepts or declines your request.",
+                  fontWeight: FontWeight.normal,
+                  fontSize: getWidth(14),
+                ),
               )
             ],
           )

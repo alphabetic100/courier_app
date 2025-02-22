@@ -117,10 +117,14 @@ class AsTravellerCard extends StatelessWidget {
                 ),
                 HorizontalSpace(width: getWidth(5)),
                 CustomText(
-                  text: myTripController.status.value,
-                  color: myTripController.status.value == "Active"
-                      ? AppColors.success
-                      : AppColors.error,
+                  text: status,
+                  color: status.contains("Pending")
+                      ? AppColors.warning
+                      : status.contains("No Request")
+                          ? AppColors.primaryColor
+                          : status.contains("Fully Booked")
+                              ? AppColors.error
+                              : Colors.black,
                   fontSize: getWidth(15),
                   fontWeight: FontWeight.w600,
                 ),

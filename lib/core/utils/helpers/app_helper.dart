@@ -119,4 +119,20 @@ class AppHelperFunctions {
     DateTime dateTime = DateTime.parse(date);
     return DateFormat('MMM d, y').format(dateTime);
   }
+
+  static String timeAgo(DateTime dateTime) {
+    Duration difference = DateTime.now().difference(dateTime);
+
+    if (difference.inSeconds < 60) {
+      return "Updated just now";
+    } else if (difference.inMinutes < 60) {
+      return "Updated ${difference.inMinutes} minutes ago";
+    } else if (difference.inHours < 24) {
+      return "Updated ${difference.inHours} hours ago";
+    } else if (difference.inDays < 30) {
+      return "Updated ${difference.inDays} days ago";
+    } else {
+      return "Updated on ${DateFormat('yyyy-MM-dd').format(dateTime)}";
+    }
+  }
 }

@@ -112,6 +112,7 @@ class ItemController extends GetxController {
       final response = await networkCaller.postRequest(
         requestUrl,
         token: AuthService.token,
+        body: {},
       );
       if (response.isSuccess) {
         myItems.value!.data.removeWhere(
