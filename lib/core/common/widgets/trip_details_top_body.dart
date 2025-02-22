@@ -6,6 +6,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:flutter/material.dart';
 
 class TripDetailsTopBody extends StatelessWidget {
@@ -17,6 +18,10 @@ class TripDetailsTopBody extends StatelessWidget {
     required this.price,
     this.priceSubText,
     required this.date,
+    required this.lat1,
+    required this.lon1,
+    required this.lat2,
+    required this.lon2,
   });
 
   final String title;
@@ -25,6 +30,10 @@ class TripDetailsTopBody extends StatelessWidget {
   final String price;
   final String date;
   final String? priceSubText;
+  final double lat1;
+  final double lon1;
+  final double lat2;
+  final double lon2;
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +127,7 @@ class TripDetailsTopBody extends StatelessWidget {
                           onTap: () {
                             log("Tapped");
                             //TODO: Will open gootle map
+                            AppHelperFunctions.launchMap(lat1, lon1);
                           },
                           child: Image.asset(
                             ImagePath.location,
@@ -128,6 +138,7 @@ class TripDetailsTopBody extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             log("Tapped");
+                            AppHelperFunctions.launchMap(lat2, lon2);
                           },
                           child: Image.asset(
                             ImagePath.location,

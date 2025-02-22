@@ -1,8 +1,11 @@
+import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ShowPaymentSuccessDialog extends StatelessWidget {
   const ShowPaymentSuccessDialog({super.key});
@@ -80,6 +83,17 @@ class ShowPaymentSuccessDialog extends StatelessWidget {
           )
         ],
       ),
+      actions: [
+        Expanded(
+            child: CustomButton(
+                onPressed: () {
+                  Get.offAll(() => LandingController());
+                },
+                child: CustomText(
+                  text: "Back to home",
+                  color: AppColors.white,
+                )))
+      ],
     );
   }
 }

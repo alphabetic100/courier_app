@@ -35,6 +35,10 @@ class TransportData {
   final int price;
   final List<String> rules;
   final List<String> additional;
+  final double lon1;
+  final double lat1;
+  final double lon2;
+  final double lat2;
   final User user;
 
   TransportData({
@@ -48,6 +52,10 @@ class TransportData {
     required this.price,
     required this.rules,
     required this.additional,
+    required this.lon1,
+    required this.lat1,
+    required this.lon2,
+    required this.lat2,
     required this.user,
   });
 
@@ -59,12 +67,16 @@ class TransportData {
       date: json['date'] ?? '',
       from: json['from']?.trim() ?? '',
       to: json['to']?.trim() ?? '',
-      weight: json['weight']?.toString() ?? '0', // Ensure weight is a string
+      weight: json['weight']?.toString() ?? '0',
       price: json['price'] ?? 0,
       rules: (json['rulse'] as List?)?.map((e) => e.toString()).toList() ?? [],
       additional:
           (json['additional'] as List?)?.map((e) => e.toString()).toList() ??
               [],
+      lon1: json['lon1']?.toDouble() ?? 0.0,
+      lat1: json['lat1']?.toDouble() ?? 0.0,
+      lon2: json['lon2']?.toDouble() ?? 0.0,
+      lat2: json['lat2']?.toDouble() ?? 0.0,
       user: User.fromJson(json['user'] ?? {}),
     );
   }
@@ -91,10 +103,10 @@ class User {
     return User(
       id: json['id'] ?? '',
       fullName: json['fullName'] ?? '',
-      profileImage: json['profileImage'] ?? '', // Ensure empty string if null
+      profileImage: json['profileImage'] ?? '',
       isVerified: json['isVerified'] ?? false,
       averageRating: (json['averageRating'] ?? 0).toDouble(),
-      accountId: json['accountId'] ?? '', 
+      accountId: json['accountId'] ?? '',
     );
   }
 }

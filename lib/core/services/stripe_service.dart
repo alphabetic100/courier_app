@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:courierapp/core/common/widgets/error_snakbar.dart';
+import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/common/widgets/show_payment_success_dialog.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:dio/dio.dart';
@@ -184,6 +185,8 @@ class StripeService {
         final responseData = jsonDecode(response.body);
         log(responseData.toString());
         if (responseData['success'] == true) {
+          hideProgressIndicator();
+          Future.delayed(Duration(milliseconds: 100));
           Get.defaultDialog(
               barrierDismissible: false,
               backgroundColor: Colors.transparent,

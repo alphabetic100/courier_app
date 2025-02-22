@@ -77,6 +77,10 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                   arrivingTo: detail.transportTo,
                   price: detail.price.toString(),
                   date: AppHelperFunctions.formateDate(detail.transportDate),
+                  lat1: 0.0,
+                  lon1: 0.0,
+                  lat2: 0.0,
+                  lon2: 0.0,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: getWidth(16)),

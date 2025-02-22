@@ -6,6 +6,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
+import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/request_shipping/controller/request_shipping_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,10 @@ class RequestShippingTopBody extends StatelessWidget {
     required this.arrivingTo,
     required this.price,
     required this.date,
+    required this.lat1,
+    required this.lon1,
+    required this.lat2,
+    required this.lon2,
   });
 
   final String title;
@@ -25,6 +30,10 @@ class RequestShippingTopBody extends StatelessWidget {
   final String arrivingTo;
   final String price;
   final String date;
+  final double lat1;
+  final double lon1;
+  final double lat2;
+  final double lon2;
 
   final RequestShippingController shippingController =
       Get.put(RequestShippingController());
@@ -120,6 +129,7 @@ class RequestShippingTopBody extends StatelessWidget {
                           onTap: () {
                             log("Tapped");
                             //TODO: Will open gootle map
+                            AppHelperFunctions.launchMap(lat1, lon1);
                           },
                           child: Image.asset(
                             ImagePath.location,
@@ -130,6 +140,7 @@ class RequestShippingTopBody extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             log("Tapped");
+                            AppHelperFunctions.launchMap(lat2, lon2);
                           },
                           child: Image.asset(
                             ImagePath.location,

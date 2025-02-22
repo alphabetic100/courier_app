@@ -56,6 +56,10 @@ class RequestShippingScreen extends StatelessWidget {
               arrivingTo: trip.to,
               price: trip.price.toString(),
               date: AppHelperFunctions.formateDate(trip.date),
+              lat1: trip.lat1,
+              lon1: trip.lon1,
+              lat2: trip.lat2,
+              lon2: trip.lon2,
             ),
             VerticalSpace(height: getHeight(20)),
             Obx(

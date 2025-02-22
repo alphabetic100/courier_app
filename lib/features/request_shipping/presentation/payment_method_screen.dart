@@ -5,6 +5,7 @@ import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/common/widgets/payment_setup_card.dart';
+import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -71,6 +72,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             arrivingTo: widget.trip!.to,
             price: widget.trip!.price.toString(),
             date: AppHelperFunctions.formateDate(widget.trip!.date),
+            lat1: widget.trip!.lat1,
+            lon1: widget.trip!.lon1,
+            lat2: widget.trip!.lat2,
+            lon2: widget.trip!.lon2,
           ),
           SizedBox(height: getHeight(16)),
           Padding(
@@ -121,7 +126,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               StripeService.isLoading = false; // Reset loading state
             });
             // Save payment method
-
+            showProgressIndicator();
             // akhan a customerId1,parcelId1,travelerAccountId1 diben
             await StripeService.instance.paymentStart(
               customerId1: customerId.toString(),
@@ -131,7 +136,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             );
           } finally {
             setState(() {
-              StripeService.isLoading = false; // Reset loading state
+              StripeService.isLoading = false;
+              // Reset loading state
             });
           }
           //Get.to(PaymentSelectScreen());

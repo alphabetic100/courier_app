@@ -36,6 +36,10 @@ class TransportData {
   final String createdAt;
   final String updatedAt;
   final List<Booking> booking;
+  final double lat1; // Latitude of the from location
+  final double lon1; // Longitude of the from location
+  final double lat2; // Latitude of the to location
+  final double lon2; // Longitude of the to location
 
   TransportData({
     required this.id,
@@ -52,6 +56,10 @@ class TransportData {
     required this.createdAt,
     required this.updatedAt,
     required this.booking,
+    required this.lat1,
+    required this.lon1,
+    required this.lat2,
+    required this.lon2,
   });
 
   factory TransportData.fromJson(Map<String, dynamic> json) {
@@ -61,15 +69,24 @@ class TransportData {
       transportType: json["transportType"] ?? "",
       transportNumber: json["transportNumber"] ?? "",
       date: json["date"] ?? "",
-      from: json["from"] ?? "",
-      to: json["to"] ?? "",
+      from: json["from"]?.trim() ??
+          "", // Trim to remove any leading/trailing spaces
+      to: json["to"]?.trim() ??
+          "", // Trim to remove any leading/trailing spaces
       weight: json["weight"]?.toString() ?? "",
       price: json["price"] ?? 0,
       rulse: List<String>.from(json["rulse"] ?? []),
       additional: List<String>.from(json["additional"] ?? []),
       createdAt: json["createdAt"] ?? "",
       updatedAt: json["updatedAt"] ?? "",
-      booking: (json["booking"] as List?)?.map((e) => Booking.fromJson(e)).toList() ?? [],
+      booking: (json["booking"] as List?)
+              ?.map((e) => Booking.fromJson(e))
+              .toList() ??
+          [],
+      lat1: json["lat1"]?.toDouble() ?? 0.0, // Ensure lat1 is double
+      lon1: json["lon1"]?.toDouble() ?? 0.0, // Ensure lon1 is double
+      lat2: json["lat2"]?.toDouble() ?? 0.0, // Ensure lat2 is double
+      lon2: json["lon2"]?.toDouble() ?? 0.0, // Ensure lon2 is double
     );
   }
 }
@@ -82,6 +99,10 @@ class Booking {
   final String status;
   final String fullName;
   final String profileImage;
+  final double avgRating;
+  final int totalTrips;
+  final String itemName; // Item name being transported
+  final double itemWeight; // Item weight
 
   Booking({
     required this.bookingId,
@@ -91,6 +112,10 @@ class Booking {
     required this.status,
     required this.fullName,
     required this.profileImage,
+    required this.avgRating,
+    required this.totalTrips,
+    required this.itemName,
+    required this.itemWeight,
   });
 
   factory Booking.fromJson(Map<String, dynamic> json) {
@@ -102,6 +127,10 @@ class Booking {
       status: json["status"] ?? "",
       fullName: json["fullName"] ?? "",
       profileImage: json["profileImage"] ?? "",
+      avgRating: (json["avgRating"] ?? 0).toDouble(),
+      totalTrips: json["totalTrips"] ?? 0,
+      itemName: json["itemName"] ?? "", // Item name being transported
+      itemWeight: (json["itemWeight"] ?? 0).toDouble(), // Item weight
     );
   }
 }

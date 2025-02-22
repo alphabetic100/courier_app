@@ -27,7 +27,9 @@ class SenderRequestCard extends StatelessWidget {
               padding: EdgeInsets.only(bottom: getHeight(20)),
               child: GestureDetector(
                 onTap: () {
-                  Get.to(() => SenderRequestDetailsScreen());
+                  Get.to(() => SenderRequestDetailsScreen(
+                        bookingId: request.bookingId,
+                      ));
                 },
                 child: Container(
                   padding: EdgeInsets.all(getWidth(16)),
@@ -42,8 +44,8 @@ class SenderRequestCard extends StatelessWidget {
                           isVerified: true,
                           profileImage: request.profileImage,
                           profileName: request.fullName,
-                          subtitle: "Total 32 Trips",
-                          rattings: 4.22.toString(),
+                          subtitle: "Total ${request.totalTrips} Trips",
+                          rattings: request.avgRating.toString(),
                           suffixIcon: CustomText(
                             text: "\$${request.price}",
                             color: AppColors.titleTextColor,
@@ -56,7 +58,7 @@ class SenderRequestCard extends StatelessWidget {
                       ),
                       VerticalSpace(height: getHeight(10)),
                       CustomText(
-                        text: "Laptop to New York (2.5kg)",
+                        text: "${request.itemName} (${request.itemWeight}kg)",
                         fontWeight: FontWeight.w600,
                         color: AppColors.black,
                         fontSize: getWidth(15),

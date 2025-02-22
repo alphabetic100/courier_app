@@ -83,6 +83,10 @@ class _TravelTripDetailScreenState extends State<TravelTripDetailScreen> {
                   price: "${post.price.toString()}/kg",
                   date: DateFormat("MMM d, yyyy")
                       .format(DateTime.parse(post.date)),
+                  lat1: post.lat1,
+                  lon1: post.lon2,
+                  lat2: post.lat2,
+                  lon2: post.lon2,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
