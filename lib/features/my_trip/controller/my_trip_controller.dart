@@ -5,6 +5,7 @@ import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
 import 'package:courierapp/features/my_trip/models/me_as_traveller_model.dart';
+import 'package:courierapp/features/my_trip/models/single_travel_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,10 +14,12 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
   late TabController tabController;
   final PageController pageController = PageController();
   Rx<MeAsTravellerModel?> myTravels = Rx<MeAsTravellerModel?>(null);
+  Rx<SingleTravelModel?> singleTravel = Rx<SingleTravelModel?>(null);
   RxInt selectedIndex = 0.obs;
   RxString status = "request panding".obs;
   RxBool isPending = false.obs;
   RxBool isLoading = false.obs;
+  RxBool isTravelLoading = false.obs;
   @override
   void onInit() {
     super.onInit();
@@ -59,6 +62,26 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
       }
     } catch (e) {
       log("Something went wrong, error: $e");
+    }
+  }
+
+  Future<void> getSingleTravelPost(String postID) async {
+    try {
+      isTravelLoading.value = true;
+      final String requestUrl = "${AppUrls.getMySingleTravelPost}/$postID";
+      final response =
+          await networkCaller.getRequest(requestUrl, token: AuthService.token);
+      isTravelLoading.value = false;
+      if (response.isSuccess) {
+        singleTravel.value = SingleTravelModel.fromJson(response.responseData);
+      } else {
+        errorSnakbar(errorMessage: response.errorMessage);
+      }
+    } catch (e) {
+      isTravelLoading.value = false;
+      log("Something went wrong, error: $e");
+    } finally {
+      isTravelLoading.value = false;
     }
   }
 

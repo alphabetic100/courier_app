@@ -34,6 +34,8 @@ class AppUrls {
   static const String getMyDeliveryAsSendr =
       "$_baseUrl//bookings/my-booking-count";
   static const String carbonEmissions = "$_baseUrl/users/carbon-immussion";
+  static const String getMySingleTravelPost =
+      "$_baseUrl/transports/traveler-transport";
 
   // static const String meAsTraveller = "$_baseUrl/transports/me";
   // static const String meAsSender = "$_baseUrl/bookings/my-bookings";
