@@ -11,6 +11,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/sing_up_controller.dart';
+import 'package:courierapp/features/authentication/services/google_auth/google_auth_service.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -222,8 +223,9 @@ class SignUpScreen extends StatelessWidget {
                     VerticalSpace(height: getHeight(16)),
                     CustomButton(
                         isPrimary: false,
-                        onPressed: () {
+                        onPressed: () async {
                           //TODO: Google sign up
+                          await signUpWithGoogle();
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

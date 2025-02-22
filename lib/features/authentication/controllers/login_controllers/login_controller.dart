@@ -80,4 +80,14 @@ class LoginController extends GetxController {
           errorMessage: "Please check your internet connection and try again");
     }
   }
+
+  Future<void> googleLogIn({
+    required String email,
+  }) async {
+    try {
+      
+    } catch (e) {
+      log("something went wrong. please try again");
+    }
+  }
 }
