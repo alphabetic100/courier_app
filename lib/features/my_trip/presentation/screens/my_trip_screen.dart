@@ -268,7 +268,7 @@ class MyTripScreen extends StatelessWidget {
                             to: tripData.to,
                             price: tripData.price.toString(),
                             availableSpace: tripData.weight,
-                            status: tripData.weight != "0"
+                            status: tripData.weight != "0.0"
                                 ? tripData.pendingCount > 0
                                     ? "${tripData.pendingCount} Requests Pending"
                                     : "No Request Yet"

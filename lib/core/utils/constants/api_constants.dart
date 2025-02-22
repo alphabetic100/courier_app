@@ -3,6 +3,7 @@ class AppUrls {
 
   static const String _baseUrl = 'http://10.0.20.36:5002/api/v1';
   static const String login = '$_baseUrl/auth/login';
+  static const String socalMedaiLogin = "$_baseUrl/users/social-login";
   static const String forgetEmail = '$_baseUrl/auth/forgot-password';
   static const String verifyOTP = '$_baseUrl/auth/verify-otp';
   static const String newPassword = '$_baseUrl/auth/change-password';
@@ -34,6 +35,11 @@ class AppUrls {
   static const String getMyDeliveryAsSendr =
       "$_baseUrl//bookings/my-booking-count";
   static const String carbonEmissions = "$_baseUrl/users/carbon-immussion";
+  static const String getMySingleTravelPost =
+      "$_baseUrl/transports/traveler-transport";
+
+  static const String myBookingAsTraveller =
+      "$_baseUrl/bookings/my-booking-as-traveler/";
 
   // static const String meAsTraveller = "$_baseUrl/transports/me";
   // static const String meAsSender = "$_baseUrl/bookings/my-bookings";

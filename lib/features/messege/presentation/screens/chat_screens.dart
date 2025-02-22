@@ -92,6 +92,9 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
             ),
             Expanded(
               child: Obx(() {
+                if (chatController.messages.isNotEmpty) {
+                  chatController.viewMessage();
+                }
                 return ListView.builder(
                   reverse: true,
                   padding:

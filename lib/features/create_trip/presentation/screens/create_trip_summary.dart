@@ -36,6 +36,10 @@ class CreateTripSummary extends StatelessWidget {
               arrivingTo: tripController.selectArrivingController.text,
               price: "${tripController.selectedCharge.value}/kg",
               date: tripController.dateTimeController.text,
+              lat1: 0.0,
+              lon1: 0.0,
+              lat2: 0.0,
+              lon2: 0.0,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: getWidth(16)),

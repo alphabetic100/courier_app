@@ -131,7 +131,12 @@ class MessageScreen extends StatelessWidget {
                                             text: user.lastMessage.isNotEmpty
                                                 ? user.lastMessage
                                                 : "message not supported",
-                                            fontWeight: FontWeight.normal,
+                                            fontWeight: user.isRead
+                                                ? FontWeight.normal
+                                                : FontWeight.w500,
+                                            color: user.isRead
+                                                ? AppColors.grey
+                                                : AppColors.black,
                                           )
                                         ],
                                       )

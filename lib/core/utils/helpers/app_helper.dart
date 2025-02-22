@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppHelperFunctions {
   AppHelperFunctions._();
@@ -133,6 +134,17 @@ class AppHelperFunctions {
       return "Updated ${difference.inDays} days ago";
     } else {
       return "Updated on ${DateFormat('yyyy-MM-dd').format(dateTime)}";
+    }
+  }
+
+  static Future<void> launchMap(double latitude, double longitude) async {
+    final String googleMapsUrl =
+        'https://www.google.com/maps?q=$latitude,$longitude';
+
+    if (await canLaunch(googleMapsUrl)) {
+      await launch(googleMapsUrl);
+    } else {
+      throw 'Could not open the map.';
     }
   }
 }

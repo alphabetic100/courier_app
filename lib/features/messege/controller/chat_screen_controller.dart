@@ -77,6 +77,7 @@ class ChatController extends GetxController {
 
   //message status change
   void viewMessage() {
+    log("View Message Called");
     String id = AuthService.userId.toString();
     socketClient.viewMessage(roomId.value, id);
   }
