@@ -1,0 +1,6 @@
+class GoogleAuthService {
+  //
+  signInWithGoogle() async {
+
+  }
+}
