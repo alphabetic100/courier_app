@@ -47,6 +47,10 @@ class BookingData {
   final String email;
   final String profileImage;
   final bool isVerified;
+  final double lat1;
+  final double lat2;
+  final double lon1;
+  final double lon2;
 
   BookingData({
     required this.bookingId,
@@ -71,6 +75,10 @@ class BookingData {
     required this.email,
     required this.profileImage,
     required this.isVerified,
+    required this.lat1,
+    required this.lat2,
+    required this.lon1,
+    required this.lon2,
   });
 
   factory BookingData.fromJson(Map<String, dynamic> json) {
@@ -92,14 +100,16 @@ class BookingData {
       itemName: json['itemName'] ?? "",
       itemDescription: json['itemDescription'] ?? "",
       itemWeight: (json['itemWeight'] ?? 0).toDouble(),
-      itemImage: (json['itemImage'] as List?)
-              ?.map((e) => e.toString())
-              .toList() ??
-          [],
+      itemImage:
+          (json['itemImage'] as List?)?.map((e) => e.toString()).toList() ?? [],
       fullName: json['fullName'] ?? "",
       email: json['email'] ?? "",
       profileImage: json['profileImage'] ?? "",
       isVerified: json['isVerified'] ?? false,
+      lat1: json["lat1"] ?? 0.0,
+      lon1: json["lon1"] ?? 0.0,
+      lat2: json["lat2"] ?? 0.0,
+      lon2: json["lon2"] ?? 0.0,
     );
   }
 }
