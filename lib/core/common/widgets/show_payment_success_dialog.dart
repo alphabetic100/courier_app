@@ -84,15 +84,14 @@ class ShowPaymentSuccessDialog extends StatelessWidget {
         ],
       ),
       actions: [
-        Expanded(
-            child: CustomButton(
-                onPressed: () {
-                  Get.offAll(() => LandingController());
-                },
-                child: CustomText(
-                  text: "Back to home",
-                  color: AppColors.white,
-                )))
+        CustomButton(
+            onPressed: () {
+              Get.offAll(() => LandingController());
+            },
+            child: CustomText(
+              text: "Back to home",
+              color: AppColors.white,
+            ))
       ],
     );
   }

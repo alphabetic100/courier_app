@@ -92,6 +92,7 @@ class _SenderRequestDetailsScreenState
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           GestureDetector(
                             onTap: () {

@@ -123,10 +123,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
           try {
             setState(() {
-              StripeService.isLoading = false; // Reset loading state
+              StripeService.isLoading = false;
+              // Reset loading state
+              showProgressIndicator();
             });
             // Save payment method
-            showProgressIndicator();
+
             // akhan a customerId1,parcelId1,travelerAccountId1 diben
             await StripeService.instance.paymentStart(
               customerId1: customerId.toString(),
@@ -137,9 +139,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           } finally {
             setState(() {
               StripeService.isLoading = false;
+
               // Reset loading state
             });
           }
+
           //Get.to(PaymentSelectScreen());
         },
         secondaryWidget: Row(
