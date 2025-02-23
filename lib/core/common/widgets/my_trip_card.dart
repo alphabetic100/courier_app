@@ -88,13 +88,18 @@ class MyBookingsCard extends StatelessWidget {
                                   ? "Accepted delivery"
                                   : booking.status == "pickupped"
                                       ? "Picked up by traveller"
-                                      : booking.status,
+                                      : booking.status == "delivered"
+                                          ? "Delivered"
+                                          : booking.status,
                           color: booking.status == "pending"
                               ? AppColors.warning
-                              : booking.status == "accepted"
+                              : booking.status == "accepted" ||
+                                      booking.status == "delivered"
                                   ? AppColors.success
                                   : AppColors.secondaryColor,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: booking.status == "delivered"
+                              ? FontWeight.bold
+                              : FontWeight.w500,
                           fontSize: getWidth(15),
                         ),
                       ],

@@ -184,13 +184,18 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                                       ? "Request accepted, ready to receive items"
                                       : detail.status == "pickupped"
                                           ? "The traveller has picked up the parcel and is on the way to the destination."
-                                          : detail.status,
+                                          : detail.status == "delivered"
+                                              ? "The parcel has been successfully delivered."
+                                              : detail.status,
                               style: getTextStyleMsrt(
                                 fontSize: getWidth(15),
-                                fontWeight: FontWeight.w500,
+                                fontWeight: detail.status == "delivered"
+                                    ? FontWeight.bold
+                                    : FontWeight.w500,
                                 color: detail.status == "pending"
                                     ? AppColors.warning
-                                    : detail.status == "accepted"
+                                    : detail.status == "accepted" ||
+                                            detail.status == "delivered"
                                         ? AppColors.success
                                         : AppColors.secondaryColor,
                               ),
@@ -276,7 +281,8 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                             color: AppColors.grey,
                             size: getHeight(28),
                           ),
-                          if (detail.status == "pending") ...[
+                          if (detail.status == "pending" ||
+                              detail.status == "delivered") ...[
                             HorizontalSpace(width: getWidth(5)),
                             CustomText(
                               text: "Chat",
@@ -287,30 +293,32 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                         ],
                       )),
                 ),
-                if (detail.status != "pending") ...[
-                  HorizontalSpace(width: getWidth(16)),
-                  Expanded(
-                    flex: 4,
-                    child: CustomButton(
-                        isPrimary: true,
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return QrGenerateDialog(
-                                  bookingID: detail.bookingId,
-                                  status: detail.status,
-                                );
-                              });
-                        },
-                        child: CustomText(
-                          text: "Generate QR Code",
-                          fontWeight: FontWeight.bold,
-                          fontSize: getWidth(18),
-                          color: AppColors.white,
-                        )),
-                  ),
-                ]
+                if (detail.status != "delivered") ...{
+                  if (detail.status != "pending") ...[
+                    HorizontalSpace(width: getWidth(16)),
+                    Expanded(
+                      flex: 4,
+                      child: CustomButton(
+                          isPrimary: true,
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return QrGenerateDialog(
+                                    bookingID: detail.bookingId,
+                                    status: detail.status,
+                                  );
+                                });
+                          },
+                          child: CustomText(
+                            text: "Generate QR Code",
+                            fontWeight: FontWeight.bold,
+                            fontSize: getWidth(18),
+                            color: AppColors.white,
+                          )),
+                    ),
+                  ]
+                }
               ],
             ),
           ),

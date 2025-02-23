@@ -185,11 +185,15 @@ class _SenderRequestDetailsScreenState
                                           ? "Ready for pickup."
                                           : details.status == "pickupped"
                                               ? "The item is being transported to the destination."
-                                              : details.status,
+                                              : details.status == "delivered"
+                                                  ? "The parcel has been successfully delivered."
+                                                  : details.status,
                                   style: getTextStyleMsrt(
                                     color: details.status == "pending"
                                         ? AppColors.warning
-                                        : AppColors.secondaryColor,
+                                        : details.status == "delivered"
+                                            ? AppColors.success
+                                            : AppColors.secondaryColor,
                                     fontSize: getWidth(15),
                                     fontWeight: FontWeight.w500,
                                   ))
@@ -292,11 +296,16 @@ class _SenderRequestDetailsScreenState
                             color: AppColors.grey,
                             size: getHeight(28),
                           ),
+                          if (details.status == "delivered") ...[
+                            HorizontalSpace(width: getWidth(10)),
+                            CustomText(text: "Chat")
+                          ],
                         ],
                       )),
                 ),
                 HorizontalSpace(width: getWidth(16)),
-                if (details.status == "pending") ...[
+                if (details.status == "pending" ||
+                    details.status != "delivered") ...[
                   Expanded(
                     flex: 3,
                     child: Row(
@@ -341,7 +350,7 @@ class _SenderRequestDetailsScreenState
                       ],
                     ),
                   )
-                ] else ...[
+                ] else if (details.status != "delivered") ...[
                   Expanded(
                     flex: 4,
                     child: CustomButton(

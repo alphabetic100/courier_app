@@ -89,10 +89,14 @@ class SenderRequestCard extends StatelessWidget {
                                     ? "Ready for pickup."
                                     : request.status == "pickupped"
                                         ? "Picked up"
-                                        : request.status,
+                                        : request.status == "delivered"
+                                            ? "Delivered"
+                                            : request.status,
                             color: request.status == "pending"
                                 ? AppColors.warning
-                                : AppColors.secondaryColor,
+                                : request.status == "delivered"
+                                    ? AppColors.success
+                                    : AppColors.secondaryColor,
                             fontWeight: FontWeight.normal,
                           ),
                         ],
