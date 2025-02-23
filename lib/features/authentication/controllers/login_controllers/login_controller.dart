@@ -49,8 +49,7 @@ class LoginController extends GetxController {
         // Successful response
         final responseBody = response.data;
         final userName = responseBody["data"]["fullName"];
-        log("_______________________${responseBody["data"]["id"]}");
-        await AuthService.saveId(id: responseBody['data']['id']);
+
         successSnakbr(
           successMessage: "Logged in Successfully! Welcome back, $userName",
         );
@@ -58,7 +57,8 @@ class LoginController extends GetxController {
         Get.offAllNamed(AppRoute.landingScreen);
         AuthService.saveToken(
             responseBody["data"]["accessToken"], responseBody["data"]["role"]);
-
+        log("_______________________${responseBody["data"]["id"]}");
+        await AuthService.saveId(id: responseBody['data']['id']);
         log(responseBody['data']["accessToken"]);
         log("Id is : ${responseBody['data']["id"]}");
 
@@ -84,9 +84,7 @@ class LoginController extends GetxController {
   Future<void> googleLogIn({
     required String email,
   }) async {
-    try {
-      
-    } catch (e) {
+    try {} catch (e) {
       log("something went wrong. please try again");
     }
   }

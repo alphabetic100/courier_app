@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:courierapp/core/common/widgets/create_trip_top_body.dart';
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
@@ -39,11 +38,9 @@ class QrCodeScannerScreen extends StatelessWidget {
               controller: MobileScannerController(
                 detectionSpeed: DetectionSpeed.noDuplicates,
               ),
-              onDetect: (
-                barcode,
-              ) {
-                if (barcode.image != null) {
-                  final String code = utf8.decode(barcode.image!);
+              onDetect: (barcode) {
+                final String code = barcode.barcodes.first.rawValue ?? '';
+                if (code.isNotEmpty) {
                   controller.updateScannedData(code);
                 }
               },
@@ -58,11 +55,14 @@ class QrCodeScannerScreen extends StatelessWidget {
         onTap: () {},
         primaryWidget: CustomButton(
             onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return DeliverdSuccesDialog();
-                  });
+              controller.verifyPicupCode(controller.scannedData.value);
+              controller.isPickupSuccess.value
+                  ? showDialog(
+                      context: context,
+                      builder: (context) {
+                        return DeliverdSuccesDialog();
+                      })
+                  : null;
             },
             child: CustomText(
               text: "Scan",
