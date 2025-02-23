@@ -299,6 +299,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                               builder: (context) {
                                 return QrGenerateDialog(
                                   bookingID: detail.bookingId,
+                                  status: detail.status,
                                 );
                               });
                         },

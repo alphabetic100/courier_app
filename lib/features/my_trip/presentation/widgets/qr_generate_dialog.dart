@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
@@ -10,11 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class QrGenerateDialog extends StatelessWidget {
-  QrGenerateDialog({super.key, required this.bookingID});
+  QrGenerateDialog({super.key, required this.bookingID, required this.status});
   final QrController qrController = Get.put(QrController());
   final String bookingID;
+  final String status;
   @override
   Widget build(BuildContext context) {
+    log("SDfsdfjlksd fsd$status");
     return AlertDialog(
       backgroundColor: AppColors.white,
       shape: RoundedRectangleBorder(
@@ -37,8 +41,9 @@ class QrGenerateDialog extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomText(
-              text:
-                  "When the traveler scans this QR code you are acknowledging that all the items that you are sending are legal both in the place of departure and the place of arival. note that LlamaFly is not responsible for any damages.",
+              text: status == "pending"
+                  ? "When the traveler scans this QR code you are acknowledging that all the items that you are sending are legal both in the place of departure and the place of arival. note that LlamaFly is not responsible for any damages."
+                  : "By generating this QR code, you are confirming that this delivery is being completed. Once the QR code is scanned, the delivery will be marked as successful.",
               textAlign: TextAlign.center,
               fontWeight: FontWeight.normal,
               fontSize: getWidth(16)),
@@ -67,7 +72,11 @@ class QrGenerateDialog extends StatelessWidget {
               isPrimary: true,
               onPressed: () {
                 Navigator.of(context).pop();
-                qrController.generateQRforPicUp(bookingID);
+                status == "accepted"
+                    ? qrController.generateQRforPicUp(bookingID)
+                    : status == "pickupped"
+                        ? qrController.generateQRforDeliverd(bookingID)
+                        : null;
                 Get.to(() => QRCodeGeneratorScreen());
               },
               child: CustomText(
