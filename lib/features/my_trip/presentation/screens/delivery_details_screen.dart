@@ -177,10 +177,18 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                           HorizontalSpace(width: getWidth(5)),
                           Expanded(
                             child: CustomText(
-                              text: detail.status,
+                              text: detail.status == "pending"
+                                  ? "Waiting for a traveler to accept the delivery."
+                                  : detail.status == "accepted"
+                                      ? "Request accepted, ready to receive items"
+                                      : detail.status,
                               fontSize: getWidth(15),
                               fontWeight: FontWeight.w600,
-                              color: AppColors.secondaryColor,
+                              color: detail.status == "pending"
+                                  ? AppColors.warning
+                                  : detail.status == "accepted"
+                                      ? AppColors.success
+                                      : AppColors.secondaryColor,
                             ),
                           )
                         ],
@@ -263,7 +271,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                             color: AppColors.grey,
                             size: getHeight(28),
                           ),
-                          if (detail.status != "pending") ...[
+                          if (detail.status == "pending") ...[
                             HorizontalSpace(width: getWidth(5)),
                             CustomText(
                               text: "Chat",
@@ -274,7 +282,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                         ],
                       )),
                 ),
-                if (detail.status == "pending") ...[
+                if (detail.status != "pending") ...[
                   HorizontalSpace(width: getWidth(16)),
                   Expanded(
                     flex: 4,

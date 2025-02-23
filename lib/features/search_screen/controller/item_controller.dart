@@ -57,7 +57,7 @@ class ItemController extends GetxController {
       final bodyData = {
         "name": itemName.text.trim(),
         "description": itemDescription.text.trim(),
-        "weight": int.parse(itemWeight.value.replaceAll("kg", "")),
+        "weight": double.parse(itemWeight.value.replaceAll("kg", "")),
       };
       final requestBodyData = jsonEncode(bodyData);
 

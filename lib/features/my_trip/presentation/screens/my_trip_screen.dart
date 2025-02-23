@@ -16,16 +16,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
-class MyTripScreen extends StatelessWidget {
+class MyTripScreen extends StatefulWidget {
   const MyTripScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final MyTripController controller = Get.put(MyTripController());
-    final LandingController landingController = Get.find<LandingController>();
-    final MyBookingsController myBookingsController =
-        Get.put(MyBookingsController());
+  State<MyTripScreen> createState() => _MyTripScreenState();
+}
 
+class _MyTripScreenState extends State<MyTripScreen> {
+  final MyTripController controller = Get.put(MyTripController());
+  final LandingController landingController = Get.find<LandingController>();
+  final MyBookingsController myBookingsController =
+      Get.put(MyBookingsController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.selectedIndex.value = 0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [

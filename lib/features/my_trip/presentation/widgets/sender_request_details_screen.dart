@@ -11,6 +11,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/messege/presentation/components/view_image_screen.dart';
 import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
+import 'package:courierapp/features/my_trip/controller/booking_confirm_controller.dart';
 import 'package:courierapp/features/my_trip/controller/my_trip_controller.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/qr_scanner_dialog.dart';
 import 'package:courierapp/features/profile/presentation/screens/traveller_profile_screen.dart';
@@ -32,6 +33,8 @@ class SenderRequestDetailsScreen extends StatefulWidget {
 class _SenderRequestDetailsScreenState
     extends State<SenderRequestDetailsScreen> {
   final MyTripController myTripController = Get.find<MyTripController>();
+  final BookingConfirmController bookingConfirmController =
+      Get.put(BookingConfirmController());
   @override
   void initState() {
     // TODO: implement initState
@@ -286,24 +289,61 @@ class _SenderRequestDetailsScreenState
                       )),
                 ),
                 HorizontalSpace(width: getWidth(16)),
-                Expanded(
-                  flex: 4,
-                  child: CustomButton(
-                      isPrimary: true,
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return QrScannerDialog();
-                            });
-                      },
-                      child: CustomText(
-                        text: "Scan QR Code",
-                        fontWeight: FontWeight.bold,
-                        fontSize: getWidth(18),
-                        color: AppColors.white,
-                      )),
-                ),
+                if (details.status == "pending") ...[
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: CustomButton(
+                              isPrimary: false,
+                              borderColor: AppColors.error,
+                              onPressed: () {},
+                              child: Icon(
+                                Icons.close,
+                                color: AppColors.error,
+                              )),
+                        ),
+                        HorizontalSpace(width: getWidth(16)),
+                        Expanded(
+                          flex: 2,
+                          child: CustomButton(
+                              isPrimary: false,
+                              borderColor: AppColors.success,
+                              onPressed: () {
+                                bookingConfirmController
+                                    .acceptBooking(widget.bookingId);
+                                   
+                              },
+                              child: Icon(
+                                Icons.check,
+                                color: AppColors.success,
+                              )),
+                        )
+                      ],
+                    ),
+                  )
+                ] else ...[
+                  Expanded(
+                    flex: 4,
+                    child: CustomButton(
+                        isPrimary: true,
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return QrScannerDialog();
+                              });
+                        },
+                        child: CustomText(
+                          text: "Scan QR Code",
+                          fontWeight: FontWeight.bold,
+                          fontSize: getWidth(18),
+                          color: AppColors.white,
+                        )),
+                  ),
+                ],
               ],
             ),
           ),

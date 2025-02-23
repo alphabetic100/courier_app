@@ -38,6 +38,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
   @override
   Widget build(BuildContext context) {
+    log("+++++++++++++++++++${widget.trip!.user.accountId}");
     return Scaffold(
       appBar: CustomAppBar(
         backgroundColor: const Color(0xffFAFAFC),
