@@ -302,7 +302,10 @@ class _SenderRequestDetailsScreenState
                           child: CustomButton(
                               isPrimary: false,
                               borderColor: AppColors.error,
-                              onPressed: () {},
+                              onPressed: () {
+                                bookingConfirmController
+                                    .cancelBooking(widget.bookingId);
+                              },
                               child: Icon(
                                 Icons.close,
                                 color: AppColors.error,
