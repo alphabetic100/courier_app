@@ -41,9 +41,11 @@ class QrGenerateDialog extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomText(
-              text: status == "pending"
+              text: status == "accepted"
                   ? "When the traveler scans this QR code you are acknowledging that all the items that you are sending are legal both in the place of departure and the place of arival. note that LlamaFly is not responsible for any damages."
-                  : "By generating this QR code, you are confirming that this delivery is being completed. Once the QR code is scanned, the delivery will be marked as successful.",
+                  : status == "pickupped"
+                      ? "By generating this QR code, you are confirming that this delivery is being completed. Once the QR code is scanned, the delivery will be marked as successful."
+                      : "",
               textAlign: TextAlign.center,
               fontWeight: FontWeight.normal,
               fontSize: getWidth(16)),

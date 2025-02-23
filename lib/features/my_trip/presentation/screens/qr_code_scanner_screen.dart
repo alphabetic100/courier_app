@@ -12,8 +12,8 @@ import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrCodeScannerScreen extends StatelessWidget {
-  const QrCodeScannerScreen({super.key});
-
+  const QrCodeScannerScreen({super.key, required this.status});
+  final String status;
   @override
   Widget build(BuildContext context) {
     final QrController controller = Get.put(QrController());
@@ -54,7 +54,15 @@ class QrCodeScannerScreen extends StatelessWidget {
         primaryWidget: CustomButton(
             onPressed: () {
               Get.back();
-              controller.verifyPicupCode(controller.scannedData.value, context);
+              status == "accepted"
+                  ? controller.verifyPicupCode(
+                      controller.scannedData.value, context)
+                  : status == "pickupped"
+                      ? controller.verifyCodeDeliverd(
+                          controller.scannedData.value,
+                          context
+                        )
+                      : null;
             },
             child: CustomText(
               text: "Scan",

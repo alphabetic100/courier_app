@@ -9,6 +9,7 @@ import 'package:courierapp/core/common/widgets/success_snakbar.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
+import 'package:courierapp/features/my_trip/presentation/widgets/deliverd_succes_dialog.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/pickup_success_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -77,56 +78,82 @@ class QrController extends GetxController {
   }
 
   // Traveller part
-
   Future<void> verifyPicupCode(String token, BuildContext context) async {
+    log("Verify QR code for pickup");
     try {
+      showProgressIndicator();
+
       final Map<String, String> requestBody = {
         "token": token,
       };
-      showProgressIndicator();
+
       final authToken = AuthService.token;
-      Future.delayed(
-        Duration(milliseconds: 100),
+
+      final response = await networkCaller.postRequest(
+        AppUrls.verifyPicupCode,
+        token: authToken,
+        body: requestBody,
       );
-      final response = await networkCaller.postRequest(AppUrls.verifyPicupCode,
-          token: authToken, body: requestBody);
+
       hideProgressIndicator();
+
       if (response.isSuccess) {
         isPickupSuccess.value = true;
-        showDialog(
-            context: context,
+
+        // Ensure context is still valid before showing dialog
+        if (context.mounted) {
+          showDialog(
+            context: Navigator.of(context, rootNavigator: true).context,
             builder: (context) {
               return PickupSuccessDialog();
-            });
+            },
+          );
+        }
 
-        log("Code verification successed");
+        log("Code verification succeeded");
       } else {
-        Future.delayed(Duration(microseconds: 200), () {
-          errorSnakbar(errorMessage: response.errorMessage);
-        });
+        errorSnakbar(errorMessage: response.errorMessage);
       }
     } catch (e) {
+      hideProgressIndicator();
       log("Something went wrong, error: $e");
     }
   }
 
-  Future<void> verifyCodeDeliverd(String token) async {
+  Future<void> verifyCodeDeliverd(String token, BuildContext context) async {
+    log("Verify QR code for Delivery");
     try {
+      showProgressIndicator();
+
       final Map<String, String> requestBody = {
         "token": token,
       };
 
       final response = await networkCaller.postRequest(
-          AppUrls.verifyCodeDeliverd,
-          token: AuthService.token,
-          body: requestBody);
+        AppUrls.verifyCodeDeliverd,
+        token: AuthService.token,
+        body: requestBody,
+      );
+
+      hideProgressIndicator();
 
       if (response.isSuccess) {
-        log("Code verification successed");
+        // Ensure context is still valid before showing dialog
+        if (context.mounted) {
+          showDialog(
+            context: Navigator.of(context, rootNavigator: true).context,
+            builder: (context) {
+              return DeliverdSuccesDialog();
+            },
+          );
+        }
+
+        log("Code verification succeeded");
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }
     } catch (e) {
+      hideProgressIndicator();
       log("Something went wrong, error: $e");
     }
   }
@@ -196,7 +223,7 @@ class QrController extends GetxController {
         [XFile(file.path)],
       );
     } catch (e) {
-      print('Error capturing image: $e');
+      log('Error capturing image: $e');
     }
   }
 }

@@ -350,7 +350,9 @@ class _SenderRequestDetailsScreenState
                           showDialog(
                               context: context,
                               builder: (context) {
-                                return QrScannerDialog();
+                                return QrScannerDialog(
+                                  status: details.status,
+                                );
                               });
                         },
                         child: CustomText(

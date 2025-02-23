@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class QrScannerDialog extends StatelessWidget {
-  const QrScannerDialog({super.key});
-
+  const QrScannerDialog({super.key, required this.status});
+  final String status;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -36,8 +36,11 @@ class QrScannerDialog extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomText(
-              text:
-                  "When you scan the QR code of the sender the responsibility of the items will be passed over to you until the moment of delivery. LlamaFly is not responsible of any damages that the items might have over the duration of the service.",
+              text: status == "accepted"
+                  ? "When you scan the QR code of the sender the responsibility of the items will be passed over to you until the moment of delivery. LlamaFly is not responsible of any damages that the items might have over the duration of the service."
+                  : status == "pickupped"
+                      ? "When you scan the qr code, this delivery will be concluded and no additional services can be performed through this channel"
+                      : "",
               textAlign: TextAlign.center,
               fontWeight: FontWeight.normal,
               fontSize: getWidth(16)),
@@ -66,7 +69,9 @@ class QrScannerDialog extends StatelessWidget {
               isPrimary: true,
               onPressed: () {
                 Navigator.of(context).pop();
-                Get.to(() => QrCodeScannerScreen());
+                Get.to(() => QrCodeScannerScreen(
+                      status: status,
+                    ));
               },
               child: CustomText(
                 text: "Proceed",
