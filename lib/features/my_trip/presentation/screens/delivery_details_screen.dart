@@ -166,32 +166,37 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                               fontSize: getWidth(15),
                             ))
                       ])),
-                      Row(
-                        children: [
-                          CustomText(
-                            text: "Status:",
-                            fontSize: getWidth(15),
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.black,
-                          ),
-                          HorizontalSpace(width: getWidth(5)),
-                          Expanded(
-                            child: CustomText(
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Status: ",
+                              style: getTextStyleMsrt(
+                                fontSize: getWidth(15),
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.black,
+                              ),
+                            ),
+                            TextSpan(
                               text: detail.status == "pending"
                                   ? "Waiting for a traveler to accept the delivery."
                                   : detail.status == "accepted"
                                       ? "Request accepted, ready to receive items"
-                                      : detail.status,
-                              fontSize: getWidth(15),
-                              fontWeight: FontWeight.w600,
-                              color: detail.status == "pending"
-                                  ? AppColors.warning
-                                  : detail.status == "accepted"
-                                      ? AppColors.success
-                                      : AppColors.secondaryColor,
+                                      : detail.status == "pickupped"
+                                          ? "The traveller has picked up the parcel and is on the way to the destination."
+                                          : detail.status,
+                              style: getTextStyleMsrt(
+                                fontSize: getWidth(15),
+                                fontWeight: FontWeight.w500,
+                                color: detail.status == "pending"
+                                    ? AppColors.warning
+                                    : detail.status == "accepted"
+                                        ? AppColors.success
+                                        : AppColors.secondaryColor,
+                              ),
                             ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

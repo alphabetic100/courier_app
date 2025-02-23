@@ -86,7 +86,9 @@ class MyBookingsCard extends StatelessWidget {
                               ? "Awaiting confirmation"
                               : booking.status == "accepted"
                                   ? "Accepted delivery"
-                                  : booking.status,
+                                  : booking.status == "pickupped"
+                                      ? "Picked up by traveller"
+                                      : booking.status,
                           color: booking.status == "pending"
                               ? AppColors.warning
                               : booking.status == "accepted"
