@@ -168,29 +168,33 @@ class _SenderRequestDetailsScreenState
                                 ))
                           ])),
                           VerticalSpace(height: getWidth(10)),
-                          Row(
+                          Text.rich(TextSpan(
                             children: [
-                              CustomText(
-                                text: "Status:",
-                                color: AppColors.titleTextColor,
-                                fontSize: getWidth(15),
-                                fontWeight: FontWeight.w700,
-                              ),
-                              HorizontalSpace(width: getWidth(5)),
-                              CustomText(
-                                text: details.status == "pending"
-                                    ? "Pending Confirmation"
-                                    : details.status == "accepted"
-                                        ? "Ready for pickup."
-                                        : "",
-                                color: details.status == "pending"
-                                    ? AppColors.warning
-                                    : AppColors.secondaryColor,
-                                fontSize: getWidth(15),
-                                fontWeight: FontWeight.w500,
-                              )
+                              TextSpan(
+                                  text: "Status: ",
+                                  style: getTextStyleMsrt(
+                                    color: AppColors.titleTextColor,
+                                    fontSize: getWidth(15),
+                                    fontWeight: FontWeight.w700,
+                                  )),
+                              //  HorizontalSpace(width: getWidth(5)),
+                              TextSpan(
+                                  text: details.status == "pending"
+                                      ? "Pending Confirmation"
+                                      : details.status == "accepted"
+                                          ? "Ready for pickup."
+                                          : details.status == "pickupped"
+                                              ? "The item is being transported to the destination."
+                                              : details.status,
+                                  style: getTextStyleMsrt(
+                                    color: details.status == "pending"
+                                        ? AppColors.warning
+                                        : AppColors.secondaryColor,
+                                    fontSize: getWidth(15),
+                                    fontWeight: FontWeight.w500,
+                                  ))
                             ],
-                          ),
+                          )),
                         ],
                       ),
                     ),

@@ -1,4 +1,3 @@
-
 import 'package:courierapp/core/common/widgets/create_trip_top_body.dart';
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
@@ -8,7 +7,6 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/my_trip/controller/qr_controller.dart';
-import 'package:courierapp/features/my_trip/presentation/widgets/deliverd_succes_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -55,14 +53,8 @@ class QrCodeScannerScreen extends StatelessWidget {
         onTap: () {},
         primaryWidget: CustomButton(
             onPressed: () {
-              controller.verifyPicupCode(controller.scannedData.value);
-              controller.isPickupSuccess.value
-                  ? showDialog(
-                      context: context,
-                      builder: (context) {
-                        return DeliverdSuccesDialog();
-                      })
-                  : null;
+              Get.back();
+              controller.verifyPicupCode(controller.scannedData.value, context);
             },
             child: CustomText(
               text: "Scan",

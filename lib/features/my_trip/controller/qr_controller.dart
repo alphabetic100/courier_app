@@ -9,6 +9,7 @@ import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
+import 'package:courierapp/features/my_trip/presentation/widgets/pickup_success_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,6 @@ class QrController extends GetxController {
   RxBool isPickupSuccess = false.obs;
 
   void updateScannedData(String data) {
-    log("Im here ==========");
     scannedData.value = data;
     log(scannedData.value);
   }
@@ -77,7 +77,7 @@ class QrController extends GetxController {
 
   // Traveller part
 
-  Future<void> verifyPicupCode(String token) async {
+  Future<void> verifyPicupCode(String token, BuildContext context) async {
     try {
       final Map<String, String> requestBody = {
         "token": token,
@@ -91,9 +91,13 @@ class QrController extends GetxController {
           token: authToken, body: requestBody);
       hideProgressIndicator();
       if (response.isSuccess) {
-        Future.delayed(Duration(milliseconds: 200), () {
-          isPickupSuccess.value = true;
-        });
+        isPickupSuccess.value = true;
+        showDialog(
+            context: context,
+            builder: (context) {
+              return PickupSuccessDialog();
+            });
+
         log("Code verification successed");
       } else {
         Future.delayed(Duration(microseconds: 200), () {
