@@ -63,7 +63,7 @@ class QRCodeGeneratorScreen extends StatelessWidget {
               child: CustomButton(
                 isPrimary: false,
                 onPressed: () {
-                  controller.shareQrFile(controller.qrKey, "Qr_Code.png");
+                  controller.shareQrFile(controller.qrKey, "Qr_Code.png", );
                 },
                 child: CustomText(
                   text: "Share",

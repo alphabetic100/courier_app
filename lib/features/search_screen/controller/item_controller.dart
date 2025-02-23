@@ -5,6 +5,7 @@ import 'package:courierapp/core/common/widgets/success_snakbar.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
+import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/search_screen/models/item_model.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart' as dio;
@@ -66,7 +67,7 @@ class ItemController extends GetxController {
         if (imagePath.isNotEmpty) {
           final imageFile = await dio.MultipartFile.fromFile(
             imagePath,
-            filename: imagePath.split('/').last,
+            filename: AppHelperFunctions.generateUniqueFileName(imagePath),
           );
           imageFiles.add(imageFile);
         }

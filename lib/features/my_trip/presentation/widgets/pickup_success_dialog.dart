@@ -4,8 +4,8 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:flutter/material.dart';
 
-class DeliverdSuccesDialog extends StatelessWidget {
-  const DeliverdSuccesDialog({super.key});
+class PickupSuccessDialog extends StatelessWidget {
+  const PickupSuccessDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class DeliverdSuccesDialog extends StatelessWidget {
           ),
           VerticalSpace(height: getHeight(10)),
           CustomText(
-            text: "Delivery Successful",
+            text: "Pickup Successful",
             fontSize: getWidth(24),
             fontWeight: FontWeight.bold,
             color: AppColors.black,
@@ -32,7 +32,7 @@ class DeliverdSuccesDialog extends StatelessWidget {
           const SizedBox(height: 16),
           CustomText(
               text:
-                  "Delivery completed. Thank you for ensuring the parcel reached its destination.",
+                  "You have successfully picked up the parcel. Proceed to the destination for delivery!",
               textAlign: TextAlign.center,
               fontWeight: FontWeight.normal,
               fontSize: getWidth(16)),

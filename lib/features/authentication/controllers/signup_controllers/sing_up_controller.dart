@@ -6,6 +6,7 @@ import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/common/widgets/success_snakbar.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
+import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/authentication/presentation/screens/sign_up_screens/get_started_screen.dart';
 import 'package:dio/dio.dart' as dio;
 
@@ -58,15 +59,15 @@ class SingUpController extends GetxController {
 
       final imageFile1 = await dio.MultipartFile.fromFile(
         imagePath1,
-        filename: imagePath1.split('/').last,
+        filename: AppHelperFunctions.generateUniqueFileName(imagePath1),
       );
       final imageFile2 = await dio.MultipartFile.fromFile(
         imagePath2,
-        filename: imagePath2.split('/').last,
+        filename: AppHelperFunctions.generateUniqueFileName(imagePath2),
       );
       final imageFile3 = await dio.MultipartFile.fromFile(
         imagePath3,
-        filename: imagePath3.split('/').last,
+        filename: AppHelperFunctions.generateUniqueFileName(imagePath3),
       );
       List imageLists = [
         imageFile1,

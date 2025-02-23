@@ -88,6 +88,22 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  Future<void> refreshSingleTravelPost(String postID) async {
+    try {
+      final String requestUrl = "${AppUrls.getMySingleTravelPost}/$postID";
+      final response =
+          await networkCaller.getRequest(requestUrl, token: AuthService.token);
+
+      if (response.isSuccess) {
+        singleTravel.value = SingleTravelModel.fromJson(response.responseData);
+      } else {
+        errorSnakbar(errorMessage: response.errorMessage);
+      }
+    } catch (e) {
+      log("Something went wrong, error: $e");
+    }
+  }
+
   Future<void> getMyBookingAsTraveller(String bookingID) async {
     try {
       isbookingLoading.value = true;

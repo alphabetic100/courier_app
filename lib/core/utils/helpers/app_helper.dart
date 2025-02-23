@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -138,13 +140,21 @@ class AppHelperFunctions {
   }
 
   static Future<void> launchMap(double latitude, double longitude) async {
-    final String googleMapsUrl =
-        'https://www.google.com/maps?q=$latitude,$longitude';
+    final Uri googleMapsUrl =
+        Uri.parse('https://www.google.com/maps?q=$latitude,$longitude');  
 
-    if (await canLaunch(googleMapsUrl)) {
-      await launch(googleMapsUrl);
+    if (await canLaunchUrl(googleMapsUrl)) {
+      await launchUrl(googleMapsUrl);
     } else {
       throw 'Could not open the map.';
     }
+  }
+
+  static String generateUniqueFileName(String imagePath) {
+    String fileName = imagePath.split('/').last;
+    String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    String randomString = Random().nextInt(99999).toString().padLeft(5, '0');
+
+    return "$fileName-$timestamp-$randomString";
   }
 }

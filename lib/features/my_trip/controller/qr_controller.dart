@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
@@ -6,9 +5,12 @@ import 'dart:ui' as ui;
 
 import 'package:courierapp/core/common/widgets/error_snakbar.dart';
 import 'package:courierapp/core/common/widgets/progress_indicator.dart';
+import 'package:courierapp/core/common/widgets/success_snakbar.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
+import 'package:courierapp/features/my_trip/presentation/widgets/deliverd_succes_dialog.dart';
+import 'package:courierapp/features/my_trip/presentation/widgets/pickup_success_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -29,7 +31,6 @@ class QrController extends GetxController {
   RxBool isPickupSuccess = false.obs;
 
   void updateScannedData(String data) {
-    log("Im here ==========");
     scannedData.value = data;
     log(scannedData.value);
   }
@@ -56,6 +57,7 @@ class QrController extends GetxController {
   }
 
   Future<void> generateQRforDeliverd(String bookingID) async {
+    log("Generating QR for delevery");
     try {
       final Map<String, String> requestBody = {
         "id": bookingID,
@@ -66,7 +68,7 @@ class QrController extends GetxController {
           token: AuthService.token,
           body: requestBody);
       if (response.isSuccess) {
-        qrData.value = jsonDecode(response.responseData)["data"];
+        qrData.value = response.responseData["data"];
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }
@@ -76,52 +78,78 @@ class QrController extends GetxController {
   }
 
   // Traveller part
-
-  Future<void> verifyPicupCode(String token) async {
+  Future<void> verifyPicupCode(String token, BuildContext context) async {
+    log("Verify QR code for pickup");
     try {
+      // Show loading dialog using Get.dialog
+      showProgressIndicator();
+
       final Map<String, String> requestBody = {
         "token": token,
       };
-      showProgressIndicator();
+
       final authToken = AuthService.token;
-      Future.delayed(
-        Duration(milliseconds: 100),
+
+      final response = await networkCaller.postRequest(
+        AppUrls.verifyPicupCode,
+        token: authToken,
+        body: requestBody,
       );
-      final response = await networkCaller.postRequest(AppUrls.verifyPicupCode,
-          token: authToken, body: requestBody);
+
       hideProgressIndicator();
+      Get.closeAllSnackbars();
       if (response.isSuccess) {
+        isPickupSuccess.value = true;
         Future.delayed(Duration(milliseconds: 200), () {
-          isPickupSuccess.value = true;
+          Get.dialog(
+            PickupSuccessDialog(),
+            barrierDismissible: true,
+          );
         });
-        log("Code verification successed");
+
+        log("Code verification succeeded");
       } else {
-        Future.delayed(Duration(microseconds: 200), () {
-          errorSnakbar(errorMessage: response.errorMessage);
-        });
+        errorSnakbar(errorMessage: response.errorMessage);
       }
     } catch (e) {
+      hideProgressIndicator();
       log("Something went wrong, error: $e");
     }
   }
 
-  Future<void> verifyCodeDeliverd(String token) async {
+  Future<void> verifyCodeDeliverd(String token, BuildContext context) async {
+    log("Verify QR code for Delivery");
     try {
+      // Show loading dialog using Get.dialog
+      showProgressIndicator();
+
       final Map<String, String> requestBody = {
         "token": token,
       };
 
       final response = await networkCaller.postRequest(
-          AppUrls.verifyCodeDeliverd,
-          token: AuthService.token,
-          body: requestBody);
+        AppUrls.verifyCodeDeliverd,
+        token: AuthService.token,
+        body: requestBody,
+      );
 
+      hideProgressIndicator();
+
+      Get.closeAllSnackbars();
       if (response.isSuccess) {
-        log("Code verification successed");
+        Future.delayed(Duration(milliseconds: 200), () {
+          Get.dialog(
+            DeliverdSuccesDialog(),
+            barrierDismissible: true,
+          );
+        });
+
+        log("Code verification succeeded");
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }
     } catch (e) {
+      hideProgressIndicator();
       log("Something went wrong, error: $e");
     }
   }
@@ -143,7 +171,9 @@ class QrController extends GetxController {
             byteData.buffer.asUint8List(),
             name: fileName);
         if (result["isSuccess"]) {
-          Get.snackbar("Success", "Qr downloaded successfully");
+          successSnakbr(successMessage: "QR Downloaded Successfully");
+        } else {
+          errorSnakbar(errorMessage: "Something went wrong, please try again");
         }
         log(result.toString());
       }
@@ -160,7 +190,10 @@ class QrController extends GetxController {
   }
 
   // Share Qr as pdf
-  Future<void> shareQrFile(GlobalKey key, String fileName) async {
+  Future<void> shareQrFile(
+    GlobalKey key,
+    String fileName,
+  ) async {
     try {
       // Render the widget to an image
       RenderRepaintBoundary boundary =
@@ -182,9 +215,11 @@ class QrController extends GetxController {
       await file.writeAsBytes(pngBytes);
 
       // Share or download the file
-      await Share.shareXFiles([XFile(file.path)], text: 'Qr code for Pickup');
+      await Share.shareXFiles(
+        [XFile(file.path)],
+      );
     } catch (e) {
-      print('Error capturing image: $e');
+      log('Error capturing image: $e');
     }
   }
 }

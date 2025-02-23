@@ -44,7 +44,7 @@ class SenderRequestCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       BodyProfileCard(
-                          isVerified: true,
+                          isVerified: request.isVerified,
                           profileImage: request.profileImage,
                           profileName: request.fullName,
                           subtitle: "Total ${request.totalTrips} Trips",
@@ -87,10 +87,16 @@ class SenderRequestCard extends StatelessWidget {
                                 ? "Pending Confirmation"
                                 : request.status == "accepted"
                                     ? "Ready for pickup."
-                                    : "",
+                                    : request.status == "pickupped"
+                                        ? "Picked up"
+                                        : request.status == "delivered"
+                                            ? "Delivered"
+                                            : request.status,
                             color: request.status == "pending"
                                 ? AppColors.warning
-                                : AppColors.secondaryColor,
+                                : request.status == "delivered"
+                                    ? AppColors.success
+                                    : AppColors.secondaryColor,
                             fontWeight: FontWeight.normal,
                           ),
                         ],

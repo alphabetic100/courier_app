@@ -168,29 +168,37 @@ class _SenderRequestDetailsScreenState
                                 ))
                           ])),
                           VerticalSpace(height: getWidth(10)),
-                          Row(
+                          Text.rich(TextSpan(
                             children: [
-                              CustomText(
-                                text: "Status:",
-                                color: AppColors.titleTextColor,
-                                fontSize: getWidth(15),
-                                fontWeight: FontWeight.w700,
-                              ),
-                              HorizontalSpace(width: getWidth(5)),
-                              CustomText(
-                                text: details.status == "pending"
-                                    ? "Pending Confirmation"
-                                    : details.status == "accepted"
-                                        ? "Ready for pickup."
-                                        : "",
-                                color: details.status == "pending"
-                                    ? AppColors.warning
-                                    : AppColors.secondaryColor,
-                                fontSize: getWidth(15),
-                                fontWeight: FontWeight.w500,
-                              )
+                              TextSpan(
+                                  text: "Status: ",
+                                  style: getTextStyleMsrt(
+                                    color: AppColors.titleTextColor,
+                                    fontSize: getWidth(15),
+                                    fontWeight: FontWeight.w700,
+                                  )),
+                              //  HorizontalSpace(width: getWidth(5)),
+                              TextSpan(
+                                  text: details.status == "pending"
+                                      ? "Pending Confirmation"
+                                      : details.status == "accepted"
+                                          ? "Ready for pickup."
+                                          : details.status == "pickupped"
+                                              ? "The item is being transported to the destination."
+                                              : details.status == "delivered"
+                                                  ? "The parcel has been successfully delivered."
+                                                  : details.status,
+                                  style: getTextStyleMsrt(
+                                    color: details.status == "pending"
+                                        ? AppColors.warning
+                                        : details.status == "delivered"
+                                            ? AppColors.success
+                                            : AppColors.secondaryColor,
+                                    fontSize: getWidth(15),
+                                    fontWeight: FontWeight.w500,
+                                  ))
                             ],
-                          ),
+                          )),
                         ],
                       ),
                     ),
@@ -249,24 +257,28 @@ class _SenderRequestDetailsScreenState
           bottomNavigationBar: CustomBottomAppBar(
             isPrimaryButton: false,
             onTap: () {},
-            secondaryWidget: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  color: AppColors.secondaryColor,
-                ),
-                HorizontalSpace(width: 5),
-                Expanded(
-                  child: CustomText(
-                    text:
-                        "To confirm that you picked up the parcel, please scan the QR code provided by sender.",
-                    fontSize: getWidth(14),
-                    fontWeight: FontWeight.normal,
-                  ),
-                )
-              ],
-            ),
+            secondaryWidget:
+                details.status == "accepted" || details.status == "pickupped"
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            color: AppColors.secondaryColor,
+                          ),
+                          HorizontalSpace(width: 5),
+                          Expanded(
+                            child: CustomText(
+                              text: details.status == "accepted"
+                                  ? "To confirm that you picked up the parcel, please scan the QR code provided by sender."
+                                  : "In order to confirm that you have delivered the item successfully, please scan the QR code of the person picking up the items",
+                              fontSize: getWidth(14),
+                              fontWeight: FontWeight.normal,
+                            ),
+                          )
+                        ],
+                      )
+                    : null,
             primaryWidget: Row(
               children: [
                 Expanded(
@@ -288,48 +300,63 @@ class _SenderRequestDetailsScreenState
                             color: AppColors.grey,
                             size: getHeight(28),
                           ),
+                          if (details.status == "delivered") ...[
+                            HorizontalSpace(width: getWidth(10)),
+                            CustomText(text: "Chat")
+                          ],
                         ],
                       )),
                 ),
                 HorizontalSpace(width: getWidth(16)),
-                if (details.status == "pending") ...[
-                  Expanded(
-                    flex: 3,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: CustomButton(
-                              isPrimary: false,
-                              borderColor: AppColors.error,
-                              onPressed: () {
-                                bookingConfirmController
-                                    .cancelBooking(widget.bookingId);
-                              },
-                              child: Icon(
-                                Icons.close,
-                                color: AppColors.error,
-                              )),
-                        ),
-                        HorizontalSpace(width: getWidth(16)),
-                        Expanded(
-                          flex: 2,
-                          child: CustomButton(
-                              isPrimary: false,
-                              borderColor: AppColors.success,
-                              onPressed: () {
-                                bookingConfirmController
-                                    .acceptBooking(widget.bookingId);
-                              },
-                              child: Icon(
-                                Icons.check,
-                                color: AppColors.success,
-                              )),
-                        )
-                      ],
-                    ),
-                  )
-                ] else ...[
+                if (details.status == "pending" ||
+                    details.status == "delivered") ...[
+                  if (details.status == "pending") ...[
+                    Expanded(
+                      flex: 3,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: CustomButton(
+                                isPrimary: false,
+                                borderColor: AppColors.error,
+                                onPressed: () {
+                                  bookingConfirmController
+                                      .cancelBooking(widget.bookingId)
+                                      .then((onValue) {
+                                    myTripController.getMyBookingAsTraveller(
+                                        widget.bookingId);
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  color: AppColors.error,
+                                )),
+                          ),
+                          HorizontalSpace(width: getWidth(16)),
+                          Expanded(
+                            flex: 2,
+                            child: CustomButton(
+                                isPrimary: false,
+                                borderColor: AppColors.success,
+                                onPressed: () {
+                                  bookingConfirmController
+                                      .acceptBooking(widget.bookingId)
+                                      .then((onValue) {
+                                    myTripController.getMyBookingAsTraveller(
+                                        widget.bookingId);
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.check,
+                                  color: AppColors.success,
+                                )),
+                          )
+                        ],
+                      ),
+                    )
+                  ]
+                ] else if (details.status != "delivered") ...[
                   Expanded(
                     flex: 4,
                     child: CustomButton(
@@ -338,7 +365,9 @@ class _SenderRequestDetailsScreenState
                           showDialog(
                               context: context,
                               builder: (context) {
-                                return QrScannerDialog();
+                                return QrScannerDialog(
+                                  status: details.status,
+                                );
                               });
                         },
                         child: CustomText(

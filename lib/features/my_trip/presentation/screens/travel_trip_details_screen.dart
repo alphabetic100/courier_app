@@ -73,43 +73,47 @@ class _TravelTripDetailScreenState extends State<TravelTripDetailScreen> {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                TripDetailsTopBody(
-                  title: "Trip Details",
-                  departingFrom: post.from,
-                  arrivingTo: post.to,
-                  price: "${post.price.toString()}/kg",
-                  date: DateFormat("MMM d, yyyy")
-                      .format(DateTime.parse(post.date)),
-                  lat1: post.lat1,
-                  lon1: post.lon2,
-                  lat2: post.lat2,
-                  lon2: post.lon2,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: getWidth(16),
+          body: RefreshIndicator(
+            onRefresh: () =>
+                myTripController.refreshSingleTravelPost(widget.trip.id),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  TripDetailsTopBody(
+                    title: "Trip Details",
+                    departingFrom: post.from,
+                    arrivingTo: post.to,
+                    price: "${post.price.toString()}/kg",
+                    date: DateFormat("MMM d, yyyy")
+                        .format(DateTime.parse(post.date)),
+                    lat1: post.lat1,
+                    lon1: post.lon2,
+                    lat2: post.lat2,
+                    lon2: post.lon2,
                   ),
-                  child: Column(
-                    children: [
-                      TripDetailsView(
-                          tripTransport: post.transportType,
-                          carNumber: post.transportNumber,
-                          availabileSpace: post.weight,
-                          tripRules: post.rulse,
-                          tripAdvantate: post.additional),
-                      VerticalSpace(height: getHeight(20)),
-                      SenderRequestCard(
-                        bookings: post.booking,
-                      ),
-                      VerticalSpace(height: getHeight(20))
-                      // ]
-                    ],
-                  ),
-                )
-              ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: getWidth(16),
+                    ),
+                    child: Column(
+                      children: [
+                        TripDetailsView(
+                            tripTransport: post.transportType,
+                            carNumber: post.transportNumber,
+                            availabileSpace: post.weight,
+                            tripRules: post.rulse,
+                            tripAdvantate: post.additional),
+                        VerticalSpace(height: getHeight(20)),
+                        SenderRequestCard(
+                          bookings: post.booking,
+                        ),
+                        VerticalSpace(height: getHeight(20))
+                        // ]
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );
