@@ -103,6 +103,7 @@ class Booking {
   final int totalTrips;
   final String itemName; // Item name being transported
   final double itemWeight; // Item weight
+  final bool isVerified;
 
   Booking({
     required this.bookingId,
@@ -116,6 +117,7 @@ class Booking {
     required this.totalTrips,
     required this.itemName,
     required this.itemWeight,
+    required this.isVerified,
   });
 
   factory Booking.fromJson(Map<String, dynamic> json) {
@@ -131,6 +133,7 @@ class Booking {
       totalTrips: json["totalTrips"] ?? 0,
       itemName: json["itemName"] ?? "", // Item name being transported
       itemWeight: (json["itemWeight"] ?? 0).toDouble(), // Item weight
+      isVerified: json["isVerified"]?? false,
     );
   }
 }

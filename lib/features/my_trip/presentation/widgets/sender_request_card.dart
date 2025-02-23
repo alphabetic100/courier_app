@@ -44,7 +44,7 @@ class SenderRequestCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       BodyProfileCard(
-                          isVerified: true,
+                          isVerified: request.isVerified,
                           profileImage: request.profileImage,
                           profileName: request.fullName,
                           subtitle: "Total ${request.totalTrips} Trips",

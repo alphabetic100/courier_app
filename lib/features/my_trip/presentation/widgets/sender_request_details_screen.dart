@@ -308,7 +308,11 @@ class _SenderRequestDetailsScreenState
                               borderColor: AppColors.error,
                               onPressed: () {
                                 bookingConfirmController
-                                    .cancelBooking(widget.bookingId);
+                                    .cancelBooking(widget.bookingId)
+                                    .then((onValue) {
+                                  myTripController.getMyBookingAsTraveller(
+                                      widget.bookingId);
+                                });
                               },
                               child: Icon(
                                 Icons.close,
@@ -323,7 +327,11 @@ class _SenderRequestDetailsScreenState
                               borderColor: AppColors.success,
                               onPressed: () {
                                 bookingConfirmController
-                                    .acceptBooking(widget.bookingId);
+                                    .acceptBooking(widget.bookingId)
+                                    .then((onValue) {
+                                  myTripController.getMyBookingAsTraveller(
+                                      widget.bookingId);
+                                });
                               },
                               child: Icon(
                                 Icons.check,
