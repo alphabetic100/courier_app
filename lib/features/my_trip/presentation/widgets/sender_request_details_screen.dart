@@ -257,24 +257,28 @@ class _SenderRequestDetailsScreenState
           bottomNavigationBar: CustomBottomAppBar(
             isPrimaryButton: false,
             onTap: () {},
-            secondaryWidget: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  color: AppColors.secondaryColor,
-                ),
-                HorizontalSpace(width: 5),
-                Expanded(
-                  child: CustomText(
-                    text:
-                        "To confirm that you picked up the parcel, please scan the QR code provided by sender.",
-                    fontSize: getWidth(14),
-                    fontWeight: FontWeight.normal,
-                  ),
-                )
-              ],
-            ),
+            secondaryWidget:
+                details.status == "accepted" || details.status == "pickupped"
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            color: AppColors.secondaryColor,
+                          ),
+                          HorizontalSpace(width: 5),
+                          Expanded(
+                            child: CustomText(
+                              text: details.status == "accepted"
+                                  ? "To confirm that you picked up the parcel, please scan the QR code provided by sender."
+                                  : "In order to confirm that you have delivered the item successfully, please scan the QR code of the person picking up the items",
+                              fontSize: getWidth(14),
+                              fontWeight: FontWeight.normal,
+                            ),
+                          )
+                        ],
+                      )
+                    : null,
             primaryWidget: Row(
               children: [
                 Expanded(
@@ -305,51 +309,53 @@ class _SenderRequestDetailsScreenState
                 ),
                 HorizontalSpace(width: getWidth(16)),
                 if (details.status == "pending" ||
-                    details.status != "delivered") ...[
-                  Expanded(
-                    flex: 3,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: CustomButton(
-                              isPrimary: false,
-                              borderColor: AppColors.error,
-                              onPressed: () {
-                                bookingConfirmController
-                                    .cancelBooking(widget.bookingId)
-                                    .then((onValue) {
-                                  myTripController.getMyBookingAsTraveller(
-                                      widget.bookingId);
-                                });
-                              },
-                              child: Icon(
-                                Icons.close,
-                                color: AppColors.error,
-                              )),
-                        ),
-                        HorizontalSpace(width: getWidth(16)),
-                        Expanded(
-                          flex: 2,
-                          child: CustomButton(
-                              isPrimary: false,
-                              borderColor: AppColors.success,
-                              onPressed: () {
-                                bookingConfirmController
-                                    .acceptBooking(widget.bookingId)
-                                    .then((onValue) {
-                                  myTripController.getMyBookingAsTraveller(
-                                      widget.bookingId);
-                                });
-                              },
-                              child: Icon(
-                                Icons.check,
-                                color: AppColors.success,
-                              )),
-                        )
-                      ],
-                    ),
-                  )
+                    details.status == "delivered") ...[
+                  if (details.status == "pending") ...[
+                    Expanded(
+                      flex: 3,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: CustomButton(
+                                isPrimary: false,
+                                borderColor: AppColors.error,
+                                onPressed: () {
+                                  bookingConfirmController
+                                      .cancelBooking(widget.bookingId)
+                                      .then((onValue) {
+                                    myTripController.getMyBookingAsTraveller(
+                                        widget.bookingId);
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  color: AppColors.error,
+                                )),
+                          ),
+                          HorizontalSpace(width: getWidth(16)),
+                          Expanded(
+                            flex: 2,
+                            child: CustomButton(
+                                isPrimary: false,
+                                borderColor: AppColors.success,
+                                onPressed: () {
+                                  bookingConfirmController
+                                      .acceptBooking(widget.bookingId)
+                                      .then((onValue) {
+                                    myTripController.getMyBookingAsTraveller(
+                                        widget.bookingId);
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.check,
+                                  color: AppColors.success,
+                                )),
+                          )
+                        ],
+                      ),
+                    )
+                  ]
                 ] else if (details.status != "delivered") ...[
                   Expanded(
                     flex: 4,

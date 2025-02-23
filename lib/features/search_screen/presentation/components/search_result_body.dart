@@ -39,7 +39,7 @@ class SearchResultBody extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: trips.length,
                 itemBuilder: (context, index) {
-                  final trip = trips.reversed.toList()[index];
+                  final trip = trips[index];
                   final user = trip.user;
 
                   return Padding(

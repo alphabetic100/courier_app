@@ -259,6 +259,28 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
           bottomNavigationBar: CustomBottomAppBar(
             isPrimaryButton: false,
             onTap: () {},
+            secondaryWidget:
+                detail.status == "accepted" || detail.status == "pickupped"
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            color: AppColors.secondaryColor,
+                          ),
+                          HorizontalSpace(width: 5),
+                          Expanded(
+                            child: CustomText(
+                              text: detail.status == "accepted"
+                                  ? "To confirm that the traveler has received your Items, please generate a QR code and ask them to scan it when delivering the items."
+                                  : "Generate a QR code and send it to the recipient. Upon delivery, have the Traveler scan it to confirm.",
+                              fontSize: getWidth(14),
+                              fontWeight: FontWeight.normal,
+                            ),
+                          )
+                        ],
+                      )
+                    : null,
             primaryWidget: Row(
               children: [
                 Expanded(

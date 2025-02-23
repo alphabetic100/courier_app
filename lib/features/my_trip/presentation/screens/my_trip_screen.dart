@@ -219,9 +219,8 @@ class _MyTripScreenState extends State<MyTripScreen> {
                     itemCount:
                         myBookingsController.myBookings.value!.data.length,
                     itemBuilder: (context, index) {
-                      final booking = myBookingsController
-                          .myBookings.value!.data.reversed
-                          .toList()[index];
+                      final booking =
+                          myBookingsController.myBookings.value!.data[index];
                       return Padding(
                         padding: EdgeInsets.all(getWidth(16)),
                         child: GestureDetector(
@@ -258,8 +257,7 @@ class _MyTripScreenState extends State<MyTripScreen> {
                       child: CustomText(text: "No Travel Yet"),
                     );
                   }
-                  final tripDatas =
-                      controller.myTravels.value!.data.reversed.toList();
+                  final tripDatas = controller.myTravels.value!.data;
 
                   return ListView.builder(
                     padding: EdgeInsets.only(top: getHeight(4)),
