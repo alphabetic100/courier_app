@@ -166,24 +166,37 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                               fontSize: getWidth(15),
                             ))
                       ])),
-                      Row(
-                        children: [
-                          CustomText(
-                            text: "Status:",
-                            fontSize: getWidth(15),
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.black,
-                          ),
-                          HorizontalSpace(width: getWidth(5)),
-                          Expanded(
-                            child: CustomText(
-                              text: detail.status,
-                              fontSize: getWidth(15),
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.secondaryColor,
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Status: ",
+                              style: getTextStyleMsrt(
+                                fontSize: getWidth(15),
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.black,
+                              ),
                             ),
-                          )
-                        ],
+                            TextSpan(
+                              text: detail.status == "pending"
+                                  ? "Waiting for a traveler to accept the delivery."
+                                  : detail.status == "accepted"
+                                      ? "Request accepted, ready to receive items"
+                                      : detail.status == "pickupped"
+                                          ? "The traveller has picked up the parcel and is on the way to the destination."
+                                          : detail.status,
+                              style: getTextStyleMsrt(
+                                fontSize: getWidth(15),
+                                fontWeight: FontWeight.w500,
+                                color: detail.status == "pending"
+                                    ? AppColors.warning
+                                    : detail.status == "accepted"
+                                        ? AppColors.success
+                                        : AppColors.secondaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -263,7 +276,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                             color: AppColors.grey,
                             size: getHeight(28),
                           ),
-                          if (detail.status != "pending") ...[
+                          if (detail.status == "pending") ...[
                             HorizontalSpace(width: getWidth(5)),
                             CustomText(
                               text: "Chat",
@@ -274,7 +287,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                         ],
                       )),
                 ),
-                if (detail.status == "pending") ...[
+                if (detail.status != "pending") ...[
                   HorizontalSpace(width: getWidth(16)),
                   Expanded(
                     flex: 4,
@@ -285,7 +298,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                               context: context,
                               builder: (context) {
                                 return QrGenerateDialog(
-                                  qrHEX: detail.bookingId,
+                                  bookingID: detail.bookingId,
                                 );
                               });
                         },

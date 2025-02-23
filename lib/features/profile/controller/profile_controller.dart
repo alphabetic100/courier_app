@@ -29,7 +29,7 @@ class ProfileController extends GetxController {
 
         //Save customer id
         if (profile.value != null) {
-          AuthService.saveCustomerId(
+          await AuthService.saveCustomerId(
               customerID: profile.value!.data.customerId);
         }
         final customerId = AuthService.customerId;

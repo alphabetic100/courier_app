@@ -4,14 +4,17 @@ import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
+import 'package:courierapp/features/my_trip/controller/booking_confirm_controller.dart';
 import 'package:courierapp/features/my_trip/models/single_travel_model.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/sender_request_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SenderRequestCard extends StatelessWidget {
-  const SenderRequestCard({super.key, required this.bookings});
+  SenderRequestCard({super.key, required this.bookings});
   final List<Booking> bookings;
+  final BookingConfirmController bookingConfirmController =
+      Get.put(BookingConfirmController());
   @override
   Widget build(BuildContext context) {
     if (bookings.isEmpty) {
@@ -82,7 +85,9 @@ class SenderRequestCard extends StatelessWidget {
                           CustomText(
                             text: request.status == "pending"
                                 ? "Pending Confirmation"
-                                : "",
+                                : request.status == "accepted"
+                                    ? "Ready for pickup."
+                                    : "",
                             color: request.status == "pending"
                                 ? AppColors.warning
                                 : AppColors.secondaryColor,
@@ -91,31 +96,39 @@ class SenderRequestCard extends StatelessWidget {
                         ],
                       ),
                       VerticalSpace(height: getHeight(10)),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CustomButton(
-                                isPrimary: false,
-                                borderColor: AppColors.success,
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.check,
-                                  color: AppColors.success,
-                                )),
-                          ),
-                          HorizontalSpace(width: getWidth(10)),
-                          Expanded(
-                            child: CustomButton(
-                                isPrimary: false,
-                                onPressed: () {},
-                                borderColor: AppColors.error,
-                                child: Icon(
-                                  Icons.close,
-                                  color: AppColors.error,
-                                )),
-                          ),
-                        ],
-                      ),
+                      if (request.status == "pending") ...[
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomButton(
+                                  isPrimary: false,
+                                  borderColor: AppColors.success,
+                                  onPressed: () {
+                                    bookingConfirmController
+                                        .acceptBooking(request.bookingId);
+                                  },
+                                  child: Icon(
+                                    Icons.check,
+                                    color: AppColors.success,
+                                  )),
+                            ),
+                            HorizontalSpace(width: getWidth(10)),
+                            Expanded(
+                              child: CustomButton(
+                                  isPrimary: false,
+                                  onPressed: () {
+                                    bookingConfirmController
+                                        .cancelBooking(request.bookingId);
+                                  },
+                                  borderColor: AppColors.error,
+                                  child: Icon(
+                                    Icons.close,
+                                    color: AppColors.error,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ],
                       VerticalSpace(height: getHeight(10)),
                     ],
                   ),

@@ -79,7 +79,7 @@ class CreateTripController extends GetxController {
       "additional": supportSet.toList(),
       "lat1": lat1,
       "lon1": long1,
-      "lat2":  lat2,
+      "lat2": lat2,
       "lon2": long2
     };
 
@@ -93,7 +93,8 @@ class CreateTripController extends GetxController {
       debugPrint(response.statusCode.toString());
       if (response.isSuccess) {
         debugPrint("--------------------------------------------------");
-        debugPrint("---------------------${response.responseData}--------------------------");
+        debugPrint(
+            "---------------------${response.responseData}--------------------------");
         successSnakbr(successMessage: "Trip is created successfully");
         landingController.currentPage.value = 0;
         Get.offAll(() => LandingScreen());
@@ -131,7 +132,7 @@ class CreateTripController extends GetxController {
 
     //TODO: Have to fix this here
     if (isUnlimited.value) {
-      weight = "unlimited";
+      weight = "Unlimited";
     } else {
       weight = itemWeight.value.toString();
     }

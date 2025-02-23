@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class QrGenerateDialog extends StatelessWidget {
-  QrGenerateDialog({super.key, required this.qrHEX});
+  QrGenerateDialog({super.key, required this.bookingID});
   final QrController qrController = Get.put(QrController());
-  final String qrHEX;
+  final String bookingID;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -67,7 +67,7 @@ class QrGenerateDialog extends StatelessWidget {
               isPrimary: true,
               onPressed: () {
                 Navigator.of(context).pop();
-                qrController.qrData.value = qrHEX;
+                qrController.generateQRforPicUp(bookingID);
                 Get.to(() => QRCodeGeneratorScreen());
               },
               child: CustomText(

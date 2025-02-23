@@ -71,7 +71,7 @@ class AsTravellerCard extends StatelessWidget {
                       fontSize: getWidth(24),
                     ),
                     if (availableSpace.isNotEmpty) ...[
-                      if (availableSpace == "unlimited") ...[
+                      if (availableSpace == "Unlimited") ...[
                         VerticalSpace(height: getHeight(5)),
                         CustomText(
                           text: "Available: $availableSpace",

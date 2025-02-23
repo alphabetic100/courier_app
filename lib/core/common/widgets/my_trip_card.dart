@@ -19,10 +19,12 @@ class MyBookingsCard extends StatelessWidget {
           border: Border.all(color: AppColors.grey.withOpacity(0.8)),
           color: Color(0xFFFAFAFC)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: double.maxFinite,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 HorizontalSpace(width: getWidth(10)),
                 Column(
@@ -36,6 +38,8 @@ class MyBookingsCard extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
                           width: booking.from.length > 20
@@ -78,9 +82,20 @@ class MyBookingsCard extends StatelessWidget {
                         ),
                         HorizontalSpace(width: getWidth(5)),
                         CustomText(
-                          text: booking.status,
-                          color: AppColors.secondaryColor,
+                          text: booking.status == "pending"
+                              ? "Awaiting confirmation"
+                              : booking.status == "accepted"
+                                  ? "Accepted delivery"
+                                  : booking.status == "pickupped"
+                                      ? "Picked up by traveller"
+                                      : booking.status,
+                          color: booking.status == "pending"
+                              ? AppColors.warning
+                              : booking.status == "accepted"
+                                  ? AppColors.success
+                                  : AppColors.secondaryColor,
                           fontWeight: FontWeight.w500,
+                          fontSize: getWidth(15),
                         ),
                       ],
                     )

@@ -44,7 +44,8 @@ class CarNumberScreen extends StatelessWidget {
                 VerticalSpace(height: getHeight(16)),
                 CustomTexFormField(
                   controller: tripController.carNumberController,
-                  hintText: "Enter your bus number",
+                  hintText:
+                      "Enter your ${tripController.selectedTransportType.toLowerCase()} number",
                 )
               ],
             ),

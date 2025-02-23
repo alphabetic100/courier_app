@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:courierapp/core/common/widgets/create_trip_top_body.dart';
 import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
@@ -100,6 +102,7 @@ class SelectMaximumWeightScreen extends StatelessWidget {
                                         tripController.itemWeight.value =
                                             double.parse(
                                                 value.toStringAsFixed(1));
+                                        log("_____________${tripController.itemWeight.value}");
                                       },
                                     ),
                                   ),

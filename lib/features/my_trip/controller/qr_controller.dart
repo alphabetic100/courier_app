@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:courierapp/core/common/widgets/error_snakbar.dart';
+import 'package:courierapp/core/common/widgets/progress_indicator.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/services/network_caller.dart';
 import 'package:courierapp/core/utils/constants/api_constants.dart';
@@ -25,9 +26,12 @@ class QrController extends GetxController {
 
   var scannedData = "No data scanned yet".obs;
   final GlobalKey qrKey = GlobalKey();
+  RxBool isPickupSuccess = false.obs;
 
   void updateScannedData(String data) {
+    log("Im here ==========");
     scannedData.value = data;
+    log(scannedData.value);
   }
 
   Future<void> generateQRforPicUp(String bookingID) async {
@@ -36,12 +40,13 @@ class QrController extends GetxController {
         "id": bookingID,
         "status": "pickupped"
       };
+
       final response = await networkCaller.postRequest(AppUrls.generateHexCode,
           token: AuthService.token, body: requestBody);
       if (response.isSuccess) {
         log("++++++++++++++++");
 
-        qrData.value = jsonDecode(response.responseData)["data"];
+        qrData.value = response.responseData["data"];
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }
@@ -77,14 +82,23 @@ class QrController extends GetxController {
       final Map<String, String> requestBody = {
         "token": token,
       };
-
+      showProgressIndicator();
+      final authToken = AuthService.token;
+      Future.delayed(
+        Duration(milliseconds: 100),
+      );
       final response = await networkCaller.postRequest(AppUrls.verifyPicupCode,
-          token: AuthService.token, body: requestBody);
-
+          token: authToken, body: requestBody);
+      hideProgressIndicator();
       if (response.isSuccess) {
+        Future.delayed(Duration(milliseconds: 200), () {
+          isPickupSuccess.value = true;
+        });
         log("Code verification successed");
       } else {
-        errorSnakbar(errorMessage: response.errorMessage);
+        Future.delayed(Duration(microseconds: 200), () {
+          errorSnakbar(errorMessage: response.errorMessage);
+        });
       }
     } catch (e) {
       log("Something went wrong, error: $e");

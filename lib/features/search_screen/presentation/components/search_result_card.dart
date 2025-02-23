@@ -98,7 +98,7 @@ class SearchResultCard extends StatelessWidget {
                           fontSize: getWidth(14),
                         )
                       ],
-                      if (availableSpace == "unlimited") ...[
+                      if (availableSpace == "Unlimited") ...[
                         VerticalSpace(height: getHeight(5)),
                         CustomText(
                           text: "Available: Unlimited",

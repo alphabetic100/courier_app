@@ -31,22 +31,23 @@ class QRCodeGeneratorScreen extends StatelessWidget {
               color: AppColors.white,
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               child: Container(
-                width: AppSizes.width * 0.9,
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    color: AppColors.white,
-                    image: DecorationImage(
-                      image: AssetImage(IconPath.qrBorder),
-                    )),
-                child: Center(
-                  child: QrImageView(
-                    data: controller.qrData.value,
-                    version: QrVersions.auto,
+                  width: AppSizes.width * 0.9,
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      image: DecorationImage(
+                        image: AssetImage(IconPath.qrBorder),
+                      )),
+                  child: Obx(
+                    () => Center(
+                      child: QrImageView(
+                        data: controller.qrData.value,
+                        version: QrVersions.auto,
 
-                    // size: AppSizes.height * 0.5,
-                  ),
-                ),
-              ),
+                        // size: AppSizes.height * 0.5,
+                      ),
+                    ),
+                  )),
             ),
           ),
           Spacer(),
