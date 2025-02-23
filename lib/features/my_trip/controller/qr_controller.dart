@@ -81,6 +81,7 @@ class QrController extends GetxController {
   Future<void> verifyPicupCode(String token, BuildContext context) async {
     log("Verify QR code for pickup");
     try {
+      // Show loading dialog using Get.dialog
       showProgressIndicator();
 
       final Map<String, String> requestBody = {
@@ -96,19 +97,15 @@ class QrController extends GetxController {
       );
 
       hideProgressIndicator();
-
+      Get.closeAllSnackbars();
       if (response.isSuccess) {
         isPickupSuccess.value = true;
-
-        // Ensure context is still valid before showing dialog
-        if (context.mounted) {
-          showDialog(
-            context: Navigator.of(context, rootNavigator: true).context,
-            builder: (context) {
-              return PickupSuccessDialog();
-            },
+        Future.delayed(Duration(milliseconds: 200), () {
+          Get.dialog(
+            PickupSuccessDialog(),
+            barrierDismissible: true,
           );
-        }
+        });
 
         log("Code verification succeeded");
       } else {
@@ -123,6 +120,7 @@ class QrController extends GetxController {
   Future<void> verifyCodeDeliverd(String token, BuildContext context) async {
     log("Verify QR code for Delivery");
     try {
+      // Show loading dialog using Get.dialog
       showProgressIndicator();
 
       final Map<String, String> requestBody = {
@@ -137,16 +135,14 @@ class QrController extends GetxController {
 
       hideProgressIndicator();
 
+      Get.closeAllSnackbars();
       if (response.isSuccess) {
-        // Ensure context is still valid before showing dialog
-        if (context.mounted) {
-          showDialog(
-            context: Navigator.of(context, rootNavigator: true).context,
-            builder: (context) {
-              return DeliverdSuccesDialog();
-            },
+        Future.delayed(Duration(milliseconds: 200), () {
+          Get.dialog(
+            DeliverdSuccesDialog(),
+            barrierDismissible: true,
           );
-        }
+        });
 
         log("Code verification succeeded");
       } else {

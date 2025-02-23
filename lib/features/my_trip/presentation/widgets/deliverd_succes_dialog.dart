@@ -31,7 +31,8 @@ class DeliverdSuccesDialog extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomText(
-              text: "You have reduced xxx tons of carbon with this trip.",
+              text:
+                  "Delivery completed. Thank you for ensuring the parcel reached its destination.",
               textAlign: TextAlign.center,
               fontWeight: FontWeight.normal,
               fontSize: getWidth(16)),

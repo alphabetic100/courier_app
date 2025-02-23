@@ -136,6 +136,8 @@ class RequestShippingScreen extends StatelessWidget {
                     maxLines: 4,
                     validator: (p0) {
                       if (p0 == null || p0.isEmpty) {
+                        errorSnakbar(
+                            errorMessage: "Add a Message for traveller");
                         return "Message is required";
                       } else if (p0.length < 10) {
                         return "Message should be at least 10 characters long";

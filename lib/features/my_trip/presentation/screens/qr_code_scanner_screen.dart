@@ -7,6 +7,7 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/my_trip/controller/qr_controller.dart';
+import 'package:courierapp/features/my_trip/presentation/widgets/qr_found_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -39,6 +40,11 @@ class QrCodeScannerScreen extends StatelessWidget {
               onDetect: (barcode) {
                 final String code = barcode.barcodes.first.rawValue ?? '';
                 if (code.isNotEmpty) {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return QrFoundDialog();
+                      });
                   controller.updateScannedData(code);
                 }
               },
@@ -54,15 +60,16 @@ class QrCodeScannerScreen extends StatelessWidget {
         primaryWidget: CustomButton(
             onPressed: () {
               Get.back();
-              status == "accepted"
-                  ? controller.verifyPicupCode(
-                      controller.scannedData.value, context)
-                  : status == "pickupped"
-                      ? controller.verifyCodeDeliverd(
-                          controller.scannedData.value,
-                          context
-                        )
-                      : null;
+
+              Future.delayed(Duration(milliseconds: 300), () {
+                if (status == "accepted") {
+                  controller.verifyPicupCode(
+                      controller.scannedData.value, Get.context!);
+                } else if (status == "pickupped") {
+                  controller.verifyCodeDeliverd(
+                      controller.scannedData.value, Get.context!);
+                }
+              });
             },
             child: CustomText(
               text: "Scan",

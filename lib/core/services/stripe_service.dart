@@ -192,6 +192,7 @@ class StripeService {
                 milliseconds: 400,
               ), () {
             Get.defaultDialog(
+                title: "",
                 barrierDismissible: false,
                 backgroundColor: Colors.transparent,
                 titlePadding: EdgeInsets.zero,
