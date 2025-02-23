@@ -99,7 +99,8 @@ class _SenderRequestDetailsScreenState
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Get.to(() => TravellerProfileScreen());
+                              Get.to(() => TravellerProfileScreen(),
+                                  arguments: details.user.id);
                             },
                             child: BodyProfileCard(
                                 isVerified: details.user.isVerified,
@@ -179,12 +180,14 @@ class _SenderRequestDetailsScreenState
                               CustomText(
                                 text: details.status == "pending"
                                     ? "Pending Confirmation"
-                                    : "",
+                                    : details.status == "accepted"
+                                        ? "Ready for pickup."
+                                        : "",
                                 color: details.status == "pending"
                                     ? AppColors.warning
                                     : AppColors.secondaryColor,
                                 fontSize: getWidth(15),
-                                fontWeight: FontWeight.normal,
+                                fontWeight: FontWeight.w500,
                               )
                             ],
                           ),
@@ -314,7 +317,6 @@ class _SenderRequestDetailsScreenState
                               onPressed: () {
                                 bookingConfirmController
                                     .acceptBooking(widget.bookingId);
-                                   
                               },
                               child: Icon(
                                 Icons.check,

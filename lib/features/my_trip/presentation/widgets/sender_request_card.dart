@@ -82,7 +82,9 @@ class SenderRequestCard extends StatelessWidget {
                           CustomText(
                             text: request.status == "pending"
                                 ? "Pending Confirmation"
-                                : "",
+                                : request.status == "accepted"
+                                    ? "Ready for pickup."
+                                    : "",
                             color: request.status == "pending"
                                 ? AppColors.warning
                                 : AppColors.secondaryColor,
@@ -91,31 +93,33 @@ class SenderRequestCard extends StatelessWidget {
                         ],
                       ),
                       VerticalSpace(height: getHeight(10)),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CustomButton(
-                                isPrimary: false,
-                                borderColor: AppColors.success,
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.check,
-                                  color: AppColors.success,
-                                )),
-                          ),
-                          HorizontalSpace(width: getWidth(10)),
-                          Expanded(
-                            child: CustomButton(
-                                isPrimary: false,
-                                onPressed: () {},
-                                borderColor: AppColors.error,
-                                child: Icon(
-                                  Icons.close,
-                                  color: AppColors.error,
-                                )),
-                          ),
-                        ],
-                      ),
+                      if (request.status == "pending") ...[
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomButton(
+                                  isPrimary: false,
+                                  borderColor: AppColors.success,
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.check,
+                                    color: AppColors.success,
+                                  )),
+                            ),
+                            HorizontalSpace(width: getWidth(10)),
+                            Expanded(
+                              child: CustomButton(
+                                  isPrimary: false,
+                                  onPressed: () {},
+                                  borderColor: AppColors.error,
+                                  child: Icon(
+                                    Icons.close,
+                                    color: AppColors.error,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ],
                       VerticalSpace(height: getHeight(10)),
                     ],
                   ),
