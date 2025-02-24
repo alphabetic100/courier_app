@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
@@ -9,6 +11,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/controllers/login_controllers/login_controller.dart';
+import 'package:courierapp/features/authentication/controllers/social_login_controller/social_login_controller.dart';
 import 'package:courierapp/features/authentication/services/google_auth/google_auth_service.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +22,9 @@ import 'forgot_email_screen.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   final LoginController loginController = Get.find<LoginController>();
-  final GlobalKey<FormState> _formKey =
-      GlobalKey<FormState>(); // Form key added
+  final SocialLoginController socialLoginController =
+      Get.put(SocialLoginController());
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                         } else if (value.length < 8) {
                           return 'Password must be at least 8 characters';
                         }
-                        return null; // Validation passed
+                        return null;
                       },
                     ),
                     VerticalSpace(height: getHeight(20)),
@@ -159,7 +163,13 @@ class LoginScreen extends StatelessWidget {
                         isPrimary: false,
                         onPressed: () async {
                           //TODO: Google sign up
-                          await signInWithGoogle();
+                          final user = await signInWithGoogle();
+
+                          log("Log in usser: $user");
+                          if (user != null && user.email!.isNotEmpty) {
+                            socialLoginController
+                                .socialLogin(user.email.toString());
+                          }
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

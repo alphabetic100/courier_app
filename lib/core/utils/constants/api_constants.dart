@@ -43,10 +43,7 @@ class AppUrls {
   static const String acceptBooking = "$_baseUrl/bookings/accept-booking/";
   static const String cancelBooking = "$_baseUrl/bookings/delice-booking/";
 
-  // static const String meAsTraveller = "$_baseUrl/transports/me";
-  // static const String meAsSender = "$_baseUrl/bookings/my-bookings";
-
-  // static const String transport = "$_baseUrl/transports";
+  static const String socialLogin = "$_baseUrl/users/social-login";
 
   static const String connectSocket = "ws://10.0.20.36:5002/api/v1";
   static const String getMyChatLists = "$_baseUrl/chats/getMyChat";
