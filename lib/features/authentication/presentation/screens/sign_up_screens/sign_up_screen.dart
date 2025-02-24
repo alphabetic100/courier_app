@@ -13,6 +13,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/authentication/controllers/signup_controllers/sing_up_controller.dart';
+import 'package:courierapp/features/authentication/controllers/social_login_controller/social_login_controller.dart';
 import 'package:courierapp/features/authentication/services/google_auth/google_auth_service.dart';
 import 'package:courierapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,8 @@ class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
   final SingUpController singUpController = Get.find<SingUpController>();
+  final SocialLoginController socialLoginController =
+      Get.put(SocialLoginController());
   final _formKey = GlobalKey<FormState>();
 
   final Map<String, int> countryCodes = {
@@ -265,7 +268,11 @@ class SignUpScreen extends StatelessWidget {
                           //TODO: Google sign up
                           final user = await signUpWithGoogle();
 
-                          log("user : ${user!.email.toString()}");
+                          log("user : ${user.toString()}");
+                          if (user != null && user.email!.isNotEmpty) {
+                            socialLoginController
+                                .socialLogin(user.email.toString());
+                          }
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
