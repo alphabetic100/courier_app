@@ -103,4 +103,11 @@ class ProfileController extends GetxController {
     myDeliveriesCount();
     corbonEmission();
   }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    fetchProfile();
+  }
 }
