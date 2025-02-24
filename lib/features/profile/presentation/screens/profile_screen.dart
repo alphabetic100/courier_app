@@ -19,10 +19,24 @@ import '../../../../core/common/widgets/custom_button_widgets.dart';
 import '../../../landing/controller/landing_controller.dart';
 import 'edit_profile_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({super.key});
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final LandingController landingController = Get.find<LandingController>();
+
   final controller = Get.put(ProfileController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.getProfileDetails();
+  }
+
   @override
   Widget build(BuildContext context) {
     //controller.getProfileDetails();
