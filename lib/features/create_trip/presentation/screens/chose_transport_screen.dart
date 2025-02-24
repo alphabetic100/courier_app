@@ -27,13 +27,8 @@ class _ChoseTransportScreenState extends State<ChoseTransportScreen> {
   final LandingController landingController = Get.find<LandingController>();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    tripController.selectedIndex.value = 4;
-    tripController.carNumberController.text = "";
-    tripController.dateTimeController.text = "";
-    tripController.itemWeight.value = 1.0;
-    tripController.isUnlimited.value = false;
+    tripController.clearForm();
   }
 
   @override

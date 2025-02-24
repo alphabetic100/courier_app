@@ -191,5 +191,8 @@ class CreateTripController extends GetxController {
     selectArrivingController.clear();
     setRulesController.clear();
     setAdditionalSupport.clear();
+
+    itemWeight.value = 1.0;
+    isUnlimited.value = false;
   }
 }

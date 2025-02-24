@@ -9,12 +9,15 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/create_trip/controller/create_trip_controller.dart';
+import 'package:courierapp/features/landing/controller/landing_controller.dart';
+import 'package:courierapp/features/landing/presentation/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateTripSummary extends StatelessWidget {
   CreateTripSummary({super.key});
   final CreateTripController tripController = Get.find<CreateTripController>();
+  final LandingController landingController = Get.find<LandingController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,14 +66,62 @@ class CreateTripSummary extends StatelessWidget {
               child: CustomButton(
                   isPrimary: false,
                   onPressed: () {
-                    // Get.defaultDialog(
-                    //   title: "Worning",
-                    // );
-                    // showDialog(
-                    //     context: context,
-                    //     builder: (context) {
-                    //       return ShowPaymentSuccessDialog();
-                    //     });
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Center(
+                              child: CustomText(
+                                text: "Worning",
+                                color: AppColors.error,
+                                fontSize: getHeight(18),
+                              ),
+                            ),
+                            content: SizedBox(
+                              width: double.maxFinite,
+                              child: CustomText(
+                                text:
+                                    "If you cancel now, all entered data will be lost. Are you sure you want to proceed?",
+                                textAlign: TextAlign.center,
+                                color: AppColors.black,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            actions: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: CustomButton(
+                                        isPrimary: false,
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: CustomText(
+                                          text: "Finish post",
+                                          fontWeight: FontWeight.w500,
+                                        )),
+                                  ),
+                                  HorizontalSpace(width: getWidth(16)),
+                                  Expanded(
+                                    child: CustomButton(
+                                        isPrimary: true,
+                                        onPressed: () {
+                                          Get.back();
+                                          Get.offAll(() => LandingScreen());
+                                        },
+                                        child: CustomText(
+                                          text: "Confirm lave",
+                                          color: AppColors.white,
+                                          fontWeight: FontWeight.w500,
+                                        )),
+                                  )
+                                ],
+                              )
+                            ],
+                          );
+                        });
                   },
                   child: CustomText(
                     text: "Cencel",
