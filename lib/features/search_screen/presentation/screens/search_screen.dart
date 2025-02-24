@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:courierapp/core/utils/constants/image_path.dart';
-import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,8 +27,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final SearchScreenController searchScreenController =
-      Get.find<SearchScreenController>();
-  final LandingController landingController = Get.find<LandingController>();
+      Get.put(SearchScreenController());
+
   final ItemController itemController = Get.put(ItemController());
 
   final formKey = GlobalKey<FormState>();
