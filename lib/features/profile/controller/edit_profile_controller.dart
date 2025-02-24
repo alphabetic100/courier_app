@@ -96,3 +96,5 @@ class EditProfileController extends GetxController {
     }
   }
 }
+
+

@@ -270,8 +270,11 @@ class SignUpScreen extends StatelessWidget {
 
                           log("user : ${user.toString()}");
                           if (user != null && user.email!.isNotEmpty) {
-                            socialLoginController
-                                .socialLogin(user.email.toString());
+                            socialLoginController.socialLogin(
+                                user.email.toString(),
+                                user.displayName.toString(),
+                                user.phoneNumber ?? "",
+                                user.photoURL ?? "");
                           }
                         },
                         child: Row(

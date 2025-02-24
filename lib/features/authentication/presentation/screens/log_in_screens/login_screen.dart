@@ -167,8 +167,11 @@ class LoginScreen extends StatelessWidget {
 
                           log("Log in usser: $user");
                           if (user != null && user.email!.isNotEmpty) {
-                            socialLoginController
-                                .socialLogin(user.email.toString());
+                            socialLoginController.socialLogin(
+                                user.email.toString(),
+                                user.displayName.toString(),
+                                user.phoneNumber ?? "",
+                                user.photoURL ?? "");
                           }
                         },
                         child: Row(

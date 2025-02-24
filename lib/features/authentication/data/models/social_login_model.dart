@@ -36,6 +36,7 @@ class LoginData {
   bool onBoarding;
   String role;
   String accessToken;
+  String customerId;
 
   LoginData({
     required this.id,
@@ -43,6 +44,7 @@ class LoginData {
     required this.onBoarding,
     required this.role,
     required this.accessToken,
+    required this.customerId,
   });
 
   factory LoginData.fromJson(Map<String, dynamic> json) {
@@ -52,6 +54,7 @@ class LoginData {
       onBoarding: json['onBoarding'],
       role: json['role'],
       accessToken: json['accessToken'],
+      customerId: json["customerId"] ?? "",
     );
   }
 
