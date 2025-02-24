@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:developer';
 
@@ -6,29 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import '../../../core/common/widgets/progress_indicator.dart';
 import '../../../core/services/Auth_service.dart';
 import '../../../core/utils/constants/api_constants.dart';
 
-class EditProfileController extends GetxController{
-
+class EditProfileController extends GetxController {
   final RxString profileImage = "".obs;
-
+  RxBool isLoading = false.obs;
   Future<void> getImage() async {
     final ImagePicker imagePicker = ImagePicker();
     final XFile? image =
-    await imagePicker.pickImage(source: ImageSource.gallery);
+        await imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       profileImage.value = image.path;
     }
   }
 
-
-
   Future<void> updateProfile({
     required String fullName,
     required String phone,
-
   }) async {
     final Map<String, String> requestBody = {
       "fullName": fullName,
@@ -36,10 +30,7 @@ class EditProfileController extends GetxController{
     };
 
     try {
-      // Ensure the progress indicator is only shown once
-      if (!Get.isSnackbarOpen) {
-        showProgressIndicator();
-      }
+      isLoading.value = true;
 
       await _sendPutRequestWithHeadersAndImages(
         AppUrls.updateProfile,
@@ -47,8 +38,7 @@ class EditProfileController extends GetxController{
         profileImage.value,
         AuthService.token,
       );
-      hideProgressIndicator();
-
+      isLoading.value = false;
       log("Profile updated successfully.");
       Get.snackbar('Success', 'Profile updated successfully!',
           backgroundColor: Colors.green, colorText: Colors.white);
@@ -57,22 +47,16 @@ class EditProfileController extends GetxController{
       Get.snackbar('Error', 'Failed to update profile. Please try again.',
           backgroundColor: Colors.redAccent, colorText: Colors.white);
     } finally {
-      // Ensure the progress indicator is only hidden once
-      if (Get.isSnackbarOpen) {
-        hideProgressIndicator();
-      }
+      isLoading.value = false;
     }
   }
 
-
-
-
   Future<void> _sendPutRequestWithHeadersAndImages(
-      String url,
-      Map<String, dynamic> body,
-      String? imagePath,
-      String? token,
-      ) async {
+    String url,
+    Map<String, dynamic> body,
+    String? imagePath,
+    String? token,
+  ) async {
     if (token == null || token.isEmpty) {
       Get.snackbar('Error', 'Token is invalid or expired.',
           backgroundColor: Colors.redAccent, colorText: Colors.white);
@@ -111,10 +95,4 @@ class EditProfileController extends GetxController{
           backgroundColor: Colors.redAccent, colorText: Colors.white);
     }
   }
-
-
-
-
-
-
 }
