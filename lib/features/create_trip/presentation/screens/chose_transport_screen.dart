@@ -32,6 +32,8 @@ class _ChoseTransportScreenState extends State<ChoseTransportScreen> {
     tripController.selectedIndex.value = 4;
     tripController.carNumberController.text = "";
     tripController.dateTimeController.text = "";
+    tripController.itemWeight.value = 1.0;
+    tripController.isUnlimited.value = false;
   }
 
   @override
