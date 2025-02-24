@@ -175,6 +175,18 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                         VerticalSpace(height: getHeight(8)),
                         PhoneNumberTextField(
+                          countryPhoneLengths: {
+                            '+880': 10,
+                            '+1': 10,
+                            '+44': 10,
+                            '+91': 10,
+                            '+61': 9,
+                            '+49': 11,
+                            '+33': 9,
+                            '+81': 10,
+                            '+55': 11,
+                            '+34': 9,
+                          },
                           controller: phoneNumberTEController,
                           validator: (value) {
                             return null;

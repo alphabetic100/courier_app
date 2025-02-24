@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:courierapp/core/common/styles/get_text_style.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
@@ -22,8 +24,21 @@ class SignUpScreen extends StatelessWidget {
   final SingUpController singUpController = Get.find<SingUpController>();
   final _formKey = GlobalKey<FormState>();
 
+  final Map<String, int> countryCodes = {
+    '+880': 10,
+    '+1': 10,
+    '+44': 10,
+    '+91': 10,
+    '+61': 9,
+    '+49': 11,
+    '+33': 9,
+    '+81': 10,
+    '+55': 11,
+    '+34': 9,
+  };
   @override
   Widget build(BuildContext context) {
+    RxString selectedCode = "".obs;
     return Scaffold(
       body: SizedBox(
         height: AppSizes.height,
@@ -33,7 +48,7 @@ class SignUpScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
             child: SafeArea(
               child: Form(
-                key: _formKey, // Add form key here
+                key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -83,15 +98,38 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     VerticalSpace(height: getHeight(8)),
                     PhoneNumberTextField(
+                      countryPhoneLengths:
+                          countryCodes, // Pass the country codes here
                       hintText: "Enter your phone number",
                       controller: singUpController.phoneNumberController,
-                      onChange: (value) {
-                        // Handle changes if needed
+                      onCountryCodeChanged: (code) {
+                        selectedCode.value = code; // Update the selected code
+                        log("Selected code: $code");
                       },
-                      // Optional custom validator
                       validator: (value) {
-                        // Your custom validation logic
-                        return null;
+                        // Check if the value is null or empty
+                        if (value == null || value.trim().isEmpty) {
+                          return "Please enter a phone number";
+                        }
+
+                        // Remove non-numeric characters from the phone number
+                        String cleanedNumber =
+                            value.replaceAll(RegExp(r'\D'), '');
+
+                        // Get the valid length for the selected country code
+                        int? validLength = countryCodes[selectedCode.value];
+
+                        // Check if a valid length exists for the selected country code
+                        if (validLength == null) {
+                          return "Please select a valid country code";
+                        }
+
+                        // Validate the phone number length
+                        if (cleanedNumber.length != validLength) {
+                          return "Phone number must be $validLength digits long";
+                        }
+
+                        return null; // Return null if the number is valid
                       },
                     ),
                     VerticalSpace(height: getHeight(16)),
@@ -225,7 +263,9 @@ class SignUpScreen extends StatelessWidget {
                         isPrimary: false,
                         onPressed: () async {
                           //TODO: Google sign up
-                          await signUpWithGoogle();
+                          final user = await signUpWithGoogle();
+
+                          log("user : ${user!.email.toString()}");
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
