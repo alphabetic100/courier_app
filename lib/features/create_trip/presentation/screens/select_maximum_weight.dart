@@ -68,7 +68,9 @@ class SelectMaximumWeightScreen extends StatelessWidget {
                             activeColor: Color(0xFFF3F3F5),
                             value: tripController.isUnlimited.value,
                             onChanged: (value) {
-                              tripController.makeUnlimited();
+                              tripController.isUnlimited.value =
+                                  !tripController.isUnlimited.value;
+                              tripController.selectedWeight();
                             },
                           ),
                         ),
@@ -102,6 +104,7 @@ class SelectMaximumWeightScreen extends StatelessWidget {
                                         tripController.itemWeight.value =
                                             double.parse(
                                                 value.toStringAsFixed(1));
+                                        tripController.selectedWeight();
                                         log("_____________${tripController.itemWeight.value}");
                                       },
                                     ),

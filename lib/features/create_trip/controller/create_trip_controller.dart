@@ -127,10 +127,7 @@ class CreateTripController extends GetxController {
   }
 
 //Weight Picker
-  makeUnlimited() {
-    isUnlimited.value = !isUnlimited.value;
-
-    //TODO: Have to fix this here
+  selectedWeight() {
     if (isUnlimited.value) {
       weight = "Unlimited";
     } else {
