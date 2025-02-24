@@ -97,21 +97,17 @@ class ProfileController extends GetxController {
     AuthService.logoutUser();
   }
 
-  @override
-  void onReady() {
-    Future.delayed(Duration(milliseconds: 200), () {
-      getProfileDetails();
-      myTripsAndTravelsCount();
-      myDeliveriesCount();
-      corbonEmission();
-    });
-    super.onReady();
+  fetchProfile() {
+    getProfileDetails();
+    myTripsAndTravelsCount();
+    myDeliveriesCount();
+    corbonEmission();
   }
 
-  // @override
-  // void onInit() {
-  //   // TODO: implement onInit
-  //   super.onInit();
-  //   getProfileDetails();
-  // }
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    fetchProfile();
+  }
 }

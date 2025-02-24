@@ -65,19 +65,26 @@ class LoginController extends GetxController {
         hideProgressIndicator();
       } else if (response.statusCode == 400) {
         hideProgressIndicator();
-        errorSnakbar(errorMessage: "Password incorrect");
+        Future.delayed(Duration(milliseconds: 200), () {
+          errorSnakbar(errorMessage: "Password incorrect");
+        });
       } else {
         hideProgressIndicator();
         final errorMessage = response.data["message"];
-        errorSnakbar(
-            errorMessage:
-                errorMessage ?? "Something went wrong please try again");
+        Future.delayed(Duration(milliseconds: 200), () {
+          errorSnakbar(
+              errorMessage:
+                  errorMessage ?? "Something went wrong please try again");
+        });
       }
     } on DioException catch (e) {
       hideProgressIndicator();
       log("something went wrong, error: $e");
-      errorSnakbar(
-          errorMessage: "Please check your internet connection and try again");
+      Future.delayed(Duration(milliseconds: 200), () {
+        errorSnakbar(
+            errorMessage:
+                "Please check your internet connection and try again");
+      });
     }
   }
 

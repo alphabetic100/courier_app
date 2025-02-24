@@ -14,10 +14,22 @@ import 'package:courierapp/features/landing/controller/landing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChoseTransportScreen extends StatelessWidget {
-  ChoseTransportScreen({super.key});
+class ChoseTransportScreen extends StatefulWidget {
+  const ChoseTransportScreen({super.key});
+
+  @override
+  State<ChoseTransportScreen> createState() => _ChoseTransportScreenState();
+}
+
+class _ChoseTransportScreenState extends State<ChoseTransportScreen> {
   final CreateTripController tripController = Get.find<CreateTripController>();
+
   final LandingController landingController = Get.find<LandingController>();
+  @override
+  void initState() {
+    super.initState();
+    tripController.clearForm();
+  }
 
   @override
   Widget build(BuildContext context) {

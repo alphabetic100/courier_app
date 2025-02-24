@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
@@ -18,7 +16,6 @@ class QrGenerateDialog extends StatelessWidget {
   final String status;
   @override
   Widget build(BuildContext context) {
-    log("SDfsdfjlksd fsd$status");
     return AlertDialog(
       backgroundColor: AppColors.white,
       shape: RoundedRectangleBorder(

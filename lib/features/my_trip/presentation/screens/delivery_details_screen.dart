@@ -17,6 +17,7 @@ import 'package:courierapp/core/utils/helpers/app_helper.dart';
 import 'package:courierapp/features/messege/presentation/components/view_Image_screen.dart';
 import 'package:courierapp/features/messege/presentation/screens/chat_screens.dart';
 import 'package:courierapp/features/my_trip/controller/delivery_details_controller.dart';
+import 'package:courierapp/features/my_trip/presentation/widgets/give_ratting_dialog.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/qr_generate_dialog.dart';
 import 'package:courierapp/features/profile/presentation/screens/traveller_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -259,9 +260,25 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
           bottomNavigationBar: CustomBottomAppBar(
             isPrimaryButton: false,
             onTap: () {},
-            secondaryWidget:
-                detail.status == "accepted" || detail.status == "pickupped"
-                    ? Row(
+            secondaryWidget: detail.status == "accepted" ||
+                    detail.status == "pickupped" ||
+                    detail.status == "delivered"
+                ? detail.status == "delivered"
+                    ? CustomButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return GiveRatingDialog(
+                                  bookingID: detail.bookingId,
+                                );
+                              });
+                        },
+                        child: CustomText(
+                          text: "Rate the traveller",
+                          color: AppColors.white,
+                        ))
+                    : Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Icon(
@@ -280,7 +297,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                           )
                         ],
                       )
-                    : null,
+                : null,
             primaryWidget: Row(
               children: [
                 Expanded(

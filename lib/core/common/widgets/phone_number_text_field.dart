@@ -13,8 +13,11 @@ class PhoneNumberTextField extends StatefulWidget {
     this.onChange,
     this.onTap,
     this.readOnly = false,
+    required this.countryPhoneLengths,
+    this.onCountryCodeChanged,
   });
 
+  final Function(String)? onCountryCodeChanged;
   final String? hintText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -22,6 +25,7 @@ class PhoneNumberTextField extends StatefulWidget {
   final Function(String)? onChange;
   final VoidCallback? onTap;
   final bool readOnly;
+  final Map<String, int> countryPhoneLengths;
 
   @override
   State<PhoneNumberTextField> createState() => _PhoneNumberTextFieldState();
@@ -30,24 +34,15 @@ class PhoneNumberTextField extends StatefulWidget {
 class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
   String _selectedCountryCode = '+34';
 
-  static const Map<String, int> countryPhoneLengths = {
-    '+880': 10,
-    '+1': 10,
-    '+44': 10,
-    '+91': 10,
-    '+61': 9,
-    '+49': 11,
-    '+33': 9,
-    '+81': 10,
-    '+55': 11,
-    '+34': 9,
-  };
+  String get selectedCountryCode => _selectedCountryCode;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       readOnly: widget.readOnly,
-      onChanged: widget.onChange,
+      onChanged: (value) {
+        widget.onChange?.call(value);
+      },
       onTap: widget.onTap,
       controller: widget.controller,
       validator: widget.validator,
@@ -62,11 +57,14 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
               value: _selectedCountryCode,
               onChanged: (newValue) {
                 if (newValue != null) {
-                  setState(() => _selectedCountryCode = newValue);
+                  setState(() {
+                    _selectedCountryCode = newValue;
+                    widget.onCountryCodeChanged?.call(newValue);
+                  });
                 }
               },
               selectedItemBuilder: (context) =>
-                  countryPhoneLengths.keys.map((code) {
+                  widget.countryPhoneLengths.keys.map((code) {
                 return Container(
                   alignment: Alignment.centerLeft,
                   child: Row(
@@ -87,7 +85,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
                   ),
                 );
               }).toList(),
-              items: countryPhoneLengths.keys.map((code) {
+              items: widget.countryPhoneLengths.keys.map((code) {
                 return DropdownMenuItem(
                   value: code,
                   child: CustomText(

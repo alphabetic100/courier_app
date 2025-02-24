@@ -21,8 +21,11 @@ import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
+
   final LandingController landingController = Get.find<LandingController>();
+
   final controller = Get.put(ProfileController());
+
   @override
   Widget build(BuildContext context) {
     //controller.getProfileDetails();

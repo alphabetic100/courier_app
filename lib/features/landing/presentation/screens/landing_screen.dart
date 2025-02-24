@@ -7,9 +7,28 @@ import 'package:courierapp/features/search_screen/presentation/screens/search_sc
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LandingScreen extends StatelessWidget {
-  LandingScreen({super.key});
+class LandingScreen extends StatefulWidget {
+  const LandingScreen({super.key});
+
+  @override
+  State<LandingScreen> createState() => _LandingScreenState();
+}
+
+class _LandingScreenState extends State<LandingScreen> {
   final LandingController landingController = Get.find<LandingController>();
+  setLandingScreen() {
+    Future.delayed(Duration(milliseconds: 200), () {
+      landingController.currentPage.value = 0;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setLandingScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

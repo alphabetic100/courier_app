@@ -18,11 +18,19 @@ import '../../../../routes/app_routes.dart';
 import '../../controller/search_screen_controller.dart';
 import 'add_item.dart';
 
-class SearchScreen extends StatelessWidget {
-  SearchScreen({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
   final SearchScreenController searchScreenController =
-      Get.find<SearchScreenController>();
+      Get.put(SearchScreenController());
+
   final ItemController itemController = Get.put(ItemController());
+
   final formKey = GlobalKey<FormState>();
 
   String? validateLocation(String? value) {
@@ -51,6 +59,12 @@ class SearchScreen extends StatelessWidget {
       log(searchScreenController.senderController.text);
       log(searchScreenController.receiverController.text);
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override

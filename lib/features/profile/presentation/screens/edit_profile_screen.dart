@@ -10,6 +10,7 @@ import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/profile/controller/edit_profile_controller.dart';
 import 'package:courierapp/features/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/common/styles/get_text_style.dart';
@@ -27,7 +28,7 @@ class EditProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final editProfileController = Get.put(EditProfileController());
     final controller = Get.put(ProfileController());
-    final forgotEmailController = Get.put(ForgotEmailAndOtpController ());
+    final forgotEmailController = Get.put(ForgotEmailAndOtpController());
 
     final Map<String, dynamic> arguments = Get.arguments;
 
@@ -46,70 +47,80 @@ class EditProfileScreen extends StatelessWidget {
         TextEditingController(text: password);
     TextEditingController phoneNumberTEController =
         TextEditingController(text: phoneNumber);
-
-    return Scaffold(
-      appBar: CustomAppBar(
-        ontapBackButton: () {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            controller.getProfileDetails();
-          });
-          Get.back();
-        },
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(
-              right: getWidth(16),
+    return Obx(() => editProfileController.isLoading.value
+        ? Scaffold(
+            appBar: CustomAppBar(),
+            body: Center(
+              child: SpinKitFadingCircle(
+                color: AppColors.primaryColor,
+                size: getWidth(50),
+              ),
             ),
-            child: MessageNotificationBox(),
           )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              color: Color(0xffFAFAFC),
+        : Scaffold(
+            appBar: CustomAppBar(
+              ontapBackButton: () {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  controller.getProfileDetails();
+                });
+                Get.back();
+              },
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: getWidth(16),
+                  ),
+                  child: MessageNotificationBox(),
+                )
+              ],
+            ),
+            body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  VerticalSpace(height: getHeight(20)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-                    child: CustomText(
-                      text: "Edit Profile",
-                      fontSize: getWidth(25),
-                      color: AppColors.black,
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    color: Color(0xffFAFAFC),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        VerticalSpace(height: getHeight(20)),
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: getWidth(16)),
+                          child: CustomText(
+                            text: "Edit Profile",
+                            fontSize: getWidth(25),
+                            color: AppColors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        VerticalSpace(height: getHeight(20)),
+                        Divider(
+                          height: getHeight(1),
+                          color: Color(0xffCCD9D6),
+                        ),
+                      ],
                     ),
                   ),
                   VerticalSpace(height: getHeight(20)),
-                  Divider(
-                    height: getHeight(1),
-                    color: Color(0xffCCD9D6),
-                  ),
-                ],
-              ),
-            ),
-            VerticalSpace(height: getHeight(20)),
-            Padding(
-              padding:
-                  EdgeInsets.only(left: getWidth(16), right: getHeight(16)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Obx(() => CircleAvatar(
-                        radius: getWidth(65),
-                        backgroundImage: editProfileController
-                                .profileImage.isNotEmpty
-                            ? FileImage(
-                                File(editProfileController.profileImage.value))
-                            : initialImagePath.isNotEmpty
-                                ? NetworkImage(initialImagePath)
-                                : AssetImage(ImagePath.profile)
-                                    as ImageProvider,
-                      )),
-                  /*
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: getWidth(16), right: getHeight(16)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Obx(() => CircleAvatar(
+                              radius: getWidth(65),
+                              backgroundImage: editProfileController
+                                      .profileImage.isNotEmpty
+                                  ? FileImage(File(
+                                      editProfileController.profileImage.value))
+                                  : initialImagePath.isNotEmpty
+                                      ? NetworkImage(initialImagePath)
+                                      : AssetImage(ImagePath.profile)
+                                          as ImageProvider,
+                            )),
+                        /*
                   SizedBox(height: getHeight(8),),
 
 
@@ -134,151 +145,165 @@ class EditProfileScreen extends StatelessWidget {
                   ),
 
                   ),*/
-                  SizedBox(
-                    height: getHeight(8),
-                  ),
-                  CustomTextButton(
-                      fontSize: getWidth(15),
-                      fontWeight: FontWeight.w600,
-                      isUnderline: true,
-                      onPressed: () async {
-                        await editProfileController.getImage();
-                      },
-                      text: "Change profile"),
-                  SizedBox(
-                    height: getHeight(24),
-                  ),
-                  CustomTextAndTextFormField(
-                    text: "Full Name",
-                    controller: fullNameTEController,
-                  ),
-                  SizedBox(
-                    height: getHeight(16),
-                  ),
-                  Text(
-                    "Phone Number",
-                    style: getTextStyleMsrt(
-                        color: AppColors.black,
-                        fontSize: getWidth(14),
-                        fontWeight: FontWeight.w600),
-                  ),
-                  VerticalSpace(height: getHeight(8)),
-                  PhoneNumberTextField(
-                    controller: phoneNumberTEController,
-                    validator: (value) {
-                      return null;
+                        SizedBox(
+                          height: getHeight(8),
+                        ),
+                        CustomTextButton(
+                            fontSize: getWidth(15),
+                            fontWeight: FontWeight.w600,
+                            isUnderline: true,
+                            onPressed: () async {
+                              await editProfileController.getImage();
+                            },
+                            text: "Change profile"),
+                        SizedBox(
+                          height: getHeight(24),
+                        ),
+                        CustomTextAndTextFormField(
+                          text: "Full Name",
+                          controller: fullNameTEController,
+                        ),
+                        SizedBox(
+                          height: getHeight(16),
+                        ),
+                        Text(
+                          "Phone Number",
+                          style: getTextStyleMsrt(
+                              color: AppColors.black,
+                              fontSize: getWidth(14),
+                              fontWeight: FontWeight.w600),
+                        ),
+                        VerticalSpace(height: getHeight(8)),
+                        PhoneNumberTextField(
+                          countryPhoneLengths: {
+                            '+880': 10,
+                            '+1': 10,
+                            '+44': 10,
+                            '+91': 10,
+                            '+61': 9,
+                            '+49': 11,
+                            '+33': 9,
+                            '+81': 10,
+                            '+55': 11,
+                            '+34': 9,
+                          },
+                          controller: phoneNumberTEController,
+                          validator: (value) {
+                            return null;
 
-                      // return AppHelperFunctions.phoneNumberValidator(
-                      //     value, singUpController.phoneNumberController.text);
-                    },
-                  ),
-                  SizedBox(
-                    height: getHeight(16),
-                  ),
-                  CustomTextAndTextFormField(
-                    text: "Email Address",
-                    controller: emailTEController,
-                    readOnly: true,
-                  ),
-                  SizedBox(
-                    height: getHeight(16),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        text: "Password",
-                        fontSize: getWidth(14),
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.black,
-                      ),
-                      CustomTextButton(
-                        isUnderline: true,
-                        onPressed: () {
-                          forgotEmailController.forgetEmail(emailTEController.text);
-
-                        },
-                        text: "Change",
-                        fontWeight: FontWeight.w600,
-                        fontSize: getHeight(14),
-                        color: Color(0xff003087),
-                      ),
-                    ],
-                  ),
-                  VerticalSpace(height: getHeight(10)),
-                  CustomTexFormField(
-                    controller: passwordTEController,
-                  ),
-                  SizedBox(
-                    height: getHeight(16),
-                  ),
-                  Row(
-                    children: [
-                      CustomText(
-                        text: "Verification status: ",
-                        fontSize: getWidth(16),
-                        color: Color(0xff262B2B),
-                      ),
-                      SizedBox(
-                        width: getWidth(4),
-                      ),
-                      CustomText(
-                        text: verification == "true"
-                            ? "Verified "
-                            : "Not Verified",
-                        fontSize: getWidth(16),
-                        color: Color(0xff2BCD31),
-                      ),
-                    ],
+                            // return AppHelperFunctions.phoneNumberValidator(
+                            //     value, singUpController.phoneNumberController.text);
+                          },
+                        ),
+                        SizedBox(
+                          height: getHeight(16),
+                        ),
+                        CustomTextAndTextFormField(
+                          text: "Email Address",
+                          controller: emailTEController,
+                          readOnly: true,
+                        ),
+                        SizedBox(
+                          height: getHeight(16),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(
+                              text: "Password",
+                              fontSize: getWidth(14),
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.black,
+                            ),
+                            CustomTextButton(
+                              isUnderline: true,
+                              onPressed: () {
+                                forgotEmailController
+                                    .forgetEmail(emailTEController.text);
+                              },
+                              text: "Change",
+                              fontWeight: FontWeight.w600,
+                              fontSize: getHeight(14),
+                              color: Color(0xff003087),
+                            ),
+                          ],
+                        ),
+                        VerticalSpace(height: getHeight(10)),
+                        CustomTexFormField(
+                          controller: passwordTEController,
+                        ),
+                        SizedBox(
+                          height: getHeight(16),
+                        ),
+                        Row(
+                          children: [
+                            CustomText(
+                              text: "Verification status: ",
+                              fontSize: getWidth(16),
+                              color: Color(0xff262B2B),
+                            ),
+                            SizedBox(
+                              width: getWidth(4),
+                            ),
+                            CustomText(
+                              text: verification == "true"
+                                  ? "Verified "
+                                  : "Not Verified",
+                              fontSize: getWidth(16),
+                              color: Color(0xff2BCD31),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
-            )
-          ],
-        ),
-      ),
-      bottomNavigationBar: CustomBottomAppBar(
-        isPrimaryButton: false,
-        onTap: () {},
-        primaryWidget: Row(
-          children: [
-            Expanded(
-              child: CustomButton(
-                  isPrimary: false,
-                  onPressed: () {
-                    // Get.defaultDialog(
-                    //   title: "Worning",
-                    // );
-                    // showDialog(
-                    //     context: context,
-                    //     builder: (context) {
-                    //       return ShowPaymentSuccessDialog();
-                    //     });
-                  },
-                  child: CustomText(
-                    text: "Cancel",
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.grey,
-                  )),
             ),
-            HorizontalSpace(width: getWidth(16)),
-            Expanded(
-              child: CustomButton(
-                  onPressed: () {
-                    editProfileController.updateProfile(
-                        fullName: fullNameTEController.text,
-                        phone: phoneNumberTEController.text);
-                  },
-                  child: CustomText(
-                    text: "Save Changes",
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  )),
-            )
-          ],
-        ),
-      ),
-    );
+            bottomNavigationBar: CustomBottomAppBar(
+              isPrimaryButton: false,
+              onTap: () {},
+              primaryWidget: Row(
+                children: [
+                  Expanded(
+                    child: CustomButton(
+                        isPrimary: false,
+                        onPressed: () {
+                          // Get.defaultDialog(
+                          //   title: "Worning",
+                          // );
+                          // showDialog(
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return ShowPaymentSuccessDialog();
+                          //     });
+
+                          Get.back();
+                        },
+                        child: CustomText(
+                          text: "Cancel",
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.grey,
+                        )),
+                  ),
+                  HorizontalSpace(width: getWidth(16)),
+                  Expanded(
+                    child: CustomButton(
+                        onPressed: () {
+                          editProfileController.updateProfile(
+                              fullName: fullNameTEController.text,
+                              phone: phoneNumberTEController.text);
+                        },
+                        child: CustomText(
+                          text: "Save Changes",
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white,
+                        )),
+                  )
+                ],
+              ),
+            ),
+          ));
   }
 }
 
