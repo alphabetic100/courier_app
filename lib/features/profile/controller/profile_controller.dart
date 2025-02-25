@@ -108,6 +108,8 @@ class ProfileController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    fetchProfile();
+    Future.delayed(Duration(milliseconds: 200), () {
+      fetchProfile();
+    });
   }
 }

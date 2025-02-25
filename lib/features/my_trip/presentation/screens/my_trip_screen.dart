@@ -252,12 +252,14 @@ class _MyTripScreenState extends State<MyTripScreen> {
                     );
                   }
                   if (controller.myTravels.value == null ||
-                      controller.myTravels.value!.data.isEmpty) {
+                      controller.myTravels.value!.data
+                          .transportsWithPendingCount.isEmpty) {
                     return const Center(
                       child: CustomText(text: "No Travel Yet"),
                     );
                   }
-                  final tripDatas = controller.myTravels.value!.data;
+                  final tripDatas = controller
+                      .myTravels.value!.data.transportsWithPendingCount;
 
                   return ListView.builder(
                     padding: EdgeInsets.only(top: getHeight(4)),
