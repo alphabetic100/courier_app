@@ -61,54 +61,59 @@ class SearchResultScreen extends StatelessWidget {
                                     ),
                                     HorizontalSpace(width: getWidth(5)),
                                     Expanded(
-                                        child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        FittedBox(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                        child: FittedBox(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
                                             children: [
-                                              Row(
-                                                children: [
-                                                  CustomText(
-                                                    text: searchScreenController
-                                                        .senderController.text,
-                                                    color: AppColors.black,
-                                                    fontSize: getWidth(14),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 5, right: 5),
-                                                    child: Image.asset(
-                                                      IconPath.arrow,
-                                                      width: getWidth(30),
-                                                      fit: BoxFit.fitWidth,
-                                                    ),
-                                                  ),
-                                                  CustomText(
-                                                    text: searchScreenController
-                                                        .receiverController
-                                                        .text,
-                                                    color: AppColors.black,
-                                                    fontSize: getWidth(14),
-                                                  ),
-                                                ],
+                                              SizedBox(
+                                                width: searchScreenController
+                                                            .senderController
+                                                            .text
+                                                            .length >
+                                                        15
+                                                    ? AppSizes.width * 0.26
+                                                    : null,
+                                                child: CustomText(
+                                                  text: searchScreenController
+                                                      .senderController.text,
+                                                  color: AppColors.black,
+                                                  fontSize: getWidth(14),
+                                                  textOverflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
                                               ),
-                                              CustomText(
-                                                text: searchScreenController
-                                                    .searchDate.value,
-                                                fontSize: getWidth(12),
-                                              )
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                child: Image.asset(
+                                                  IconPath.arrow,
+                                                  width: getWidth(30),
+                                                  fit: BoxFit.fitWidth,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: AppSizes.width * 0.3,
+                                                child: CustomText(
+                                                  text: searchScreenController
+                                                      .receiverController.text,
+                                                  color: AppColors.black,
+                                                  fontSize: getWidth(14),
+                                                  textOverflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
                                             ],
                                           ),
-                                        ),
-                                        Image.asset(
-                                          IconPath.filterIcon,
-                                          height: getWidth(40),
-                                        )
-                                      ],
+                                          CustomText(
+                                            text: searchScreenController
+                                                .searchDate.value,
+                                            fontSize: getWidth(12),
+                                          )
+                                        ],
+                                      ),
                                     )),
                                   ])),
                             ),
