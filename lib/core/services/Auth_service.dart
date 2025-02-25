@@ -7,6 +7,7 @@ import '../../routes/app_routes.dart';
 
 class AuthService {
   static const String _tokenKey = 'token';
+  static const String _rememberMeKey = "rememberMe";
 
   // Singleton instance for SharedPreferences
   static late SharedPreferences _preferences;
@@ -42,14 +43,22 @@ class AuthService {
   // Clear authentication data (for logout or clearing auth data)
   static Future<void> logoutUser() async {
     try {
-      // Clear all data from SharedPreferences
-      await _preferences.clear();
+      bool? rememberMe = _preferences.getBool(_rememberMeKey);
 
-      // Reset private variables
+      // If "Remember Me" is NOT enabled, clear email and password from SharedPreferences
+      if (rememberMe != true) {
+        await _preferences.remove('email');
+        await _preferences.remove('password');
+      }
+
+      // Clear other auth-related data (but not email/password if "Remember Me" is on)
+      await _preferences.remove(_tokenKey);
+      await _preferences.remove("ID");
+
+      // Reset the private variables
       _token = null;
+
       _id = null;
-      // Redirect to the login screen
-      log("+++++++++++++ Logout called");
       await goToLogin();
     } catch (e) {
       log('Error during logout: $e');

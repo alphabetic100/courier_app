@@ -21,9 +21,12 @@ import 'forgot_email_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
+
   final LoginController loginController = Get.find<LoginController>();
+
   final SocialLoginController socialLoginController =
       Get.put(SocialLoginController());
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -68,6 +71,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                     VerticalSpace(height: getHeight(10)),
                     CustomTexFormField(
+                      onTap: () {
+                        loginController.loadSavedCredentials();
+                      },
                       controller: loginController.emailController,
                       hintText: "Enter your email address",
                       validator: (value) {
