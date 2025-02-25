@@ -159,7 +159,7 @@ class CreateTripController extends GetxController {
 
     if (selectedDate != null) {
       date = selectedDate.toUtc().toIso8601String();
-      log(date);
+      log("selected date is : $date");
       dateTimeController.text = DateFormat('EEEE, MMMM d').format(selectedDate);
     }
   }
