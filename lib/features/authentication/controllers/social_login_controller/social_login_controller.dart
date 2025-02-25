@@ -43,6 +43,11 @@ class SocialLoginController extends GetxController {
         });
         log("customer id : ${user.data.customerId}");
         AuthService.saveCustomerId(customerID: user.data.customerId);
+        AuthService.saveId(id: user.data.id);
+        log("response id : :lksdfoijd fsdolkf m ${user.data.id}");
+        Future.delayed(Duration(milliseconds: 200), () {
+          log("User Id is : ${AuthService.userId}");
+        });
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }

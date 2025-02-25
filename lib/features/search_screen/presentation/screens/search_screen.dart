@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/search_screen/controller/item_controller.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ],
               ),
               Container(
-                height: AppSizes.height * 0.1,
+                height: AppSizes.height * 0.09,
                 color: AppColors.white,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -162,7 +163,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           Container(
                             padding: EdgeInsets.all(getWidth(16)),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(8),
                               color: AppColors.white,
                             ),
                             child: Column(
@@ -217,42 +218,24 @@ class _SearchScreenState extends State<SearchScreen> {
                                     color: AppColors.secondaryColor,
                                   ),
                                 ),
+                                VerticalSpace(height: getHeight(16)),
+                                CustomButton(
+                                  isPrimary: false,
+                                  height: getHeight(50),
+                                  onPressed: () {
+                                    Get.to(() => AddItem());
+                                  },
+                                  child: CustomText(
+                                    text: "Add a Item",
+                                    fontSize: getWidth(16),
+                                    color: const Color(0xff677674),
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                          VerticalSpace(height: getHeight(16)),
-                          CustomButton(
-                            height: getHeight(50),
-                            onPressed: onSearchPressed,
-                            // onPressed: () {
-                            //   // AuthService.logoutUser();
-                            //   showDialog(
-                            //       context: context,
-                            //       builder: (_) {
-                            //         return ShowPaymentSuccessDialog();
-                            //       });
-                            // },
-                            child: CustomText(
-                              text: "Search",
-                              fontSize: getWidth(16),
-                              color: AppColors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          VerticalSpace(height: getHeight(16)),
-                          CustomButton(
-                            isPrimary: false,
-                            height: getHeight(50),
-                            onPressed: () {
-                              Get.to(() => AddItem());
-                            },
-                            child: CustomText(
-                              text: "Add a Item",
-                              fontSize: getWidth(16),
-                              color: const Color(0xff677674),
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                          // VerticalSpace(height: getHeight(16)),
                           VerticalSpace(height: getHeight(24)),
                           Align(
                             alignment: Alignment.centerLeft,
@@ -280,33 +263,35 @@ class _SearchScreenState extends State<SearchScreen> {
                                   ],
                                 );
                               } else {
-                                final reversedItems = itemController
-                                    .myItems.value!.data.reversed
-                                    .toList();
+                                final reversedItems =
+                                    itemController.myItems.value!.data;
 
                                 return SizedBox(
-                                  height: getHeight(200),
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: reversedItems.length,
-                                    itemBuilder: (context, index) {
-                                      log(reversedItems.length.toString());
-                                      final item = reversedItems[index];
-                                      return Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: getHeight(20)),
-                                        child: GestureDetector(
-                                          onTap: () {},
-                                          child: ItemCardTwo(
-                                            item: item,
-                                            isSelected: false,
-                                            isdeletable: true,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                );
+                                    height: getHeight(250),
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: reversedItems.length + 1,
+                                      itemBuilder: (context, index) {
+                                        log("sldkfsdjof s{${index == reversedItems.length}}");
+                                        if (index == reversedItems.length) {
+                                          return VerticalSpace(height: 100);
+                                        } else {
+                                          final item = reversedItems[index];
+                                          return Padding(
+                                            padding: EdgeInsets.only(
+                                                bottom: getHeight(20)),
+                                            child: GestureDetector(
+                                              onTap: () {},
+                                              child: ItemCardTwo(
+                                                item: item,
+                                                isSelected: false,
+                                                isdeletable: true,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ));
                               }
                             }),
                           ),
@@ -317,6 +302,20 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: CustomBottomAppBar(
+        isPrimaryButton: false,
+        onTap: () {},
+        primaryWidget: CustomButton(
+          height: getHeight(50),
+          onPressed: onSearchPressed,
+          child: CustomText(
+            text: "Search",
+            fontSize: getWidth(16),
+            color: AppColors.white,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),

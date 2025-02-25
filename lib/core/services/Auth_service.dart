@@ -83,6 +83,7 @@ class AuthService {
   static Future saveId({required String id}) async {
     _preferences = await SharedPreferences.getInstance();
     log("id saveing");
+    _id = id;
     await _preferences.setString("ID", id);
   }
 
@@ -93,6 +94,7 @@ class AuthService {
   static String? _customerId;
   static Future saveCustomerId({required String customerID}) async {
     _preferences = await SharedPreferences.getInstance();
+    _customerId = customerID;
     log("Customer Id saveing");
     await _preferences.setString("CUSTOMERID", customerID);
   }

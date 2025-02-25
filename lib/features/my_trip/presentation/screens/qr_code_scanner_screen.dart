@@ -3,11 +3,11 @@ import 'package:courierapp/core/common/widgets/custom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_bottom_app_bar.dart';
 import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
+import 'package:courierapp/core/common/widgets/success_snakbar.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/icon_path.dart';
 import 'package:courierapp/features/my_trip/controller/qr_controller.dart';
-import 'package:courierapp/features/my_trip/presentation/widgets/qr_found_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -40,11 +40,9 @@ class QrCodeScannerScreen extends StatelessWidget {
               onDetect: (barcode) {
                 final String code = barcode.barcodes.first.rawValue ?? '';
                 if (code.isNotEmpty) {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return QrFoundDialog();
-                      });
+                  successSnakbr(
+                      successMessage:
+                          "QR code Detected successflully, Tap Scan to Confirm");
                   controller.updateScannedData(code);
                 }
               },
