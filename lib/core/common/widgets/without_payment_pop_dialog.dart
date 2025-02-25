@@ -52,19 +52,8 @@ class WithoutPaymentPopDialog extends StatelessWidget {
                 //   Get.back();
                 // });
               },
-              child: CustomText(text: "Back"),
+              child: CustomText(text: "Okay"),
             )),
-            HorizontalSpace(width: 16),
-            Expanded(
-                child: CustomButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: CustomText(
-                text: "Cancel",
-                color: AppColors.white,
-              ),
-            ))
           ],
         )
       ],

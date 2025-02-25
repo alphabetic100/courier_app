@@ -32,9 +32,10 @@ class ProfileController extends GetxController {
           await AuthService.saveCustomerId(
               customerID: profile.value!.data.customerId);
         }
-        Future.delayed(Duration(milliseconds: 200), () {});
-        final customerId = AuthService.customerId;
-        log("customer id is : $customerId");
+        Future.delayed(Duration(milliseconds: 200), () {
+          final customerId = AuthService.customerId;
+          log("customer id is : $customerId");
+        });
       } else {
         errorSnakbar(errorMessage: "Failed to load profile data");
       }
