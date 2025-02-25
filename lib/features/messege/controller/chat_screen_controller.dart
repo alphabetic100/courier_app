@@ -166,7 +166,7 @@ class ChatController extends GetxController {
           message['conversationId'],
           message['isRead'],
           message['updatedAt'],
-          message['image'] ?? [], // Handle images properly
+          message['image'] ?? [],
         );
       }
     }
@@ -179,7 +179,7 @@ class ChatController extends GetxController {
     String conversationId,
     bool isRead,
     String updatedAt,
-    List<dynamic> imageUrls, // Accept list of images
+    List<dynamic> imageUrls, 
   ) {
     if (!messages.any((msg) => msg['id'] == messageId)) {
       messages.add({

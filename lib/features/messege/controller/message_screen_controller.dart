@@ -17,6 +17,7 @@ class MessageScreenController extends GetxController {
           token: AuthService.token);
       if (response.isSuccess) {
         chatlists.value = MyChatlistModel.fromJson(response.responseData);
+        update();
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }
@@ -29,7 +30,7 @@ class MessageScreenController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    Future.delayed(Duration(microseconds: 500), () {
+    Future.delayed(Duration(microseconds: 200), () {
       getMyChatList();
     });
   }

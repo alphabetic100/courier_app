@@ -42,14 +42,14 @@ class WebSocketClient {
 //To view a room conversation
   void viewMessage(String chatroomId, String userId) {
     final message = jsonEncode({
-      "type": "viewMessage",
+      "type": "viewMessages",
       "chatroomId": chatroomId,
       "userId": userId,
     });
 
     _channel?.sink.add(message);
     if (kDebugMode) {
-      log("View message sent for chatroomid: $chatroomId");
+      log("View message sent for chatroomid: $chatroomId wit user id : $userId");
     }
   }
 
