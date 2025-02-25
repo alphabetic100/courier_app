@@ -5,16 +5,19 @@ import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/features/my_trip/controller/booking_confirm_controller.dart';
+import 'package:courierapp/features/my_trip/controller/my_trip_controller.dart';
 import 'package:courierapp/features/my_trip/models/single_travel_model.dart';
 import 'package:courierapp/features/my_trip/presentation/widgets/sender_request_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SenderRequestCard extends StatelessWidget {
-  SenderRequestCard({super.key, required this.bookings});
+  SenderRequestCard({super.key, required this.bookings, required this.postID});
   final List<Booking> bookings;
+  final String postID;
   final BookingConfirmController bookingConfirmController =
       Get.put(BookingConfirmController());
+  final MyTripController myTripController = Get.find<MyTripController>();
   @override
   Widget build(BuildContext context) {
     if (bookings.isEmpty) {
@@ -111,7 +114,11 @@ class SenderRequestCard extends StatelessWidget {
                                   borderColor: AppColors.success,
                                   onPressed: () {
                                     bookingConfirmController
-                                        .acceptBooking(request.bookingId);
+                                        .acceptBooking(request.bookingId)
+                                        .then((onValue) {
+                                      myTripController
+                                          .getSingleTravelPost(postID);
+                                    });
                                   },
                                   child: Icon(
                                     Icons.check,
@@ -124,7 +131,11 @@ class SenderRequestCard extends StatelessWidget {
                                   isPrimary: false,
                                   onPressed: () {
                                     bookingConfirmController
-                                        .cancelBooking(request.bookingId);
+                                        .cancelBooking(request.bookingId)
+                                        .then((onValue) {
+                                      myTripController
+                                          .getSingleTravelPost(postID);
+                                    });
                                   },
                                   borderColor: AppColors.error,
                                   child: Icon(

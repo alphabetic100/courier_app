@@ -106,6 +106,7 @@ class _TravelTripDetailScreenState extends State<TravelTripDetailScreen> {
                         VerticalSpace(height: getHeight(20)),
                         SenderRequestCard(
                           bookings: post.booking,
+                          postID: widget.trip.id,
                         ),
                         VerticalSpace(height: getHeight(20))
                         // ]

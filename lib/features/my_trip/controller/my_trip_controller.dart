@@ -47,6 +47,7 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
 
         log(myTravels.value!.data.totalPendingCount.toString());
         totalPendingRequest.value = myTravels.value!.data.totalPendingCount;
+        update();
         log("Total \npending \ncount is : $totalPendingRequest");
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
@@ -66,6 +67,7 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
 
         log(myTravels.value.toString());
         totalPendingRequest.value = myTravels.value!.data.totalPendingCount;
+        update();
         log("Total \npending \ncount is : $totalPendingRequest");
       } else {
         errorSnakbar(errorMessage: response.errorMessage);

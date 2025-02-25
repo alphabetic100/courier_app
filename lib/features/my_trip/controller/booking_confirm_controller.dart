@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 class BookingConfirmController extends GetxController {
   final NetworkCaller networkCaller = NetworkCaller();
+  
   RxBool isLoading = false.obs;
   Future<void> acceptBooking(String bookingID) async {
     try {
@@ -21,6 +22,7 @@ class BookingConfirmController extends GetxController {
       hideProgressIndicator();
       isLoading.value = false;
       if (response.isSuccess) {
+
         Future.delayed(Duration(milliseconds: 200), () {
           successSnakbr(
               successMessage: "You've successfully accepted the booking.");
