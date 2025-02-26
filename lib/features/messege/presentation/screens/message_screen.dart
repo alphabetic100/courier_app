@@ -11,21 +11,6 @@ import 'package:get/get.dart';
 
 import 'chat_screens.dart';
 
-class Message {
-  final String name;
-  final String lastMessage;
-  final String time;
-  final String avatarUrl;
-  final bool seen;
-
-  Message({
-    required this.name,
-    required this.lastMessage,
-    required this.time,
-    required this.avatarUrl,
-    this.seen = false,
-  });
-}
 
 class MessageScreen extends StatelessWidget {
   MessageScreen({super.key});

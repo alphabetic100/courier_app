@@ -2,7 +2,7 @@ class MeAsTravellerModel {
   final bool success;
   final int statusCode;
   final String message;
-  final List<TransportData> data;
+  final TransportResponse data;
 
   MeAsTravellerModel({
     required this.success,
@@ -16,10 +16,27 @@ class MeAsTravellerModel {
       success: json["success"] ?? false,
       statusCode: json["statusCode"] ?? 0,
       message: json["message"] ?? "",
-      data: (json["data"] as List?)
+      data: TransportResponse.fromJson(json["data"] ?? {}),
+    );
+  }
+}
+
+class TransportResponse {
+  final List<TransportData> transportsWithPendingCount;
+  final int totalPendingCount;
+
+  TransportResponse({
+    required this.transportsWithPendingCount,
+    required this.totalPendingCount,
+  });
+
+  factory TransportResponse.fromJson(Map<String, dynamic> json) {
+    return TransportResponse(
+      transportsWithPendingCount: (json["transportsWithPendingCount"] as List?)
               ?.map((e) => TransportData.fromJson(e))
               .toList() ??
           [],
+      totalPendingCount: json["totalPendingCount"] ?? 0,
     );
   }
 }

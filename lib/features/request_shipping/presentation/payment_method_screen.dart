@@ -6,6 +6,7 @@ import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/common/widgets/message_notification_box.dart';
 import 'package:courierapp/core/common/widgets/payment_setup_card.dart';
 import 'package:courierapp/core/common/widgets/progress_indicator.dart';
+import 'package:courierapp/core/common/widgets/without_payment_pop_dialog.dart';
 import 'package:courierapp/core/services/Auth_service.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
@@ -35,6 +36,18 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       Get.put(RequestShippingController());
   final PaymentSetupController paymentSetupController =
       Get.find<PaymentSetupController>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(milliseconds: 200), () {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return WithoutPaymentPopDialog();
+          });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +57,6 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
         backgroundColor: const Color(0xffFAFAFC),
         ontapBackButton: () {
           Get.back();
-          // AlertDialog(
-          //   title: CustomText(
-          //     text: "Alert",
-          //     color: AppColors.error,
-          //   ),
-          //   content: CustomText(
-          //     text:
-          //         "If the payment is not completed, your booking will be canceled.",
-          //     fontSize: getWidth(14),
-          //     fontWeight: FontWeight.normal,
-          //   ),
-          // );
         },
         actions: [
           Padding(

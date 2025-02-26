@@ -28,7 +28,7 @@ class GiveRatingDialog extends StatelessWidget {
             IconPath.worningIcon,
             height: getHeight(70),
           ),
-          SizedBox(height: getHeight(10)), // Fixed spacing
+          SizedBox(height: getHeight(10)), 
           CustomText(
             text: "Give your honest feedback",
             fontSize: getWidth(24),

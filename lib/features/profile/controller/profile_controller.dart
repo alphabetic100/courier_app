@@ -31,9 +31,14 @@ class ProfileController extends GetxController {
         if (profile.value != null) {
           await AuthService.saveCustomerId(
               customerID: profile.value!.data.customerId);
+          await AuthService.saveId(id: profile.value!.data.id);
         }
-        final customerId = AuthService.customerId;
-        log("customer id is : $customerId");
+        Future.delayed(Duration(milliseconds: 200), () {
+          final customerId = AuthService.customerId;
+          final id = AuthService.userId;
+          log("customer id is : $customerId");
+          log("User id is : $id");
+        });
       } else {
         errorSnakbar(errorMessage: "Failed to load profile data");
       }
@@ -108,6 +113,8 @@ class ProfileController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    fetchProfile();
+    Future.delayed(Duration(milliseconds: 200), () {
+      fetchProfile();
+    });
   }
 }

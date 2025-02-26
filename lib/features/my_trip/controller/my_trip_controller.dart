@@ -23,11 +23,12 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
   RxBool isLoading = false.obs;
   RxBool isTravelLoading = false.obs;
   RxBool isbookingLoading = false.obs;
+  RxInt totalPendingRequest = 0.obs;
   @override
   void onInit() {
     super.onInit();
     tabController = TabController(length: 2, vsync: this);
-    WidgetsBinding.instance.addPostFrameCallback((callback) {
+    Future.delayed(Duration(milliseconds: 200), () {
       meAsTravellerPosts();
     });
     selectedIndex.value = 0;
@@ -43,6 +44,11 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
         myTravels.value = MeAsTravellerModel.fromJson(response.responseData);
 
         log(myTravels.value.toString());
+
+        log(myTravels.value!.data.totalPendingCount.toString());
+        totalPendingRequest.value = myTravels.value!.data.totalPendingCount;
+        update();
+        log("Total \npending \ncount is : $totalPendingRequest");
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }
@@ -60,6 +66,9 @@ class MyTripController extends GetxController with GetTickerProviderStateMixin {
         myTravels.value = MeAsTravellerModel.fromJson(response.responseData);
 
         log(myTravels.value.toString());
+        totalPendingRequest.value = myTravels.value!.data.totalPendingCount;
+        update();
+        log("Total \npending \ncount is : $totalPendingRequest");
       } else {
         errorSnakbar(errorMessage: response.errorMessage);
       }

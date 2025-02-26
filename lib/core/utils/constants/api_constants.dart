@@ -1,7 +1,7 @@
 class AppUrls {
   AppUrls._();
 
-  static const String _baseUrl = 'http://10.0.20.36:5002/api/v1';
+  static const String _baseUrl = 'http://137.184.86.119:8002/api/v1';
   static const String login = '$_baseUrl/auth/login';
   static const String socalMedaiLogin = "$_baseUrl/users/social-login";
   static const String forgetEmail = '$_baseUrl/auth/forgot-password';

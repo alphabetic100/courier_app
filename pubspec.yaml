@@ -61,7 +61,7 @@ dependencies:
   firebase_auth: ^5.5.0
   firebase_core: ^3.12.0
 
-  flutter_paypal_payment:
+  # flutter_paypal_payment:
   webview_flutter: ^4.10.0
   # photo_manager:
 

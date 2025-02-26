@@ -263,7 +263,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
             secondaryWidget: detail.status == "accepted" ||
                     detail.status == "pickupped" ||
                     detail.status == "delivered"
-                ? detail.status == "delivered"
+                ? detail.status == "delivered" && detail.isRating != true
                     ? CustomButton(
                         onPressed: () {
                           showDialog(
@@ -278,25 +278,31 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                           text: "Rate the traveller",
                           color: AppColors.white,
                         ))
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.error_outline,
-                            color: AppColors.secondaryColor,
-                          ),
-                          HorizontalSpace(width: 5),
-                          Expanded(
-                            child: CustomText(
-                              text: detail.status == "accepted"
-                                  ? "To confirm that the traveler has received your Items, please generate a QR code and ask them to scan it when delivering the items."
-                                  : "Generate a QR code and send it to the recipient. Upon delivery, have the Traveler scan it to confirm.",
-                              fontSize: getWidth(14),
-                              fontWeight: FontWeight.normal,
-                            ),
+                    : detail.status == "accepted" ||
+                            detail.status == "pickupped"
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.error_outline,
+                                color: AppColors.secondaryColor,
+                              ),
+                              HorizontalSpace(width: 5),
+                              Expanded(
+                                child: CustomText(
+                                  text: detail.status == "accepted"
+                                      ? "To confirm that the traveler has received your Items, please generate a QR code and ask them to scan it when delivering the items."
+                                      : detail.status == "pickupped"
+                                          ? "Generate a QR code and send it to the recipient. Upon delivery, have the Traveler scan it to confirm."
+                                          : "",
+                                  fontSize: getWidth(14),
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              )
+                            ],
                           )
-                        ],
-                      )
+                        : null
                 : null,
             primaryWidget: Row(
               children: [

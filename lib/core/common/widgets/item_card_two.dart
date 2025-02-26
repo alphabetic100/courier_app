@@ -92,25 +92,6 @@ class ItemCardTwo extends StatelessWidget {
           PopupMenuButton(
             itemBuilder: (context) => [
               PopupMenuItem(
-                onTap: () {},
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.edit,
-                      color: AppColors.secondaryColor,
-                      size: getWidth(20),
-                    ),
-                    HorizontalSpace(width: getWidth(5)),
-                    CustomText(
-                      text: "Edit",
-                      color: AppColors.secondaryColor,
-                      fontSize: getWidth(12),
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
                 onTap: () {
                   isdeletable
                       ? itemController.deleteItem(item.id)

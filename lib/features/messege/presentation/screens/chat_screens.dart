@@ -9,6 +9,7 @@ import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:courierapp/core/utils/constants/image_path.dart';
 import 'package:courierapp/features/messege/controller/chat_screen_controller.dart';
+import 'package:courierapp/features/messege/controller/message_screen_controller.dart';
 import 'package:courierapp/features/messege/presentation/components/message_input_box.dart';
 import 'package:courierapp/features/messege/presentation/components/message_sent_by_me.dart';
 import 'package:courierapp/features/messege/presentation/components/recived_message.dart';
@@ -31,6 +32,8 @@ class ChatInboxScreen extends StatefulWidget {
 
 class _ChatInboxScreenState extends State<ChatInboxScreen> {
   final ChatController chatController = Get.find<ChatController>();
+  final MessageScreenController messageScreenController =
+      Get.put(MessageScreenController());
   @override
   void initState() {
     // TODO: implement initState
@@ -43,7 +46,12 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
     final userId = AuthService.userId;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        ontapBackButton: () {
+          Get.back();
+          messageScreenController.getMyChatList();
+        },
+      ),
       body: SizedBox(
         height: AppSizes.height,
         child: Column(
@@ -75,10 +83,10 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
                           HorizontalSpace(
                             width: getWidth(5),
                           ),
-                          CircleAvatar(
-                            radius: getWidth(4),
-                            backgroundColor: Colors.green,
-                          )
+                          // CircleAvatar(
+                          //   radius: getWidth(4),
+                          //   backgroundColor: Colors.green,
+                          // )
                         ],
                       ),
                     ),
@@ -93,7 +101,9 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
             Expanded(
               child: Obx(() {
                 if (chatController.messages.isNotEmpty) {
-                  chatController.viewMessage();
+                  Future.delayed(Duration(milliseconds: 200), () {
+                    chatController.viewMessage();
+                  });
                 }
                 return ListView.builder(
                   reverse: true,
