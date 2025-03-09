@@ -122,6 +122,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           log("Booking id : ${shippingController.bookingId.value}");
           log("Customer id : $customerId");
           log("Traveller id: ${widget.trip!.user.accountId}");
+          log("Traveller Name: ${widget.trip!.user.fullName}");
 
           try {
             setState(() {
@@ -137,6 +138,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               price1: price,
               parcelId1: shippingController.bookingId.value,
               travelerAccountId1: widget.trip!.user.accountId,
+              travellerName: widget.trip!.user.fullName,
             );
           } finally {
             setState(() {

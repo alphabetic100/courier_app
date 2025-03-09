@@ -20,6 +20,7 @@ class StripeService {
 
   String? customerId, parcelId, travelerAccountId;
   double? price;
+  String? _travellerName;
 
   static bool isLoading = false;
 
@@ -46,11 +47,13 @@ class StripeService {
       {required String customerId1,
       required double price1,
       required String parcelId1,
-      required String travelerAccountId1}) async {
+      required String travelerAccountId1,
+      required String travellerName}) async {
     customerId = customerId1;
     price = price1;
     parcelId = parcelId1;
     travelerAccountId = travelerAccountId1;
+    _travellerName = travellerName;
     debugPrint('customerId: $customerId');
     debugPrint('price: $price');
 
@@ -152,7 +155,9 @@ class StripeService {
     }
   }
 
-  Future<void> paymentConfirm(String pmId) async {
+  Future<void> paymentConfirm(
+    String pmId,
+  ) async {
     final url = Uri.parse(AppUrls.confirmPayment);
 
     debugPrint(url.toString());
@@ -197,7 +202,9 @@ class StripeService {
                 backgroundColor: Colors.transparent,
                 titlePadding: EdgeInsets.zero,
                 contentPadding: EdgeInsets.zero,
-                content: ShowPaymentSuccessDialog());
+                content: ShowPaymentSuccessDialog(
+                  travellerName: _travellerName ?? "Guest",
+                ));
           });
           //  Get.offAll(() => ());
           /*Get.snackbar(

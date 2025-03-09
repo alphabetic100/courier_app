@@ -25,7 +25,7 @@ class MyTripScreen extends StatefulWidget {
 
 class _MyTripScreenState extends State<MyTripScreen> {
   final MyTripController controller = Get.put(MyTripController());
-  final LandingController landingController = Get.put(LandingController());
+  final LandingController landingController = Get.find<LandingController>();
   final MyBookingsController myBookingsController =
       Get.put(MyBookingsController());
   @override
