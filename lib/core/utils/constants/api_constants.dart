@@ -46,7 +46,7 @@ class AppUrls {
   static const String socialLogin = "$_baseUrl/users/social-login";
   static const String postReview = "$_baseUrl/reviews";
 
-  static const String connectSocket = "ws://10.0.20.36:5002/api/v1";
+  static const String connectSocket = "ws://137.184.86.119:8002/api/v1";
   static const String getMyChatLists = "$_baseUrl/chats/getMyChat";
   static const String generateImageLink = "$_baseUrl/chats/generate-imagelink";
 }

@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ShowPaymentSuccessDialog extends StatelessWidget {
-  const ShowPaymentSuccessDialog({super.key});
-
+  const ShowPaymentSuccessDialog({super.key, required this.travellerName});
+  final String travellerName;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -34,7 +34,7 @@ class ShowPaymentSuccessDialog extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomText(
-              text: "Your shipment request has been sent to Albert Flores.",
+              text: "Your shipment request has been sent to $travellerName",
               textAlign: TextAlign.center,
               fontWeight: FontWeight.normal,
               fontSize: getWidth(16)),
@@ -54,7 +54,7 @@ class ShowPaymentSuccessDialog extends StatelessWidget {
               SizedBox(
                 width: AppSizes.width * 0.4,
                 child: CustomText(
-                  text: "Albert Flores will review your request.",
+                  text: "$travellerName will review your request.",
                   fontWeight: FontWeight.normal,
                   fontSize: getWidth(14),
                 ),
