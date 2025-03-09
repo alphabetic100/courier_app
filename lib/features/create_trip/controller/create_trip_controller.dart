@@ -158,7 +158,6 @@ class CreateTripController extends GetxController {
     );
 
     if (selectedDate != null) {
-      DateTime selectedDate = DateTime(2025, 2, 27);
       selectedDate = DateTime(
           selectedDate.year, selectedDate.month, selectedDate.day, 10, 30, 00);
       log("Picked Date is : $selectedDate");

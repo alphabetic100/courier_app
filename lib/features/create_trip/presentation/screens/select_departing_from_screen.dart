@@ -29,7 +29,6 @@ class SelectDepartingFromScreen extends StatefulWidget {
 class _SelectDepartingFromScreenState extends State<SelectDepartingFromScreen> {
   final CreateTripController tripController = Get.find<CreateTripController>();
 
-
   GoogleMapController? mapController;
 
   late LatLng selectedLocation;
@@ -39,8 +38,8 @@ class _SelectDepartingFromScreenState extends State<SelectDepartingFromScreen> {
     super.initState();
 
     // Ensure valid default coordinates
-    double latitude = SplashController .latitude.value;
-    double longitude = SplashController .longitude.value;
+    double latitude = SplashController.latitude.value;
+    double longitude = SplashController.longitude.value;
 
     if (latitude == 0.0 || longitude == 0.0) {
       latitude = 48.8566; // Default to Paris
@@ -61,11 +60,12 @@ class _SelectDepartingFromScreenState extends State<SelectDepartingFromScreen> {
 
     try {
       List<Placemark> placemarks =
-      await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+          await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
 
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks.first;
-        String address = " ${place.street}, ${place.subLocality} ${place.locality} ${place.country}";
+        String address =
+            " ${place.street}, ${place.subLocality} ${place.locality} ${place.country}";
 
         tripController.selectDepartingController.text = address;
         tripController.lat1 = latLng.latitude;
@@ -105,7 +105,7 @@ class _SelectDepartingFromScreenState extends State<SelectDepartingFromScreen> {
                   VerticalSpace(height: getHeight(10)),
                   CustomText(
                     text:
-                    "Please put here the address where you are going to receive the items",
+                        "Please put here the address where you are going to receive the items",
                     color: AppColors.bodyTextColor,
                     fontSize: getWidth(15),
                     fontWeight: FontWeight.normal,
@@ -171,7 +171,7 @@ class _SelectDepartingFromScreenState extends State<SelectDepartingFromScreen> {
         onTap: () {
           if (tripController.selectDepartingController.text.isNotEmpty) {
             Get.to(
-                  () => SelectArrivingToScreen(),
+              () => SelectArrivingToScreen(),
               transition: Transition.rightToLeftWithFade,
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeOut,
