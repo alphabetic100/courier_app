@@ -43,7 +43,7 @@ class CreateTripController extends GetxController {
   RxString departingLocation = "1.0".obs;
   RxBool isUnlimited = false.obs;
 
-  final List<String> titles = ["Car", "Train", "Buss", "Airplane"];
+  final List<String> titles = ["Car", "Train", "Bus", "Airplane"];
   final List<String> iconPaths = [
     IconPath.car,
     IconPath.train,
@@ -52,11 +52,16 @@ class CreateTripController extends GetxController {
   ];
 
   final List<String> chargeRange = [
+    '\$1',
+    '\$2',
     '\$3',
     '\$4',
     '\$5',
     '\$6',
     '\$7',
+    '\$8',
+    '\$9',
+    '\$10',
   ];
   RxString selectedCharge = "\$4".obs;
 
@@ -71,8 +76,8 @@ class CreateTripController extends GetxController {
       "transportType": selectedTransportType,
       "transportNumber": carNumberController.text.trim(),
       "date": date,
-      "from": selectDepartingController.text,
-      "to": selectArrivingController.text,
+      "from": selectDepartingController.text.trim(),
+      "to": selectArrivingController.text.trim(),
       "weight": weight,
       "price": int.parse(selectedCharge.value.replaceAll("\$", "")),
       "rulse": rulesSet.toList(),

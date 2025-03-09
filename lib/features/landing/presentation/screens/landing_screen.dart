@@ -15,18 +15,10 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  final LandingController landingController = Get.find<LandingController>();
-  setLandingScreen() {
-    Future.delayed(Duration(milliseconds: 200), () {
-      landingController.currentPage.value = 0;
-    });
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    setLandingScreen();
   }
 
   @override
@@ -34,9 +26,9 @@ class _LandingScreenState extends State<LandingScreen> {
     return Scaffold(
       bottomNavigationBar: CustomBottomNavBar(),
       body: PageView(
-        controller: landingController.pageController,
+        controller: Get.find<LandingController>().pageController,
         onPageChanged: (value) {
-          landingController.currentPage.value = value;
+          Get.find<LandingController>().currentPage.value = value;
         },
         children: [
           SearchScreen(),

@@ -140,27 +140,31 @@ class ItemDetails extends StatelessWidget {
               child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
                   child: Obx(
-                    () => DropdownButton<String>(
-                      isDense: true,
-                      isExpanded: true,
-                      underline: SizedBox.shrink(),
-                      padding: EdgeInsets.zero,
-                      elevation: 0,
-                      value: itemController.itemWeight.value,
-                      onChanged: (value) {
-                        itemController.itemWeight.value = value!;
-                      },
-                      items: ['5kg', '7kg', '10kg', '12kg', '15kg']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: CustomText(
-                            text: value,
-                            color: AppColors.black,
-                            fontSize: getWidth(15),
-                          ),
-                        );
-                      }).toList(),
+                    () => SizedBox(
+                      height: 30,
+                      child: DropdownButton<String>(
+                        dropdownColor: AppColors.white,
+                        isDense: true,
+                        isExpanded: true,
+                        underline: SizedBox.shrink(),
+                        padding: EdgeInsets.zero,
+                        elevation: 0,
+                        value: itemController.itemWeight.value,
+                        onChanged: (value) {
+                          itemController.itemWeight.value = value!;
+                        },
+                        items: List.generate(50, (index) => '${index + 1}kg')
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: CustomText(
+                              text: value,
+                              color: AppColors.black,
+                              fontSize: getWidth(15),
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
                   )))
         ],
