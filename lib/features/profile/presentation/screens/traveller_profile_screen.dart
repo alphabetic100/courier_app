@@ -168,7 +168,9 @@ class TravellerProfileScreen extends StatelessWidget {
                 ListView.builder(
                     itemCount: profileController.showMore.value
                         ? user.review.length
-                        : 2,
+                        : user.review.length > 1
+                            ? 2
+                            : 1,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -181,20 +183,22 @@ class TravellerProfileScreen extends StatelessWidget {
                         review: review.comment,
                       );
                     }),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
-                  child: CustomTextButton(
-                    onPressed: () {
-                      profileController.showMore.value =
-                          !profileController.showMore.value;
-                    },
-                    text: profileController.showMore.value
-                        ? "Show less"
-                        : "Show More",
-                    isUnderline: true,
-                    fontWeight: FontWeight.bold,
+                if (user.review.length > 2) ...[
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getWidth(16)),
+                    child: CustomTextButton(
+                      onPressed: () {
+                        profileController.showMore.value =
+                            !profileController.showMore.value;
+                      },
+                      text: profileController.showMore.value
+                          ? "Show less"
+                          : "Show More",
+                      isUnderline: true,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
+                ]
               ] else ...[
                 Center(
                     child: CustomText(
