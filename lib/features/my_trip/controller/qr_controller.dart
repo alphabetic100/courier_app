@@ -105,6 +105,7 @@ class QrController extends GetxController {
             PickupSuccessDialog(),
             barrierDismissible: true,
           );
+         
         });
 
         log("Code verification succeeded");
@@ -142,6 +143,8 @@ class QrController extends GetxController {
             DeliverdSuccesDialog(),
             barrierDismissible: true,
           );
+          Get.back();
+          Get.back();
         });
 
         log("Code verification succeeded");

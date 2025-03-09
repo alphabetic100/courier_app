@@ -1,8 +1,10 @@
+import 'package:courierapp/core/common/widgets/custom_button.dart';
 import 'package:courierapp/core/common/widgets/custom_text.dart';
 import 'package:courierapp/core/utils/constants/app_colors.dart';
 import 'package:courierapp/core/utils/constants/app_sizes.dart';
 import 'package:courierapp/core/utils/constants/app_spacers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DeliverdSuccesDialog extends StatelessWidget {
   const DeliverdSuccesDialog({super.key});
@@ -39,6 +41,17 @@ class DeliverdSuccesDialog extends StatelessWidget {
           const SizedBox(height: 16),
         ],
       ),
+      actions: [
+        CustomButton(
+            onPressed: () {
+              Get.back();
+              Get.back();
+            },
+            child: CustomText(
+              text: "Go Back",
+              color: AppColors.white,
+            ))
+      ],
     );
   }
 }
